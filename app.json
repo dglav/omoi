@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -35,6 +37,15 @@
     "scheme": {
       "type": "string",
       "pattern": "^[a-z][a-z0-9+.-]*$"
+    },
+    "extra": {
+      "router": {
+        "origin": false,
+        "root": "./src/app"
+      },
+      "eas": {
+        "projectId": "092fe555-09bf-4925-b540-1cdb42fe807a"
+      }
     }
   }
 }
