@@ -1,7 +1,9 @@
-import { Link } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { Text, View, StyleSheet } from "react-native";
-import { Button, useTheme } from "react-native-paper";
+import { useTheme } from "react-native-paper";
+
+import PartnersMood from "../components/index/PartnersMood";
+import YourMood from "../components/index/YourMood";
 
 export default function IndexPage() {
   const theme = useTheme();
@@ -14,19 +16,9 @@ export default function IndexPage() {
         <Text style={styles.headerText}>Our Mood</Text>
       </View>
 
-      <View>
-        <View>
-          <Text>You</Text>
-          <Link href="/mood-share">
-            <Button>
-              <Text>Share your Mood!</Text>
-            </Button>
-          </Link>
-        </View>
-
-        <View>
-          <Text>Your Partner</Text>
-        </View>
+      <View style={styles.moodsView}>
+        <YourMood />
+        <PartnersMood />
       </View>
 
       <StatusBar style="auto" />
@@ -44,5 +36,9 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontWeight: "bold",
+  },
+  moodsView: {
+    display: "flex",
+    justifyContent: "space-between",
   },
 });
