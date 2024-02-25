@@ -2,8 +2,8 @@ import { StatusBar } from "expo-status-bar";
 import { Text, View, StyleSheet } from "react-native";
 import { useTheme } from "react-native-paper";
 
-import PartnersMood from "../components/index/PartnersMood";
-import YourMood from "../components/index/YourMood";
+import { PartnersMood } from "../components/IndexPage/PartnersMood";
+import { YourMood } from "../components/IndexPage/YourMood";
 
 export default function IndexPage() {
   const theme = useTheme();

@@ -4,7 +4,7 @@ type MoodItemProps = {
   item: string;
 };
 
-export default function MoodItem({ item }: MoodItemProps) {
+export function MoodItem({ item }: MoodItemProps) {
   return (
     <View style={styles.container}>
       <Text>{item}</Text>

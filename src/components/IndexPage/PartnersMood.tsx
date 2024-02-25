@@ -1,6 +1,6 @@
 import { Text, View } from "react-native";
 
-export default function PartnersMood() {
+export function PartnersMood() {
   return (
     <View>
       <Text>Your Partner</Text>

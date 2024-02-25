@@ -1,6 +1,6 @@
 import { FlatList, StyleSheet } from "react-native";
 
-import MoodItem from "./MoodItem";
+import { MoodItem } from "./MoodItem";
 
 const moods = [
   "happy",
@@ -11,7 +11,7 @@ const moods = [
   "lovely",
 ];
 
-export default function MoodList() {
+export function MoodList() {
   return (
     <FlatList
       data={moods}

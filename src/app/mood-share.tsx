@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { useTheme } from "react-native-paper";
 
-import MoodList from "../components/mood-share/MoodList";
+import { MoodList } from "../components/MoodSharePage/MoodList";
 
 export default function HomePage() {
   const theme = useTheme();
