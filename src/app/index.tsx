@@ -16,7 +16,7 @@ export default function IndexPage() {
         <Text style={styles.headerText}>Our Mood</Text>
       </View>
 
-      <View style={styles.moodsView}>
+      <View style={styles.moodsContainer}>
         <YourMood />
         <PartnersMood />
       </View>
@@ -37,8 +37,12 @@ const styles = StyleSheet.create({
   headerText: {
     fontWeight: "bold",
   },
-  moodsView: {
+  moodsContainer: {
     display: "flex",
+    flexDirection: "row",
     justifyContent: "space-between",
+    width: "100%",
+    paddingTop: 20,
+    paddingHorizontal: 60,
   },
 });
