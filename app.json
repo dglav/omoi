@@ -23,6 +23,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": ["expo-router"],
+    "scheme": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9+.-]*$"
     }
   }
 }
