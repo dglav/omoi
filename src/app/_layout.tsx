@@ -33,6 +33,14 @@ export default function Layout() {
               options={{ headerShown: false, headerBackTitle: "Back" }}
             />
             <Stack.Screen
+              name="mood-share"
+              options={{
+                headerTitle: "Mood Share",
+                headerBackTitle: "Back",
+                headerTransparent: true,
+              }}
+            />
+            <Stack.Screen
               name="modal"
               options={{
                 presentation: "modal",

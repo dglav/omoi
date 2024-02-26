@@ -4,7 +4,12 @@ import React from "react";
 const TabsLayout = () => {
   return (
     <Tabs>
-      <Tabs.Screen name="home" options={{ headerShown: false }} />
+      <Tabs.Screen
+        name="home"
+        options={{
+          headerShown: false,
+        }}
+      />
       <Tabs.Screen
         name="questions-and-answers"
         options={{ headerShown: false }}

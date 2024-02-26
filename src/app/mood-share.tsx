@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { useTheme } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { MoodList } from "../../../components/MoodSharePage/MoodList";
+import { MoodList } from "../components/MoodSharePage/MoodList";
 
 export default function MoodSharePage() {
   const theme = useTheme();

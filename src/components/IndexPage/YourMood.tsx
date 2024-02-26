@@ -17,7 +17,7 @@ export function YourMood() {
       }}
     >
       <Text>You</Text>
-      <Link href="/home/mood-share" asChild>
+      <Link href="/mood-share" asChild>
         <Button
           mode="contained"
           contentStyle={{
