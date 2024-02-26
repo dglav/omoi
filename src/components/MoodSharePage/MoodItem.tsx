@@ -14,7 +14,7 @@ export function MoodItem({ item }: MoodItemProps) {
 
 const styles = StyleSheet.create({
   container: {
-    width: 100,
+    width: 108,
     display: "flex",
     alignItems: "center",
     padding: 16,

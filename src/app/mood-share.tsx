@@ -10,7 +10,10 @@ export default function MoodSharePage() {
 
   return (
     <SafeAreaView
-      style={{ ...styles.container, backgroundColor: theme.colors.background }}
+      style={{
+        ...styles.container,
+        backgroundColor: theme.colors.background,
+      }}
     >
       <View style={styles.content}>
         <Text style={styles.title}>What's your mood now?</Text>
@@ -29,7 +32,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   content: {
-    paddingTop: 84,
+    paddingTop: 60,
   },
   title: {
     fontWeight: "bold",
