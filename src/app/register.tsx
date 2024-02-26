@@ -1,19 +1,20 @@
 import { Link } from "expo-router";
-import { View, StyleSheet } from "react-native";
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
 import { useTheme } from "react-native-paper";
 
-export default function LoginPage() {
+const RegisterPage = () => {
   const theme = useTheme();
 
   return (
     <View
       style={{ ...styles.container, backgroundColor: theme.colors.background }}
     >
-      <Link href="/home">Login</Link>
-      <Link href="/register">Open Register</Link>
+      <Text>Register Page</Text>
+      <Link href="/">Open Login</Link>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -22,3 +23,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+export default RegisterPage;

@@ -1,14 +1,15 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import { useTheme } from "react-native-paper";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-import { MoodList } from "../components/MoodSharePage/MoodList";
+import { MoodList } from "../../../components/MoodSharePage/MoodList";
 
-export default function HomePage() {
+export default function MoodSharePage() {
   const theme = useTheme();
 
   return (
-    <View
+    <SafeAreaView
       style={{ ...styles.container, backgroundColor: theme.colors.background }}
     >
       <View style={styles.content}>
@@ -18,7 +19,7 @@ export default function HomePage() {
       <MoodList />
 
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 

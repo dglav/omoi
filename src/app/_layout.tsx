@@ -1,23 +1,39 @@
-import { Stack } from "expo-router";
-import { StrictMode } from "react";
-import { PaperProvider } from "react-native-paper";
+import { Stack, useRouter } from "expo-router";
+import React, { StrictMode } from "react";
+import { Button, PaperProvider } from "react-native-paper";
 
 import { theme } from "../theme";
 
 export default function Layout() {
+  const router = useRouter();
+
   return (
     <StrictMode>
       <PaperProvider theme={theme}>
         <Stack>
-          <Stack.Screen name="index" options={{ headerShown: false }} />
           <Stack.Screen
-            name="mood-share"
+            name="index"
+            options={{ headerTitle: "Login", headerShown: false }}
+          />
+          <Stack.Screen
+            name="register"
             options={{
+              headerTitle: "Create Account",
               headerTransparent: true,
-              headerTitle: "Mood Share",
-              headerTitleAlign: "center",
+              headerRight: () => (
+                <Button onPress={() => router.push("/modal")}>Open</Button>
+              ),
               headerBackTitle: "Back",
-              headerBackTitleVisible: true,
+            }}
+          />
+          <Stack.Screen
+            name="(tabs)"
+            options={{ headerShown: false, headerBackTitle: "Back" }}
+          />
+          <Stack.Screen
+            name="modal"
+            options={{
+              presentation: "modal",
             }}
           />
         </Stack>
