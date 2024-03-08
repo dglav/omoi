@@ -50,64 +50,108 @@ function Pager({ index }: PagerProps) {
   }, [flatListRef, index]);
 
   return (
-    <FlatList
-      ref={flatListRef}
-      getItemLayout={(data, index) => ({
-        length: width,
-        offset: width * index,
-        index,
-      })}
-      data={data}
-      renderItem={({ item }) => (
-        <SafeAreaView>
-          <View
-            style={{
-              width,
-              paddingHorizontal: 28,
-              marginTop: 56,
-              display: "flex",
-              justifyContent: "flex-start",
-              alignItems: "center",
-            }}
-          >
-            <Image source={item.image} />
-            <Text
+    <View
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
+    >
+      <FlatList
+        ref={flatListRef}
+        getItemLayout={(data, index) => ({
+          length: width,
+          offset: width * index,
+          index,
+        })}
+        data={data}
+        renderItem={({ item }) => (
+          <SafeAreaView>
+            <View
               style={{
-                fontSize: theme.fontStyle.xxl[1].size,
-                fontWeight: theme.fontStyle.xxl[1].weight,
-                textAlign: "center",
-                marginTop: 40,
+                width,
+                paddingHorizontal: 28,
+                marginTop: 56,
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "center",
               }}
             >
-              {item.headerText}
-            </Text>
-            {item.subText && (
+              <Image source={item.image} />
               <Text
                 style={{
-                  fontSize: theme.fontStyle.md[1].size,
-                  fontWeight: theme.fontStyle.md[1].weight,
+                  fontSize: theme.fontStyle.xxl[1].size,
+                  fontWeight: theme.fontStyle.xxl[1].weight,
                   textAlign: "center",
-                  marginTop: 24,
+                  marginTop: 40,
                 }}
               >
-                {item.subText}
+                {item.headerText}
               </Text>
-            )}
-          </View>
-        </SafeAreaView>
-      )}
-      horizontal
-      showsHorizontalScrollIndicator
-      pagingEnabled
-      bounces={false}
-      keyExtractor={(item) => item.id}
-      onScroll={Animated.event(
-        [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-        { useNativeDriver: false }
-      )}
-      scrollEventThrottle={32}
-      viewabilityConfig={{ viewAreaCoveragePercentThreshold: 100 }}
-    />
+              {item.subText && (
+                <Text
+                  style={{
+                    fontSize: theme.fontStyle.md[1].size,
+                    fontWeight: theme.fontStyle.md[1].weight,
+                    textAlign: "center",
+                    marginTop: 24,
+                  }}
+                >
+                  {item.subText}
+                </Text>
+              )}
+            </View>
+          </SafeAreaView>
+        )}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        pagingEnabled
+        bounces={false}
+        keyExtractor={(item) => item.id}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+          { useNativeDriver: false }
+        )}
+        scrollEventThrottle={32}
+        viewabilityConfig={{ viewAreaCoveragePercentThreshold: 100 }}
+      />
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 8,
+          marginBottom: 10,
+          paddingVertical: 8,
+          paddingHorizontal: 12,
+          borderRadius: 50,
+          backgroundColor: "#BFBFBF44",
+        }}
+      >
+        {data.map((_, i) => {
+          const inputRange = [(i - 1) * width, i * width, (i + 1) * width];
+
+          const dotColor = scrollX.interpolate({
+            inputRange,
+            outputRange: ["#00000030", "#000000", "#00000030"],
+            extrapolate: "clamp",
+          });
+
+          return (
+            <Animated.View
+              key={i}
+              style={{
+                width: 8,
+                height: 8,
+                backgroundColor: dotColor,
+                borderRadius: 50,
+              }}
+            />
+          );
+        })}
+      </View>
+    </View>
   );
 }
 
