@@ -1,6 +1,6 @@
 import { ArrowRightIcon } from "lucide-react-native";
-import { useState } from "react";
-import { View, Alert, useWindowDimensions } from "react-native";
+import { useEffect, useRef, useState } from "react";
+import { View, Alert, useWindowDimensions, Animated } from "react-native";
 import { Button } from "react-native-paper";
 
 import { useAppTheme } from "../hooks/useAppTheme";
@@ -10,6 +10,24 @@ const OnboardingScreen = () => {
   const theme = useAppTheme();
   const { height } = useWindowDimensions();
   const [pagerIndex, setPagerIndex] = useState(0);
+  const { width } = useWindowDimensions();
+
+  const flatListRef = useRef(null);
+
+  useEffect(() => {
+    if (!!pagerIndex && pagerIndex >= 0 && flatListRef.current) {
+      (flatListRef.current as any).scrollToIndex({ index: pagerIndex });
+    }
+  }, [flatListRef, pagerIndex]);
+
+  const scrollX = useRef(new Animated.Value(0)).current;
+
+  scrollX.addListener(({ value }) => {
+    const aaa = [0, width, width * 2];
+    if (aaa.includes(value)) {
+      setPagerIndex(value / width);
+    }
+  });
 
   return (
     <View
@@ -28,7 +46,7 @@ const OnboardingScreen = () => {
           justifyContent: "flex-start",
         }}
       >
-        <Pager index={pagerIndex} />
+        <Pager flatListRef={flatListRef} scrollX={scrollX} />
       </View>
       <View
         style={{

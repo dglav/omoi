@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { Ref } from "react";
 import {
   FlatList,
   Image,
@@ -33,21 +33,13 @@ const data = [
 ];
 
 type PagerProps = {
-  index?: number;
+  scrollX: Animated.Value;
+  flatListRef?: Ref<FlatList> | null;
 };
 
-function Pager({ index }: PagerProps) {
+function Pager({ flatListRef, scrollX }: PagerProps) {
   const { width } = useWindowDimensions();
   const theme = useAppTheme();
-  const scrollX = useRef(new Animated.Value(0)).current;
-
-  const flatListRef = useRef(null);
-
-  useEffect(() => {
-    if (!!index && index >= 0 && flatListRef.current) {
-      (flatListRef.current as any).scrollToIndex({ index });
-    }
-  }, [flatListRef, index]);
 
   return (
     <View
