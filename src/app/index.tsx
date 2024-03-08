@@ -12,6 +12,7 @@ export default function LoginPage() {
       <Link href="/onboarding">Intro</Link>
       <Link href="/home">Login</Link>
       <Link href="/register">Open Register</Link>
+      <Link href="/mood-share">Mood Share</Link>
     </View>
   );
 }

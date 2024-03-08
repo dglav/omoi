@@ -3,8 +3,8 @@ import { Text, View, StyleSheet } from "react-native";
 import { useTheme } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { PartnersMood } from "../../components/HomePage/PartnersMood";
-import { YourMood } from "../../components/HomePage/YourMood";
+import { PartnersMood } from "../../screens/(tabs)/home/PartnersMood";
+import { YourMood } from "../../screens/(tabs)/home/YourMood";
 
 export default function HomePage() {
   const theme = useTheme();
