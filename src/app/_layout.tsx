@@ -1,6 +1,8 @@
 import { Stack, useRouter } from "expo-router";
+import { ChevronLeft } from "lucide-react-native";
 import React, { StrictMode } from "react";
-import { Button, PaperProvider } from "react-native-paper";
+import { Pressable } from "react-native";
+import { PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { theme } from "../theme";
@@ -13,19 +15,17 @@ export default function Layout() {
       <SafeAreaProvider>
         <PaperProvider theme={theme}>
           <Stack>
+            <Stack.Screen name="index" options={{ headerShown: false }} />
             <Stack.Screen
-              name="index"
-              options={{ headerTitle: "Login", headerShown: false }}
-            />
-            <Stack.Screen
-              name="register"
+              name="onboarding"
               options={{
-                headerTitle: "Create Account",
+                headerTitle: "Omoi β版",
                 headerTransparent: true,
-                headerRight: () => (
-                  <Button onPress={() => router.push("/modal")}>Open</Button>
+                headerLeft: () => (
+                  <Pressable onPress={() => router.back()}>
+                    <ChevronLeft color={theme.colors.text} />
+                  </Pressable>
                 ),
-                headerBackTitle: "Back",
               }}
             />
             <Stack.Screen
