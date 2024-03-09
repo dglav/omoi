@@ -57,7 +57,7 @@ export default function IndexScreen() {
         </Button>
         <Button
           variant="secondary"
-          onPress={() => router.push("/relationship/length")}
+          onPress={() => router.push("/survey/relationship-length")}
         >
           ログインする
         </Button>

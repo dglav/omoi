@@ -7,14 +7,14 @@ export default function Layout() {
   return (
     <Stack>
       <Stack.Screen
-        name="length"
+        name="relationship-length"
         options={{
           headerTitle: "基本情報の登録",
           headerTransparent: true,
         }}
       />
       <Stack.Screen
-        name="status"
+        name="relationship-status"
         options={{
           headerTitle: "基本情報の登録",
           headerTransparent: true,

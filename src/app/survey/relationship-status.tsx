@@ -4,12 +4,12 @@ import { View, Text, SafeAreaView } from "react-native";
 import { useAppTheme } from "../../hooks/useAppTheme";
 import { LeftAlignedButton } from "../../screens/relationship/leftAlignedButton";
 
-const RelationshipLength = () => {
+const RelationshipStatus = () => {
   const theme = useAppTheme();
   const router = useRouter();
 
   const handlePress = () => {
-    router.push("relationship/status");
+    router.push("tutorial");
   };
 
   return (
@@ -34,7 +34,7 @@ const RelationshipLength = () => {
               fontWeight: theme.fontStyle.xxl[1].weight,
             }}
           >
-            交際期間
+            交際ステータス
           </Text>
           <Text
             style={{
@@ -42,7 +42,7 @@ const RelationshipLength = () => {
               fontWeight: theme.fontStyle.md[1].weight,
             }}
           >
-            交際期間を教えてください
+            現在の交際ステータスを教えてください
           </Text>
         </View>
         <View
@@ -51,18 +51,26 @@ const RelationshipLength = () => {
             gap: 24,
           }}
         >
-          <LeftAlignedButton onPress={handlePress}>0~1年</LeftAlignedButton>
-          <LeftAlignedButton onPress={handlePress}>1~2年</LeftAlignedButton>
-          <LeftAlignedButton onPress={handlePress}>3~5年</LeftAlignedButton>
-          <LeftAlignedButton onPress={handlePress}>6~10年</LeftAlignedButton>
-          <LeftAlignedButton onPress={handlePress}>11年以上</LeftAlignedButton>
           <LeftAlignedButton onPress={handlePress}>
-            まだ交際していない
+            交際している
           </LeftAlignedButton>
+          <LeftAlignedButton onPress={handlePress}>
+            同棲している
+          </LeftAlignedButton>
+          <LeftAlignedButton onPress={handlePress}>
+            婚約している
+          </LeftAlignedButton>
+          <LeftAlignedButton onPress={handlePress}>
+            既婚（子供なし）
+          </LeftAlignedButton>
+          <LeftAlignedButton onPress={handlePress}>
+            既婚（子供あり）
+          </LeftAlignedButton>
+          <LeftAlignedButton onPress={handlePress}>事実婚</LeftAlignedButton>
         </View>
       </View>
     </SafeAreaView>
   );
 };
 
-export default RelationshipLength;
+export default RelationshipStatus;

@@ -31,7 +31,7 @@ export default function Layout() {
               }}
             />
             <Stack.Screen
-              name="relationship"
+              name="survey"
               options={{
                 headerShown: false,
               }}

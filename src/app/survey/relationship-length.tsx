@@ -9,7 +9,7 @@ const RelationshipLength = () => {
   const router = useRouter();
 
   const handlePress = () => {
-    router.push("tutorial");
+    router.push("/survey/relationship-status");
   };
 
   return (
@@ -34,7 +34,7 @@ const RelationshipLength = () => {
               fontWeight: theme.fontStyle.xxl[1].weight,
             }}
           >
-            交際ステータス
+            交際期間
           </Text>
           <Text
             style={{
@@ -42,7 +42,7 @@ const RelationshipLength = () => {
               fontWeight: theme.fontStyle.md[1].weight,
             }}
           >
-            現在の交際ステータスを教えてください
+            交際期間を教えてください
           </Text>
         </View>
         <View
@@ -51,22 +51,14 @@ const RelationshipLength = () => {
             gap: 24,
           }}
         >
+          <LeftAlignedButton onPress={handlePress}>0~1年</LeftAlignedButton>
+          <LeftAlignedButton onPress={handlePress}>1~2年</LeftAlignedButton>
+          <LeftAlignedButton onPress={handlePress}>3~5年</LeftAlignedButton>
+          <LeftAlignedButton onPress={handlePress}>6~10年</LeftAlignedButton>
+          <LeftAlignedButton onPress={handlePress}>11年以上</LeftAlignedButton>
           <LeftAlignedButton onPress={handlePress}>
-            交際している
+            まだ交際していない
           </LeftAlignedButton>
-          <LeftAlignedButton onPress={handlePress}>
-            同棲している
-          </LeftAlignedButton>
-          <LeftAlignedButton onPress={handlePress}>
-            婚約している
-          </LeftAlignedButton>
-          <LeftAlignedButton onPress={handlePress}>
-            既婚（子供なし）
-          </LeftAlignedButton>
-          <LeftAlignedButton onPress={handlePress}>
-            既婚（子供あり）
-          </LeftAlignedButton>
-          <LeftAlignedButton onPress={handlePress}>事実婚</LeftAlignedButton>
         </View>
       </View>
     </SafeAreaView>
