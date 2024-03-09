@@ -2,8 +2,8 @@ import { useRouter } from "expo-router";
 import { ArrowRightIcon } from "lucide-react-native";
 import { useEffect, useRef, useState } from "react";
 import { View, useWindowDimensions, Animated } from "react-native";
-import { Button } from "react-native-paper";
 
+import { Button } from "../components/button";
 import { useAppTheme } from "../hooks/useAppTheme";
 import Pager from "../screens/introduction/pager";
 
@@ -61,41 +61,16 @@ const IntroductionScreen = () => {
         }}
       >
         {pagerIndex === 2 ? (
-          <Button
-            mode="contained"
-            labelStyle={{
-              marginVertical: 16,
-              fontSize: theme.fontStyle.lg[1].size,
-              fontWeight: theme.fontStyle.lg[1].weight,
-            }}
-            onPress={() => router.push("/")}
-          >
-            Omoiを始める
-          </Button>
+          <Button onPress={() => router.push("/")}>Omoiを始める</Button>
         ) : (
           <Button
-            mode="contained"
-            labelStyle={{
-              marginVertical: 16,
-              fontSize: theme.fontStyle.lg[1].size,
-              fontWeight: theme.fontStyle.lg[1].weight,
-            }}
             onPress={() => setPagerIndex((currentIndex) => currentIndex + 1)}
           >
             次へ <ArrowRightIcon color={theme.colors.white} />
           </Button>
         )}
         {pagerIndex < 2 && (
-          <Button
-            mode="text"
-            labelStyle={{
-              marginVertical: 16,
-              fontSize: theme.fontStyle.lg[1].size,
-              fontWeight: theme.fontStyle.lg[1].weight,
-              color: theme.colors.text,
-            }}
-            onPress={() => router.push("/")}
-          >
+          <Button variant="secondary" onPress={() => router.push("/")}>
             スキップして始める
           </Button>
         )}
