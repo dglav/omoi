@@ -37,7 +37,12 @@ export const Button = ({
   }
 
   return (
-    <RNButton mode={mode} labelStyle={labelStyle} style={style} {...props}>
+    <RNButton
+      {...props}
+      mode={mode}
+      labelStyle={[labelStyle, props.labelStyle]}
+      style={style}
+    >
       {props.children}
     </RNButton>
   );
