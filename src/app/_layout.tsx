@@ -1,7 +1,5 @@
 import { Stack, useRouter } from "expo-router";
-import { ChevronLeft } from "lucide-react-native";
 import React, { StrictMode, useEffect } from "react";
-import { Pressable } from "react-native";
 import { PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
