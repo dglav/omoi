@@ -9,7 +9,7 @@ export default function LoginPage() {
     <View
       style={{ ...styles.container, backgroundColor: theme.colors.background }}
     >
-      <Link href="/onboarding">Intro</Link>
+      <Link href="/introduction">Intro</Link>
       <Link href="/home">Login</Link>
       <Link href="/register">Open Register</Link>
       <Link href="/mood-share">Mood Share</Link>

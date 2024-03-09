@@ -1,16 +1,18 @@
+import { useRouter } from "expo-router";
 import { ArrowRightIcon } from "lucide-react-native";
 import { useEffect, useRef, useState } from "react";
-import { View, Alert, useWindowDimensions, Animated } from "react-native";
+import { View, useWindowDimensions, Animated } from "react-native";
 import { Button } from "react-native-paper";
 
 import { useAppTheme } from "../hooks/useAppTheme";
-import Pager from "../screens/onboarding/pager";
+import Pager from "../screens/introduction/pager";
 
-const OnboardingScreen = () => {
+const IntroductionScreen = () => {
   const theme = useAppTheme();
   const { height } = useWindowDimensions();
   const [pagerIndex, setPagerIndex] = useState(0);
   const { width } = useWindowDimensions();
+  const router = useRouter();
 
   const flatListRef = useRef(null);
 
@@ -66,7 +68,7 @@ const OnboardingScreen = () => {
               fontSize: theme.fontStyle.lg[1].size,
               fontWeight: theme.fontStyle.lg[1].weight,
             }}
-            onPress={() => Alert.alert("go to next section")}
+            onPress={() => router.push("/")}
           >
             Omoiを始める
           </Button>
@@ -92,7 +94,7 @@ const OnboardingScreen = () => {
               fontWeight: theme.fontStyle.lg[1].weight,
               color: theme.colors.text,
             }}
-            onPress={() => Alert.alert("go to next section")}
+            onPress={() => router.push("/")}
           >
             スキップして始める
           </Button>
@@ -102,4 +104,4 @@ const OnboardingScreen = () => {
   );
 };
 
-export default OnboardingScreen;
+export default IntroductionScreen;

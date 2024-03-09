@@ -1,6 +1,6 @@
 import { Stack, useRouter } from "expo-router";
 import { ChevronLeft } from "lucide-react-native";
-import React, { StrictMode } from "react";
+import React, { StrictMode, useEffect } from "react";
 import { Pressable } from "react-native";
 import { PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -10,6 +10,14 @@ import { theme } from "../theme";
 export default function Layout() {
   const router = useRouter();
 
+  /**
+   * Replace with implementation async storage for introduction screen
+   * https://docs.expo.dev/versions/latest/sdk/async-storage/
+   */
+  useEffect(() => {
+    router.navigate("/introduction");
+  }, []);
+
   return (
     <StrictMode>
       <SafeAreaProvider>
@@ -17,7 +25,7 @@ export default function Layout() {
           <Stack>
             <Stack.Screen name="index" options={{ headerShown: false }} />
             <Stack.Screen
-              name="onboarding"
+              name="introduction"
               options={{
                 headerTitle: "Omoi β版",
                 headerTransparent: true,
