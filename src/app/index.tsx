@@ -4,7 +4,7 @@ import { View, StyleSheet, Text, Image } from "react-native";
 import { Button } from "../components/button";
 import { useAppTheme } from "../hooks/useAppTheme";
 
-export default function LoginPage() {
+export default function IndexScreen() {
   const theme = useAppTheme();
   const router = useRouter();
 
@@ -55,7 +55,10 @@ export default function LoginPage() {
         <Button variant="secondary" disabled>
           新規アカウントを作る
         </Button>
-        <Button variant="secondary" onPress={() => router.push("/home")}>
+        <Button
+          variant="secondary"
+          onPress={() => router.push("/relationship/length")}
+        >
           ログインする
         </Button>
       </View>

@@ -29,11 +29,13 @@ export default function Layout() {
               options={{
                 headerTitle: "Omoi β版",
                 headerTransparent: true,
-                headerLeft: () => (
-                  <Pressable onPress={() => router.back()}>
-                    <ChevronLeft color={theme.colors.text} />
-                  </Pressable>
-                ),
+                headerBackVisible: false,
+              }}
+            />
+            <Stack.Screen
+              name="relationship"
+              options={{
+                headerShown: false,
               }}
             />
             <Stack.Screen
