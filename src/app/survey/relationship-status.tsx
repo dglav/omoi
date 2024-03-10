@@ -9,7 +9,7 @@ const RelationshipStatus = () => {
   const router = useRouter();
 
   const handlePress = () => {
-    router.push("tutorial");
+    router.push("/tutorial");
   };
 
   return (
@@ -67,6 +67,9 @@ const RelationshipStatus = () => {
             既婚（子供あり）
           </LeftAlignedButton>
           <LeftAlignedButton onPress={handlePress}>事実婚</LeftAlignedButton>
+          <LeftAlignedButton onPress={handlePress}>
+            現在パートナーはいない
+          </LeftAlignedButton>
         </View>
       </View>
     </SafeAreaView>

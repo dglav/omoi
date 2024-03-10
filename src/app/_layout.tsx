@@ -36,6 +36,7 @@ export default function Layout() {
                 headerShown: false,
               }}
             />
+            <Stack.Screen name="tutorial" options={{ headerShown: false }} />
             <Stack.Screen
               name="(tabs)"
               options={{ headerShown: false, headerBackTitle: "Back" }}
