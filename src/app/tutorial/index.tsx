@@ -79,7 +79,7 @@ const TutorialScreen = () => {
           height: 172,
         }}
       >
-        <Button onPress={() => router.push("/")}>
+        <Button onPress={() => router.push("/new-journal-entry/condition")}>
           感情ジャーナルをスタート
         </Button>
         <Button variant="secondary" onPress={() => router.push("/")}>

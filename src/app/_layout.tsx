@@ -36,6 +36,10 @@ export default function Layout() {
                 headerShown: false,
               }}
             />
+            <Stack.Screen
+              name="new-journal-entry"
+              options={{ headerShown: false }}
+            />
             <Stack.Screen name="tutorial" options={{ headerShown: false }} />
             <Stack.Screen
               name="(tabs)"
