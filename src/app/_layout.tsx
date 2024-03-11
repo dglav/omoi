@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Stack, useRouter } from "expo-router";
 import React, { StrictMode, useEffect } from "react";
 import { PaperProvider } from "react-native-paper";
@@ -8,12 +9,19 @@ import { theme } from "../theme";
 export default function Layout() {
   const router = useRouter();
 
-  /**
-   * Replace with implementation async storage for introduction screen
-   * https://docs.expo.dev/versions/latest/sdk/async-storage/
-   */
   useEffect(() => {
-    router.navigate("/introduction");
+    const rerouteIfFirstLoad = async () => {
+      try {
+        const value = await AsyncStorage.getItem("@viewedIntroduction");
+        if (value !== "true") {
+          router.navigate("/introduction");
+        }
+      } catch (e) {
+        console.error("getting from async store failed", e);
+      }
+    };
+
+    rerouteIfFirstLoad();
   }, []);
 
   return (

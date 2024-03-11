@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import { ArrowRightIcon } from "lucide-react-native";
 import { useEffect, useRef, useState } from "react";
@@ -31,6 +32,15 @@ const IntroductionScreen = () => {
     }
   });
 
+  const handleViewedIntroduction = async () => {
+    try {
+      await AsyncStorage.setItem("@viewedIntroduction", "true");
+      router.push("/");
+    } catch (e) {
+      console.error("setting to async store failed", e);
+    }
+  };
+
   return (
     <View
       style={{
@@ -61,7 +71,7 @@ const IntroductionScreen = () => {
         }}
       >
         {pagerIndex === 2 ? (
-          <Button onPress={() => router.push("/")}>Omoiを始める</Button>
+          <Button onPress={handleViewedIntroduction}>Omoiを始める</Button>
         ) : (
           <Button
             onPress={() => setPagerIndex((currentIndex) => currentIndex + 1)}
