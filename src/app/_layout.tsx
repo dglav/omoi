@@ -4,6 +4,7 @@ import React, { StrictMode, useEffect } from "react";
 import { PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
+import { HAS_VIEWED_INTRODUCTION } from "../asyncStorageConstants";
 import { theme } from "../theme";
 
 export default function Layout() {
@@ -12,7 +13,7 @@ export default function Layout() {
   useEffect(() => {
     const rerouteIfFirstLoad = async () => {
       try {
-        const value = await AsyncStorage.getItem("@viewedIntroduction");
+        const value = await AsyncStorage.getItem(HAS_VIEWED_INTRODUCTION);
         if (value !== "true") {
           router.navigate("/introduction");
         }

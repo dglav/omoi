@@ -4,6 +4,7 @@ import { ArrowRightIcon } from "lucide-react-native";
 import { useEffect, useRef, useState } from "react";
 import { View, useWindowDimensions, Animated } from "react-native";
 
+import { HAS_VIEWED_INTRODUCTION } from "../asyncStorageConstants";
 import { Button } from "../components/button";
 import { useAppTheme } from "../hooks/useAppTheme";
 import Pager from "../screens/introduction/pager";
@@ -34,7 +35,7 @@ const IntroductionScreen = () => {
 
   const handleViewedIntroduction = async () => {
     try {
-      await AsyncStorage.setItem("@viewedIntroduction", "true");
+      await AsyncStorage.setItem(HAS_VIEWED_INTRODUCTION, "true");
       router.push("/");
     } catch (e) {
       console.error("setting to async store failed", e);
