@@ -168,7 +168,9 @@ const JournalCondition = () => {
               paddingHorizontal: 16,
             }}
           >
-            <Button>次へ</Button>
+            <Button onPress={() => router.push("/new-journal-entry/feeling")}>
+              次へ
+            </Button>
           </View>
         </View>
       </SafeAreaView>
