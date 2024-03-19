@@ -13,30 +13,7 @@ import {
 import { Button } from "../../components/button";
 import { FeelingIcon } from "../../components/feeling-icon";
 import { useAppTheme } from "../../hooks/useAppTheme";
-
-const emotionMap = {
-  興奮: {
-    text: "興奮",
-  },
-  面白い: {
-    text: "面白い",
-  },
-  嬉しい: {
-    text: "嬉しい",
-  },
-  達成感: {
-    text: "達成感",
-  },
-  楽しい: {
-    text: "楽しい",
-  },
-  感謝: {
-    text: "感謝",
-  },
-  好き: {
-    text: "好き",
-  },
-};
+import { useStore } from "../../screens/new-journal-entry/useStore";
 
 const feelings = [
   {
