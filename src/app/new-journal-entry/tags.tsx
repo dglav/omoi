@@ -1,16 +1,10 @@
 import { useRouter } from "expo-router";
-import { useState } from "react";
-import {
-  Alert,
-  SafeAreaView,
-  Text,
-  View,
-  useWindowDimensions,
-} from "react-native";
+import { SafeAreaView, Text, View, useWindowDimensions } from "react-native";
 
 import { Button } from "../../components/button";
 import { useAppTheme } from "../../hooks/useAppTheme";
 import { TagSection } from "../../screens/new-journal-entry/tags/TagSection";
+import { useStore } from "../../screens/new-journal-entry/useStore";
 
 const tags = {
   personal: ["体調", "健康", "悩み", "趣味", "アイデンティティ"],
@@ -23,21 +17,18 @@ const JournalTags = () => {
   const theme = useAppTheme();
   const { width } = useWindowDimensions();
   const router = useRouter();
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [selectedTags, addTag, removeTag] = useStore((state) => [
+    state.tags,
+    state.addTag,
+    state.removeTag,
+  ]);
 
-  const onPressTag = (feeling: string) => {
-    if (selectedTags.includes(feeling)) {
-      return setSelectedTags(
-        selectedTags.filter((_feeling) => _feeling !== feeling),
-      );
+  const onPressTag = (tag: string) => {
+    if (selectedTags.includes(tag)) {
+      return removeTag(tag);
     }
 
-    if (selectedTags.length >= 3) {
-      Alert.alert("最大３つまで選んでください");
-      return;
-    }
-
-    setSelectedTags(selectedTags.concat([feeling]));
+    addTag(tag);
   };
 
   return (

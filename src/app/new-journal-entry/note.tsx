@@ -1,5 +1,4 @@
 import { useRouter } from "expo-router";
-import { useState } from "react";
 import {
   Alert,
   SafeAreaView,
@@ -11,12 +10,22 @@ import {
 
 import { Button } from "../../components/button";
 import { useAppTheme } from "../../hooks/useAppTheme";
+import { useStore } from "../../screens/new-journal-entry/useStore";
 
 const JournalNote = () => {
   const theme = useAppTheme();
   const { width } = useWindowDimensions();
   const router = useRouter();
-  const [note, setNote] = useState("");
+  const [note, updateNote] = useStore((state) => [
+    state.note,
+    state.updateNote,
+  ]);
+  const journalEntry = useStore((state) => ({
+    condition: state.condition,
+    feelings: state.feelings,
+    tags: state.tags,
+    note: state.note,
+  }));
 
   return (
     <View
@@ -60,7 +69,7 @@ const JournalNote = () => {
                   editable
                   multiline
                   value={note}
-                  onChangeText={(text) => setNote(text)}
+                  onChangeText={(text) => updateNote(text)}
                   placeholder="詳しく書いてみてください"
                   maxLength={2000}
                 />
@@ -73,7 +82,14 @@ const JournalNote = () => {
               paddingHorizontal: 16,
             }}
           >
-            <Button onPress={() => Alert.alert("post")}>投稿する</Button>
+            <Button
+              onPress={() => {
+                console.log({ journalEntry });
+                Alert.alert("post");
+              }}
+            >
+              投稿する
+            </Button>
           </View>
         </View>
       </SafeAreaView>

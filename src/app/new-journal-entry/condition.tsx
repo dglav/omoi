@@ -6,6 +6,7 @@ import { View, useWindowDimensions, SafeAreaView, Text } from "react-native";
 import { Button } from "../../components/button";
 import { ConditionIcon } from "../../components/condition-icon-200";
 import { useAppTheme } from "../../hooks/useAppTheme";
+import { useStore } from "../../screens/new-journal-entry/useStore";
 
 const conditionMap = {
   reallyBad: {
@@ -37,7 +38,11 @@ const JournalCondition = () => {
   const [value, setValue] = useState(50);
   const [thumbImage, setThumbImage] = useState();
   const [trackImage, setTrackImage] = useState();
-  const [condition, setCondition] = useState(conditionMap.average);
+  const [condition, setCondition] = useStore((state) => [
+    state.condition,
+    state.setCondition,
+  ]);
+  const [strokeColor, setStrokeColor] = useState(conditionMap.average.stroke);
 
   useEffect(() => {
     setThumbImage(require("../../../assets/Knob (3).png"));
@@ -46,15 +51,20 @@ const JournalCondition = () => {
 
   useEffect(() => {
     if (value < 20) {
-      setCondition(conditionMap.reallyBad);
+      setCondition(conditionMap.reallyBad.text);
+      setStrokeColor(conditionMap.reallyBad.stroke);
     } else if (value < 40) {
-      setCondition(conditionMap.bad);
+      setCondition(conditionMap.bad.text);
+      setStrokeColor(conditionMap.bad.stroke);
     } else if (value < 60) {
-      setCondition(conditionMap.average);
+      setCondition(conditionMap.average.text);
+      setStrokeColor(conditionMap.average.stroke);
     } else if (value < 80) {
-      setCondition(conditionMap.good);
+      setCondition(conditionMap.good.text);
+      setStrokeColor(conditionMap.good.stroke);
     } else {
-      setCondition(conditionMap.reallyGood);
+      setCondition(conditionMap.reallyGood.text);
+      setStrokeColor(conditionMap.reallyGood.stroke);
     }
   }, [value]);
 
@@ -102,7 +112,7 @@ const JournalCondition = () => {
               </Text>
 
               <View style={{ marginTop: 108, alignSelf: "center" }}>
-                <ConditionIcon stroke={condition.stroke} />
+                <ConditionIcon stroke={strokeColor} />
               </View>
 
               <Text
@@ -114,7 +124,7 @@ const JournalCondition = () => {
                   marginBottom: 92,
                 }}
               >
-                {condition.text}
+                {condition}
               </Text>
 
               <Slider

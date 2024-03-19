@@ -1,5 +1,4 @@
 import { useRouter } from "expo-router";
-import { useState } from "react";
 import {
   View,
   useWindowDimensions,
@@ -50,13 +49,15 @@ const JournalFeeling = () => {
   const theme = useAppTheme();
   const { width } = useWindowDimensions();
   const router = useRouter();
-  const [selectedFeelings, setSelectedFeelings] = useState<string[]>([]);
+  const [selectedFeelings, addFeeling, removeFeeling] = useStore((state) => [
+    state.feelings,
+    state.addFeeling,
+    state.removeFeeling,
+  ]);
 
   const onPressFeeling = (feeling: string) => {
     if (selectedFeelings.includes(feeling)) {
-      return setSelectedFeelings(
-        selectedFeelings.filter((_feeling) => _feeling !== feeling),
-      );
+      return removeFeeling(feeling);
     }
 
     if (selectedFeelings.length >= 3) {
@@ -64,7 +65,7 @@ const JournalFeeling = () => {
       return;
     }
 
-    setSelectedFeelings(selectedFeelings.concat([feeling]));
+    addFeeling(feeling);
   };
 
   const itemWidth = (width - 44) / 5;
