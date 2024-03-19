@@ -17,6 +17,8 @@ export const theme = {
     dangerLight: "#E9AFAF",
     danger: "#D75555",
     dangerHeavy: "#AE3838",
+    secondaryContainer: "#18B66A",
+    onSecondaryContainer: "#FAFAFA",
   },
   fontStyle: {
     xxl: {

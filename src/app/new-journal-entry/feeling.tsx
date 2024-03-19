@@ -78,7 +78,7 @@ const JournalFeeling = () => {
   const onPressFeeling = (feeling: string) => {
     if (selectedFeelings.includes(feeling)) {
       return setSelectedFeelings(
-        selectedFeelings.filter((_feeling) => _feeling !== feeling)
+        selectedFeelings.filter((_feeling) => _feeling !== feeling),
       );
     }
 
@@ -197,7 +197,7 @@ const JournalFeeling = () => {
               paddingHorizontal: 16,
             }}
           >
-            <Button onPress={() => Alert.alert("Go to next scrreen")}>
+            <Button onPress={() => router.push("/new-journal-entry/tags")}>
               次へ
             </Button>
           </View>

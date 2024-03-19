@@ -24,6 +24,14 @@ export default function Layout() {
           headerLeft: () => <BackButton />,
         }}
       />
+      <Stack.Screen
+        name="tags"
+        options={{
+          headerTitle: date,
+          headerTransparent: true,
+          headerLeft: () => <BackButton />,
+        }}
+      />
     </Stack>
   );
 }
