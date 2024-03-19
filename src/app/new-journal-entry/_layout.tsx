@@ -32,6 +32,14 @@ export default function Layout() {
           headerLeft: () => <BackButton />,
         }}
       />
+      <Stack.Screen
+        name="note"
+        options={{
+          headerTitle: date,
+          headerTransparent: true,
+          headerLeft: () => <BackButton />,
+        }}
+      />
     </Stack>
   );
 }
