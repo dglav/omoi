@@ -61,70 +61,77 @@ const JournalTags = () => {
           <View
             style={{
               flex: 1,
-              width,
               flexDirection: "column",
               justifyContent: "flex-start",
             }}
           >
             <View
-              style={{ gap: 8, paddingHorizontal: 28, paddingVertical: 16 }}
+              style={{
+                width,
+                display: "flex",
+                justifyContent: "flex-start",
+              }}
             >
-              <Text
-                style={{
-                  fontSize: theme.fontStyle.xl[1].size,
-                  fontWeight: theme.fontStyle.xl[1].weight,
-                }}
+              <View
+                style={{ gap: 8, paddingHorizontal: 28, paddingVertical: 16 }}
               >
-                関係していることは？
-              </Text>
-              <Text
-                style={{
-                  fontSize: theme.fontStyle.md[3].size,
-                  fontWeight: theme.fontStyle.md[3].weight,
-                }}
-              >
-                関連タグを設定することで、分析に役立ちます。
-              </Text>
+                <Text
+                  style={{
+                    fontSize: theme.fontStyle.xl[1].size,
+                    fontWeight: theme.fontStyle.xl[1].weight,
+                  }}
+                >
+                  関係していることは？
+                </Text>
+                <Text
+                  style={{
+                    fontSize: theme.fontStyle.md[3].size,
+                    fontWeight: theme.fontStyle.md[3].weight,
+                  }}
+                >
+                  関連タグを設定することで、分析に役立ちます。
+                </Text>
+              </View>
+
+              <TagSection
+                title="自分自身"
+                tags={tags.personal}
+                selectedTags={selectedTags}
+                onPressTag={onPressTag}
+              />
+
+              <TagSection
+                title="関係性"
+                tags={tags.relationship}
+                selectedTags={selectedTags}
+                onPressTag={onPressTag}
+              />
+
+              <TagSection
+                title="出来事"
+                tags={tags.happenings}
+                selectedTags={selectedTags}
+                onPressTag={onPressTag}
+              />
+
+              <TagSection
+                title="その他"
+                tags={tags.other}
+                selectedTags={selectedTags}
+                onPressTag={onPressTag}
+              />
             </View>
-
-            <TagSection
-              title="自分自身"
-              tags={tags.personal}
-              selectedTags={selectedTags}
-              onPressTag={onPressTag}
-            />
-
-            <TagSection
-              title="関係性"
-              tags={tags.relationship}
-              selectedTags={selectedTags}
-              onPressTag={onPressTag}
-            />
-
-            <TagSection
-              title="出来事"
-              tags={tags.happenings}
-              selectedTags={selectedTags}
-              onPressTag={onPressTag}
-            />
-
-            <TagSection
-              title="その他"
-              tags={tags.other}
-              selectedTags={selectedTags}
-              onPressTag={onPressTag}
-            />
           </View>
-        </View>
-        <View
-          style={{
-            width: "100%",
-            paddingHorizontal: 16,
-          }}
-        >
-          <Button onPress={() => Alert.alert("Go to next scrreen")}>
-            次へ
-          </Button>
+          <View
+            style={{
+              width: "100%",
+              paddingHorizontal: 16,
+            }}
+          >
+            <Button onPress={() => router.push("/new-journal-entry/note")}>
+              次へ
+            </Button>
+          </View>
         </View>
       </SafeAreaView>
     </View>
