@@ -17,7 +17,7 @@ export default function Layout() {
         }}
       />
       <Stack.Screen
-        name="feeling"
+        name="feelings"
         options={{
           headerTitle: date,
           headerTransparent: true,

@@ -121,7 +121,6 @@ const JournalFeeling = () => {
               style={{
                 width,
                 paddingVertical: 16,
-
                 display: "flex",
                 justifyContent: "flex-start",
               }}
