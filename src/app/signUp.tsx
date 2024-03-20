@@ -15,20 +15,32 @@ import { Button } from "../components/button";
 import { useAppTheme } from "../hooks/useAppTheme";
 import { useState } from "react";
 
-export default function LoginScreen() {
+export default function SignUpScreen() {
   const { width } = useWindowDimensions();
   const theme = useAppTheme();
   const router = useRouter();
   const [userId, setUserId] = useState<string>();
   const [password, setPassword] = useState<string>();
+  const [passwordConfirm, setPasswordConfirm] = useState<string>();
+  const [loading, setLoading] = useState<boolean>(false);
 
-  async function signInWithEmail() {
-    if (!userId || !password) {
-      Alert.alert("入力に誤りがあります。");
+  async function signUpWithEmail(
+    userId: string,
+    password: string,
+    passwordConfirm: string,
+  ) {
+    if (
+      !userId ||
+      !password ||
+      !passwordConfirm ||
+      password !== passwordConfirm
+    ) {
+      Alert.alert("入力データに誤りがあります。");
       return;
     }
 
-    const { data, error } = await supabase.auth.signInWithPassword({
+    setLoading(true);
+    const { data, error } = await supabase.auth.signUp({
       email: userId,
       password,
     });
@@ -37,7 +49,13 @@ export default function LoginScreen() {
 
     if (error) {
       Alert.alert(error.message);
+      setLoading(false);
+      return;
     }
+
+    if (!data.session)
+      Alert.alert("Please check your inbox for email verification!");
+    setLoading(false);
   }
 
   return (
@@ -83,7 +101,7 @@ export default function LoginScreen() {
                   fontWeight: theme.fontStyle.xl[1].weight,
                 }}
               >
-                ログイン
+                アカウント作成
               </Text>
               <Text
                 style={{
@@ -91,7 +109,7 @@ export default function LoginScreen() {
                   fontWeight: theme.fontStyle.md[1].weight,
                 }}
               >
-                あなたのIDとパスワードを入力してください
+                メールアドレスとパスワードを登録してください
               </Text>
             </View>
 
@@ -147,8 +165,37 @@ export default function LoginScreen() {
                   autoCapitalize="none"
                   placeholder="*******"
                   textContentType="password"
-                  autoCorrect={false}
                   secureTextEntry
+                  autoCorrect={false}
+                  style={{
+                    backgroundColor: theme.colors.white,
+                    fontSize: theme.fontStyle.md[3].size,
+                    fontWeight: theme.fontStyle.md[3].weight,
+                    paddingHorizontal: 16,
+                    paddingVertical: 17.5,
+                    borderRadius: 8,
+                  }}
+                />
+              </View>
+
+              <View>
+                <Text
+                  style={{
+                    fontSize: theme.fontStyle.md[1].size,
+                    fontWeight: theme.fontStyle.md[1].weight,
+                  }}
+                >
+                  パスワード（確認）
+                </Text>
+                <View style={{ height: 8 }} />
+                <TextInput
+                  value={passwordConfirm}
+                  onChangeText={(text) => setPasswordConfirm(text)}
+                  autoCapitalize="none"
+                  placeholder="*******"
+                  textContentType="password"
+                  secureTextEntry
+                  autoCorrect={false}
                   style={{
                     backgroundColor: theme.colors.white,
                     fontSize: theme.fontStyle.md[3].size,
@@ -161,7 +208,13 @@ export default function LoginScreen() {
               </View>
 
               <View style={{}}>
-                <Button onPress={signInWithEmail}>次へ</Button>
+                <Button
+                  onPress={() =>
+                    signUpWithEmail(userId, password, passwordConfirm)
+                  }
+                >
+                  次へ
+                </Button>
               </View>
             </View>
           </View>

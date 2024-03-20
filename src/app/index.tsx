@@ -52,7 +52,7 @@ export default function IndexScreen() {
           height: 172,
         }}
       >
-        <Button variant="secondary" disabled>
+        <Button variant="secondary" onPress={() => router.push("/signUp")}>
           新規アカウントを作る
         </Button>
         <Button variant="secondary" onPress={() => router.push("/signIn")}>

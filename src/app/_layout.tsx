@@ -8,8 +8,8 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { Database, Tables } from "../../types/supabase";
 import { HAS_VIEWED_INTRODUCTION } from "../asyncStorageConstants";
-import { theme } from "../theme";
 import { BackButton } from "../components/back-button";
+import { theme } from "../theme";
 
 export const supabase = createClient<Database>(
   "https://osfzwvhubwmiwimpgrpj.supabase.co",
@@ -39,18 +39,6 @@ AppState.addEventListener("change", (state) => {
 
 export default function Layout() {
   const router = useRouter();
-  const [countries, setCountries] = useState<Tables<"countries">[]>([]);
-
-  console.log({ countries });
-
-  useEffect(() => {
-    getCountries();
-  }, []);
-
-  async function getCountries() {
-    const { data } = await supabase.from("countries").select();
-    setCountries(data ?? []);
-  }
 
   useEffect(() => {
     const rerouteIfFirstLoad = async () => {
@@ -77,6 +65,14 @@ export default function Layout() {
               name="signIn"
               options={{
                 headerTitle: "ログイン",
+                headerTransparent: true,
+                headerLeft: () => <BackButton />,
+              }}
+            />
+            <Stack.Screen
+              name="signUp"
+              options={{
+                headerTitle: "アカウント作成",
                 headerTransparent: true,
                 headerLeft: () => <BackButton />,
               }}
