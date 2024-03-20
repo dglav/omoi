@@ -55,10 +55,7 @@ export default function IndexScreen() {
         <Button variant="secondary" disabled>
           新規アカウントを作る
         </Button>
-        <Button
-          variant="secondary"
-          onPress={() => router.push("/survey/relationship-length")}
-        >
+        <Button variant="secondary" onPress={() => router.push("/signIn")}>
           ログインする
         </Button>
       </View>
