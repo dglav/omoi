@@ -1,14 +1,33 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { createClient } from "@supabase/supabase-js";
 import { Stack, useRouter } from "expo-router";
-import React, { StrictMode, useEffect } from "react";
+import React, { StrictMode, useEffect, useState } from "react";
 import { PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
+import { Database, Tables } from "../../types/supabase";
 import { HAS_VIEWED_INTRODUCTION } from "../asyncStorageConstants";
 import { theme } from "../theme";
 
+const supabase = createClient<Database>(
+  "https://osfzwvhubwmiwimpgrpj.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9zZnp3dmh1YndtaXdpbXBncnBqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA5MjQ2MDgsImV4cCI6MjAyNjUwMDYwOH0.XDSsknfDRqeSbZO26ynvE6Ea3RiUQaN5yqsVWdFF9aI",
+);
+
 export default function Layout() {
   const router = useRouter();
+  const [countries, setCountries] = useState<Tables<"countries">[]>([]);
+
+  console.log({ countries });
+
+  useEffect(() => {
+    getCountries();
+  }, []);
+
+  async function getCountries() {
+    const { data } = await supabase.from("countries").select();
+    setCountries(data ?? []);
+  }
 
   useEffect(() => {
     const rerouteIfFirstLoad = async () => {
