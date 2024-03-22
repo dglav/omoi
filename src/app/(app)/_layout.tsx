@@ -32,15 +32,6 @@ export default function AppLayout() {
         name="(tabs)"
         options={{ headerShown: false, headerBackTitle: "Back" }}
       />
-
-      <Stack.Screen
-        name="mood-share"
-        options={{
-          headerTitle: "Mood Share",
-          headerBackTitle: "Back",
-          headerTransparent: true,
-        }}
-      />
     </Stack>
   );
 }

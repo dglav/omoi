@@ -1,10 +1,8 @@
 import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Text } from "../../../components/text";
-import { PartnersMood } from "../../../screens/(tabs)/home/PartnersMood";
-import { YourMood } from "../../../screens/(tabs)/home/YourMood";
 import { useAppTheme } from "../../../hooks/useAppTheme";
 
 export default function HomePage() {
@@ -12,10 +10,26 @@ export default function HomePage() {
 
   return (
     <SafeAreaView
-      style={{ ...styles.container, backgroundColor: theme.colors.background }}
+      style={{
+        flex: 1,
+        alignItems: "center",
+        backgroundColor: theme.colors.background,
+      }}
     >
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Omoi</Text>
+      <View
+        style={{
+          marginVertical: 12,
+        }}
+      >
+        <Text
+          style={{
+            fontSize: theme.fontStyle.lg[1].size,
+            fontWeight: theme.fontStyle.lg[1].weight,
+            letterSpacing: 2,
+          }}
+        >
+          Omoi
+        </Text>
       </View>
 
       <View style={{ height: 40 }} />
@@ -38,33 +52,7 @@ export default function HomePage() {
 
       <View style={{ height: 40 }} />
 
-      {/* <View style={styles.moodsContainer}>
-        <YourMood />
-        <PartnersMood />
-      </View> */}
-
       <StatusBar style="auto" />
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-  },
-  header: {
-    paddingTop: 32,
-  },
-  headerText: {
-    fontWeight: "bold",
-  },
-  moodsContainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "100%",
-    paddingTop: 20,
-    paddingHorizontal: 60,
-  },
-});
