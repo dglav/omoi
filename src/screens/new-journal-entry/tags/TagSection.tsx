@@ -1,6 +1,7 @@
 import { View } from "react-native";
-import { Chip, Text } from "react-native-paper";
 
+import { Chip } from "../../../components/chip";
+import { Text } from "../../../components/text";
 import { theme } from "../../../theme";
 
 type TagSectionProps = {
@@ -27,8 +28,6 @@ const TagSection = ({
     >
       <Text
         style={{
-          fontSize: theme.fontStyle.md[3].size,
-          fontWeight: theme.fontStyle.md[3].weight,
           color: theme.colors.textLight,
         }}
       >
@@ -48,10 +47,7 @@ const TagSection = ({
           return (
             <Chip
               key={tag}
-              mode={isSelected ? "flat" : "outlined"}
-              style={{
-                borderWidth: 0,
-              }}
+              isSelected={isSelected}
               onPress={() => onPressTag(tag)}
             >
               {tag}
