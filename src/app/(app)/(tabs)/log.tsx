@@ -3,14 +3,14 @@ import { Text, StyleSheet } from "react-native";
 import { useTheme } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const QuestionsAndAnswersPage = () => {
+const LogRoute = () => {
   const theme = useTheme();
 
   return (
     <SafeAreaView
       style={{ ...styles.container, backgroundColor: theme.colors.background }}
     >
-      <Text>QuestionsAndAnswersPage</Text>
+      <Text>Logs</Text>
     </SafeAreaView>
   );
 };
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default QuestionsAndAnswersPage;
+export default LogRoute;

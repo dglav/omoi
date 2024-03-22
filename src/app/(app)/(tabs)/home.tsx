@@ -1,26 +1,47 @@
 import { StatusBar } from "expo-status-bar";
-import { Text, View, StyleSheet } from "react-native";
-import { useTheme } from "react-native-paper";
+import { View, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { Text } from "../../../components/text";
 import { PartnersMood } from "../../../screens/(tabs)/home/PartnersMood";
 import { YourMood } from "../../../screens/(tabs)/home/YourMood";
+import { useAppTheme } from "../../../hooks/useAppTheme";
 
 export default function HomePage() {
-  const theme = useTheme();
+  const theme = useAppTheme();
 
   return (
     <SafeAreaView
       style={{ ...styles.container, backgroundColor: theme.colors.background }}
     >
       <View style={styles.header}>
-        <Text style={styles.headerText}>Our Mood</Text>
+        <Text style={styles.headerText}>Omoi</Text>
       </View>
 
-      <View style={styles.moodsContainer}>
+      <View style={{ height: 40 }} />
+
+      <View
+        style={{
+          gap: 16,
+        }}
+      >
+        <Text
+          style={{
+            fontSize: theme.fontStyle.xl[1].size,
+            fontWeight: theme.fontStyle.xl[1].weight,
+          }}
+        >
+          おはようございます
+        </Text>
+        <Text>今日の気分を記録して2人の連続投稿を継続しよう🤝</Text>
+      </View>
+
+      <View style={{ height: 40 }} />
+
+      {/* <View style={styles.moodsContainer}>
         <YourMood />
         <PartnersMood />
-      </View>
+      </View> */}
 
       <StatusBar style="auto" />
     </SafeAreaView>

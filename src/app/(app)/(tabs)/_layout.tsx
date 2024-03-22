@@ -1,52 +1,46 @@
-import { MaterialIcons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
+import { Home, PieChart, NotebookText, User } from "lucide-react-native";
 import React from "react";
-import { useTheme } from "react-native-paper";
+
+import { useAppTheme } from "../../../hooks/useAppTheme";
 
 const TabsLayout = () => {
-  const theme = useTheme();
+  const theme = useAppTheme();
 
   return (
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: theme.colors.primary,
+        tabBarInactiveTintColor: theme.colors.text,
         headerShown: false,
       }}
     >
       <Tabs.Screen
         name="home"
         options={{
-          title: "Home",
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons name="home" size={24} color={color} />
-          ),
+          title: "ホーム",
+          tabBarIcon: ({ color }) => <Home size={24} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="questions-and-answers"
+        name="analysis"
         options={{
-          title: "Q&A",
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons name="question-answer" size={24} color={color} />
-          ),
+          title: "分析",
+          tabBarIcon: ({ color }) => <PieChart size={24} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="mood-flow"
+        name="log"
         options={{
-          title: "Moodflow",
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons name="monitor-heart" size={24} color={color} />
-          ),
+          title: "ログ",
+          tabBarIcon: ({ color }) => <NotebookText size={24} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="value-lists"
+        name="settings"
         options={{
-          title: "Value lists",
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons name="list-alt" size={24} color={color} />
-          ),
+          title: "マイページ",
+          tabBarIcon: ({ color }) => <User size={24} color={color} />,
         }}
       />
     </Tabs>

@@ -84,8 +84,8 @@ const JournalNote = () => {
           >
             <Button
               onPress={() => {
-                console.log({ journalEntry });
                 Alert.alert("post");
+                router.navigate("/(app)/(tabs)/home");
               }}
             >
               投稿する

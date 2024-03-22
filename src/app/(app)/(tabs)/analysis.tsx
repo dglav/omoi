@@ -3,14 +3,14 @@ import { Text, StyleSheet } from "react-native";
 import { useTheme } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const MoodFlowPage = () => {
+const AnalysisRoute = () => {
   const theme = useTheme();
 
   return (
     <SafeAreaView
       style={{ ...styles.container, backgroundColor: theme.colors.background }}
     >
-      <Text>MoodFlowPage</Text>
+      <Text>Analysis</Text>
     </SafeAreaView>
   );
 };
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MoodFlowPage;
+export default AnalysisRoute;

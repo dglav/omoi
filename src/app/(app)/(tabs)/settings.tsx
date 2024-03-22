@@ -3,14 +3,14 @@ import { Text, StyleSheet } from "react-native";
 import { useTheme } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const ValueListsPage = () => {
+const SettingsRoute = () => {
   const theme = useTheme();
 
   return (
     <SafeAreaView
       style={{ ...styles.container, backgroundColor: theme.colors.background }}
     >
-      <Text>ValueListsPage</Text>
+      <Text>Settings</Text>
     </SafeAreaView>
   );
 };
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ValueListsPage;
+export default SettingsRoute;
