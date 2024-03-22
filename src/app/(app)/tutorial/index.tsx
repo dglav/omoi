@@ -7,8 +7,8 @@ import {
   Text,
 } from "react-native";
 
-import { Button } from "../../components/button";
-import { useAppTheme } from "../../hooks/useAppTheme";
+import { Button } from "../../../components/button";
+import { useAppTheme } from "../../../hooks/useAppTheme";
 
 const TutorialScreen = () => {
   const theme = useAppTheme();
@@ -44,7 +44,7 @@ const TutorialScreen = () => {
             }}
           >
             <Image
-              source={require("../../../assets/undraw_joyride_re_968t 1.png")}
+              source={require("../../../../assets/undraw_joyride_re_968t 1.png")}
             />
             <Text
               style={{

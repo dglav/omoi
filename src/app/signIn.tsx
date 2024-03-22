@@ -10,7 +10,7 @@ import {
   Alert,
 } from "react-native";
 
-import { supabase } from "./_layout";
+import { supabase } from "../services/supabase";
 import { Button } from "../components/button";
 import { useAppTheme } from "../hooks/useAppTheme";
 import { useState } from "react";
@@ -33,10 +33,12 @@ export default function LoginScreen() {
       password,
     });
 
-    console.log({ data, error });
-
     if (error) {
       Alert.alert(error.message);
+    }
+
+    if (data.session) {
+      router.push("/(app)/new-journal-entry/condition");
     }
   }
 

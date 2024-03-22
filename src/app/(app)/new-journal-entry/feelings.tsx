@@ -9,10 +9,10 @@ import {
   Pressable,
 } from "react-native";
 
-import { Button } from "../../components/button";
-import { FeelingIcon } from "../../components/feeling-icon";
-import { useAppTheme } from "../../hooks/useAppTheme";
-import { useStore } from "../../screens/new-journal-entry/useStore";
+import { Button } from "../../../components/button";
+import { FeelingIcon } from "../../../components/feeling-icon";
+import { useAppTheme } from "../../../hooks/useAppTheme";
+import { useStore } from "../../../screens/new-journal-entry/useStore";
 
 const feelings = [
   {

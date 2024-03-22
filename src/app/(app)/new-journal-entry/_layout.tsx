@@ -2,7 +2,7 @@ import { format } from "@formkit/tempo";
 import { Stack } from "expo-router";
 import React from "react";
 
-import { BackButton } from "../../components/back-button";
+import { BackButton } from "../../../components/back-button";
 
 export default function Layout() {
   const date = format(new Date(), "YYYY/MM/DD");

@@ -10,7 +10,7 @@ import {
   Alert,
 } from "react-native";
 
-import { supabase } from "./_layout";
+import { supabase } from "../services/supabase";
 import { Button } from "../components/button";
 import { useAppTheme } from "../hooks/useAppTheme";
 import { useState } from "react";

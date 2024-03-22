@@ -1,43 +1,15 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { createClient } from "@supabase/supabase-js";
 import { Stack, useRouter } from "expo-router";
-import React, { StrictMode, useEffect, useState } from "react";
-import { AppState } from "react-native";
+import React, { StrictMode, useEffect } from "react";
 import { PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import { Database, Tables } from "../../types/supabase";
 import { HAS_VIEWED_INTRODUCTION } from "../asyncStorageConstants";
 import { BackButton } from "../components/back-button";
+import { SessionProvider } from "../providers/SessionProvider";
 import { theme } from "../theme";
 
-export const supabase = createClient<Database>(
-  "https://osfzwvhubwmiwimpgrpj.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9zZnp3dmh1YndtaXdpbXBncnBqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA5MjQ2MDgsImV4cCI6MjAyNjUwMDYwOH0.XDSsknfDRqeSbZO26ynvE6Ea3RiUQaN5yqsVWdFF9aI",
-  {
-    auth: {
-      storage: AsyncStorage,
-      autoRefreshToken: true,
-      persistSession: true,
-      detectSessionInUrl: false,
-    },
-  },
-);
-
-// Tells Supabase Auth to continuously refresh the session automatically
-// if the app is in the foreground. When this is added, you will continue
-// to receive `onAuthStateChange` events with the `TOKEN_REFRESHED` or
-// `SIGNED_OUT` event if the user's session is terminated. This should
-// only be registered once.
-AppState.addEventListener("change", (state) => {
-  if (state === "active") {
-    supabase.auth.startAutoRefresh();
-  } else {
-    supabase.auth.stopAutoRefresh();
-  }
-});
-
-export default function Layout() {
+export default function Root() {
   const router = useRouter();
 
   useEffect(() => {
@@ -59,62 +31,43 @@ export default function Layout() {
     <StrictMode>
       <SafeAreaProvider>
         <PaperProvider theme={theme}>
-          <Stack>
-            <Stack.Screen name="index" options={{ headerShown: false }} />
-            <Stack.Screen
-              name="signIn"
-              options={{
-                headerTitle: "ログイン",
-                headerTransparent: true,
-                headerLeft: () => <BackButton />,
-              }}
-            />
-            <Stack.Screen
-              name="signUp"
-              options={{
-                headerTitle: "アカウント作成",
-                headerTransparent: true,
-                headerLeft: () => <BackButton />,
-              }}
-            />
-            <Stack.Screen
-              name="introduction"
-              options={{
-                headerTitle: "Omoi β版",
-                headerTransparent: true,
-                headerBackVisible: false,
-              }}
-            />
-            <Stack.Screen
-              name="survey"
-              options={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="new-journal-entry"
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen name="tutorial" options={{ headerShown: false }} />
-            <Stack.Screen
-              name="(tabs)"
-              options={{ headerShown: false, headerBackTitle: "Back" }}
-            />
-            <Stack.Screen
-              name="mood-share"
-              options={{
-                headerTitle: "Mood Share",
-                headerBackTitle: "Back",
-                headerTransparent: true,
-              }}
-            />
-            <Stack.Screen
-              name="modal"
-              options={{
-                presentation: "modal",
-              }}
-            />
-          </Stack>
+          <SessionProvider>
+            <Stack>
+              <Stack.Screen
+                name="introduction"
+                options={{
+                  headerTitle: "Omoi β版",
+                  headerTransparent: true,
+                  headerBackVisible: false,
+                }}
+              />
+
+              <Stack.Screen name="index" options={{ headerShown: false }} />
+
+              <Stack.Screen
+                name="signIn"
+                options={{
+                  headerTitle: "ログイン",
+                  headerTransparent: true,
+                  headerLeft: () => <BackButton />,
+                }}
+              />
+
+              <Stack.Screen
+                name="signUp"
+                options={{
+                  headerTitle: "アカウント作成",
+                  headerTransparent: true,
+                  headerLeft: () => <BackButton />,
+                }}
+              />
+
+              <Stack.Screen
+                name="(app)"
+                options={{ headerShown: false, headerBackTitle: "Back" }}
+              />
+            </Stack>
+          </SessionProvider>
         </PaperProvider>
       </SafeAreaProvider>
     </StrictMode>

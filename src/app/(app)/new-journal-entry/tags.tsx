@@ -1,10 +1,10 @@
 import { useRouter } from "expo-router";
 import { SafeAreaView, Text, View, useWindowDimensions } from "react-native";
 
-import { Button } from "../../components/button";
-import { useAppTheme } from "../../hooks/useAppTheme";
-import { TagSection } from "../../screens/new-journal-entry/tags/TagSection";
-import { useStore } from "../../screens/new-journal-entry/useStore";
+import { Button } from "../../../components/button";
+import { useAppTheme } from "../../../hooks/useAppTheme";
+import { TagSection } from "../../../screens/new-journal-entry/tags/TagSection";
+import { useStore } from "../../../screens/new-journal-entry/useStore";
 
 const tags = {
   personal: ["体調", "健康", "悩み", "趣味", "アイデンティティ"],

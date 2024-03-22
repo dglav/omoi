@@ -1,8 +1,8 @@
 import { useRouter } from "expo-router";
 import { View, Text, SafeAreaView } from "react-native";
 
-import { useAppTheme } from "../../hooks/useAppTheme";
-import { LeftAlignedButton } from "../../screens/relationship/leftAlignedButton";
+import { useAppTheme } from "../../../hooks/useAppTheme";
+import { LeftAlignedButton } from "../../../screens/relationship/leftAlignedButton";
 
 const RelationshipStatus = () => {
   const theme = useAppTheme();

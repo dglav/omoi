@@ -1,12 +1,18 @@
-import { useRouter } from "expo-router";
+import { Redirect, useRouter } from "expo-router";
 import { View, StyleSheet, Text, Image } from "react-native";
 
 import { Button } from "../components/button";
 import { useAppTheme } from "../hooks/useAppTheme";
+import { useSession } from "../providers/SessionProvider";
 
 export default function IndexScreen() {
   const theme = useAppTheme();
   const router = useRouter();
+  const { session } = useSession();
+
+  if (session) {
+    return <Redirect href="/(app)/new-journal-entry/condition" />;
+  }
 
   return (
     <View

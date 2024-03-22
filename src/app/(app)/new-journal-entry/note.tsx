@@ -8,9 +8,9 @@ import {
   useWindowDimensions,
 } from "react-native";
 
-import { Button } from "../../components/button";
-import { useAppTheme } from "../../hooks/useAppTheme";
-import { useStore } from "../../screens/new-journal-entry/useStore";
+import { Button } from "../../../components/button";
+import { useAppTheme } from "../../../hooks/useAppTheme";
+import { useStore } from "../../../screens/new-journal-entry/useStore";
 
 const JournalNote = () => {
   const theme = useAppTheme();
