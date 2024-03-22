@@ -12,7 +12,7 @@ export default function AppLayout() {
   }
 
   if (!session) {
-    return <Redirect href="/signIn" />;
+    return <Redirect href="/" />;
   }
 
   return (
