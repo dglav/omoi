@@ -38,7 +38,7 @@ export default function LoginScreen() {
     }
 
     if (data.session) {
-      router.push("/(app)/new-journal-entry/condition");
+      router.push("/(app)/(tabs)/home");
     }
   }
 
