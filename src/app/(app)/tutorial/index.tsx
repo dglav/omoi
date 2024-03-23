@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import {
   View,
@@ -7,6 +8,7 @@ import {
   Text,
 } from "react-native";
 
+import { FIRST_SIGN_IN } from "../../../asyncStorageConstants";
 import { Button } from "../../../components/button";
 import { useAppTheme } from "../../../hooks/useAppTheme";
 
@@ -14,6 +16,8 @@ const TutorialScreen = () => {
   const theme = useAppTheme();
   const { height, width } = useWindowDimensions();
   const router = useRouter();
+
+  const onCompleteTutorial = () => AsyncStorage.setItem(FIRST_SIGN_IN, "true");
 
   return (
     <View
@@ -79,10 +83,21 @@ const TutorialScreen = () => {
           height: 172,
         }}
       >
-        <Button onPress={() => router.push("/new-journal-entry/condition")}>
+        <Button
+          onPress={async () => {
+            await onCompleteTutorial();
+            router.push("/new-journal-entry/condition");
+          }}
+        >
           感情ジャーナルをスタート
         </Button>
-        <Button variant="secondary" onPress={() => router.push("/")}>
+        <Button
+          variant="secondary"
+          onPress={async () => {
+            await onCompleteTutorial();
+            router.push("/(tabs)/home");
+          }}
+        >
           スキップ
         </Button>
       </View>

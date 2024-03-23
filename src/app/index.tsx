@@ -11,7 +11,7 @@ export default function IndexScreen() {
   const { session } = useSession();
 
   if (session) {
-    return <Redirect href="/(app)/{tabs)/home" />;
+    return <Redirect href="/(app)/(tabs)/home" />;
   }
 
   return (
