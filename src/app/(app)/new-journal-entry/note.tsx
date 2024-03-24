@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
+import { useState } from "react";
 import {
-  Alert,
   SafeAreaView,
   Text,
   TextInput,
@@ -10,6 +10,7 @@ import {
 
 import { Button } from "../../../components/button";
 import { useAppTheme } from "../../../hooks/useAppTheme";
+import { PostSuccessModal } from "../../../screens/new-journal-entry/post-success-modal";
 import { useStore } from "../../../screens/new-journal-entry/useStore";
 
 const JournalNote = () => {
@@ -20,12 +21,7 @@ const JournalNote = () => {
     state.note,
     state.updateNote,
   ]);
-  const journalEntry = useStore((state) => ({
-    condition: state.condition,
-    feelings: state.feelings,
-    tags: state.tags,
-    note: state.note,
-  }));
+  const [isPostSuccessModalOpen, setIsPostSuccessModalOpen] = useState(false);
 
   return (
     <View
@@ -84,14 +80,21 @@ const JournalNote = () => {
           >
             <Button
               onPress={() => {
-                Alert.alert("post");
-                router.navigate("/(app)/(tabs)/home");
+                setIsPostSuccessModalOpen(true);
               }}
             >
               投稿する
             </Button>
           </View>
         </View>
+
+        <PostSuccessModal
+          visible={isPostSuccessModalOpen}
+          onConfirm={() => {
+            setIsPostSuccessModalOpen(false);
+            router.navigate("/(app)/(tabs)/home");
+          }}
+        />
       </SafeAreaView>
     </View>
   );

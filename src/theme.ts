@@ -19,7 +19,6 @@ export const theme = {
     dangerHeavy: "#AE3838",
     secondaryContainer: "#18B66A",
     onSecondaryContainer: "#FAFAFA",
-    backdrop: "red",
   },
   fontStyle: {
     xxl: {
