@@ -1,5 +1,8 @@
+import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { SquarePen } from "lucide-react-native";
 import { Pressable, View } from "react-native";
+import { FAB } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Text } from "../../../components/text";
@@ -7,6 +10,7 @@ import { useAppTheme } from "../../../hooks/useAppTheme";
 
 export default function HomePage() {
   const theme = useAppTheme();
+  const router = useRouter();
 
   return (
     <SafeAreaView
@@ -88,6 +92,18 @@ export default function HomePage() {
       </View>
 
       <View style={{ height: 40 }} />
+
+      <FAB
+        icon={() => <SquarePen color={theme.colors.white} />}
+        style={{
+          position: "absolute",
+          margin: 16,
+          right: 0,
+          bottom: 0,
+          backgroundColor: theme.colors.primary,
+        }}
+        onPress={() => router.push("/(app)/new-journal-entry")}
+      />
 
       <StatusBar style="auto" />
     </SafeAreaView>

@@ -14,6 +14,7 @@ export default function Layout() {
         options={{
           headerTitle: date,
           headerTransparent: true,
+          headerLeft: () => <BackButton />,
         }}
       />
       <Stack.Screen
