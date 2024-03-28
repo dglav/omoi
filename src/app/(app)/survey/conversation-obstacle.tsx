@@ -6,22 +6,21 @@ import { LeftAlignedButton } from "../../../screens/relationship/leftAlignedButt
 import { useStore } from "../../../screens/survey/useStore";
 
 const options = [
-  { text: "0~1年", value: "0~1年" },
-  { text: "1~2年", value: "1~2年" },
-  { text: "3~5年", value: "3~5年" },
-  { text: "6~10年", value: "6~10年" },
-  { text: "11年以上", value: "11年以上" },
-  { text: "まだ交際していない", value: "まだ交際していない" },
+  { text: "いら", value: "いら" },
+  { text: "満足している", value: "満足している" },
+  { text: "ふつう", value: "ふつう" },
+  { text: "不満がある", value: "不満がある" },
+  { text: "とても不満がある", value: "とても不満がある" },
 ];
 
-const RelationshipLength = () => {
+const ConversationObstacle = () => {
   const theme = useAppTheme();
   const router = useRouter();
-  const { setRelationshipLength } = useStore();
+  const { setConversationObstacle } = useStore();
 
   const handlePress = (answer: string) => {
-    setRelationshipLength(answer);
-    router.push("/survey/relationship-status");
+    setConversationObstacle(answer);
+    router.push("/survey/self-expression");
   };
 
   return (
@@ -46,7 +45,7 @@ const RelationshipLength = () => {
               fontWeight: theme.fontStyle.xxl[1].weight,
             }}
           >
-            交際の期間
+            会話の課題
           </Text>
           <Text
             style={{
@@ -54,7 +53,7 @@ const RelationshipLength = () => {
               fontWeight: theme.fontStyle.md[1].weight,
             }}
           >
-            2人の関係が始まってからどれくらいが経ちますか？
+            パートナーとの会話について教えてください
           </Text>
         </View>
         <View
@@ -74,4 +73,4 @@ const RelationshipLength = () => {
   );
 };
 
-export default RelationshipLength;
+export default ConversationObstacle;

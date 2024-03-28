@@ -13,8 +13,45 @@ export default function Layout() {
           headerTransparent: true,
         }}
       />
+
       <Stack.Screen
         name="relationship-status"
+        options={{
+          headerTitle: "基本情報の登録",
+          headerTransparent: true,
+          headerLeft: () => <BackButton />,
+        }}
+      />
+
+      <Stack.Screen
+        name="conversation-amount"
+        options={{
+          headerTitle: "基本情報の登録",
+          headerTransparent: true,
+          headerLeft: () => <BackButton />,
+        }}
+      />
+
+      <Stack.Screen
+        name="conversation-obstacle"
+        options={{
+          headerTitle: "基本情報の登録",
+          headerTransparent: true,
+          headerLeft: () => <BackButton />,
+        }}
+      />
+
+      <Stack.Screen
+        name="self-expression"
+        options={{
+          headerTitle: "基本情報の登録",
+          headerTransparent: true,
+          headerLeft: () => <BackButton />,
+        }}
+      />
+
+      <Stack.Screen
+        name="partner-expression"
         options={{
           headerTitle: "基本情報の登録",
           headerTransparent: true,

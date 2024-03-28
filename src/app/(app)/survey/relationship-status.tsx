@@ -3,13 +3,25 @@ import { View, Text, SafeAreaView } from "react-native";
 
 import { useAppTheme } from "../../../hooks/useAppTheme";
 import { LeftAlignedButton } from "../../../screens/relationship/leftAlignedButton";
+import { useStore } from "../../../screens/survey/useStore";
+
+const options = [
+  { text: "交際している", value: "交際している" },
+  { text: "同棲している", value: "同棲している" },
+  { text: "婚約している", value: "婚約している" },
+  { text: "既婚（子供なし）", value: "既婚（子供なし）" },
+  { text: "既婚（子供あり）", value: "既婚（子供あり）" },
+  { text: "現在パートナーはいない", value: "現在パートナーはいない" },
+];
 
 const RelationshipStatus = () => {
   const theme = useAppTheme();
   const router = useRouter();
+  const { setRelationshipStatus } = useStore();
 
-  const handlePress = () => {
-    router.push("/tutorial");
+  const handlePress = (answer: string) => {
+    setRelationshipStatus(answer);
+    router.navigate("/survey/conversation-amount");
   };
 
   return (
@@ -51,25 +63,11 @@ const RelationshipStatus = () => {
             gap: 24,
           }}
         >
-          <LeftAlignedButton onPress={handlePress}>
-            交際している
-          </LeftAlignedButton>
-          <LeftAlignedButton onPress={handlePress}>
-            同棲している
-          </LeftAlignedButton>
-          <LeftAlignedButton onPress={handlePress}>
-            婚約している
-          </LeftAlignedButton>
-          <LeftAlignedButton onPress={handlePress}>
-            既婚（子供なし）
-          </LeftAlignedButton>
-          <LeftAlignedButton onPress={handlePress}>
-            既婚（子供あり）
-          </LeftAlignedButton>
-          <LeftAlignedButton onPress={handlePress}>事実婚</LeftAlignedButton>
-          <LeftAlignedButton onPress={handlePress}>
-            現在パートナーはいない
-          </LeftAlignedButton>
+          {options.map((option) => (
+            <LeftAlignedButton onPress={() => handlePress(option.value)}>
+              {option.text}
+            </LeftAlignedButton>
+          ))}
         </View>
       </View>
     </SafeAreaView>
