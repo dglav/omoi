@@ -1,9 +1,14 @@
+import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "expo-router";
-import { View, Text, SafeAreaView } from "react-native";
+import { View, Text, SafeAreaView, Alert } from "react-native";
 
 import { useAppTheme } from "../../../hooks/useAppTheme";
+import { useSession } from "../../../providers/SessionProvider";
 import { LeftAlignedButton } from "../../../screens/relationship/leftAlignedButton";
 import { useStore } from "../../../screens/survey/useStore";
+import { createSurveyEntry } from "../../../services/supabase/survey_1/create";
+
+type CreateSurveyEntryParams = Parameters<typeof createSurveyEntry>[0];
 
 const options = [
   { text: "もっと感情を知りたい", value: "もっと感情を知りたい" },
@@ -25,17 +30,43 @@ const SelfExpression = () => {
     selfExpression,
   } = useStore();
 
+  const { session } = useSession();
+
+  const { mutate } = useMutation({
+    mutationFn: (values: CreateSurveyEntryParams) => createSurveyEntry(values),
+    onSuccess: () => {
+      Alert.alert("post success!");
+      router.push("/tutorial");
+    },
+    onError: () => {
+      Alert.alert("post failed");
+    },
+  });
+
   const handlePress = (answer: string) => {
     setSelfExpression(answer);
-    console.log({
-      conversationAmount,
-      conversationObstacle,
-      partnerExpression: answer,
-      relationshipLength,
-      relationshipStatus,
-      selfExpression,
-    });
-    router.push("/tutorial");
+
+    const userId = session?.user.id;
+
+    if (
+      userId &&
+      relationshipLength &&
+      relationshipStatus &&
+      conversationAmount &&
+      conversationObstacle &&
+      selfExpression &&
+      answer
+    ) {
+      mutate({
+        user_id: userId,
+        conversation_amount: conversationAmount,
+        conversation_obstacle: conversationObstacle,
+        relationship_length: relationshipLength,
+        relationship_status: relationshipStatus,
+        self_expression: selfExpression,
+        partner_expression: answer,
+      });
+    }
   };
 
   return (

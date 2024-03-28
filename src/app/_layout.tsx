@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack, useRouter } from "expo-router";
 import React, { StrictMode, useEffect } from "react";
 import { PaperProvider } from "react-native-paper";
@@ -8,6 +9,14 @@ import { HAS_VIEWED_INTRODUCTION } from "../asyncStorageConstants";
 import { BackButton } from "../components/back-button";
 import { SessionProvider } from "../providers/SessionProvider";
 import { theme } from "../theme";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 0,
+    },
+  },
+});
 
 export default function Root() {
   const router = useRouter();
@@ -32,41 +41,43 @@ export default function Root() {
       <SafeAreaProvider>
         <PaperProvider theme={theme}>
           <SessionProvider>
-            <Stack>
-              <Stack.Screen
-                name="introduction"
-                options={{
-                  headerTitle: "Omoi β版",
-                  headerTransparent: true,
-                  headerBackVisible: false,
-                }}
-              />
+            <QueryClientProvider client={queryClient}>
+              <Stack>
+                <Stack.Screen
+                  name="introduction"
+                  options={{
+                    headerTitle: "Omoi β版",
+                    headerTransparent: true,
+                    headerBackVisible: false,
+                  }}
+                />
 
-              <Stack.Screen name="index" options={{ headerShown: false }} />
+                <Stack.Screen name="index" options={{ headerShown: false }} />
 
-              <Stack.Screen
-                name="signIn"
-                options={{
-                  headerTitle: "ログイン",
-                  headerTransparent: true,
-                  headerLeft: () => <BackButton />,
-                }}
-              />
+                <Stack.Screen
+                  name="signIn"
+                  options={{
+                    headerTitle: "ログイン",
+                    headerTransparent: true,
+                    headerLeft: () => <BackButton />,
+                  }}
+                />
 
-              <Stack.Screen
-                name="signUp"
-                options={{
-                  headerTitle: "アカウント作成",
-                  headerTransparent: true,
-                  headerLeft: () => <BackButton />,
-                }}
-              />
+                <Stack.Screen
+                  name="signUp"
+                  options={{
+                    headerTitle: "アカウント作成",
+                    headerTransparent: true,
+                    headerLeft: () => <BackButton />,
+                  }}
+                />
 
-              <Stack.Screen
-                name="(app)"
-                options={{ headerShown: false, headerBackTitle: "Back" }}
-              />
-            </Stack>
+                <Stack.Screen
+                  name="(app)"
+                  options={{ headerShown: false, headerBackTitle: "Back" }}
+                />
+              </Stack>
+            </QueryClientProvider>
           </SessionProvider>
         </PaperProvider>
       </SafeAreaProvider>

@@ -24,27 +24,98 @@ export type Database = {
         };
         Relationships: [];
       };
-      test: {
+      survey_1: {
         Row: {
-          created_at: string;
+          conversation_amount: string;
+          conversation_obstacle: string;
           id: number;
+          partner_expression: string;
+          relationship_length: string;
+          relationship_status: string;
+          self_expression: string;
+          user_id: string;
         };
         Insert: {
-          created_at?: string;
-          id?: number;
+          conversation_amount: string;
+          conversation_obstacle: string;
+          id?: never;
+          partner_expression: string;
+          relationship_length: string;
+          relationship_status: string;
+          self_expression: string;
+          user_id: string;
         };
         Update: {
-          created_at?: string;
-          id?: number;
+          conversation_amount?: string;
+          conversation_obstacle?: string;
+          id?: never;
+          partner_expression?: string;
+          relationship_length?: string;
+          relationship_status?: string;
+          self_expression?: string;
+          user_id?: string;
         };
-        Relationships: [];
+        Relationships: [
+          {
+            foreignKeyName: "public_survey_1_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      users: {
+        Row: {
+          birthday: string | null;
+          id: string;
+          nickname: string | null;
+        };
+        Insert: {
+          birthday?: string | null;
+          id?: string;
+          nickname?: string | null;
+        };
+        Update: {
+          birthday?: string | null;
+          id?: string;
+          nickname?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "public_users_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
       };
     };
     Views: {
       [_ in never]: never;
     };
     Functions: {
-      [_ in never]: never;
+      add_country: {
+        Args: {
+          name_input: string;
+        };
+        Returns: {
+          id: number;
+          name: string;
+        }[];
+      };
+      get_countries: {
+        Args: Record<PropertyKey, never>;
+        Returns: {
+          id: number;
+          name: string;
+        }[];
+      };
+      hello: {
+        Args: Record<PropertyKey, never>;
+        Returns: string;
+      };
     };
     Enums: {
       [_ in never]: never;
