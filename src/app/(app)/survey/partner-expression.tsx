@@ -78,7 +78,10 @@ const SelfExpression = () => {
           }}
         >
           {options.map((option) => (
-            <LeftAlignedButton onPress={() => handlePress(option.value)}>
+            <LeftAlignedButton
+              key={option.text}
+              onPress={() => handlePress(option.value)}
+            >
               {option.text}
             </LeftAlignedButton>
           ))}
