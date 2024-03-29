@@ -1,19 +1,19 @@
 import { useRouter } from "expo-router";
+import { useState } from "react";
 import {
   View,
   StyleSheet,
   Text,
-  Image,
   SafeAreaView,
   useWindowDimensions,
   TextInput,
   Alert,
 } from "react-native";
 
-import { supabase } from "../services/supabase";
 import { Button } from "../components/button";
 import { useAppTheme } from "../hooks/useAppTheme";
-import { useState } from "react";
+import { supabase } from "../services/supabase";
+import { FIRST_SIGN_IN } from "../asyncStorageConstants";
 
 export default function LoginScreen() {
   const { width } = useWindowDimensions();
