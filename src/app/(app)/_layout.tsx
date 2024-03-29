@@ -1,10 +1,10 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Redirect, Stack, useRouter } from "expo-router";
 import React, { useEffect } from "react";
 import { Text } from "react-native";
 
+import { IS_FIRST_SIGN_IN } from "../../asyncStorageConstants";
 import { useSession } from "../../providers/SessionProvider";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { FIRST_SIGN_IN } from "../../asyncStorageConstants";
 
 export default function AppLayout() {
   const { session, isLoading } = useSession();
@@ -13,9 +13,8 @@ export default function AppLayout() {
   useEffect(() => {
     const rerouteIfFirstSignIn = async () => {
       try {
-        const value = await AsyncStorage.getItem(FIRST_SIGN_IN);
-        console.log({ FIRST_SIGN_IN: value });
-        if (value !== "true") {
+        const value = await AsyncStorage.getItem(IS_FIRST_SIGN_IN);
+        if (value !== "false") {
           router.navigate("/survey");
         }
       } catch (e) {

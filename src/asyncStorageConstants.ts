@@ -1,2 +1,2 @@
 export const HAS_VIEWED_INTRODUCTION = "hasViewedIntroduction";
-export const FIRST_SIGN_IN = "firstSignIn";
+export const IS_FIRST_SIGN_IN = "isFirstSignIn";

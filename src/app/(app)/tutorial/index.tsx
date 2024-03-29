@@ -8,7 +8,7 @@ import {
   Text,
 } from "react-native";
 
-import { FIRST_SIGN_IN } from "../../../asyncStorageConstants";
+import { IS_FIRST_SIGN_IN } from "../../../asyncStorageConstants";
 import { Button } from "../../../components/button";
 import { useAppTheme } from "../../../hooks/useAppTheme";
 
@@ -17,7 +17,8 @@ const TutorialScreen = () => {
   const { height, width } = useWindowDimensions();
   const router = useRouter();
 
-  const onCompleteTutorial = () => AsyncStorage.setItem(FIRST_SIGN_IN, "true");
+  const onCompleteTutorial = () =>
+    AsyncStorage.setItem(IS_FIRST_SIGN_IN, "false");
 
   return (
     <View

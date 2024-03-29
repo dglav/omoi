@@ -13,7 +13,7 @@ import {
 import { Button } from "../components/button";
 import { useAppTheme } from "../hooks/useAppTheme";
 import { supabase } from "../services/supabase";
-import { FIRST_SIGN_IN } from "../asyncStorageConstants";
+import { IS_FIRST_SIGN_IN } from "../asyncStorageConstants";
 
 export default function LoginScreen() {
   const { width } = useWindowDimensions();
