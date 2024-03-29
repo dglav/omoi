@@ -1,24 +1,13 @@
-import { useRouter } from "expo-router";
-import {
-  View,
-  StyleSheet,
-  Text,
-  Image,
-  SafeAreaView,
-  useWindowDimensions,
-  TextInput,
-  Alert,
-} from "react-native";
-
-import { supabase } from "../services/supabase";
-import { Button } from "../components/button";
-import { useAppTheme } from "../hooks/useAppTheme";
 import { useState } from "react";
+import { View, StyleSheet, Text, TextInput, Alert } from "react-native";
+
+import { Button } from "../components/button";
+import TitleSubtitleLayout from "../components/title-subtitle-layout";
+import { useAppTheme } from "../hooks/useAppTheme";
+import { supabase } from "../services/supabase";
 
 export default function SignUpScreen() {
-  const { width } = useWindowDimensions();
   const theme = useAppTheme();
-  const router = useRouter();
   const [userId, setUserId] = useState<string>();
   const [password, setPassword] = useState<string>();
   const [passwordConfirm, setPasswordConfirm] = useState<string>();
@@ -27,7 +16,7 @@ export default function SignUpScreen() {
   async function signUpWithEmail(
     userId: string,
     password: string,
-    passwordConfirm: string,
+    passwordConfirm: string
   ) {
     if (
       !userId ||
@@ -59,168 +48,113 @@ export default function SignUpScreen() {
   }
 
   return (
-    <View
-      style={{
-        flex: 1,
-        alignItems: "flex-start",
-        backgroundColor: theme.colors.background,
-      }}
+    <TitleSubtitleLayout
+      title="アカウント作成"
+      subtitle="メールアドレスとパスワードを登録してください"
     >
-      <SafeAreaView>
-        <View
-          style={{
-            display: "flex",
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "space-between",
-            backgroundColor: theme.colors.background,
-          }}
-        >
-          <View
+      <View
+        style={{
+          gap: 40,
+        }}
+      >
+        <View>
+          <Text
             style={{
-              width,
-              flex: 1,
-              flexDirection: "column",
-              justifyContent: "flex-start",
-              paddingHorizontal: 16,
-              gap: 46,
+              fontSize: theme.fontStyle.md[1].size,
+              fontWeight: theme.fontStyle.md[1].weight,
             }}
           >
-            <View
-              style={{
-                width,
-                paddingVertical: 16,
-                display: "flex",
-                justifyContent: "flex-start",
-                gap: 16,
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: theme.fontStyle.xl[1].size,
-                  fontWeight: theme.fontStyle.xl[1].weight,
-                }}
-              >
-                アカウント作成
-              </Text>
-              <Text
-                style={{
-                  fontSize: theme.fontStyle.md[1].size,
-                  fontWeight: theme.fontStyle.md[1].weight,
-                }}
-              >
-                メールアドレスとパスワードを登録してください
-              </Text>
-            </View>
-
-            <View
-              style={{
-                gap: 40,
-              }}
-            >
-              <View>
-                <Text
-                  style={{
-                    fontSize: theme.fontStyle.md[1].size,
-                    fontWeight: theme.fontStyle.md[1].weight,
-                  }}
-                >
-                  ユーザーID
-                </Text>
-                <View style={{ height: 8 }} />
-                <TextInput
-                  value={userId}
-                  onChangeText={(text) => setUserId(text)}
-                  placeholder="tanaka@omoi.com"
-                  autoCapitalize="none"
-                  textContentType="emailAddress"
-                  autoCorrect={false}
-                  autoFocus
-                  keyboardType="email-address"
-                  inputMode="email"
-                  style={{
-                    backgroundColor: theme.colors.white,
-                    fontSize: theme.fontStyle.md[3].size,
-                    fontWeight: theme.fontStyle.md[3].weight,
-                    paddingHorizontal: 16,
-                    paddingVertical: 17.5,
-                    borderRadius: 8,
-                  }}
-                />
-              </View>
-
-              <View>
-                <Text
-                  style={{
-                    fontSize: theme.fontStyle.md[1].size,
-                    fontWeight: theme.fontStyle.md[1].weight,
-                  }}
-                >
-                  パスワード
-                </Text>
-                <View style={{ height: 8 }} />
-                <TextInput
-                  value={password}
-                  onChangeText={(text) => setPassword(text)}
-                  autoCapitalize="none"
-                  placeholder="*******"
-                  textContentType="password"
-                  secureTextEntry
-                  autoCorrect={false}
-                  style={{
-                    backgroundColor: theme.colors.white,
-                    fontSize: theme.fontStyle.md[3].size,
-                    fontWeight: theme.fontStyle.md[3].weight,
-                    paddingHorizontal: 16,
-                    paddingVertical: 17.5,
-                    borderRadius: 8,
-                  }}
-                />
-              </View>
-
-              <View>
-                <Text
-                  style={{
-                    fontSize: theme.fontStyle.md[1].size,
-                    fontWeight: theme.fontStyle.md[1].weight,
-                  }}
-                >
-                  パスワード（確認）
-                </Text>
-                <View style={{ height: 8 }} />
-                <TextInput
-                  value={passwordConfirm}
-                  onChangeText={(text) => setPasswordConfirm(text)}
-                  autoCapitalize="none"
-                  placeholder="*******"
-                  textContentType="password"
-                  secureTextEntry
-                  autoCorrect={false}
-                  style={{
-                    backgroundColor: theme.colors.white,
-                    fontSize: theme.fontStyle.md[3].size,
-                    fontWeight: theme.fontStyle.md[3].weight,
-                    paddingHorizontal: 16,
-                    paddingVertical: 17.5,
-                    borderRadius: 8,
-                  }}
-                />
-              </View>
-
-              <View style={{}}>
-                <Button
-                  onPress={() =>
-                    signUpWithEmail(userId, password, passwordConfirm)
-                  }
-                >
-                  次へ
-                </Button>
-              </View>
-            </View>
-          </View>
+            ユーザーID
+          </Text>
+          <View style={{ height: 8 }} />
+          <TextInput
+            value={userId}
+            onChangeText={(text) => setUserId(text)}
+            placeholder="tanaka@omoi.com"
+            autoCapitalize="none"
+            textContentType="emailAddress"
+            autoCorrect={false}
+            autoFocus
+            keyboardType="email-address"
+            inputMode="email"
+            style={{
+              backgroundColor: theme.colors.white,
+              fontSize: theme.fontStyle.md[3].size,
+              fontWeight: theme.fontStyle.md[3].weight,
+              paddingHorizontal: 16,
+              paddingVertical: 17.5,
+              borderRadius: 8,
+            }}
+          />
         </View>
-      </SafeAreaView>
-    </View>
+
+        <View>
+          <Text
+            style={{
+              fontSize: theme.fontStyle.md[1].size,
+              fontWeight: theme.fontStyle.md[1].weight,
+            }}
+          >
+            パスワード
+          </Text>
+          <View style={{ height: 8 }} />
+          <TextInput
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+            autoCapitalize="none"
+            placeholder="*******"
+            textContentType="password"
+            secureTextEntry
+            autoCorrect={false}
+            style={{
+              backgroundColor: theme.colors.white,
+              fontSize: theme.fontStyle.md[3].size,
+              fontWeight: theme.fontStyle.md[3].weight,
+              paddingHorizontal: 16,
+              paddingVertical: 17.5,
+              borderRadius: 8,
+            }}
+          />
+        </View>
+
+        <View>
+          <Text
+            style={{
+              fontSize: theme.fontStyle.md[1].size,
+              fontWeight: theme.fontStyle.md[1].weight,
+            }}
+          >
+            パスワード（確認）
+          </Text>
+          <View style={{ height: 8 }} />
+          <TextInput
+            value={passwordConfirm}
+            onChangeText={(text) => setPasswordConfirm(text)}
+            autoCapitalize="none"
+            placeholder="*******"
+            textContentType="password"
+            secureTextEntry
+            autoCorrect={false}
+            style={{
+              backgroundColor: theme.colors.white,
+              fontSize: theme.fontStyle.md[3].size,
+              fontWeight: theme.fontStyle.md[3].weight,
+              paddingHorizontal: 16,
+              paddingVertical: 17.5,
+              borderRadius: 8,
+            }}
+          />
+        </View>
+
+        <View style={{}}>
+          <Button
+            onPress={() => signUpWithEmail(userId, password, passwordConfirm)}
+          >
+            次へ
+          </Button>
+        </View>
+      </View>
+    </TitleSubtitleLayout>
   );
 }
 
