@@ -3,7 +3,7 @@ import { useState } from "react";
 import { View, StyleSheet, Text, TextInput, Alert } from "react-native";
 
 import { Button } from "../components/button";
-import TitleSubtitleLayout from "../components/title-subtitle-layout";
+import { TitleSubtitleLayout } from "../components/title-subtitle-layout";
 import { useAppTheme } from "../hooks/useAppTheme";
 import { supabase } from "../services/supabase";
 
