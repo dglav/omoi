@@ -1,11 +1,27 @@
-import { useState } from "react";
+import { useRouter } from "expo-router";
+import { useEffect, useState } from "react";
 import { TextInput, View } from "react-native";
 
+import { Button } from "../../../../components/button";
 import { TitleSubtitleLayout } from "../../../../components/title-subtitle-layout";
+import { useGetUser } from "../../../../hooks/userHooks/useGetUser";
+import { useUpdateUser } from "../../../../hooks/userHooks/useUpdateUser";
 import { theme } from "../../../../theme";
 
 export default function Nickname() {
+  const router = useRouter();
+  const { user } = useGetUser();
   const [nickname, setNickname] = useState<string>("");
+
+  useEffect(() => {
+    if (user) {
+      setNickname(user.nickname ?? "");
+    }
+  }, [user]);
+
+  const { mutate } = useUpdateUser({
+    onSuccess: () => router.navigate("/settings"),
+  });
 
   return (
     <TitleSubtitleLayout
@@ -32,6 +48,18 @@ export default function Nickname() {
           borderRadius: 8,
         }}
       />
+
+      <View style={{ height: 124 }} />
+
+      <Button
+        onPress={
+          user
+            ? () => mutate({ userId: user.id, updatedUser: { nickname } })
+            : () => null
+        }
+      >
+        保存
+      </Button>
     </TitleSubtitleLayout>
   );
 }
