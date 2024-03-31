@@ -28,6 +28,7 @@ export const SettingsCardButton = ({ icon, text, onPress }: Props) => {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
+          width: "100%",
         }}
       >
         <View

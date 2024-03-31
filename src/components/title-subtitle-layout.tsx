@@ -30,7 +30,6 @@ export const TitleSubtitleLayout = ({ title, subtitle, children }: Props) => {
             flexDirection: "column",
             justifyContent: "flex-start",
             paddingHorizontal: 16,
-            gap: 46,
           }}
         >
           <View

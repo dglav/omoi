@@ -52,6 +52,7 @@ export default function SignUpScreen() {
       title="アカウント作成"
       subtitle="メールアドレスとパスワードを登録してください"
     >
+      <View style={{ height: 46 }} />
       <View
         style={{
           gap: 40,

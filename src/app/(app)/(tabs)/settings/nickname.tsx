@@ -12,7 +12,7 @@ export default function Nickname() {
       title="ニックネーム"
       subtitle="アプリ内で使うニックネームを入力してください"
     >
-      <View style={{ height: 8 }} />
+      <View style={{ height: 56 }} />
 
       <TextInput
         value={nickname}

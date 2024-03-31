@@ -38,6 +38,7 @@ export default function LoginScreen() {
       title="ログイン"
       subtitle="あなたのIDとパスワードを入力してください"
     >
+      <View style={{ height: 46 }} />
       <View
         style={{
           gap: 40,
