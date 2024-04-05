@@ -4,7 +4,7 @@ import { supabase } from "../index";
 
 export const updateUser = async (
   userId: string,
-  userData: Omit<UserEntity, "id">,
+  userData: Partial<Omit<UserEntity, "id">>,
 ) => {
   const { data: users, error } = await supabase
     .from("users")

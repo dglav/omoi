@@ -1,5 +1,4 @@
 import { useMutation } from "@tanstack/react-query";
-import { useRouter } from "expo-router";
 import { Alert } from "react-native";
 
 import { updateUser } from "../../services/supabase/user/updateUser";
