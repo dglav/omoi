@@ -2,13 +2,14 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
   SafeAreaView,
-  Text,
   TextInput,
   View,
   useWindowDimensions,
 } from "react-native";
 
 import { Button } from "../../../components/button";
+import { MiniFeeling } from "../../../components/mini-feeling";
+import { TagPill } from "../../../components/tag-pill";
 import { useCreatePost } from "../../../hooks/postHooks/useCreatePost";
 import { useAppTheme } from "../../../hooks/useAppTheme";
 import { PostSuccessModal } from "../../../screens/new-journal-entry/post-success-modal";
@@ -68,8 +69,19 @@ const JournalNote = () => {
               }}
             >
               <View style={{ gap: 8, padding: 16 }}>
-                <Text>Feelings Placeholder</Text>
-                <Text>Tags Placeholder</Text>
+                {feelings.map((feeling) => (
+                  <MiniFeeling key={feeling} feeling={feeling} />
+                ))}
+                <View
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                  }}
+                >
+                  {tags.map((tag) => (
+                    <TagPill key={tag} tag={tag} />
+                  ))}
+                </View>
               </View>
 
               <View style={{ padding: 16 }}>
