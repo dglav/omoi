@@ -5,13 +5,47 @@ import { Button } from "../../../components/button";
 import { useAppTheme } from "../../../hooks/useAppTheme";
 import { TagSection } from "../../../screens/new-journal-entry/tags/TagSection";
 import { useStore } from "../../../screens/new-journal-entry/useStore";
+import { tagMap } from "../../../utils/tagMap";
 
-const tags = {
-  personal: ["体調", "健康", "悩み", "趣味", "アイデンティティ"],
-  relationship: ["友人", "仕事仲間", "家族", "パートナー"],
-  happenings: ["仕事", "学校", "バイト", "お金"],
-  other: ["将来", "思い出", "その他"],
-};
+const tags = Object.entries(tagMap).reduce(
+  (
+    tagLists: {
+      personal: { value: string; text: string }[];
+      relationship: { value: string; text: string }[];
+      happenings: { value: string; text: string }[];
+      other: { value: string; text: string }[];
+    },
+    [key, value],
+  ) => {
+    if (value.category === "personal") {
+      tagLists.personal = tagLists.personal.concat([
+        { value: key, text: value.text },
+      ]);
+    }
+    if (value.category === "relationship") {
+      tagLists.relationship = tagLists.relationship.concat([
+        { value: key, text: value.text },
+      ]);
+    }
+    if (value.category === "happenings") {
+      tagLists.happenings = tagLists.happenings.concat([
+        { value: key, text: value.text },
+      ]);
+    }
+    if (value.category === "other") {
+      tagLists.other = tagLists.other.concat([
+        { value: key, text: value.text },
+      ]);
+    }
+    return tagLists;
+  },
+  {
+    personal: [],
+    relationship: [],
+    happenings: [],
+    other: [],
+  },
+);
 
 const JournalTags = () => {
   const theme = useAppTheme();

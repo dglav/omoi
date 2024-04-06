@@ -6,7 +6,7 @@ import { theme } from "../../../theme";
 
 type TagSectionProps = {
   title: string;
-  tags: string[];
+  tags: { value: string; text: string }[];
   selectedTags: string[];
   onPressTag: (tag: string) => void;
 };
@@ -42,15 +42,15 @@ const TagSection = ({
         }}
       >
         {tags.map((tag) => {
-          const isSelected = selectedTags.includes(tag);
+          const isSelected = selectedTags.includes(tag.value);
 
           return (
             <Chip
-              key={tag}
+              key={tag.value}
               isSelected={isSelected}
-              onPress={() => onPressTag(tag)}
+              onPress={() => onPressTag(tag.value)}
             >
-              {tag}
+              {tag.text}
             </Chip>
           );
         })}

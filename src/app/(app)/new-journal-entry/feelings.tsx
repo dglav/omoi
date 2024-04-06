@@ -13,37 +13,7 @@ import { Button } from "../../../components/button";
 import { FeelingIcon } from "../../../components/feeling-icon";
 import { useAppTheme } from "../../../hooks/useAppTheme";
 import { useStore } from "../../../screens/new-journal-entry/useStore";
-
-const feelings = [
-  {
-    text: "興奮",
-    fillColor: "#F55634",
-  },
-  {
-    text: "面白い",
-    fillColor: "#F88D5F",
-  },
-  {
-    text: "嬉しい",
-    fillColor: "#FFBA69",
-  },
-  {
-    text: "達成感",
-    fillColor: "#F0B966",
-  },
-  {
-    text: "楽しい",
-    fillColor: "#F2B339",
-  },
-  {
-    text: "感謝",
-    fillColor: "#E8D849",
-  },
-  {
-    text: "好き",
-    fillColor: "#EC9A88",
-  },
-];
+import { feelingMap } from "../../../utils/feelingMap";
 
 const JournalFeeling = () => {
   const theme = useAppTheme();
@@ -125,13 +95,13 @@ const JournalFeeling = () => {
 
               <View style={{ paddingHorizontal: 22 }}>
                 <FlatList
-                  data={feelings}
-                  renderItem={({ item }) => {
-                    const isSelected = selectedFeelings.includes(item.text);
+                  data={Object.entries(feelingMap)}
+                  renderItem={({ item: [key, value] }) => {
+                    const isSelected = selectedFeelings.includes(key);
 
                     return (
                       <Pressable
-                        key={item.text}
+                        key={value.text}
                         style={{
                           display: "flex",
                           justifyContent: "center",
@@ -141,9 +111,9 @@ const JournalFeeling = () => {
                           marginVertical: 16,
                           gap: 4,
                         }}
-                        onPress={() => onPressFeeling(item.text)}
+                        onPress={() => onPressFeeling(key)}
                       >
-                        <FeelingIcon fill={item.fillColor} />
+                        <FeelingIcon fill={value.fillColor} />
                         <Text
                           style={{
                             fontSize: isSelected
@@ -157,7 +127,7 @@ const JournalFeeling = () => {
                               : "none",
                           }}
                         >
-                          {item.text}
+                          {value.text}
                         </Text>
                       </Pressable>
                     );
