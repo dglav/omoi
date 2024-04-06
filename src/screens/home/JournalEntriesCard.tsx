@@ -7,8 +7,6 @@ import { TagPill } from "../../components/tag-pill";
 import type { useGetPostGroups } from "../../hooks/postGroupHooks/useGetPostGroups";
 import { useAppTheme } from "../../hooks/useAppTheme";
 import { conditionMap } from "../../utils/conditionMap";
-import { feelingMap } from "../../utils/feelingMap";
-import { tagMap } from "../../utils/tagMap";
 
 type Props = {
   postGroup: ReturnType<typeof useGetPostGroups>["data"][0];
@@ -51,7 +49,7 @@ export const JournalEntriesCard = ({ postGroup }: Props) => {
                     }}
                   >
                     {post.feelings.map((feeling) => {
-                      return <MiniFeeling feeling={feeling} />;
+                      return <MiniFeeling key={feeling} feeling={feeling} />;
                     })}
                   </View>
                   <View

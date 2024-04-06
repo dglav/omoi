@@ -26,12 +26,14 @@ export default function HomePage() {
         alignItems: "center",
         backgroundColor: theme.colors.background,
       }}
+      edges={{
+        top: "additive",
+        bottom: "off",
+      }}
     >
-      <View
-        style={{
-          marginVertical: 12,
-        }}
-      >
+      <View style={{ height: 12 }} />
+
+      <View>
         <Text
           style={{
             fontSize: theme.fontStyle.lg[1].size,
@@ -42,6 +44,8 @@ export default function HomePage() {
           Omoi
         </Text>
       </View>
+
+      <View style={{ height: 12 }} />
 
       <View
         style={{
@@ -80,46 +84,50 @@ export default function HomePage() {
         }}
       />
 
-      <View style={{ height: 40 }} />
+      <ScrollView>
+        <View style={{ height: 40 }} />
 
-      <View
-        style={{
-          gap: 16,
-          display: "flex",
-          justifyContent: "flex-start",
-          alignItems: "flex-start",
-          width: "100%",
-          paddingHorizontal: 16,
-        }}
-      >
-        <Text
+        <View
           style={{
-            fontSize: theme.fontStyle.xl[1].size,
-            fontWeight: theme.fontStyle.xl[1].weight,
+            gap: 16,
+            display: "flex",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+            width: "100%",
+            paddingHorizontal: 16,
           }}
         >
-          {isMorning ? "おはようございます" : "おつかれさま"}
-        </Text>
-        <Text>
-          {isMorning
-            ? "今日の気分を記録して2人の連続投稿を継続しよう🤝"
-            : "休憩がてら感情を記入しませんか？"}
-        </Text>
-      </View>
+          <Text
+            style={{
+              fontSize: theme.fontStyle.xl[1].size,
+              fontWeight: theme.fontStyle.xl[1].weight,
+            }}
+          >
+            {isMorning ? "おはようございます" : "おつかれさま"}
+          </Text>
+          <Text>
+            {isMorning
+              ? "今日の気分を記録して2人の連続投稿を継続しよう🤝"
+              : "休憩がてら感情を記入しませんか？"}
+          </Text>
+        </View>
 
-      <View style={{ height: 40 }} />
+        <View style={{ height: 40 }} />
 
-      <ScrollView
-        style={{
-          paddingHorizontal: 16,
-          width: "100%",
-        }}
-      >
-        {postGroups.map((postGroup) => (
-          <View key={postGroup.id}>
-            <JournalEntriesCard postGroup={postGroup} />
-          </View>
-        ))}
+        <View
+          style={{
+            paddingHorizontal: 16,
+            width: "100%",
+          }}
+        >
+          {postGroups.map((postGroup) => (
+            <View key={postGroup.id}>
+              <JournalEntriesCard postGroup={postGroup} />
+            </View>
+          ))}
+        </View>
+
+        <View style={{ height: 40 }} />
       </ScrollView>
 
       <FAB
@@ -136,7 +144,7 @@ export default function HomePage() {
         }}
       />
 
-      <StatusBar style="auto" />
+      <StatusBar />
     </SafeAreaView>
   );
 }
