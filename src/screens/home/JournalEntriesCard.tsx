@@ -1,13 +1,14 @@
+import { format } from "@formkit/tempo";
 import { View, Text } from "react-native";
 
 import { ConditionIcon_36 } from "../../components/condition-icon-36";
-import { FeelingIcon_16 } from "../../components/feeling-icon-16";
+import { MiniFeeling } from "../../components/mini-feeling";
+import { TagPill } from "../../components/tag-pill";
 import type { useGetPostGroups } from "../../hooks/postGroupHooks/useGetPostGroups";
 import { useAppTheme } from "../../hooks/useAppTheme";
 import { conditionMap } from "../../utils/conditionMap";
 import { feelingMap } from "../../utils/feelingMap";
 import { tagMap } from "../../utils/tagMap";
-import { format } from "@formkit/tempo";
 
 type Props = {
   postGroup: ReturnType<typeof useGetPostGroups>["data"][0];
@@ -50,27 +51,7 @@ export const JournalEntriesCard = ({ postGroup }: Props) => {
                     }}
                   >
                     {post.feelings.map((feeling) => {
-                      const { fillColor, text } = feelingMap[feeling];
-                      return (
-                        <View
-                          key={feeling}
-                          style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            gap: 4,
-                          }}
-                        >
-                          <FeelingIcon_16 fill={fillColor} />
-                          <Text
-                            style={{
-                              fontSize: theme.fontStyle.sm[3].size,
-                              fontWeight: theme.fontStyle.sm[3].weight,
-                            }}
-                          >
-                            {text}
-                          </Text>
-                        </View>
-                      );
+                      return <MiniFeeling feeling={feeling} />;
                     })}
                   </View>
                   <View
@@ -81,24 +62,7 @@ export const JournalEntriesCard = ({ postGroup }: Props) => {
                     }}
                   >
                     {post.tags.map((tag) => {
-                      const { text } = tagMap[tag];
-                      return (
-                        <Text
-                          key={text}
-                          style={{
-                            borderColor: theme.colors.textLight,
-                            borderRadius: 4,
-                            borderStyle: "solid",
-                            borderWidth: 2,
-                            paddingHorizontal: 4,
-                            paddingVertical: 2,
-                            fontSize: theme.fontStyle.xs[1].size,
-                            fontWeight: theme.fontStyle.xs[1].weight,
-                          }}
-                        >
-                          {text}
-                        </Text>
-                      );
+                      return <TagPill key={tag} tag={tag} />;
                     })}
                   </View>
                 </View>
