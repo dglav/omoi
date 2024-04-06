@@ -1,3 +1,4 @@
+import { format } from "@formkit/tempo";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { SquarePen } from "lucide-react-native";
@@ -8,6 +9,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Text } from "../../../components/text";
 import { useGetPostGroups } from "../../../hooks/postGroupHooks/useGetPostGroups";
 import { useAppTheme } from "../../../hooks/useAppTheme";
+import { CreateNewJournalEntryCard } from "../../../screens/home/CreateNewJournalEntryCard";
 import { JournalEntriesCard } from "../../../screens/home/JournalEntriesCard";
 
 const hour = new Date().getHours();
@@ -18,6 +20,8 @@ export default function HomePage() {
   const theme = useAppTheme();
   const router = useRouter();
   const { data: postGroups } = useGetPostGroups();
+  const hasWrittenJournalEntryToday =
+    postGroups[0].postGroupDate === format(new Date(), "YYYY-MM-DD");
 
   return (
     <SafeAreaView
@@ -118,8 +122,11 @@ export default function HomePage() {
           style={{
             paddingHorizontal: 16,
             width: "100%",
+            gap: 60,
           }}
         >
+          {!hasWrittenJournalEntryToday && <CreateNewJournalEntryCard />}
+
           {postGroups.map((postGroup) => (
             <View key={postGroup.id}>
               <JournalEntriesCard postGroup={postGroup} />
