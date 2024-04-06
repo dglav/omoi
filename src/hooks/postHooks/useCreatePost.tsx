@@ -5,7 +5,7 @@ import { createPost } from "../../services/supabase/posts/createPost";
 
 type mutationParams = {
   post: {
-    condition: string;
+    condition: "average" | "reallyBad" | "bad" | "good" | "reallyGood";
     feelings: string[];
     tags: string[];
     note: string;

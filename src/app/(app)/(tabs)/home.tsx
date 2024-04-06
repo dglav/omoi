@@ -20,8 +20,9 @@ export default function HomePage() {
   const theme = useAppTheme();
   const router = useRouter();
   const { data: postGroups } = useGetPostGroups();
+  console.log(postGroups[0]);
   const hasWrittenJournalEntryToday =
-    postGroups[0].postGroupDate === format(new Date(), "YYYY-MM-DD");
+    postGroups[0]?.postGroupDate === format(new Date(), "YYYY-MM-DD");
 
   return (
     <SafeAreaView

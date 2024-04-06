@@ -23,7 +23,7 @@ const JournalNote = () => {
     state.note,
     state.updateNote,
   ]);
-  const { condition, feelings, tags } = useStore();
+  const { condition, feelings, tags, resetAll } = useStore();
   const [isPostSuccessModalOpen, setIsPostSuccessModalOpen] = useState(false);
   const mutation = useCreatePost();
 
@@ -116,6 +116,7 @@ const JournalNote = () => {
           visible={isPostSuccessModalOpen}
           onConfirm={() => {
             setIsPostSuccessModalOpen(false);
+            resetAll();
             router.navigate("/(app)/(tabs)/home");
           }}
         />

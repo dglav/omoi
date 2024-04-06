@@ -3,7 +3,7 @@ import { supabase } from "../index";
 
 type Props = {
   authorId: string;
-  condition: string;
+  condition: "average" | "reallyBad" | "bad" | "good" | "reallyGood";
   feelings: string[];
   tags: string[];
   note: string;
