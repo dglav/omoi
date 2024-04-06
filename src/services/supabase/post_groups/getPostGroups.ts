@@ -29,7 +29,11 @@ export const getPostGroups = async ({ userId, limit }: Params) => {
       throw new SupabaseDatabaseError(error);
     }
 
-    return { ...postGroup, posts };
+    const convertedPosts = posts.map((post) => {
+      return { ...post, date: new Date(post.date) };
+    });
+
+    return { ...postGroup, posts: convertedPosts };
   });
 
   const mergedPostGroups = await Promise.all(mergedPostGroupPromises);

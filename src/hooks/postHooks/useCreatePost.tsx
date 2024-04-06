@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { useSession } from "../../providers/SessionProvider";
 import { createPost } from "../../services/supabase/posts/createPost";
@@ -14,6 +14,7 @@ type mutationParams = {
 };
 
 export const useCreatePost = () => {
+  const queryClient = useQueryClient();
   const { session } = useSession();
   const userId = session?.user.id;
 
@@ -23,6 +24,9 @@ export const useCreatePost = () => {
         throw new Error("User is not authenticated");
       }
       return createPost({ authorId: userId, ...post });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["postGroups"] });
     },
   });
 

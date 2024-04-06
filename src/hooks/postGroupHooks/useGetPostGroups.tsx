@@ -9,7 +9,7 @@ export const useGetPostGroups = () => {
   const userId = session?.user.id;
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["user", userId],
+    queryKey: ["postGroups"],
     queryFn: () => {
       if (!userId) {
         throw new Error("user is not authenticated");

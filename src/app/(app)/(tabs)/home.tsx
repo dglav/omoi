@@ -105,7 +105,9 @@ export default function HomePage() {
         }}
       >
         {postGroups.map((postGroup) => (
-          <JournalEntriesCard postGroup={postGroup} />
+          <View key={postGroup.id}>
+            <JournalEntriesCard postGroup={postGroup} />
+          </View>
         ))}
       </ScrollView>
 
