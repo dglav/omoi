@@ -5,11 +5,9 @@ import { Pressable, ScrollView, View } from "react-native";
 import { FAB } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { ConditionIcon_36 } from "../../../components/condition-icon-36";
 import { Text } from "../../../components/text";
 import { useGetPostGroups } from "../../../hooks/postGroupHooks/useGetPostGroups";
 import { useAppTheme } from "../../../hooks/useAppTheme";
-import { conditionMap } from "../../../utils/conditionMap";
 import { JournalEntriesCard } from "../../../screens/home/JournalEntriesCard";
 
 export default function HomePage() {
