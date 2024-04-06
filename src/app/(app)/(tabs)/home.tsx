@@ -10,6 +10,10 @@ import { useGetPostGroups } from "../../../hooks/postGroupHooks/useGetPostGroups
 import { useAppTheme } from "../../../hooks/useAppTheme";
 import { JournalEntriesCard } from "../../../screens/home/JournalEntriesCard";
 
+const hour = new Date().getHours();
+
+const isMorning = hour > 6 && hour < 12;
+
 export default function HomePage() {
   const theme = useAppTheme();
   const router = useRouter();
@@ -81,6 +85,11 @@ export default function HomePage() {
       <View
         style={{
           gap: 16,
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "flex-start",
+          width: "100%",
+          paddingHorizontal: 16,
         }}
       >
         <Text
@@ -89,9 +98,13 @@ export default function HomePage() {
             fontWeight: theme.fontStyle.xl[1].weight,
           }}
         >
-          おはようございます
+          {isMorning ? "おはようございます" : "おつかれさま"}
         </Text>
-        <Text>今日の気分を記録して2人の連続投稿を継続しよう🤝</Text>
+        <Text>
+          {isMorning
+            ? "今日の気分を記録して2人の連続投稿を継続しよう🤝"
+            : "休憩がてら感情を記入しませんか？"}
+        </Text>
       </View>
 
       <View style={{ height: 40 }} />
