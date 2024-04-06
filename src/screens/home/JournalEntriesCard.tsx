@@ -1,3 +1,4 @@
+import { addDay, parse } from "@formkit/tempo";
 import { View, Text } from "react-native";
 
 import { JournalEntryRow } from "./JournalEntryRow";
@@ -10,12 +11,29 @@ type Props = {
 
 export const JournalEntriesCard = ({ postGroup }: Props) => {
   const theme = useAppTheme();
-  const isToday =
-    new Date().getDay() === Number(postGroup.postGroupDate?.split("-").at(-1));
+
+  const now = new Date();
+  const postGroupDate = parse(postGroup.postGroupDate, "YYYY-MM-DD");
+  const isToday = now.getDay() === postGroupDate.getDay();
+  const isYesterday = now.getDay() === addDay(postGroupDate, 1).getDay();
 
   return (
     <View>
-      {!isToday && <Text>{postGroup.postGroupDate}</Text>}
+      {!isToday && isYesterday ? (
+        <>
+          <Text
+            style={{
+              fontSize: theme.fontStyle.xl[3].size,
+              fontWeight: theme.fontStyle.xl[3].weight,
+            }}
+          >
+            昨日
+          </Text>
+          <View style={{ height: 16 }} />
+        </>
+      ) : (
+        <Text>{postGroup.postGroupDate}</Text>
+      )}
 
       <View
         style={{
@@ -25,7 +43,7 @@ export const JournalEntriesCard = ({ postGroup }: Props) => {
           paddingVertical: 24,
         }}
       >
-        {postGroup.posts.map((post) => {
+        {postGroup.posts.map((post, index) => {
           return <JournalEntryRow key={post.id} post={post} />;
         })}
       </View>
