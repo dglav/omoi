@@ -7,29 +7,7 @@ import { Button } from "../../../components/button";
 import { ConditionIcon } from "../../../components/condition-icon-200";
 import { useAppTheme } from "../../../hooks/useAppTheme";
 import { useStore } from "../../../screens/new-journal-entry/useStore";
-
-const conditionMap = {
-  reallyBad: {
-    text: "とても不調",
-    stroke: "#A26DF8",
-  },
-  bad: {
-    text: "不調",
-    stroke: "#6D9CF8",
-  },
-  average: {
-    text: "ふつう",
-    stroke: "#7CD185",
-  },
-  good: {
-    text: "好調",
-    stroke: "#F89F6D",
-  },
-  reallyGood: {
-    text: "とても好調",
-    stroke: "#F86D6D",
-  },
-};
+import { conditionMap } from "../../../utils/conditionMap";
 
 const JournalCondition = () => {
   const theme = useAppTheme();
@@ -51,19 +29,19 @@ const JournalCondition = () => {
 
   useEffect(() => {
     if (value < 20) {
-      setCondition(conditionMap.reallyBad.text);
+      setCondition("reallyBad");
       setStrokeColor(conditionMap.reallyBad.stroke);
     } else if (value < 40) {
-      setCondition(conditionMap.bad.text);
+      setCondition("bad");
       setStrokeColor(conditionMap.bad.stroke);
     } else if (value < 60) {
-      setCondition(conditionMap.average.text);
+      setCondition("average");
       setStrokeColor(conditionMap.average.stroke);
     } else if (value < 80) {
-      setCondition(conditionMap.good.text);
+      setCondition("good");
       setStrokeColor(conditionMap.good.stroke);
     } else {
-      setCondition(conditionMap.reallyGood.text);
+      setCondition("reallyGood");
       setStrokeColor(conditionMap.reallyGood.stroke);
     }
   }, [value]);
@@ -124,7 +102,7 @@ const JournalCondition = () => {
                   marginBottom: 92,
                 }}
               >
-                {condition}
+                {conditionMap[condition]?.text}
               </Text>
 
               <Slider

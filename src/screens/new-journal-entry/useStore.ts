@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 type State = {
-  condition: string;
+  condition: "reallyBad" | "bad" | "average" | "good" | "reallyGood";
   feelings: string[];
   tags: string[];
   note: string;
@@ -17,8 +17,8 @@ type Actions = {
 };
 
 export const useStore = create<State & Actions>((set) => ({
-  condition: "普通",
-  setCondition: (newCondition: string) => set({ condition: newCondition }),
+  condition: "average",
+  setCondition: (newCondition) => set({ condition: newCondition }),
 
   feelings: [],
   addFeeling: (newfeeling: string) =>
