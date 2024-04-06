@@ -11,9 +11,7 @@ export const useGetUser = () => {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["user", userId],
     queryFn: async () => {
-      const user = await getUser(userId!);
-      console.log(user);
-      return user;
+      return getUser(userId!);
     },
     enabled: !!userId,
   });

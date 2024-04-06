@@ -1,4 +1,12 @@
-export const conditionMap = {
+type Values = { text: string; stroke: string };
+
+export const conditionMap: {
+  reallyBad: Values;
+  bad: Values;
+  average: Values;
+  good: Values;
+  reallyGood: Values;
+} = {
   reallyBad: {
     text: "とても不調",
     stroke: "#A26DF8",

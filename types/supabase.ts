@@ -56,7 +56,7 @@ export type Database = {
       posts: {
         Row: {
           author_id: string;
-          condition: string;
+          condition: Database["public"]["Enums"]["condition"];
           created_at: string;
           date: string;
           feelings: string[];
@@ -67,7 +67,7 @@ export type Database = {
         };
         Insert: {
           author_id: string;
-          condition: string;
+          condition: Database["public"]["Enums"]["condition"];
           created_at?: string;
           date: string;
           feelings: string[];
@@ -78,7 +78,7 @@ export type Database = {
         };
         Update: {
           author_id?: string;
-          condition?: string;
+          condition?: Database["public"]["Enums"]["condition"];
           created_at?: string;
           date?: string;
           feelings?: string[];
@@ -196,7 +196,7 @@ export type Database = {
         };
         Returns: {
           author_id: string;
-          condition: string;
+          condition: Database["public"]["Enums"]["condition"];
           created_at: string;
           date: string;
           feelings: string[];
@@ -215,7 +215,7 @@ export type Database = {
       };
     };
     Enums: {
-      [_ in never]: never;
+      condition: "reallyBad" | "bad" | "average" | "good" | "reallyGood";
     };
     CompositeTypes: {
       [_ in never]: never;
