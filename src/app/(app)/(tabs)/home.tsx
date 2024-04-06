@@ -102,7 +102,9 @@ export default function HomePage() {
           bottom: 0,
           backgroundColor: theme.colors.primary,
         }}
-        onPress={() => router.push("/(app)/new-journal-entry")}
+        onPress={() => {
+          router.push("/(app)/new-journal-entry");
+        }}
       />
 
       <StatusBar style="auto" />

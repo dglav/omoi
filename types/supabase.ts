@@ -24,6 +24,86 @@ export type Database = {
         };
         Relationships: [];
       };
+      post_groups: {
+        Row: {
+          author_id: string;
+          created_at: string;
+          date: string | null;
+          id: string;
+        };
+        Insert: {
+          author_id: string;
+          created_at?: string;
+          date?: string | null;
+          id?: string;
+        };
+        Update: {
+          author_id?: string;
+          created_at?: string;
+          date?: string | null;
+          id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "public_post_groups_author_id_fkey";
+            columns: ["author_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      posts: {
+        Row: {
+          author_id: string;
+          condition: string;
+          created_at: string;
+          date: string;
+          feelings: string[];
+          id: string;
+          note: string;
+          post_group_id: string;
+          tags: string[];
+        };
+        Insert: {
+          author_id: string;
+          condition: string;
+          created_at?: string;
+          date: string;
+          feelings: string[];
+          id?: string;
+          note: string;
+          post_group_id: string;
+          tags: string[];
+        };
+        Update: {
+          author_id?: string;
+          condition?: string;
+          created_at?: string;
+          date?: string;
+          feelings?: string[];
+          id?: string;
+          note?: string;
+          post_group_id?: string;
+          tags?: string[];
+        };
+        Relationships: [
+          {
+            foreignKeyName: "public_posts_author_id_fkey";
+            columns: ["author_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "public_posts_post_group_id_fkey";
+            columns: ["post_group_id"];
+            isOneToOne: false;
+            referencedRelation: "post_groups";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       survey_1: {
         Row: {
           conversation_amount: string;
@@ -105,16 +185,33 @@ export type Database = {
           name: string;
         }[];
       };
+      create_new_post: {
+        Args: {
+          author_id: string;
+          note: string;
+          condition: string;
+          feelings: string[];
+          tags: string[];
+          date: string;
+        };
+        Returns: {
+          author_id: string;
+          condition: string;
+          created_at: string;
+          date: string;
+          feelings: string[];
+          id: string;
+          note: string;
+          post_group_id: string;
+          tags: string[];
+        }[];
+      };
       get_countries: {
         Args: Record<PropertyKey, never>;
         Returns: {
           id: number;
           name: string;
         }[];
-      };
-      hello: {
-        Args: Record<PropertyKey, never>;
-        Returns: string;
       };
     };
     Enums: {

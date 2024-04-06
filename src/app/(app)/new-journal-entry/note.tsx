@@ -9,6 +9,7 @@ import {
 } from "react-native";
 
 import { Button } from "../../../components/button";
+import { useCreatePost } from "../../../hooks/postHooks/useCreatePost";
 import { useAppTheme } from "../../../hooks/useAppTheme";
 import { PostSuccessModal } from "../../../screens/new-journal-entry/post-success-modal";
 import { useStore } from "../../../screens/new-journal-entry/useStore";
@@ -21,7 +22,18 @@ const JournalNote = () => {
     state.note,
     state.updateNote,
   ]);
+  const { condition, feelings, tags } = useStore();
   const [isPostSuccessModalOpen, setIsPostSuccessModalOpen] = useState(false);
+  const mutation = useCreatePost();
+
+  const handlePost = () => {
+    mutation.mutate(
+      {
+        post: { condition, feelings, tags, note, date: new Date() },
+      },
+      { onSuccess: () => setIsPostSuccessModalOpen(true) },
+    );
+  };
 
   return (
     <View
@@ -80,7 +92,7 @@ const JournalNote = () => {
           >
             <Button
               onPress={() => {
-                setIsPostSuccessModalOpen(true);
+                handlePost();
               }}
             >
               投稿する
