@@ -4,6 +4,7 @@ import { View, Text } from "react-native";
 import { JournalEntryRow } from "./JournalEntryRow";
 import type { useGetPostGroups } from "../../hooks/postGroupHooks/useGetPostGroups";
 import { useAppTheme } from "../../hooks/useAppTheme";
+import { JournalEntryHeader } from "./JournalEntryHeader";
 
 type Props = {
   postGroup: ReturnType<typeof useGetPostGroups>["data"][0];
@@ -19,7 +20,7 @@ export const JournalEntriesCard = ({ postGroup }: Props) => {
 
   return (
     <View>
-      {!isToday && isYesterday ? (
+      {isYesterday && (
         <>
           <Text
             style={{
@@ -31,9 +32,9 @@ export const JournalEntriesCard = ({ postGroup }: Props) => {
           </Text>
           <View style={{ height: 16 }} />
         </>
-      ) : (
-        <Text>{postGroup.postGroupDate}</Text>
       )}
+
+      {!isToday && !isYesterday && <Text>{postGroup.postGroupDate}</Text>}
 
       <View
         style={{
@@ -44,7 +45,31 @@ export const JournalEntriesCard = ({ postGroup }: Props) => {
         }}
       >
         {postGroup.posts.map((post, index) => {
-          return <JournalEntryRow key={post.id} post={post} />;
+          if (isToday && index === 0) {
+            return <JournalEntryHeader key={post.id} post={post} />;
+          }
+          return (
+            <>
+              {isToday && index === 1 && (
+                <View
+                  style={{
+                    width: "100%",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                  }}
+                >
+                  <View
+                    style={{
+                      height: 1,
+                      width: "92%",
+                      backgroundColor: theme.colors.textLight,
+                    }}
+                  />
+                </View>
+              )}
+              <JournalEntryRow key={post.id} post={post} />
+            </>
+          );
         })}
       </View>
     </View>

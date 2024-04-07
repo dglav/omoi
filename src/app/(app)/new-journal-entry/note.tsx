@@ -1,3 +1,4 @@
+import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
@@ -26,13 +27,19 @@ const JournalNote = () => {
   const { condition, feelings, tags, resetAll } = useStore();
   const [isPostSuccessModalOpen, setIsPostSuccessModalOpen] = useState(false);
   const mutation = useCreatePost();
+  const queryClient = useQueryClient();
 
   const handlePost = () => {
     mutation.mutate(
       {
         post: { condition, feelings, tags, note, date: new Date() },
       },
-      { onSuccess: () => setIsPostSuccessModalOpen(true) },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ["postGroups"] });
+          setIsPostSuccessModalOpen(true);
+        },
+      },
     );
   };
 
