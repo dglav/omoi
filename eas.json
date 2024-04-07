@@ -15,7 +15,10 @@
       }
     },
     "preview": {
-      "distribution": "internal"
+      "distribution": "internal",
+      "ios": {
+        "cocoapods": "1.15.2"
+      }
     },
     "production": {}
   },
