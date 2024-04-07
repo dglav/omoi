@@ -23,7 +23,7 @@ export const JournalEntriesCard = ({ postGroup }: Props) => {
   const isBeforeYesterday = !isToday && !isYesterday;
 
   return (
-    <View>
+    <View key={postGroup.id}>
       {isYesterday && (
         <>
           <Text
@@ -76,7 +76,7 @@ export const JournalEntriesCard = ({ postGroup }: Props) => {
             return <JournalEntryHeader key={post.id} post={post} />;
           }
           return (
-            <>
+            <View key={post.id}>
               {isToday && index === 1 && (
                 <View
                   style={{
@@ -95,7 +95,7 @@ export const JournalEntriesCard = ({ postGroup }: Props) => {
                 </View>
               )}
               <JournalEntryRow key={post.id} post={post} />
-            </>
+            </View>
           );
         })}
       </View>

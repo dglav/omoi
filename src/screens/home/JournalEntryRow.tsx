@@ -16,7 +16,7 @@ export const JournalEntryRow = ({ post }: Props) => {
   const theme = useAppTheme();
 
   return (
-    <View key={post.id} style={{ padding: 16, gap: 16 }}>
+    <View style={{ padding: 16, gap: 16 }}>
       <View
         style={{
           display: "flex",
