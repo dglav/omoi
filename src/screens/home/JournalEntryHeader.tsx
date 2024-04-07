@@ -56,10 +56,9 @@ export const JournalEntryHeader = ({ post }: Props) => {
                 style={{
                   fontSize: theme.fontStyle.xl["1"].size,
                   fontWeight: theme.fontStyle.xl["1"].weight,
-                  textAlign: "center",
                 }}
               >
-                {post.condition}
+                {conditionMap[post.condition].text}
               </Text>
             </View>
 
