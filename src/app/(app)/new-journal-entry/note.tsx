@@ -24,7 +24,7 @@ const JournalNote = () => {
     state.note,
     state.updateNote,
   ]);
-  const { condition, feelings, tags, resetAll } = useStore();
+  const { condition, feelings, tags, date, resetAll } = useStore();
   const [isPostSuccessModalOpen, setIsPostSuccessModalOpen] = useState(false);
   const mutation = useCreatePost();
   const queryClient = useQueryClient();
@@ -32,7 +32,7 @@ const JournalNote = () => {
   const handlePost = () => {
     mutation.mutate(
       {
-        post: { condition, feelings, tags, note, date: new Date() },
+        post: { condition, feelings, tags, note, date },
       },
       {
         onSuccess: () => {

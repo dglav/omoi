@@ -5,6 +5,7 @@ const defaultState: State = {
   feelings: [],
   tags: [],
   note: "",
+  date: new Date(),
 };
 
 type State = {
@@ -12,6 +13,7 @@ type State = {
   feelings: string[];
   tags: string[];
   note: string;
+  date: Date;
 };
 
 type Actions = {
@@ -21,6 +23,7 @@ type Actions = {
   addTag: (newTag: string) => void;
   removeTag: (tag: string) => void;
   updateNote: (updatedNote: string) => void;
+  setDate: (updatedDate: Date) => void;
   resetAll: () => void;
 };
 
@@ -46,6 +49,9 @@ export const useStore = create<State & Actions>((set) => ({
 
   note: "",
   updateNote: (updatedNote: string) => set({ note: updatedNote }),
+
+  date: new Date(),
+  setDate: (updatedDate) => set({ date: updatedDate }),
 
   resetAll: () => set(defaultState),
 }));
