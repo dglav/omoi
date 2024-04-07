@@ -1,18 +1,18 @@
-import { format } from "@formkit/tempo";
 import { Stack } from "expo-router";
 import React from "react";
 
 import { BackButton } from "../../../components/back-button";
+import { DateSelector } from "../../../screens/new-journal-entry/date-selector";
 
 export default function Layout() {
-  const date = format(new Date(), "YYYY/MM/DD");
+  const date = new Date();
 
   return (
     <Stack>
       <Stack.Screen
         name="condition"
         options={{
-          headerTitle: date,
+          headerTitle: () => <DateSelector date={date} />,
           headerTransparent: true,
           headerLeft: () => <BackButton />,
         }}
@@ -20,7 +20,7 @@ export default function Layout() {
       <Stack.Screen
         name="feelings"
         options={{
-          headerTitle: date,
+          headerTitle: () => <DateSelector date={date} />,
           headerTransparent: true,
           headerLeft: () => <BackButton />,
         }}
@@ -28,7 +28,7 @@ export default function Layout() {
       <Stack.Screen
         name="tags"
         options={{
-          headerTitle: date,
+          headerTitle: () => <DateSelector date={date} />,
           headerTransparent: true,
           headerLeft: () => <BackButton />,
         }}
@@ -36,7 +36,7 @@ export default function Layout() {
       <Stack.Screen
         name="note"
         options={{
-          headerTitle: date,
+          headerTitle: () => <DateSelector date={date} />,
           headerTransparent: true,
           headerLeft: () => <BackButton />,
         }}
