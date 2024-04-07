@@ -1,10 +1,10 @@
-import { addDay, parse } from "@formkit/tempo";
+import { addDay, format, parse } from "@formkit/tempo";
 import { View, Text } from "react-native";
 
+import { JournalEntryHeader } from "./JournalEntryHeader";
 import { JournalEntryRow } from "./JournalEntryRow";
 import type { useGetPostGroups } from "../../hooks/postGroupHooks/useGetPostGroups";
 import { useAppTheme } from "../../hooks/useAppTheme";
-import { JournalEntryHeader } from "./JournalEntryHeader";
 
 type Props = {
   postGroup: ReturnType<typeof useGetPostGroups>["data"][0];
@@ -15,8 +15,12 @@ export const JournalEntriesCard = ({ postGroup }: Props) => {
 
   const now = new Date();
   const postGroupDate = parse(postGroup.postGroupDate, "YYYY-MM-DD");
+  const dayOfTheWeek = new Intl.DateTimeFormat("ja-JP", {
+    weekday: "short",
+  }).format(postGroupDate);
   const isToday = now.getDay() === postGroupDate.getDay();
   const isYesterday = now.getDay() === addDay(postGroupDate, 1).getDay();
+  const isBeforeYesterday = !isToday && !isYesterday;
 
   return (
     <View>
@@ -34,7 +38,30 @@ export const JournalEntriesCard = ({ postGroup }: Props) => {
         </>
       )}
 
-      {!isToday && !isYesterday && <Text>{postGroup.postGroupDate}</Text>}
+      {isBeforeYesterday && (
+        <>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 5 }}>
+            <Text
+              style={{
+                fontSize: theme.fontStyle.xxl[3].size,
+                fontWeight: theme.fontStyle.xxl[3].weight,
+              }}
+            >
+              {format(postGroupDate, "DD")}
+            </Text>
+            <Text
+              style={{
+                fontSize: theme.fontStyle.md[3].size,
+                fontWeight: theme.fontStyle.md[3].weight,
+              }}
+            >
+              ({dayOfTheWeek})
+            </Text>
+          </View>
+
+          <View style={{ height: 16 }} />
+        </>
+      )}
 
       <View
         style={{
