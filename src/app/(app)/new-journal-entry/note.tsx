@@ -83,6 +83,7 @@ const JournalNote = () => {
                   style={{
                     display: "flex",
                     flexDirection: "row",
+                    gap: 8,
                   }}
                 >
                   {tags.map((tag) => (
