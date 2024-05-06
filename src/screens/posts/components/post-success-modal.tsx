@@ -1,9 +1,9 @@
 import { Image, View } from "react-native";
 import { Text } from "react-native-paper";
 
-import { Button } from "../../components/button";
-import { Modal } from "../../components/modal";
-import { useAppTheme } from "../../hooks/useAppTheme";
+import { Button } from "../../../components/button";
+import { Modal } from "../../../components/modal";
+import { useAppTheme } from "../../../hooks/useAppTheme";
 
 type Props = {
   visible: boolean;
@@ -16,7 +16,7 @@ export const PostSuccessModal = ({ visible, onConfirm }: Props) => {
     <Modal visible={visible}>
       <View style={{ alignSelf: "center", position: "relative" }}>
         <Image
-          source={require("../../../assets/undraw_checklist__re_2w7v 2.png")}
+          source={require("../../../../assets/undraw_checklist__re_2w7v 2.png")}
           style={{}}
         />
 

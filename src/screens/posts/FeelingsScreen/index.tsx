@@ -9,11 +9,11 @@ import {
   Pressable,
 } from "react-native";
 
-import { useStore } from "./useStore";
-import { Button } from "../../components/button";
-import { FeelingIcon } from "../../components/feeling-icon";
-import { useAppTheme } from "../../hooks/useAppTheme";
-import { feelingMap } from "../../utils/feelingMap";
+import { Button } from "../../../components/button";
+import { FeelingIcon } from "../../../components/feeling-icon";
+import { useAppTheme } from "../../../hooks/useAppTheme";
+import { feelingMap } from "../../../utils/feelingMap";
+import { useStore } from "../store/useStore";
 
 const JournalFeeling = () => {
   const theme = useAppTheme();

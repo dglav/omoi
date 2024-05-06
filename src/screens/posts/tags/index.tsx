@@ -1,11 +1,11 @@
 import { useRouter } from "expo-router";
 import { SafeAreaView, Text, View, useWindowDimensions } from "react-native";
 
-import { TagSection } from "./tags/TagSection";
-import { useStore } from "./useStore";
-import { Button } from "../../components/button";
-import { useAppTheme } from "../../hooks/useAppTheme";
-import { tagMap } from "../../utils/tagMap";
+import { TagSection } from "./components/TagSection";
+import { Button } from "../../../components/button";
+import { useAppTheme } from "../../../hooks/useAppTheme";
+import { tagMap } from "../../../utils/tagMap";
+import { useStore } from "../store/useStore";
 
 const tags = Object.entries(tagMap).reduce(
   (

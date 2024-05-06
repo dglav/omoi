@@ -1,3 +1,3 @@
-import JournalFeeling from "../../../../screens/posts/feelings";
+import JournalFeeling from "../../../../screens/posts/FeelingsScreen";
 
 export default JournalFeeling;

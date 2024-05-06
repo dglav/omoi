@@ -7,8 +7,8 @@ import React, { useState } from "react";
 import { Text, Pressable, Modal, SafeAreaView, View } from "react-native";
 import { Portal } from "react-native-paper";
 
-import { Button } from "../../components/button";
-import { useAppTheme } from "../../hooks/useAppTheme";
+import { Button } from "../../../components/button";
+import { useAppTheme } from "../../../hooks/useAppTheme";
 
 type Props = {
   date: Date;

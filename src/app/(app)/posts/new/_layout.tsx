@@ -2,8 +2,8 @@ import { Stack } from "expo-router";
 import React from "react";
 
 import { BackButton } from "../../../../components/back-button";
-import { DateSelector } from "../../../../screens/posts/date-selector";
-import { useStore } from "../../../../screens/posts/useStore";
+import { DateSelector } from "../../../../screens/posts/components/date-selector";
+import { useStore } from "../../../../screens/posts/store/useStore";
 
 export default function Layout() {
   const { date, setDate } = useStore(({ date, setDate }) => ({

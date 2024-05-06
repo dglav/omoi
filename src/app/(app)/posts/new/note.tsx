@@ -1,3 +1,3 @@
-import JournalNote from "../../../../screens/posts/note";
+import JournalNote from "../../../../screens/posts/NoteScreen";
 
 export default JournalNote;

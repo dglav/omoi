@@ -8,13 +8,13 @@ import {
   useWindowDimensions,
 } from "react-native";
 
-import { PostSuccessModal } from "./post-success-modal";
-import { useStore } from "./useStore";
-import { Button } from "../../components/button";
-import { MiniFeeling } from "../../components/mini-feeling";
-import { TagPill } from "../../components/tag-pill";
-import { useCreatePost } from "../../hooks/postHooks/useCreatePost";
-import { useAppTheme } from "../../hooks/useAppTheme";
+import { Button } from "../../../components/button";
+import { MiniFeeling } from "../../../components/mini-feeling";
+import { TagPill } from "../../../components/tag-pill";
+import { useCreatePost } from "../../../hooks/postHooks/useCreatePost";
+import { useAppTheme } from "../../../hooks/useAppTheme";
+import { PostSuccessModal } from "../components/post-success-modal";
+import { useStore } from "../store/useStore";
 
 const JournalNote = () => {
   const theme = useAppTheme();
