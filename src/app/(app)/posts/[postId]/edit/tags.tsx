@@ -1,3 +1,3 @@
-import JournalTags from "../../../../../screens/posts/tags";
+import JournalTags from "../../../../../screens/posts/TagsScreen";
 
 export default JournalTags;

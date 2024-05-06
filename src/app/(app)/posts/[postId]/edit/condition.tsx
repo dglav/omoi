@@ -1,3 +1,3 @@
-import JournalCondition from "../../../../../screens/posts/condition";
+import JournalCondition from "../../../../../screens/posts/ConditionScreen";
 
 export default JournalCondition;
