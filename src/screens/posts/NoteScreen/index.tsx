@@ -1,5 +1,5 @@
 import { useQueryClient } from "@tanstack/react-query";
-import { useRouter } from "expo-router";
+import { useGlobalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
 import {
   SafeAreaView,
@@ -12,6 +12,7 @@ import { Button } from "../../../components/button";
 import { MiniFeeling } from "../../../components/mini-feeling";
 import { TagPill } from "../../../components/tag-pill";
 import { useCreatePost } from "../../../hooks/postHooks/useCreatePost";
+import { useEditPost } from "../../../hooks/postHooks/useEditPost";
 import { useAppTheme } from "../../../hooks/useAppTheme";
 import { PostSuccessModal } from "../components/post-success-modal";
 import { useStore } from "../store/useStore";
@@ -20,27 +21,48 @@ const JournalNote = () => {
   const theme = useAppTheme();
   const { width } = useWindowDimensions();
   const router = useRouter();
+  const params = useGlobalSearchParams<{ postId: string }>();
   const [note, updateNote] = useStore((state) => [
     state.note,
     state.updateNote,
   ]);
   const { condition, feelings, tags, date, resetAll } = useStore();
   const [isPostSuccessModalOpen, setIsPostSuccessModalOpen] = useState(false);
-  const mutation = useCreatePost();
+  const createPostMutation = useCreatePost();
+  const editPostMutation = useEditPost();
   const queryClient = useQueryClient();
 
+  const isEdit = !!params.postId;
+
   const handlePost = () => {
-    mutation.mutate(
-      {
-        post: { condition, feelings, tags, note, date },
-      },
-      {
-        onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ["postGroups"] });
-          setIsPostSuccessModalOpen(true);
+    if (!isEdit) {
+      createPostMutation.mutate(
+        {
+          post: { condition, feelings, tags, note, date },
         },
-      },
-    );
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["postGroups"] });
+            setIsPostSuccessModalOpen(true);
+          },
+        },
+      );
+    }
+
+    if (!!isEdit && params.postId) {
+      editPostMutation.mutate(
+        {
+          post: { id: params.postId, condition, feelings, tags, note, date },
+        },
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["postGroups"] });
+            resetAll();
+            router.push("/(app)/(tabs)/home");
+          },
+        },
+      );
+    }
   };
 
   return (

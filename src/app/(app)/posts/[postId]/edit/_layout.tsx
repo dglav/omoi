@@ -30,7 +30,6 @@ export default function Layout() {
           headerTransparent: true,
           headerLeft: () => <BackButton />,
         }}
-        // initialParams={{ postId: params.postId }}
       />
       <Stack.Screen
         name="feelings"

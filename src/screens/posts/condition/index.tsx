@@ -1,5 +1,5 @@
 import Slider from "@react-native-community/slider";
-import { useGlobalSearchParams, useRouter } from "expo-router";
+import { useGlobalSearchParams, useRouter, usePathname } from "expo-router";
 import { useEffect, useState } from "react";
 import { View, useWindowDimensions, SafeAreaView, Text } from "react-native";
 
@@ -16,7 +16,11 @@ const MAX_SLIDER_VALUE = 98;
 const JournalCondition = () => {
   const theme = useAppTheme();
   const { width } = useWindowDimensions();
+
   const router = useRouter();
+  const pathname = usePathname();
+  const params = useGlobalSearchParams<{ postId: string }>();
+
   const [value, setValue] = useState(50);
   const [thumbImage, setThumbImage] = useState();
   const [trackImage, setTrackImage] = useState();
@@ -26,7 +30,6 @@ const JournalCondition = () => {
   ]);
   const [strokeColor, setStrokeColor] = useState(conditionMap.average.stroke);
 
-  const params = useGlobalSearchParams<{ postId: string }>();
   const { data: post, isLoading } = useGetPost(params.postId);
 
   useEffect(() => {
@@ -188,7 +191,11 @@ const JournalCondition = () => {
               paddingHorizontal: 16,
             }}
           >
-            <Button onPress={() => router.push("/posts/new/feelings")}>
+            <Button
+              onPress={() =>
+                router.push(pathname.replace("/condition", "/feelings"))
+              }
+            >
               次へ
             </Button>
           </View>

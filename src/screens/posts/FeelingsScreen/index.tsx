@@ -1,4 +1,4 @@
-import { useRouter } from "expo-router";
+import { usePathname, useRouter } from "expo-router";
 import {
   View,
   useWindowDimensions,
@@ -19,6 +19,7 @@ const JournalFeeling = () => {
   const theme = useAppTheme();
   const { width } = useWindowDimensions();
   const router = useRouter();
+  const pathname = usePathname();
   const [selectedFeelings, addFeeling, removeFeeling] = useStore((state) => [
     state.feelings,
     state.addFeeling,
@@ -144,7 +145,13 @@ const JournalFeeling = () => {
               paddingHorizontal: 16,
             }}
           >
-            <Button onPress={() => router.push("/posts/new/tags")}>次へ</Button>
+            <Button
+              onPress={() =>
+                router.push(pathname.replace("/feelings", "/tags"))
+              }
+            >
+              次へ
+            </Button>
           </View>
         </View>
       </SafeAreaView>

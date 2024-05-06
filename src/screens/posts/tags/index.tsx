@@ -1,4 +1,4 @@
-import { useRouter } from "expo-router";
+import { usePathname, useRouter } from "expo-router";
 import { SafeAreaView, Text, View, useWindowDimensions } from "react-native";
 
 import { TagSection } from "./components/TagSection";
@@ -51,6 +51,7 @@ const JournalTags = () => {
   const theme = useAppTheme();
   const { width } = useWindowDimensions();
   const router = useRouter();
+  const pathname = usePathname();
   const [selectedTags, addTag, removeTag] = useStore((state) => [
     state.tags,
     state.addTag,
@@ -153,7 +154,11 @@ const JournalTags = () => {
               paddingHorizontal: 16,
             }}
           >
-            <Button onPress={() => router.push("/posts/new/note")}>次へ</Button>
+            <Button
+              onPress={() => router.push(pathname.replace("/tags", "/note"))}
+            >
+              次へ
+            </Button>
           </View>
         </View>
       </SafeAreaView>
