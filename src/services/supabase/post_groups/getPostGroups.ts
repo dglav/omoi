@@ -36,7 +36,9 @@ export const getPostGroups = async ({ userId, limit }: Params) => {
     return { ...postGroup, posts: convertedPosts };
   });
 
-  const mergedPostGroups = await Promise.all(mergedPostGroupPromises);
+  const mergedPostGroups = (await Promise.all(mergedPostGroupPromises)).filter(
+    (postGroup) => postGroup.posts.length >= 1,
+  );
 
   return mergedPostGroups;
 };

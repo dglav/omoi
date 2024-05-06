@@ -14,7 +14,7 @@ export const useGetPostGroups = () => {
       if (!userId) {
         throw new Error("user is not authenticated");
       }
-      return getPostGroups({ userId, limit: 3 });
+      return getPostGroups({ userId, limit: 10 });
     },
   });
 
