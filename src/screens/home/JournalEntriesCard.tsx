@@ -117,7 +117,11 @@ export const JournalEntriesCard = ({ postGroup }: Props) => {
           <ContextMenuItem
             key="edit"
             onSelect={() =>
-              router.push(`home/select-post?date=${postGroup.postGroupDate}`)
+              postGroup.posts.length >= 2
+                ? router.push(
+                    `home/select-post?date=${postGroup.postGroupDate}`,
+                  )
+                : router.push(`/posts/${postGroup.posts[0].id}/edit`)
             }
           >
             <ContextMenuItemTitle>編集</ContextMenuItemTitle>
