@@ -1,5 +1,5 @@
-import { useLocalSearchParams } from "expo-router";
-import { View, Alert } from "react-native";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { View } from "react-native";
 
 import { Button } from "../../../../components/button";
 import { ScreenContainer } from "../../../../components/screen-container";
@@ -9,6 +9,7 @@ import { useAppTheme } from "../../../../hooks/useAppTheme";
 
 function SelectPost() {
   const style = useAppTheme();
+  const router = useRouter();
   const { date } = useLocalSearchParams<{ date: string }>();
   const { data } = useGetPostGroup(date!);
 
@@ -39,7 +40,7 @@ function SelectPost() {
             <Button
               key={post.id}
               variant="secondary"
-              onPress={() => Alert.alert("aaa")}
+              onPress={() => router.navigate(`/posts/${post.id}/edit`)}
               labelStyle={{
                 width: "100%",
                 paddingHorizontal: 40,

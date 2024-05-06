@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-const defaultState: State = {
+const defaultState: Post = {
   condition: "average",
   feelings: [],
   tags: [],
@@ -8,7 +8,7 @@ const defaultState: State = {
   date: new Date(),
 };
 
-type State = {
+export type Post = {
   condition: "reallyBad" | "bad" | "average" | "good" | "reallyGood";
   feelings: string[];
   tags: string[];
@@ -17,7 +17,7 @@ type State = {
 };
 
 type Actions = {
-  setCondition: (newCondition: State["condition"]) => void;
+  setCondition: (newCondition: Post["condition"]) => void;
   addFeeling: (newFeeling: string) => void;
   removeFeeling: (feeling: string) => void;
   addTag: (newTag: string) => void;
@@ -25,9 +25,10 @@ type Actions = {
   updateNote: (updatedNote: string) => void;
   setDate: (updatedDate: Date) => void;
   resetAll: () => void;
+  resetTo: (newState: Post) => void;
 };
 
-export const useStore = create<State & Actions>((set) => ({
+export const useStore = create<Post & Actions>((set) => ({
   condition: "average",
   setCondition: (newCondition) => set({ condition: newCondition }),
 
@@ -54,4 +55,6 @@ export const useStore = create<State & Actions>((set) => ({
   setDate: (updatedDate) => set({ date: updatedDate }),
 
   resetAll: () => set(defaultState),
+
+  resetTo: (newState: Post) => set(newState),
 }));

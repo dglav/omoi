@@ -1,13 +1,17 @@
 import Slider from "@react-native-community/slider";
-import { useRouter } from "expo-router";
+import { useGlobalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { View, useWindowDimensions, SafeAreaView, Text } from "react-native";
 
 import { Button } from "../../../components/button";
 import { ConditionIcon } from "../../../components/condition-icon-200";
+import { useGetPost } from "../../../hooks/postHooks/useGetPost";
 import { useAppTheme } from "../../../hooks/useAppTheme";
 import { conditionMap } from "../../../utils/conditionMap";
 import { useStore } from "../store/useStore";
+
+const MIN_SLIDER_VALUE = 2;
+const MAX_SLIDER_VALUE = 98;
 
 const JournalCondition = () => {
   const theme = useAppTheme();
@@ -21,6 +25,34 @@ const JournalCondition = () => {
     state.setCondition,
   ]);
   const [strokeColor, setStrokeColor] = useState(conditionMap.average.stroke);
+
+  const params = useGlobalSearchParams<{ postId: string }>();
+  const { data: post, isLoading } = useGetPost(params.postId);
+
+  useEffect(() => {
+    if (!isLoading && post) {
+      if (post.condition === "reallyBad") {
+        setValue(MIN_SLIDER_VALUE);
+        setStrokeColor(conditionMap.reallyBad.stroke);
+      }
+      if (post.condition === "bad") {
+        setValue(25);
+        setStrokeColor(conditionMap.bad.stroke);
+      }
+      if (post.condition === "average") {
+        setValue(50);
+        setStrokeColor(conditionMap.average.stroke);
+      }
+      if (post.condition === "good") {
+        setValue(75);
+        setStrokeColor(conditionMap.good.stroke);
+      }
+      if (post.condition === "reallyGood") {
+        setValue(MAX_SLIDER_VALUE);
+        setStrokeColor(conditionMap.reallyGood.stroke);
+      }
+    }
+  }, [isLoading]);
 
   useEffect(() => {
     setThumbImage(require("../../../../assets/Knob (3).png"));
@@ -116,8 +148,8 @@ const JournalCondition = () => {
                 trackImage={trackImage}
                 thumbImage={thumbImage}
                 value={value}
-                lowerLimit={2}
-                upperLimit={98}
+                lowerLimit={MIN_SLIDER_VALUE}
+                upperLimit={MAX_SLIDER_VALUE}
                 onValueChange={(_value) => setValue(_value)}
               />
 

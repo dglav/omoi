@@ -49,6 +49,11 @@ export default function AppLayout() {
       <Stack.Screen name="posts/new" options={{ headerShown: false }} />
 
       <Stack.Screen
+        name="posts/[postId]/edit"
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen
         name="(tabs)"
         options={{ headerShown: false, headerBackTitle: "Back" }}
       />
