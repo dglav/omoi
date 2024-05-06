@@ -48,7 +48,7 @@ export const CreateNewJournalEntryCard = () => {
           >
             未回答
           </Text>
-          <Button onPress={() => router.push("/new-journal-entry/condition")}>
+          <Button onPress={() => router.push("/posts/new/condition")}>
             感情ジャーナルする
           </Button>
         </View>

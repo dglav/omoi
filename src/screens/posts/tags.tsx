@@ -1,11 +1,11 @@
 import { useRouter } from "expo-router";
 import { SafeAreaView, Text, View, useWindowDimensions } from "react-native";
 
-import { Button } from "../../../components/button";
-import { useAppTheme } from "../../../hooks/useAppTheme";
-import { TagSection } from "../../../screens/new-journal-entry/tags/TagSection";
-import { useStore } from "../../../screens/new-journal-entry/useStore";
-import { tagMap } from "../../../utils/tagMap";
+import { TagSection } from "./tags/TagSection";
+import { useStore } from "./useStore";
+import { Button } from "../../components/button";
+import { useAppTheme } from "../../hooks/useAppTheme";
+import { tagMap } from "../../utils/tagMap";
 
 const tags = Object.entries(tagMap).reduce(
   (
@@ -153,9 +153,7 @@ const JournalTags = () => {
               paddingHorizontal: 16,
             }}
           >
-            <Button onPress={() => router.push("/new-journal-entry/note")}>
-              次へ
-            </Button>
+            <Button onPress={() => router.push("/posts/new/note")}>次へ</Button>
           </View>
         </View>
       </SafeAreaView>

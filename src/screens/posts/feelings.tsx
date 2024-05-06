@@ -9,11 +9,11 @@ import {
   Pressable,
 } from "react-native";
 
-import { Button } from "../../../components/button";
-import { FeelingIcon } from "../../../components/feeling-icon";
-import { useAppTheme } from "../../../hooks/useAppTheme";
-import { useStore } from "../../../screens/new-journal-entry/useStore";
-import { feelingMap } from "../../../utils/feelingMap";
+import { useStore } from "./useStore";
+import { Button } from "../../components/button";
+import { FeelingIcon } from "../../components/feeling-icon";
+import { useAppTheme } from "../../hooks/useAppTheme";
+import { feelingMap } from "../../utils/feelingMap";
 
 const JournalFeeling = () => {
   const theme = useAppTheme();
@@ -144,9 +144,7 @@ const JournalFeeling = () => {
               paddingHorizontal: 16,
             }}
           >
-            <Button onPress={() => router.push("/new-journal-entry/tags")}>
-              次へ
-            </Button>
+            <Button onPress={() => router.push("/posts/new/tags")}>次へ</Button>
           </View>
         </View>
       </SafeAreaView>

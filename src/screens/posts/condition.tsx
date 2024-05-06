@@ -3,11 +3,11 @@ import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { View, useWindowDimensions, SafeAreaView, Text } from "react-native";
 
-import { Button } from "../../../components/button";
-import { ConditionIcon } from "../../../components/condition-icon-200";
-import { useAppTheme } from "../../../hooks/useAppTheme";
-import { useStore } from "../../../screens/new-journal-entry/useStore";
-import { conditionMap } from "../../../utils/conditionMap";
+import { useStore } from "./useStore";
+import { Button } from "../../components/button";
+import { ConditionIcon } from "../../components/condition-icon-200";
+import { useAppTheme } from "../../hooks/useAppTheme";
+import { conditionMap } from "../../utils/conditionMap";
 
 const JournalCondition = () => {
   const theme = useAppTheme();
@@ -23,8 +23,8 @@ const JournalCondition = () => {
   const [strokeColor, setStrokeColor] = useState(conditionMap.average.stroke);
 
   useEffect(() => {
-    setThumbImage(require("../../../../assets/Knob (3).png"));
-    setTrackImage(require("../../../../assets/track.png"));
+    setThumbImage(require("../../../assets/Knob (3).png"));
+    setTrackImage(require("../../../assets/track.png"));
   }, []);
 
   useEffect(() => {
@@ -156,7 +156,7 @@ const JournalCondition = () => {
               paddingHorizontal: 16,
             }}
           >
-            <Button onPress={() => router.push("/new-journal-entry/feelings")}>
+            <Button onPress={() => router.push("/posts/new/feelings")}>
               次へ
             </Button>
           </View>

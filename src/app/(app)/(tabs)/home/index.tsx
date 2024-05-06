@@ -147,7 +147,7 @@ export default function HomePage() {
           backgroundColor: theme.colors.primary,
         }}
         onPress={() => {
-          router.push("/(app)/new-journal-entry");
+          router.push("/(app)/posts/new");
         }}
       />
 

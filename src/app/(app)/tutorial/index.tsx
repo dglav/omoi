@@ -87,7 +87,7 @@ const TutorialScreen = () => {
         <Button
           onPress={async () => {
             await onCompleteTutorial();
-            router.push("/new-journal-entry/condition");
+            router.push("/posts/new/condition");
           }}
         >
           感情ジャーナルをスタート

@@ -46,7 +46,7 @@ export default function AppLayout() {
 
       <Stack.Screen name="tutorial" options={{ headerShown: false }} />
 
-      <Stack.Screen name="new-journal-entry" options={{ headerShown: false }} />
+      <Stack.Screen name="posts/new" options={{ headerShown: false }} />
 
       <Stack.Screen
         name="(tabs)"
