@@ -88,7 +88,7 @@ export default function HomePage() {
         }}
       />
 
-      <ScrollView>
+      <ScrollView style={{ width: "100%" }}>
         <View style={{ height: 40 }} />
 
         <View
