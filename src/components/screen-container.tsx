@@ -1,4 +1,4 @@
-import { View, SafeAreaView } from "react-native";
+import { View, SafeAreaView, useWindowDimensions } from "react-native";
 
 import { useAppTheme } from "../hooks/useAppTheme";
 
@@ -6,6 +6,7 @@ type Props = React.PropsWithChildren;
 
 export const ScreenContainer = ({ children }: Props) => {
   const theme = useAppTheme();
+  const { width } = useWindowDimensions();
 
   return (
     <View
@@ -15,7 +16,9 @@ export const ScreenContainer = ({ children }: Props) => {
         backgroundColor: theme.colors.background,
       }}
     >
-      <SafeAreaView>{children}</SafeAreaView>
+      <SafeAreaView>
+        <View style={{ width }}>{children}</View>
+      </SafeAreaView>
     </View>
   );
 };

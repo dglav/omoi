@@ -1,4 +1,5 @@
 import { addDay, format, parse } from "@formkit/tempo";
+import { useRouter } from "expo-router";
 import { View, Text } from "react-native";
 
 import { JournalEntryHeader } from "./JournalEntryHeader";
@@ -20,6 +21,7 @@ type Props = {
 
 export const JournalEntriesCard = ({ postGroup }: Props) => {
   const theme = useAppTheme();
+  const router = useRouter();
 
   const now = new Date();
   const postGroupDate = parse(postGroup.postGroupDate, "YYYY-MM-DD");
@@ -112,7 +114,12 @@ export const JournalEntriesCard = ({ postGroup }: Props) => {
         </ContextMenuTrigger>
 
         <ContextMenuContent>
-          <ContextMenuItem key="edit">
+          <ContextMenuItem
+            key="edit"
+            onSelect={() =>
+              router.push(`home/select-post?date=${postGroup.postGroupDate}`)
+            }
+          >
             <ContextMenuItemTitle>編集</ContextMenuItemTitle>
             <ContextMenuItemIcon
               ios={{ name: "pencil" }}
