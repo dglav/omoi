@@ -98,9 +98,18 @@ const JournalNote = () => {
               }}
             >
               <View style={{ gap: 8, padding: 16 }}>
-                {feelings.map((feeling) => (
-                  <MiniFeeling key={feeling} feeling={feeling} />
-                ))}
+                <View
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: 8,
+                  }}
+                >
+                  {feelings.map((feeling) => (
+                    <MiniFeeling key={feeling} feeling={feeling} />
+                  ))}
+                </View>
+
                 <View
                   style={{
                     display: "flex",
