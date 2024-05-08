@@ -11,10 +11,10 @@ import {
   ContextMenuItemTitle,
   ContextMenuRoot,
   ContextMenuTrigger,
-} from "../../components/ContextMenu";
-import type { useGetPostGroups } from "../../hooks/postGroupHooks/useGetPostGroups";
-import { useDeletePost } from "../../hooks/postHooks/useDeletePost";
-import { useAppTheme } from "../../hooks/useAppTheme";
+} from "./ContextMenu";
+import type { useGetPostGroups } from "../hooks/postGroupHooks/useGetPostGroups";
+import { useDeletePost } from "../hooks/postHooks/useDeletePost";
+import { useAppTheme } from "../hooks/useAppTheme";
 
 type Props = {
   postGroup: ReturnType<typeof useGetPostGroups>["data"][0];

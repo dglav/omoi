@@ -6,11 +6,11 @@ import { Pressable, ScrollView, View } from "react-native";
 import { FAB } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { JournalEntriesCard } from "../../../../components/JournalEntriesCard";
 import { Text } from "../../../../components/text";
 import { useGetPostGroups } from "../../../../hooks/postGroupHooks/useGetPostGroups";
 import { useAppTheme } from "../../../../hooks/useAppTheme";
 import { CreateNewJournalEntryCard } from "../../../../screens/home/CreateNewJournalEntryCard";
-import { JournalEntriesCard } from "../../../../screens/home/JournalEntriesCard";
 
 const hour = new Date().getHours();
 
