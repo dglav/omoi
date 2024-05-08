@@ -1,9 +1,7 @@
-import { addDay, format, parse } from "@formkit/tempo";
+import { format, parse, dayStart, dayEnd, addDay } from "@formkit/tempo";
 import { useRouter } from "expo-router";
 import { View, Text, Alert } from "react-native";
 
-import { JournalEntryHeader } from "./JournalEntryHeader";
-import { JournalEntryRow } from "./JournalEntryRow";
 import {
   ContextMenuContent,
   ContextMenuItem,
@@ -12,6 +10,8 @@ import {
   ContextMenuRoot,
   ContextMenuTrigger,
 } from "./ContextMenu";
+import { JournalEntryHeader } from "./JournalEntryHeader";
+import { JournalEntryRow } from "./JournalEntryRow";
 import type { useGetPostGroups } from "../hooks/postGroupHooks/useGetPostGroups";
 import { useDeletePost } from "../hooks/postHooks/useDeletePost";
 import { useAppTheme } from "../hooks/useAppTheme";
@@ -31,9 +31,16 @@ export const JournalEntriesCard = ({ postGroup }: Props) => {
   const dayOfTheWeek = new Intl.DateTimeFormat("ja-JP", {
     weekday: "short",
   }).format(postGroupDate);
-  const isToday = now.getDay() === postGroupDate.getDay();
-  const isYesterday = now.getDay() === addDay(postGroupDate, 1).getDay();
-  const isBeforeYesterday = !isToday && !isYesterday;
+
+  const startOfToday = dayStart(now);
+  const endOfToday = dayEnd(now);
+  const startOfYesterday = addDay(startOfToday, -1);
+  const endOfYesterday = addDay(endOfToday, -1);
+
+  const isToday = postGroupDate >= startOfToday && postGroupDate < endOfToday;
+  const isYesterday =
+    postGroupDate >= startOfYesterday && postGroupDate < endOfYesterday;
+  const isBeforeYesterday = postGroupDate < startOfYesterday;
 
   return (
     <View key={postGroup.id}>
