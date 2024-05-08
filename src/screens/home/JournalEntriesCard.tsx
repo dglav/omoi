@@ -1,6 +1,6 @@
 import { addDay, format, parse } from "@formkit/tempo";
 import { useRouter } from "expo-router";
-import { View, Text } from "react-native";
+import { View, Text, Alert } from "react-native";
 
 import { JournalEntryHeader } from "./JournalEntryHeader";
 import { JournalEntryRow } from "./JournalEntryRow";
@@ -13,6 +13,7 @@ import {
   ContextMenuTrigger,
 } from "../../components/ContextMenu";
 import type { useGetPostGroups } from "../../hooks/postGroupHooks/useGetPostGroups";
+import { useDeletePost } from "../../hooks/postHooks/useDeletePost";
 import { useAppTheme } from "../../hooks/useAppTheme";
 
 type Props = {
@@ -22,6 +23,8 @@ type Props = {
 export const JournalEntriesCard = ({ postGroup }: Props) => {
   const theme = useAppTheme();
   const router = useRouter();
+
+  const deletePostMutation = useDeletePost();
 
   const now = new Date();
   const postGroupDate = parse(postGroup.postGroupDate, "YYYY-MM-DD");
@@ -131,7 +134,25 @@ export const JournalEntriesCard = ({ postGroup }: Props) => {
             />
           </ContextMenuItem>
 
-          <ContextMenuItem key="delete" destructive>
+          <ContextMenuItem
+            key="delete"
+            destructive
+            onSelect={() => {
+              Alert.alert(
+                "最新の投稿を削除",
+                "この操作は取り消せません。よろしいですか？",
+                [
+                  { text: "キャンセル" },
+                  {
+                    text: "削除",
+                    style: "destructive",
+                    onPress: () =>
+                      deletePostMutation.mutate({ id: postGroup.posts[0].id }),
+                  },
+                ],
+              );
+            }}
+          >
             <ContextMenuItemTitle>最新の投稿を削除</ContextMenuItemTitle>
             <ContextMenuItemIcon
               ios={{ name: "trash" }}
