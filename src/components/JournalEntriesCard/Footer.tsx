@@ -1,6 +1,6 @@
-import { Smile } from "lucide-react-native";
-import { useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { MessageCircleMore, Smile } from "lucide-react-native";
+import React, { useState } from "react";
+import { View, Text, TouchableOpacity, Alert } from "react-native";
 import EmojiPicker, { ja } from "rn-emoji-keyboard";
 
 import { useAppTheme } from "../../hooks/useAppTheme";
@@ -41,6 +41,7 @@ export const Footer = () => {
             {emoji}
           </Text>
         )}
+
         <TouchableOpacity
           style={{
             padding: 12,
@@ -53,6 +54,32 @@ export const Footer = () => {
           }}
         >
           <Smile color="black" />
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={{
+            paddingVertical: 12,
+            paddingHorizontal: 20,
+            borderColor: theme.colors.textLight,
+            borderWidth: 1,
+            borderRadius: 100,
+            gap: 10,
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+          onPress={() => {
+            Alert.alert("go to messages screen");
+          }}
+        >
+          <Text
+            style={{
+              fontSize: theme.fontStyle.lg[1].size,
+              fontWeight: theme.fontStyle.lg[1].weight,
+            }}
+          >
+            0
+          </Text>
+          <MessageCircleMore color="black" />
         </TouchableOpacity>
       </View>
 

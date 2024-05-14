@@ -1,9 +1,8 @@
 import { format, parse, dayStart, dayEnd, addDay } from "@formkit/tempo";
 import { useRouter } from "expo-router";
-import { Smile } from "lucide-react-native";
 import { View, Text, Alert } from "react-native";
 
-import { JournalEntryHeader } from "./JournalEntryHeader";
+import { Footer } from "./Footer";
 import { JournalEntryRow } from "./JournalEntryRow";
 import type { useGetPostGroups } from "../../hooks/postGroupHooks/useGetPostGroups";
 import { useDeletePost } from "../../hooks/postHooks/useDeletePost";
@@ -16,7 +15,6 @@ import {
   ContextMenuRoot,
   ContextMenuTrigger,
 } from "../ContextMenu";
-import { Footer } from "./Footer";
 
 type Props = {
   postGroup: ReturnType<typeof useGetPostGroups>["data"][0];
