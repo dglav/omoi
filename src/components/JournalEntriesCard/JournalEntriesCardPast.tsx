@@ -1,7 +1,13 @@
 import { format, parse, dayStart, dayEnd, addDay } from "@formkit/tempo";
 import { useRouter } from "expo-router";
+import { Smile } from "lucide-react-native";
 import { View, Text, Alert } from "react-native";
 
+import { JournalEntryHeader } from "./JournalEntryHeader";
+import { JournalEntryRow } from "./JournalEntryRow";
+import type { useGetPostGroups } from "../../hooks/postGroupHooks/useGetPostGroups";
+import { useDeletePost } from "../../hooks/postHooks/useDeletePost";
+import { useAppTheme } from "../../hooks/useAppTheme";
 import {
   ContextMenuContent,
   ContextMenuItem,
@@ -9,18 +15,14 @@ import {
   ContextMenuItemTitle,
   ContextMenuRoot,
   ContextMenuTrigger,
-} from "./ContextMenu";
-import { JournalEntryHeader } from "./JournalEntryHeader";
-import { JournalEntryRow } from "./JournalEntryRow";
-import type { useGetPostGroups } from "../hooks/postGroupHooks/useGetPostGroups";
-import { useDeletePost } from "../hooks/postHooks/useDeletePost";
-import { useAppTheme } from "../hooks/useAppTheme";
+} from "../ContextMenu";
+import { Footer } from "./Footer";
 
 type Props = {
   postGroup: ReturnType<typeof useGetPostGroups>["data"][0];
 };
 
-export const JournalEntriesCard = ({ postGroup }: Props) => {
+export const JournalEntriesCardPast = ({ postGroup }: Props) => {
   const theme = useAppTheme();
   const router = useRouter();
 
@@ -94,30 +96,31 @@ export const JournalEntriesCard = ({ postGroup }: Props) => {
             }}
           >
             {postGroup.posts.map((post, index) => {
-              if (isToday && index === 0) {
-                return <JournalEntryHeader key={post.id} post={post} />;
-              }
               return (
-                <View key={post.id}>
-                  {isToday && index === 1 && (
-                    <View
-                      style={{
-                        width: "100%",
-                        flexDirection: "row",
-                        justifyContent: "center",
-                      }}
-                    >
+                <>
+                  <View key={post.id}>
+                    {isToday && index === 1 && (
                       <View
                         style={{
-                          height: 1,
-                          width: "92%",
-                          backgroundColor: theme.colors.textLight,
+                          width: "100%",
+                          flexDirection: "row",
+                          justifyContent: "center",
                         }}
-                      />
-                    </View>
-                  )}
-                  <JournalEntryRow key={post.id} post={post} />
-                </View>
+                      >
+                        <View
+                          style={{
+                            height: 1,
+                            width: "92%",
+                            backgroundColor: theme.colors.textLight,
+                          }}
+                        />
+                      </View>
+                    )}
+                    <JournalEntryRow key={post.id} post={post} />
+                  </View>
+
+                  {index === postGroup.posts.length - 1 && <Footer />}
+                </>
               );
             })}
           </View>

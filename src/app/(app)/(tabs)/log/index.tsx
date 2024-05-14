@@ -1,4 +1,4 @@
-import { format } from "@formkit/tempo";
+import { parse, dayStart, dayEnd } from "@formkit/tempo";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { SquarePen } from "lucide-react-native";
@@ -6,15 +6,13 @@ import { Pressable, ScrollView, View } from "react-native";
 import { FAB } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import { JournalEntriesCard } from "../../../../components/JournalEntriesCard";
+import { JournalEntriesCardPast } from "../../../../components/JournalEntriesCard/JournalEntriesCardPast";
+import { JournalEntriesCardToday } from "../../../../components/JournalEntriesCard/JournalEntriesCardToday";
 import { Text } from "../../../../components/text";
 import { useGetPostGroups } from "../../../../hooks/postGroupHooks/useGetPostGroups";
 import { useAppTheme } from "../../../../hooks/useAppTheme";
-import { CreateNewJournalEntryCard } from "../../../../screens/home/CreateNewJournalEntryCard";
 
-const hour = new Date().getHours();
-
-const isMorning = hour > 6 && hour < 12;
+const now = new Date();
 
 export default function LogScreen() {
   const theme = useAppTheme();
@@ -96,11 +94,25 @@ export default function LogScreen() {
             gap: 60,
           }}
         >
-          {postGroups.map((postGroup) => (
-            <View key={postGroup.id}>
-              <JournalEntriesCard postGroup={postGroup} />
-            </View>
-          ))}
+          {postGroups.map((postGroup) => {
+            const postGroupDate = parse(postGroup.postGroupDate, "YYYY-MM-DD");
+
+            const startOfToday = dayStart(now);
+            const endOfToday = dayEnd(now);
+
+            const isToday =
+              postGroupDate >= startOfToday && postGroupDate < endOfToday;
+
+            return (
+              <View key={postGroup.id}>
+                {isToday ? (
+                  <JournalEntriesCardToday postGroup={postGroup} />
+                ) : (
+                  <JournalEntriesCardPast postGroup={postGroup} />
+                )}
+              </View>
+            );
+          })}
         </View>
 
         <View style={{ height: 40 }} />

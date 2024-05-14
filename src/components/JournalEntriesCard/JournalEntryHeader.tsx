@@ -1,12 +1,12 @@
 import { format } from "@formkit/tempo";
 import { View, Text } from "react-native";
 
-import { ConditionIcon_80 } from "./condition-icon-80";
-import { MiniFeeling } from "./mini-feeling";
-import { TagPill } from "./tag-pill";
-import { useGetPostGroups } from "../hooks/postGroupHooks/useGetPostGroups";
-import { useAppTheme } from "../hooks/useAppTheme";
-import { conditionMap } from "../utils/conditionMap";
+import { ConditionIcon_80 } from "../condition-icon-80";
+import { MiniFeeling } from "../mini-feeling";
+import { TagPill } from "../tag-pill";
+import { useGetPostGroups } from "../../hooks/postGroupHooks/useGetPostGroups";
+import { useAppTheme } from "../../hooks/useAppTheme";
+import { conditionMap } from "../../utils/conditionMap";
 
 type Props = {
   post: ReturnType<typeof useGetPostGroups>["data"][0]["posts"][0];

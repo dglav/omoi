@@ -38,6 +38,7 @@
     "react-native-svg": "14.1.0",
     "react-native-url-polyfill": "^2.0.0",
     "react-native-web": "^0.19.10",
+    "rn-emoji-keyboard": "^1.7.0",
     "zeego": "^1.10.0",
     "zustand": "^4.5.2"
   },
