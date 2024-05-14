@@ -2,9 +2,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import { LogOut, RotateCcw, User } from "lucide-react-native";
 import React from "react";
-import { Alert, View } from "react-native";
+import { Alert, View, Text } from "react-native";
 
-import { TitleSubtitleLayout } from "../../../../components/title-subtitle-layout";
+import { ScreenContainer } from "../../../../components/screen-container";
 import { useAppTheme } from "../../../../hooks/useAppTheme";
 import { useSession } from "../../../../providers/SessionProvider";
 import { SettingsCard } from "../../../../screens/settings/settings-card";
@@ -16,12 +16,23 @@ const SettingsRoute = () => {
   const router = useRouter();
 
   return (
-    <TitleSubtitleLayout title="マイページ">
+    <ScreenContainer>
       <View
         style={{
           gap: 16,
+          paddingHorizontal: 16,
+          paddingTop: 24,
         }}
       >
+        <Text
+          style={{
+            fontSize: theme.fontStyle.xl[1].size,
+            fontWeight: theme.fontStyle.xl[1].weight,
+          }}
+        >
+          マイページ
+        </Text>
+
         <SettingsCard title="アカウント設定">
           <SettingsCardButton
             icon={<User color={theme.colors.text} size={20} />}
@@ -51,7 +62,7 @@ const SettingsRoute = () => {
           />
         </SettingsCard>
       </View>
-    </TitleSubtitleLayout>
+    </ScreenContainer>
   );
 };
 

@@ -14,56 +14,37 @@ export const TitleSubtitleLayout = ({ title, subtitle, children }: Props) => {
 
   return (
     <ScreenContainer>
-      <View
-        style={{
-          display: "flex",
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "space-between",
-          backgroundColor: theme.colors.background,
-        }}
-      >
+      <View style={{ paddingHorizontal: 16, paddingTop: 48 }}>
         <View
           style={{
             width,
-            flex: 1,
-            flexDirection: "column",
+            paddingVertical: 16,
+            display: "flex",
             justifyContent: "flex-start",
-            paddingHorizontal: 16,
+            gap: 16,
           }}
         >
-          <View
+          <Text
             style={{
-              width,
-              paddingVertical: 16,
-              display: "flex",
-              justifyContent: "flex-start",
-              gap: 16,
+              fontSize: theme.fontStyle.xxl[1].size,
+              fontWeight: theme.fontStyle.xxl[1].weight,
             }}
           >
+            {title}
+          </Text>
+
+          {subtitle && (
             <Text
               style={{
-                fontSize: theme.fontStyle.xl[1].size,
-                fontWeight: theme.fontStyle.xl[1].weight,
+                fontSize: theme.fontStyle.md[1].size,
+                fontWeight: theme.fontStyle.md[1].weight,
               }}
             >
-              {title}
+              {subtitle}
             </Text>
-
-            {subtitle && (
-              <Text
-                style={{
-                  fontSize: theme.fontStyle.md[1].size,
-                  fontWeight: theme.fontStyle.md[1].weight,
-                }}
-              >
-                {subtitle}
-              </Text>
-            )}
-          </View>
-
-          {children}
+          )}
         </View>
+        {children}
       </View>
     </ScreenContainer>
   );
