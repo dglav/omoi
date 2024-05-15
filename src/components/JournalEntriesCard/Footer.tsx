@@ -80,7 +80,7 @@ export const Footer = ({ postGroupId }: Props) => {
             alignItems: "center",
           }}
           onPress={() => {
-            router.push(`home/${postGroupId}/chat`);
+            router.push(`post-group/${postGroupId}/chat`);
           }}
         >
           <Text

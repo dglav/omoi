@@ -57,6 +57,8 @@ export default function AppLayout() {
         name="(tabs)"
         options={{ headerShown: false, headerBackTitle: "Back" }}
       />
+
+      <Stack.Screen name="post-group" options={{ headerShown: false }} />
     </Stack>
   );
 }

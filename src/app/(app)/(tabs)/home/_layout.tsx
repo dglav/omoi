@@ -13,7 +13,14 @@ export default function Layout() {
         }}
       />
 
-      <Stack.Screen name="[postGroupId]/chat" />
+      <Stack.Screen
+        name="[postGroupId]/chat"
+        options={{
+          headerTitle: "投稿コメント",
+          headerTransparent: true,
+          headerLeft: () => <BackButton />,
+        }}
+      />
 
       <Stack.Screen
         name="select-post"
