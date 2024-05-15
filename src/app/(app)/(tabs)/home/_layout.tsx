@@ -13,6 +13,8 @@ export default function Layout() {
         }}
       />
 
+      <Stack.Screen name="[postGroupId]/chat" />
+
       <Stack.Screen
         name="select-post"
         options={{

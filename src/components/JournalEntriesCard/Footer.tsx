@@ -1,27 +1,25 @@
+import { useRouter } from "expo-router";
 import { MessageCircleMore, Smile } from "lucide-react-native";
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Alert } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import EmojiPicker, { ja } from "rn-emoji-keyboard";
 
-import type { PostGroupEmoji } from "../../hooks/postGroupEmojiHooks/useGetPostGroupEmojis";
+import { usePostGroupEmojis } from "./hooks/usePostGroupEmojis";
 import { useAppTheme } from "../../hooks/useAppTheme";
+import { useGetUser } from "../../hooks/userHooks/useGetUser";
 
 type Props = {
-  postGroupEmojis: PostGroupEmoji[];
-  userId: string | undefined;
-  handlePostEmoji: (emoji: string) => void;
-  handleDeleteEmoji: () => void;
+  postGroupId: string;
 };
 
-export const Footer = ({
-  postGroupEmojis,
-  userId,
-  handlePostEmoji,
-  handleDeleteEmoji,
-}: Props) => {
+export const Footer = ({ postGroupId }: Props) => {
   const theme = useAppTheme();
+  const router = useRouter();
 
   const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
+  const { postGroupEmojis, handlePostEmoji, handleDeleteEmoji } =
+    usePostGroupEmojis({ postGroupId });
+  const { user } = useGetUser();
 
   return (
     <>
@@ -44,16 +42,17 @@ export const Footer = ({
           gap: 8,
         }}
       >
-        {postGroupEmojis.map((postGroupEmoji) => (
-          <Text
-            key={postGroupEmoji.id}
-            style={{
-              fontSize: 24,
-            }}
-          >
-            {postGroupEmoji.emoji}
-          </Text>
-        ))}
+        {postGroupEmojis &&
+          postGroupEmojis.map((postGroupEmoji) => (
+            <Text
+              key={postGroupEmoji.id}
+              style={{
+                fontSize: 24,
+              }}
+            >
+              {postGroupEmoji.emoji}
+            </Text>
+          ))}
 
         <TouchableOpacity
           style={{
@@ -81,7 +80,7 @@ export const Footer = ({
             alignItems: "center",
           }}
           onPress={() => {
-            Alert.alert("go to messages screen");
+            router.push(`home/${postGroupId}/chat`);
           }}
         >
           <Text
@@ -99,13 +98,13 @@ export const Footer = ({
       <EmojiPicker
         onEmojiSelected={(data) => {
           const selectedEmoji = data.emoji;
-          const myEmoji = postGroupEmojis.find(
-            (emoji) => emoji.user_id === userId,
+          const myEmoji = postGroupEmojis?.find(
+            (emoji) => emoji.user_id === user?.id,
           )?.emoji;
 
           return selectedEmoji === myEmoji
-            ? handleDeleteEmoji()
-            : handlePostEmoji(selectedEmoji);
+            ? handleDeleteEmoji(postGroupId)
+            : handlePostEmoji({ postGroupId, emoji: selectedEmoji });
         }}
         open={isEmojiPickerOpen}
         onClose={() => setIsEmojiPickerOpen(false)}
