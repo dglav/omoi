@@ -1,13 +1,14 @@
-import { parse, dayStart, dayEnd } from "@formkit/tempo";
 import { useRouter } from "expo-router";
 import { View, Alert } from "react-native";
 
 import { Footer } from "./Footer";
 import { JournalEntryHeader } from "./JournalEntryHeader";
 import { JournalEntryRow } from "./JournalEntryRow";
+import { usePostGroupEmojis } from "./hooks/usePostGroupEmojis";
 import type { useGetPostGroups } from "../../hooks/postGroupHooks/useGetPostGroups";
 import { useDeletePost } from "../../hooks/postHooks/useDeletePost";
 import { useAppTheme } from "../../hooks/useAppTheme";
+import { useGetUser } from "../../hooks/userHooks/useGetUser";
 import {
   ContextMenuContent,
   ContextMenuItem,
@@ -24,15 +25,16 @@ type Props = {
 export const JournalEntriesCardToday = ({ postGroup }: Props) => {
   const router = useRouter();
   const theme = useAppTheme();
+  const { user } = useGetUser();
+
   const deletePostMutation = useDeletePost();
 
-  const now = new Date();
-  const postGroupDate = parse(postGroup.postGroupDate, "YYYY-MM-DD");
+  const { postGroupEmojis, handlePostEmoji, handleDeleteEmoji } =
+    usePostGroupEmojis({ postGroupId: postGroup.id });
 
-  const startOfToday = dayStart(now);
-  const endOfToday = dayEnd(now);
-
-  const isToday = postGroupDate >= startOfToday && postGroupDate < endOfToday;
+  if (!postGroupEmojis) {
+    return <View />;
+  }
 
   return (
     <View key={postGroup.id}>
@@ -55,7 +57,7 @@ export const JournalEntriesCardToday = ({ postGroup }: Props) => {
 
                   {index !== 0 && (
                     <View key={post.id}>
-                      {isToday && index === 1 && (
+                      {index === 1 && (
                         <View
                           style={{
                             width: "100%",
@@ -76,7 +78,16 @@ export const JournalEntriesCardToday = ({ postGroup }: Props) => {
                     </View>
                   )}
 
-                  {index === postGroup.posts.length - 1 && <Footer />}
+                  {index === postGroup.posts.length - 1 && (
+                    <Footer
+                      postGroupEmojis={postGroupEmojis}
+                      userId={user?.id}
+                      handlePostEmoji={(emoji: string) =>
+                        handlePostEmoji({ postGroupId: postGroup.id, emoji })
+                      }
+                      handleDeleteEmoji={() => handleDeleteEmoji(postGroup.id)}
+                    />
+                  )}
                 </>
               );
             })}

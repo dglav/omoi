@@ -4,9 +4,11 @@ import { View, Text, Alert } from "react-native";
 
 import { Footer } from "./Footer";
 import { JournalEntryRow } from "./JournalEntryRow";
+import { usePostGroupEmojis } from "./hooks/usePostGroupEmojis";
 import type { useGetPostGroups } from "../../hooks/postGroupHooks/useGetPostGroups";
 import { useDeletePost } from "../../hooks/postHooks/useDeletePost";
 import { useAppTheme } from "../../hooks/useAppTheme";
+import { useGetUser } from "../../hooks/userHooks/useGetUser";
 import {
   ContextMenuContent,
   ContextMenuItem,
@@ -23,6 +25,7 @@ type Props = {
 export const JournalEntriesCardPast = ({ postGroup }: Props) => {
   const theme = useAppTheme();
   const router = useRouter();
+  const { user } = useGetUser();
 
   const deletePostMutation = useDeletePost();
 
@@ -41,6 +44,13 @@ export const JournalEntriesCardPast = ({ postGroup }: Props) => {
   const isYesterday =
     postGroupDate >= startOfYesterday && postGroupDate < endOfYesterday;
   const isBeforeYesterday = postGroupDate < startOfYesterday;
+
+  const { postGroupEmojis, handlePostEmoji, handleDeleteEmoji } =
+    usePostGroupEmojis({ postGroupId: postGroup.id });
+
+  if (!postGroupEmojis) {
+    return <View />;
+  }
 
   return (
     <View key={postGroup.id}>
@@ -117,7 +127,16 @@ export const JournalEntriesCardPast = ({ postGroup }: Props) => {
                     <JournalEntryRow key={post.id} post={post} />
                   </View>
 
-                  {index === postGroup.posts.length - 1 && <Footer />}
+                  {index === postGroup.posts.length - 1 && (
+                    <Footer
+                      postGroupEmojis={postGroupEmojis}
+                      userId={user?.id}
+                      handlePostEmoji={(emoji: string) =>
+                        handlePostEmoji({ postGroupId: postGroup.id, emoji })
+                      }
+                      handleDeleteEmoji={() => handleDeleteEmoji(postGroup.id)}
+                    />
+                  )}
                 </>
               );
             })}
@@ -169,8 +188,6 @@ export const JournalEntriesCardPast = ({ postGroup }: Props) => {
           </ContextMenuItem>
         </ContextMenuContent>
       </ContextMenuRoot>
-
-      {/* </ContextMenu> */}
     </View>
   );
 };

@@ -9,6 +9,45 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      post_group_emojis: {
+        Row: {
+          created_at: string;
+          emoji: string;
+          id: number;
+          post_group_id: string;
+          user_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          emoji: string;
+          id?: number;
+          post_group_id: string;
+          user_id: string;
+        };
+        Update: {
+          created_at?: string;
+          emoji?: string;
+          id?: number;
+          post_group_id?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "post_group_emojis_post_group_id_fkey";
+            columns: ["post_group_id"];
+            isOneToOne: false;
+            referencedRelation: "post_groups";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "post_group_emojis_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       post_groups: {
         Row: {
           author_id: string;

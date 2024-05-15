@@ -3,13 +3,25 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Alert } from "react-native";
 import EmojiPicker, { ja } from "rn-emoji-keyboard";
 
+import type { PostGroupEmoji } from "../../hooks/postGroupEmojiHooks/useGetPostGroupEmojis";
 import { useAppTheme } from "../../hooks/useAppTheme";
 
-export const Footer = () => {
+type Props = {
+  postGroupEmojis: PostGroupEmoji[];
+  userId: string | undefined;
+  handlePostEmoji: (emoji: string) => void;
+  handleDeleteEmoji: () => void;
+};
+
+export const Footer = ({
+  postGroupEmojis,
+  userId,
+  handlePostEmoji,
+  handleDeleteEmoji,
+}: Props) => {
   const theme = useAppTheme();
 
   const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
-  const [emoji, setEmoji] = useState<null | string>(null);
 
   return (
     <>
@@ -32,15 +44,16 @@ export const Footer = () => {
           gap: 8,
         }}
       >
-        {emoji && (
+        {postGroupEmojis.map((postGroupEmoji) => (
           <Text
+            key={postGroupEmoji.id}
             style={{
               fontSize: 24,
             }}
           >
-            {emoji}
+            {postGroupEmoji.emoji}
           </Text>
-        )}
+        ))}
 
         <TouchableOpacity
           style={{
@@ -84,10 +97,16 @@ export const Footer = () => {
       </View>
 
       <EmojiPicker
-        onEmojiSelected={(data) =>
-          data.emoji === emoji ? setEmoji(null) : setEmoji(data.emoji)
-        }
-        selectedEmojis={emoji ? [emoji] : []}
+        onEmojiSelected={(data) => {
+          const selectedEmoji = data.emoji;
+          const myEmoji = postGroupEmojis.find(
+            (emoji) => emoji.user_id === userId,
+          )?.emoji;
+
+          return selectedEmoji === myEmoji
+            ? handleDeleteEmoji()
+            : handlePostEmoji(selectedEmoji);
+        }}
         open={isEmojiPickerOpen}
         onClose={() => setIsEmojiPickerOpen(false)}
         translation={ja}
