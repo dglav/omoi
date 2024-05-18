@@ -1,40 +1,46 @@
+import { format } from "@formkit/tempo";
 import { Text, View } from "react-native";
 
-import { useAppTheme } from "../../../../hooks/useAppTheme";
+import { useAppTheme } from "../../../../../../hooks/useAppTheme";
 
-export const PartnerMessage = () => {
+type Props = {
+  messageText: string;
+  messageDate: Date;
+};
+
+export const MyMessage = ({ messageText, messageDate }: Props) => {
   const theme = useAppTheme();
 
   return (
     <View
       style={{
         flexDirection: "row",
-        justifyContent: "flex-start",
+        justifyContent: "flex-end",
         alignItems: "flex-end",
         gap: 8,
       }}
     >
+      <Text style={{ color: "#858585" }}>{format(messageDate, "HH:mm")}</Text>
       <View
         style={{
-          backgroundColor: theme.colors.white,
+          backgroundColor: theme.colors.textColor,
           paddingVertical: 16,
           paddingHorizontal: 24,
           borderRadius: 32,
-          borderBottomLeftRadius: 0,
+          borderTopEndRadius: 0,
           maxWidth: "75%",
         }}
       >
         <Text
           style={{
-            color: theme.colors.text,
+            color: "#ffffff",
             fontSize: theme.fontStyle.sm[1].size,
             fontWeight: theme.fontStyle.sm[1].weight,
           }}
         >
-          いつもありがとう！！がんばる！！💪
+          {messageText}
         </Text>
       </View>
-      <Text style={{ color: "#858585" }}>19:35</Text>
     </View>
   );
 };

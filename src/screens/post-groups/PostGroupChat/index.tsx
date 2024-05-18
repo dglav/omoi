@@ -1,12 +1,13 @@
+import { useLocalSearchParams } from "expo-router";
 import { SafeAreaView, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { Footer } from "./components/Footer";
-import { MyMessage } from "./components/MyMessage";
-import { PartnerMessage } from "./components/PartnerMessage";
+import { MessageWindow } from "./components/MessageWindow";
 import { useAppTheme } from "../../../hooks/useAppTheme";
 
 export const PostGroupChat = () => {
+  const { postGroupId } = useLocalSearchParams();
   const insets = useSafeAreaInsets();
   const theme = useAppTheme();
 
@@ -21,14 +22,13 @@ export const PostGroupChat = () => {
         <View
           style={{
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "flex-end",
             height: "100%",
           }}
         >
-          <View style={{ paddingTop: 32, paddingHorizontal: 16, gap: 28 }}>
-            <MyMessage />
-            <PartnerMessage />
-          </View>
+          {typeof postGroupId === "string" && (
+            <MessageWindow postGroupId={postGroupId} />
+          )}
 
           <Footer />
         </View>
