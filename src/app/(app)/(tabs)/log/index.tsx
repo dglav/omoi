@@ -17,7 +17,7 @@ const now = new Date();
 export default function LogScreen() {
   const theme = useAppTheme();
   const router = useRouter();
-  const { data: postGroups } = useGetPostGroups();
+  const { data: postGroups } = useGetPostGroups({});
 
   return (
     <SafeAreaView

@@ -1,4 +1,4 @@
-import { dayEnd, dayStart, format, parse } from "@formkit/tempo";
+import { addDay, dayEnd, dayStart, format, parse } from "@formkit/tempo";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { SquarePen } from "lucide-react-native";
@@ -20,7 +20,9 @@ const isMorning = hour > 6 && hour < 12;
 export default function HomeScreen() {
   const theme = useAppTheme();
   const router = useRouter();
-  const { data: postGroups } = useGetPostGroups();
+  const { data: postGroups } = useGetPostGroups({
+    laterThan: dayStart(addDay(new Date(), -2)),
+  });
   const hasWrittenJournalEntryToday =
     postGroups[0]?.postGroupDate === format(new Date(), "YYYY-MM-DD");
 

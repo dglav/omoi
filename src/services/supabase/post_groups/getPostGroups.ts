@@ -3,17 +3,28 @@ import { supabase } from "../index";
 
 type Params = {
   userId: string;
-  limit: number;
+  limit?: number;
+  laterThan?: Date;
 };
 
-export const getPostGroups = async ({ userId, limit }: Params) => {
-  const { data: postGroups, error } = await supabase
+export const getPostGroups = async ({ userId, limit, laterThan }: Params) => {
+  console.log({ laterThan });
+
+  const query = supabase
     .from("post_groups")
     .select("id,postGroupDate:date")
     .match({ author_id: userId })
-    .order("date", { ascending: false })
-    .limit(limit);
+    .order("date", { ascending: false });
 
+  if (laterThan) {
+    query.gt("date", laterThan.toISOString());
+  }
+
+  if (limit) {
+    query.limit(limit);
+  }
+
+  const { data: postGroups, error } = await query;
   if (error) {
     throw new SupabaseDatabaseError(error);
   }
