@@ -5,6 +5,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import EmojiPicker, { ja } from "rn-emoji-keyboard";
 
 import { usePostGroupEmojis } from "./hooks/usePostGroupEmojis";
+import { useGetPostGroupMessageCount } from "../../hooks/postGroupMessageHooks/useGetPostGroupMessagesCount";
 import { useAppTheme } from "../../hooks/useAppTheme";
 import { useGetUser } from "../../hooks/userHooks/useGetUser";
 
@@ -20,6 +21,9 @@ export const Footer = ({ postGroupId }: Props) => {
   const { postGroupEmojis, handlePostEmoji, handleDeleteEmoji } =
     usePostGroupEmojis({ postGroupId });
   const { user } = useGetUser();
+  const { data } = useGetPostGroupMessageCount({ postGroupId });
+
+  const count = data?.count;
 
   return (
     <>
@@ -89,7 +93,7 @@ export const Footer = ({ postGroupId }: Props) => {
               fontWeight: theme.fontStyle.lg[1].weight,
             }}
           >
-            0
+            {count ?? 0}
           </Text>
           <MessageCircleMore color="black" />
         </TouchableOpacity>

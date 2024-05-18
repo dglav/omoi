@@ -64,16 +64,15 @@ export const JournalEntriesCardToday = ({ postGroup }: Props) => {
                           />
                         </View>
                       )}
+
                       <JournalEntryRow key={post.id} post={post} />
                     </View>
-                  )}
-
-                  {index === postGroup.posts.length - 1 && (
-                    <Footer postGroupId={postGroup.id} />
                   )}
                 </>
               );
             })}
+
+            <Footer postGroupId={postGroup.id} />
           </View>
         </ContextMenuTrigger>
 

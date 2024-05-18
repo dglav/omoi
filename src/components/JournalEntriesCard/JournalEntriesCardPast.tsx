@@ -37,7 +37,6 @@ export const JournalEntriesCardPast = ({ postGroup }: Props) => {
   const startOfYesterday = addDay(startOfToday, -1);
   const endOfYesterday = addDay(endOfToday, -1);
 
-  const isToday = postGroupDate >= startOfToday && postGroupDate < endOfToday;
   const isYesterday =
     postGroupDate >= startOfYesterday && postGroupDate < endOfYesterday;
   const isBeforeYesterday = postGroupDate < startOfYesterday;
@@ -93,36 +92,11 @@ export const JournalEntriesCardPast = ({ postGroup }: Props) => {
               paddingVertical: 24,
             }}
           >
-            {postGroup.posts.map((post, index) => {
-              return (
-                <>
-                  <View key={post.id}>
-                    {isToday && index === 1 && (
-                      <View
-                        style={{
-                          width: "100%",
-                          flexDirection: "row",
-                          justifyContent: "center",
-                        }}
-                      >
-                        <View
-                          style={{
-                            height: 1,
-                            width: "92%",
-                            backgroundColor: theme.colors.textLight,
-                          }}
-                        />
-                      </View>
-                    )}
-                    <JournalEntryRow key={post.id} post={post} />
-                  </View>
-
-                  {index === postGroup.posts.length - 1 && (
-                    <Footer postGroupId={postGroup.id} />
-                  )}
-                </>
-              );
+            {postGroup.posts.map((post) => {
+              return <JournalEntryRow key={post.id} post={post} />;
             })}
+
+            <Footer postGroupId={postGroup.id} />
           </View>
         </ContextMenuTrigger>
 
