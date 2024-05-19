@@ -2,8 +2,11 @@ import { Stack } from "expo-router";
 import React from "react";
 
 import { BackButton } from "../../../../components/back-button";
+import { useAppTheme } from "../../../../hooks/useAppTheme";
 
 export default function Layout() {
+  const theme = useAppTheme();
+
   return (
     <Stack>
       <Stack.Screen
@@ -31,6 +34,19 @@ export default function Layout() {
           headerLeft: () => <BackButton />,
         }}
       /> */}
+
+      <Stack.Screen
+        name="color"
+        options={{
+          headerTitle: "カラーテーマ",
+          // headerTransparent: true,
+          headerStyle: {
+            backgroundColor: theme.colors.background,
+          },
+          headerShadowVisible: false,
+          headerLeft: () => <BackButton />,
+        }}
+      />
     </Stack>
   );
 }

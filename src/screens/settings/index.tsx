@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
-import { HeartHandshake, LogOut, RotateCcw, User } from "lucide-react-native";
+import { LogOut, RotateCcw, User } from "lucide-react-native";
 import React from "react";
 import { Alert, View, Text } from "react-native";
 
@@ -48,6 +48,13 @@ const SettingsScreen = () => {
               router.push("/settings/pair-settings");
             }}
           /> */}
+          <SettingsCardButton
+            icon={<User color={theme.colors.text} size={20} />}
+            text="カラーテーマ"
+            onPress={() => {
+              router.push("/settings/color");
+            }}
+          />
         </SettingsCard>
 
         <SettingsCard title="その他">
