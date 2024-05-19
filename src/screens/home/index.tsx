@@ -17,7 +17,8 @@ export default function HomeScreen() {
       style={{
         flex: 1,
         alignItems: "center",
-        backgroundColor: theme.colors.background,
+        backgroundColor:
+          activeTab === "me" ? theme.colors.background : "#F3D9D3",
       }}
       edges={{
         top: "additive",
@@ -50,8 +51,7 @@ export default function HomeScreen() {
           style={{
             paddingVertical: 10,
             paddingHorizontal: 16,
-            backgroundColor:
-              activeTab === "me" ? "white" : theme.colors.background,
+            backgroundColor: activeTab === "me" ? "white" : "#F3D9D3",
             borderRadius: 50,
           }}
           onPress={() => setActiveTab("me")}
