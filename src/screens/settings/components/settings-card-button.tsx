@@ -2,7 +2,7 @@ import { ChevronRight } from "lucide-react-native";
 import { View, Text } from "react-native";
 import { Button } from "react-native-paper";
 
-import { useAppTheme } from "../../hooks/useAppTheme";
+import { useAppTheme } from "../../../hooks/useAppTheme";
 
 type Props = {
   icon: React.JSX.Element;

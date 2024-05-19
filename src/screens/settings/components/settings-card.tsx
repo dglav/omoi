@@ -1,6 +1,6 @@
 import { View, Text } from "react-native";
 
-import { useAppTheme } from "../../hooks/useAppTheme";
+import { useAppTheme } from "../../../hooks/useAppTheme";
 
 type Props = { title: string } & React.PropsWithChildren;
 
