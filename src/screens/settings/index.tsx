@@ -1,14 +1,15 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
-import { LogOut, RotateCcw, User } from "lucide-react-native";
+import { AlarmClock, Bell, LogOut, RotateCcw, User } from "lucide-react-native";
 import React from "react";
-import { Alert, View, Text } from "react-native";
+import { Alert, View, Text, ScrollView } from "react-native";
 
 import { SettingsCard } from "./components/settings-card";
 import { SettingsCardButton } from "./components/settings-card-button";
 import { ScreenContainer } from "../../components/screen-container";
 import { useSignOut } from "../../hooks/authHooks/useSignOut";
 import { useAppTheme } from "../../hooks/useAppTheme";
+import { isDevelopmentMode } from "../../utils/isDevelopmentMode";
 
 const SettingsScreen = () => {
   const theme = useAppTheme();
@@ -17,67 +18,98 @@ const SettingsScreen = () => {
 
   return (
     <ScreenContainer>
-      <View
-        style={{
-          gap: 16,
-          paddingHorizontal: 16,
-          paddingTop: 24,
-        }}
-      >
-        <Text
+      <ScrollView>
+        <View
           style={{
-            fontSize: theme.fontStyle.xl[1].size,
-            fontWeight: theme.fontStyle.xl[1].weight,
+            gap: 16,
+            paddingHorizontal: 16,
+            paddingTop: 24,
           }}
         >
-          マイページ
-        </Text>
-
-        <SettingsCard title="アカウント設定">
-          <SettingsCardButton
-            icon={<User color={theme.colors.text} size={20} />}
-            text="ニックネーム変更"
-            onPress={() => {
-              router.push("/settings/nickname");
+          <Text
+            style={{
+              fontSize: theme.fontStyle.xl[1].size,
+              fontWeight: theme.fontStyle.xl[1].weight,
             }}
-          />
-          {/* <SettingsCardButton
+          >
+            マイページ
+          </Text>
+
+          <SettingsCard title="アカウント設定">
+            <SettingsCardButton
+              icon={<User color={theme.colors.text} size={20} />}
+              text="ニックネーム変更"
+              onPress={() => {
+                router.push("/settings/nickname");
+              }}
+            />
+            {/* <SettingsCardButton
             icon={<HeartHandshake color={theme.colors.text} size={20} />}
             text="ペアリング設定"
             onPress={() => {
               router.push("/settings/pair-settings");
             }}
           /> */}
-          <SettingsCardButton
-            icon={<User color={theme.colors.text} size={20} />}
-            text="カラーテーマ"
-            onPress={() => {
-              router.push("/settings/color");
-            }}
-          />
-        </SettingsCard>
+            <SettingsCardButton
+              icon={<User color={theme.colors.text} size={20} />}
+              text="カラーテーマ"
+              onPress={() => {
+                router.push("/settings/color");
+              }}
+            />
+          </SettingsCard>
 
-        <SettingsCard title="その他">
-          <SettingsCardButton
-            icon={<LogOut color={theme.colors.text} size={20} />}
-            text="ログアウト"
-            onPress={() => {
-              signOut();
-            }}
-          />
-        </SettingsCard>
+          <SettingsCard title="通知設定">
+            <SettingsCardButton
+              icon={<Bell color={theme.colors.text} size={20} />}
+              text="通知設定"
+              onPress={() => {
+                Alert.alert("未実装");
+              }}
+            />
+            <SettingsCardButton
+              icon={<AlarmClock color={theme.colors.text} size={20} />}
+              text="リマインダー設定"
+              onPress={() => {
+                Alert.alert("未実装");
+              }}
+            />
+          </SettingsCard>
 
-        <SettingsCard title="開発者設定">
+          {/* <SettingsCard title="ヘルプ">
           <SettingsCardButton
-            icon={<RotateCcw color={theme.colors.text} size={20} />}
-            text="Reset Async Storage"
+            icon={<HelpCircle color={theme.colors.text} size={20} />}
+            text="お問い合わせ"
             onPress={() => {
-              AsyncStorage.clear();
-              Alert.alert("async storage has been reset!");
+              Alert.alert("未実装");
             }}
           />
-        </SettingsCard>
-      </View>
+        </SettingsCard> */}
+
+          <SettingsCard title="その他">
+            <SettingsCardButton
+              icon={<LogOut color={theme.colors.text} size={20} />}
+              text="ログアウト"
+              onPress={() => {
+                signOut();
+              }}
+            />
+          </SettingsCard>
+
+          {isDevelopmentMode && (
+            <SettingsCard title="開発者設定">
+              <SettingsCardButton
+                icon={<RotateCcw color={theme.colors.text} size={20} />}
+                text="Reset Async Storage"
+                onPress={() => {
+                  AsyncStorage.clear();
+                  Alert.alert("async storage has been reset!");
+                }}
+              />
+            </SettingsCard>
+          )}
+        </View>
+      </ScrollView>
     </ScreenContainer>
   );
 };
