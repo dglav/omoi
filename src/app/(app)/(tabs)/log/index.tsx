@@ -2,6 +2,7 @@ import { parse, dayStart, dayEnd } from "@formkit/tempo";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { SquarePen } from "lucide-react-native";
+import { useState } from "react";
 import { Pressable, ScrollView, View } from "react-native";
 import { FAB } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -17,6 +18,7 @@ const now = new Date();
 export default function LogScreen() {
   const theme = useAppTheme();
   const router = useRouter();
+  const [activeTab, setActiveTab] = useState<"me" | "partner">("me");
   const { data: postGroups } = useGetPostGroups({});
 
   return (
@@ -57,9 +59,11 @@ export default function LogScreen() {
           style={{
             paddingVertical: 10,
             paddingHorizontal: 16,
-            backgroundColor: "white",
+            backgroundColor:
+              activeTab === "me" ? "white" : theme.colors.background,
             borderRadius: 50,
           }}
+          onPress={() => setActiveTab("me")}
         >
           <Text>あなた</Text>
         </Pressable>
@@ -68,8 +72,11 @@ export default function LogScreen() {
           style={{
             paddingVertical: 10,
             paddingHorizontal: 16,
+            backgroundColor:
+              activeTab === "partner" ? "white" : theme.colors.background,
             borderRadius: 50,
           }}
+          onPress={() => setActiveTab("partner")}
         >
           <Text>パートナー</Text>
         </Pressable>
