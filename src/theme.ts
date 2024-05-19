@@ -79,3 +79,51 @@ export const theme = {
     },
   },
 };
+
+export const redTheme = {
+  ...theme,
+  colors: {
+    ...theme.colors,
+    background: "#F4C8C8",
+  },
+};
+
+export const blueTheme = {
+  ...theme,
+  colors: {
+    ...theme.colors,
+    background: "#D3E0F3",
+  },
+};
+
+export const yellowTheme = {
+  ...theme,
+  colors: {
+    ...theme.colors,
+    background: "#F2F0BC",
+  },
+};
+
+export const pinkTheme = {
+  ...theme,
+  colors: {
+    ...theme.colors,
+    background: "#F6D2E1",
+  },
+};
+
+export const brownTheme = {
+  ...theme,
+  colors: {
+    ...theme.colors,
+    background: "#F0D3C2",
+  },
+};
+
+export const greyTheme = {
+  ...theme,
+  colors: {
+    ...theme.colors,
+    background: "#DDDDDD",
+  },
+};

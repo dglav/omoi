@@ -9,10 +9,15 @@ type Option = {
 
 type Props = {
   options: Option[];
+  selectedOption?: Option;
   handleSelectOption: (value: string) => void;
 };
 
-export const OptionsList = ({ options, handleSelectOption }: Props) => {
+export const OptionsList = ({
+  options,
+  selectedOption,
+  handleSelectOption,
+}: Props) => {
   return (
     <View
       style={{
@@ -23,6 +28,7 @@ export const OptionsList = ({ options, handleSelectOption }: Props) => {
       {options.map((option) => (
         <OptionButton
           key={option.text}
+          isSelected={option.text === selectedOption?.text}
           onPress={() => handleSelectOption(option.value)}
         >
           {option.text}

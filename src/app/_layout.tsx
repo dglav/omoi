@@ -2,13 +2,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack, useRouter } from "expo-router";
 import React, { StrictMode, useEffect } from "react";
-import { PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { HAS_VIEWED_INTRODUCTION } from "../asyncStorageConstants";
 import { BackButton } from "../components/back-button";
 import { AuthProvider } from "../providers/AuthProvider";
-import { theme } from "../theme";
+import { ThemeProvider } from "../providers/ThemeProvider";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -39,7 +38,7 @@ export default function Root() {
   return (
     <StrictMode>
       <SafeAreaProvider>
-        <PaperProvider theme={theme}>
+        <ThemeProvider>
           <AuthProvider>
             <QueryClientProvider client={queryClient}>
               <Stack>
@@ -79,7 +78,7 @@ export default function Root() {
               </Stack>
             </QueryClientProvider>
           </AuthProvider>
-        </PaperProvider>
+        </ThemeProvider>
       </SafeAreaProvider>
     </StrictMode>
   );
