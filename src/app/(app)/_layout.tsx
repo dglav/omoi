@@ -1,31 +1,28 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Redirect, Stack, useRouter } from "expo-router";
-import React, { useEffect } from "react";
+import { Redirect, Stack } from "expo-router";
+import React from "react";
 import { Text } from "react-native";
 
-import { IS_FIRST_SIGN_IN } from "../../asyncStorageConstants";
 import { useSession } from "../../providers/SessionProvider";
 
 export default function AppLayout() {
   const { session, isLoading } = useSession();
-  const router = useRouter();
 
-  useEffect(() => {
-    const rerouteIfFirstSignIn = async () => {
-      try {
-        const value = await AsyncStorage.getItem(IS_FIRST_SIGN_IN);
-        if (value !== "false") {
-          router.navigate("/survey");
-        }
-      } catch (e) {
-        console.error("getting from async store failed", e);
-      }
-    };
+  // useEffect(() => {
+  //   const rerouteIfFirstSignIn = async () => {
+  //     try {
+  //       const value = await AsyncStorage.getItem(IS_FIRST_SIGN_IN);
+  //       if (value !== "false") {
+  //         router.navigate("/survey");
+  //       }
+  //     } catch (e) {
+  //       console.error("getting from async store failed", e);
+  //     }
+  //   };
 
-    if (session) {
-      rerouteIfFirstSignIn();
-    }
-  }, [session]);
+  //   if (session) {
+  //     rerouteIfFirstSignIn();
+  //   }
+  // }, [session]);
 
   if (isLoading) {
     return <Text>Loading...</Text>;
