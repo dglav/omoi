@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { useSession } from "../../providers/AuthProvider";
-import { insertPostGroupMessage } from "../../services/supabase/post_group_messages/insertPostGroupMessages";
+import { insertPostGroupMessage } from "../../services/supabase/database/post_group_messages/insertPostGroupMessages";
 
 type mutationParams = {
   postGroupId: string;

@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { useSession } from "../../providers/AuthProvider";
-import { deletePostGroupEmoji } from "../../services/supabase/post_group_emojis/deletePostGroupEmoji";
+import { deletePostGroupEmoji } from "../../services/supabase/database/post_group_emojis/deletePostGroupEmoji";
 
 type mutationParams = {
   postGroupId: string;

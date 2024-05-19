@@ -6,7 +6,7 @@ import { useAppTheme } from "../../../hooks/useAppTheme";
 import { useSession } from "../../../providers/AuthProvider";
 import { LeftAlignedButton } from "../../../screens/relationship/leftAlignedButton";
 import { useStore } from "../../../screens/survey/useStore";
-import { createSurveyEntry } from "../../../services/supabase/survey_1/create";
+import { createSurveyEntry } from "../../../services/supabase/database/survey_1/create";
 
 type CreateSurveyEntryParams = Parameters<typeof createSurveyEntry>[0];
 

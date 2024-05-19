@@ -1,5 +1,5 @@
-import { SupabaseDatabaseError } from "../error";
-import { supabase } from "../index";
+import { SupabaseDatabaseError } from "../../error";
+import { supabase } from "../../index";
 
 export const deletePostGroupEmoji = async (
   userId: string,

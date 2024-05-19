@@ -1,7 +1,7 @@
 import { parse } from "@formkit/tempo";
 
-import { supabase } from "..";
-import { SupabaseDatabaseError } from "../error";
+import { supabase } from "../..";
+import { SupabaseDatabaseError } from "../../error";
 
 type Message = {
   id: string;

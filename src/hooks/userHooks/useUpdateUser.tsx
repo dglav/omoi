@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { Alert } from "react-native";
 
-import { updateUser } from "../../services/supabase/user/updateUser";
+import { updateUser } from "../../services/supabase/database/user/updateUser";
 
 type UpdateUserParams = {
   nickname?: string;

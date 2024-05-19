@@ -5,7 +5,7 @@ import { View, StyleSheet, Text, TextInput, Alert } from "react-native";
 import { Button } from "../components/button";
 import { TitleSubtitleLayout } from "../components/title-subtitle-layout";
 import { useAppTheme } from "../hooks/useAppTheme";
-import { useSignUp } from "../hooks/useSignUp";
+import { useSignUp } from "../hooks/authHooks/useSignUp";
 import { AuthError } from "../utils/errors";
 
 export default function SignUpScreen() {

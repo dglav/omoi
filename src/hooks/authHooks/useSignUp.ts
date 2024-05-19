@@ -1,5 +1,5 @@
-import { signUp as signUpWithSupabase } from "../services/supabase/signUp";
-import { AuthError } from "../utils/errors";
+import { signUp as signUpWithSupabase } from "../../services/supabase/auth/signUp";
+import { AuthError } from "../../utils/errors";
 
 export const useSignUp = () => {
   const signUp = async ({

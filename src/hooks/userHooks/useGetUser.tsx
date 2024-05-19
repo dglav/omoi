@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { useSession } from "../../providers/AuthProvider";
-import { getUser } from "../../services/supabase/user/getUser";
+import { getUser } from "../../services/supabase/database/user/getUser";
 
 export const useGetUser = () => {
   const { session } = useSession();

@@ -1,8 +1,7 @@
-import { SupabaseDatabaseError } from "../error";
-import { supabase } from "../index";
+import { SupabaseDatabaseError } from "../../error";
+import { supabase } from "../../index";
 
 type Props = {
-  id: string;
   authorId: string;
   condition: "average" | "reallyBad" | "bad" | "good" | "reallyGood";
   feelings: string[];
@@ -11,8 +10,7 @@ type Props = {
   date: Date;
 };
 
-export const editPost = async ({
-  id,
+export const createPost = async ({
   authorId,
   condition,
   feelings,
@@ -20,17 +18,14 @@ export const editPost = async ({
   note,
   date,
 }: Props) => {
-  const { data, error } = await supabase.rpc("edit_post", {
+  const { data, error } = await supabase.rpc("create_new_post", {
     author_id: authorId,
     condition,
-    date: date.toISOString(),
     feelings,
-    id,
-    note,
     tags,
+    note,
+    date: date.toISOString(),
   });
-  if (error) console.error(error);
-  else console.log(data);
 
   if (error) {
     throw new SupabaseDatabaseError(error);

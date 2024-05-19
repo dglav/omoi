@@ -1,5 +1,5 @@
-import { supabase } from "..";
-import { SupabaseDatabaseError } from "../error";
+import { supabase } from "../..";
+import { SupabaseDatabaseError } from "../../error";
 
 type Props = {
   userId: string;

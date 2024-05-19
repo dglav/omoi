@@ -1,6 +1,6 @@
 import { UserEntity } from "./types";
-import { SupabaseDatabaseError } from "../error";
-import { supabase } from "../index";
+import { SupabaseDatabaseError } from "../../error";
+import { supabase } from "../../index";
 
 export const updateUser = async (
   userId: string,

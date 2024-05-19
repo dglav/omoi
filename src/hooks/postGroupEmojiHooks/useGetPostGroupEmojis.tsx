@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { useSession } from "../../providers/AuthProvider";
-import { getPostGroupEmojis } from "../../services/supabase/post_group_emojis/getPostGroupEmojis";
+import { getPostGroupEmojis } from "../../services/supabase/database/post_group_emojis/getPostGroupEmojis";
 
 export type PostGroupEmoji = {
   created_at: string;

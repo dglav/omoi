@@ -1,4 +1,4 @@
-import { supabase } from ".";
+import { supabase } from "..";
 
 export const signUp = async ({
   email,

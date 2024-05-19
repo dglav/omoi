@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { useSession } from "../../providers/AuthProvider";
-import { getPostGroupMessages } from "../../services/supabase/post_group_messages/getPostGroupMessages";
+import { getPostGroupMessages } from "../../services/supabase/database/post_group_messages/getPostGroupMessages";
 
 export const useGetPostGroupMessages = ({
   postGroupId,

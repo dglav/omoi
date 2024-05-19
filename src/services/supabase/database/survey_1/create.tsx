@@ -1,5 +1,5 @@
-import { Tables } from "../../../../types/supabase";
-import { supabase } from "../index";
+import { Tables } from "../../../../../types/supabase";
+import { supabase } from "../../index";
 
 type NewSurveyEntry = Omit<Tables<"survey_1">, "id">;
 
