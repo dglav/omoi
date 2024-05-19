@@ -35,7 +35,6 @@ const SelfExpression = () => {
   const { mutate } = useMutation({
     mutationFn: (values: CreateSurveyEntryParams) => createSurveyEntry(values),
     onSuccess: () => {
-      Alert.alert("post success!");
       router.push("/tutorial");
     },
     onError: () => {

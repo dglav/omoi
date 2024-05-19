@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Alert } from "react-native";
 
 import { updateUser } from "../../services/supabase/database/user/updateUser";
@@ -13,6 +13,8 @@ type UseUpdateUserParams = {
 };
 
 export const useUpdateUser = ({ onSuccess }: UseUpdateUserParams) => {
+  const queryClient = useQueryClient();
+
   const mutation = useMutation({
     mutationFn: ({
       userId,
@@ -21,8 +23,10 @@ export const useUpdateUser = ({ onSuccess }: UseUpdateUserParams) => {
       userId: string;
       updatedUser: UpdateUserParams;
     }) => updateUser(userId, updatedUser),
-    onSuccess: () => {
-      Alert.alert("post success!");
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: ["user", variables.userId],
+      });
       onSuccess();
     },
     onError: () => {

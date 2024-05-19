@@ -47,16 +47,18 @@ export const Footer = ({ postGroupId }: Props) => {
         }}
       >
         {postGroupEmojis &&
-          postGroupEmojis.map((postGroupEmoji) => (
-            <Text
-              key={postGroupEmoji.id}
-              style={{
-                fontSize: 24,
-              }}
-            >
-              {postGroupEmoji.emoji}
-            </Text>
-          ))}
+          postGroupEmojis.map((postGroupEmoji) => {
+            return (
+              <Text
+                key={`${postGroupEmoji.post_group_id}_${postGroupEmoji.user_id}`}
+                style={{
+                  fontSize: 24,
+                }}
+              >
+                {postGroupEmoji.emoji}
+              </Text>
+            );
+          })}
 
         <TouchableOpacity
           style={{

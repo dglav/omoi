@@ -6,7 +6,6 @@ import { getPostGroupEmojis } from "../../services/supabase/database/post_group_
 export type PostGroupEmoji = {
   created_at: string;
   emoji: string;
-  id: number;
   post_group_id: string;
   user_id: string;
 };

@@ -40,13 +40,11 @@ export const MyJournalEntriesCardToday = ({ postGroup }: Props) => {
           >
             {postGroup.posts.map((post, index) => {
               return (
-                <>
-                  {index === 0 && (
-                    <JournalEntryHeader key={post.id} post={post} />
-                  )}
+                <View key={post.id}>
+                  {index === 0 && <JournalEntryHeader post={post} />}
 
                   {index !== 0 && (
-                    <View key={post.id}>
+                    <View>
                       {index === 1 && (
                         <View
                           style={{
@@ -65,10 +63,10 @@ export const MyJournalEntriesCardToday = ({ postGroup }: Props) => {
                         </View>
                       )}
 
-                      <JournalEntryRow key={post.id} post={post} />
+                      <JournalEntryRow post={post} />
                     </View>
                   )}
-                </>
+                </View>
               );
             })}
 

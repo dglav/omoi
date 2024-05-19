@@ -42,7 +42,7 @@ export const MyJournalEntriesCardPast = ({ postGroup }: Props) => {
   const isBeforeYesterday = postGroupDate < startOfYesterday;
 
   return (
-    <View key={postGroup.id}>
+    <View>
       {isYesterday && (
         <>
           <Text

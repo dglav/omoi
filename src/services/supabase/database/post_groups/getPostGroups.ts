@@ -8,8 +8,6 @@ type Params = {
 };
 
 export const getPostGroups = async ({ userId, limit, laterThan }: Params) => {
-  console.log({ laterThan });
-
   const query = supabase
     .from("post_groups")
     .select("id,postGroupDate:date")
