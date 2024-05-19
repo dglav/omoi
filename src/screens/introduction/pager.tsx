@@ -16,6 +16,7 @@ const data = [
     id: "1",
     image: require("../../../assets/undraw_joyride_re_968t 1.png"),
     headerText: "日々の感情を記録しましょう",
+    subText: "些細な気持ちも。忘れたくない感情も。",
   },
   {
     id: "2",
@@ -102,7 +103,7 @@ function Pager({ flatListRef, scrollX }: PagerProps) {
         keyExtractor={(item) => item.id}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-          { useNativeDriver: false }
+          { useNativeDriver: false },
         )}
         scrollEventThrottle={32}
         viewabilityConfig={{ viewAreaCoveragePercentThreshold: 100 }}
