@@ -30,7 +30,7 @@ export const PostSuccessModal = ({ visible, onConfirm }: Props) => {
             fontWeight: theme.fontStyle.xl[1].weight,
           }}
         >
-          初投稿！！
+          投稿完了！
         </Text>
       </View>
 
