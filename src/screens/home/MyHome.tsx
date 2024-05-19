@@ -14,7 +14,10 @@ export const MyHome = () => {
   const theme = useAppTheme();
   const router = useRouter();
   const { data: postGroups } = useGetPostGroups({
-    laterThan: dayStart(addDay(new Date(), -2)),
+    user: "me",
+    options: {
+      laterThan: dayStart(addDay(new Date(), -2)),
+    },
   });
   const hasWrittenJournalEntryToday =
     postGroups[0]?.postGroupDate === format(new Date(), "YYYY-MM-DD");

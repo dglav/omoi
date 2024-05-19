@@ -7,7 +7,10 @@ import { useGetPostGroups } from "../../hooks/postGroupHooks/useGetPostGroups";
 
 export const PartnerHome = () => {
   const { data: postGroups } = useGetPostGroups({
-    laterThan: dayStart(addDay(new Date(), -2)),
+    user: "partner",
+    options: {
+      laterThan: dayStart(addDay(new Date(), -2)),
+    },
   });
 
   const now = new Date();
