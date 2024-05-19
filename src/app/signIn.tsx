@@ -4,14 +4,15 @@ import { View, StyleSheet, Text, TextInput, Alert } from "react-native";
 
 import { Button } from "../components/button";
 import { TitleSubtitleLayout } from "../components/title-subtitle-layout";
+import { useSignInWithPassword } from "../hooks/authHooks/useSignInWithPassword";
 import { useAppTheme } from "../hooks/useAppTheme";
-import { supabase } from "../services/supabase";
 
 export default function LoginScreen() {
   const theme = useAppTheme();
   const router = useRouter();
   const [userId, setUserId] = useState<string>();
   const [password, setPassword] = useState<string>();
+  const { signInWithPassword } = useSignInWithPassword();
 
   async function signInWithEmail() {
     if (!userId || !password) {
@@ -19,7 +20,7 @@ export default function LoginScreen() {
       return;
     }
 
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await signInWithPassword({
       email: userId,
       password,
     });

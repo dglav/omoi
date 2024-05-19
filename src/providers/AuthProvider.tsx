@@ -20,11 +20,9 @@ AppState.addEventListener("change", (state) => {
 const AuthContext = createContext<{
   session: Session | null;
   isLoading: boolean;
-  signInWithPassword: typeof supabase.auth.signInWithPassword;
 }>({
   session: null,
   isLoading: false,
-  signInWithPassword: supabase.auth.signInWithPassword,
 });
 
 const useSession = () => {
@@ -60,7 +58,6 @@ const AuthProvider = (props: React.PropsWithChildren) => {
       value={{
         session,
         isLoading,
-        signInWithPassword: supabase.auth.signInWithPassword,
       }}
     >
       {props.children}
