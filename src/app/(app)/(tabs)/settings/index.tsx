@@ -5,14 +5,14 @@ import React from "react";
 import { Alert, View, Text } from "react-native";
 
 import { ScreenContainer } from "../../../../components/screen-container";
+import { useSignOut } from "../../../../hooks/authHooks/useSignOut";
 import { useAppTheme } from "../../../../hooks/useAppTheme";
-import { useSession } from "../../../../providers/AuthProvider";
 import { SettingsCard } from "../../../../screens/settings/settings-card";
 import { SettingsCardButton } from "../../../../screens/settings/settings-card-button";
 
 const SettingsRoute = () => {
   const theme = useAppTheme();
-  const { signOut } = useSession();
+  const { signOut } = useSignOut();
   const router = useRouter();
 
   return (

@@ -21,12 +21,10 @@ const AuthContext = createContext<{
   session: Session | null;
   isLoading: boolean;
   signInWithPassword: typeof supabase.auth.signInWithPassword;
-  signOut: typeof supabase.auth.signOut;
 }>({
   session: null,
   isLoading: false,
   signInWithPassword: supabase.auth.signInWithPassword,
-  signOut: supabase.auth.signOut,
 });
 
 const useSession = () => {
@@ -63,7 +61,6 @@ const AuthProvider = (props: React.PropsWithChildren) => {
         session,
         isLoading,
         signInWithPassword: supabase.auth.signInWithPassword,
-        signOut: () => supabase.auth.signOut(),
       }}
     >
       {props.children}
