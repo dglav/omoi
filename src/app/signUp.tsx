@@ -1,22 +1,26 @@
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import { View, StyleSheet, Text, TextInput, Alert } from "react-native";
 
 import { Button } from "../components/button";
 import { TitleSubtitleLayout } from "../components/title-subtitle-layout";
 import { useAppTheme } from "../hooks/useAppTheme";
-import { supabase } from "../services/supabase";
+import { useSignUp } from "../hooks/useSignUp";
+import { AuthError } from "../utils/errors";
 
 export default function SignUpScreen() {
   const theme = useAppTheme();
-  const [userId, setUserId] = useState<string>();
-  const [password, setPassword] = useState<string>();
-  const [passwordConfirm, setPasswordConfirm] = useState<string>();
-  const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
+  const [userId, setUserId] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [passwordConfirm, setPasswordConfirm] = useState<string>("");
+
+  const { signUp } = useSignUp();
 
   async function signUpWithEmail(
     userId: string,
     password: string,
-    passwordConfirm: string
+    passwordConfirm: string,
   ) {
     if (
       !userId ||
@@ -28,23 +32,25 @@ export default function SignUpScreen() {
       return;
     }
 
-    setLoading(true);
-    const { data, error } = await supabase.auth.signUp({
-      email: userId,
-      password,
-    });
+    try {
+      const { data } = await signUp({ email: userId, password });
 
-    console.log({ data, error });
+      if (!data.session) {
+        Alert.alert("Please check your inbox for email verification!");
+      }
 
-    if (error) {
-      Alert.alert(error.message);
-      setLoading(false);
-      return;
+      if (data.session) {
+        router.push("/home");
+      }
+    } catch (error) {
+      if (error instanceof AuthError) {
+        Alert.alert("Authentication Error", error.message);
+      } else if (error instanceof Error) {
+        Alert.alert("Authentication Error", error.message);
+      } else {
+        console.error(error);
+      }
     }
-
-    if (!data.session)
-      Alert.alert("Please check your inbox for email verification!");
-    setLoading(false);
   }
 
   return (

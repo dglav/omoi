@@ -51,7 +51,7 @@ const SessionProvider = (props: React.PropsWithChildren) => {
       setIsLoading(false);
     });
 
-    supabase.auth.onAuthStateChange((_event, session) => {
+    supabase.auth.onAuthStateChange((_, session) => {
       setSession(session);
       setIsLoading(false);
     });
