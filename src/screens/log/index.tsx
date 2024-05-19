@@ -7,8 +7,10 @@ import { FAB } from "react-native-paper";
 
 import { Container } from "../../components/Feed/Container";
 import { Header } from "../../components/Feed/Header";
-import { JournalEntriesCardPast } from "../../components/JournalEntriesCard/JournalEntriesCardPast";
-import { JournalEntriesCardToday } from "../../components/JournalEntriesCard/JournalEntriesCardToday";
+import { MyJournalEntriesCardPast } from "../../components/JournalEntriesCard/MyJournalEntriesCardPast";
+import { MyJournalEntriesCardToday } from "../../components/JournalEntriesCard/MyJournalEntriesCardToday";
+import { PartnerJournalEntriesCardPast } from "../../components/JournalEntriesCard/PartnerJournalEntriesCardPast";
+import { PartnerJournalEntriesCardToday } from "../../components/JournalEntriesCard/PartnerJournalEntriesCardToday";
 import { useGetPostGroups } from "../../hooks/postGroupHooks/useGetPostGroups";
 import { useAppTheme } from "../../hooks/useAppTheme";
 
@@ -45,10 +47,17 @@ export default function LogScreen() {
 
             return (
               <View key={postGroup.id}>
-                {isToday ? (
-                  <JournalEntriesCardToday postGroup={postGroup} />
-                ) : (
-                  <JournalEntriesCardPast postGroup={postGroup} />
+                {isToday && activeTab === "me" && (
+                  <MyJournalEntriesCardToday postGroup={postGroup} />
+                )}
+                {isToday && activeTab === "partner" && (
+                  <PartnerJournalEntriesCardToday postGroup={postGroup} />
+                )}
+                {!isToday && activeTab === "me" && (
+                  <MyJournalEntriesCardPast postGroup={postGroup} />
+                )}
+                {!isToday && activeTab === "partner" && (
+                  <PartnerJournalEntriesCardPast postGroup={postGroup} />
                 )}
               </View>
             );

@@ -5,8 +5,8 @@ import { ScrollView, View, Text } from "react-native";
 import { FAB } from "react-native-paper";
 
 import { CreateNewJournalEntryCard } from "./CreateNewJournalEntryCard";
-import { JournalEntriesCardPast } from "../../components/JournalEntriesCard/JournalEntriesCardPast";
-import { JournalEntriesCardToday } from "../../components/JournalEntriesCard/JournalEntriesCardToday";
+import { MyJournalEntriesCardPast } from "../../components/JournalEntriesCard/MyJournalEntriesCardPast";
+import { MyJournalEntriesCardToday } from "../../components/JournalEntriesCard/MyJournalEntriesCardToday";
 import { useGetPostGroups } from "../../hooks/postGroupHooks/useGetPostGroups";
 import { useAppTheme } from "../../hooks/useAppTheme";
 
@@ -79,9 +79,9 @@ export const MyHome = () => {
             return (
               <View key={postGroup.id}>
                 {isToday ? (
-                  <JournalEntriesCardToday postGroup={postGroup} />
+                  <MyJournalEntriesCardToday postGroup={postGroup} />
                 ) : (
-                  <JournalEntriesCardPast postGroup={postGroup} />
+                  <MyJournalEntriesCardPast postGroup={postGroup} />
                 )}
               </View>
             );

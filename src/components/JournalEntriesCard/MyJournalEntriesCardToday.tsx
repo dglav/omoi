@@ -20,7 +20,7 @@ type Props = {
   postGroup: ReturnType<typeof useGetPostGroups>["data"][0];
 };
 
-export const JournalEntriesCardToday = ({ postGroup }: Props) => {
+export const MyJournalEntriesCardToday = ({ postGroup }: Props) => {
   const router = useRouter();
   const theme = useAppTheme();
 
