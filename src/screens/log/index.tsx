@@ -1,15 +1,14 @@
 import { parse, dayStart, dayEnd } from "@formkit/tempo";
 import { useRouter } from "expo-router";
-import { StatusBar } from "expo-status-bar";
 import { SquarePen } from "lucide-react-native";
 import { useState } from "react";
-import { Pressable, ScrollView, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { FAB } from "react-native-paper";
-import { SafeAreaView } from "react-native-safe-area-context";
 
+import { Container } from "../../components/Feed/Container";
+import { Header } from "../../components/Feed/Header";
 import { JournalEntriesCardPast } from "../../components/JournalEntriesCard/JournalEntriesCardPast";
 import { JournalEntriesCardToday } from "../../components/JournalEntriesCard/JournalEntriesCardToday";
-import { Text } from "../../components/text";
 import { useGetPostGroups } from "../../hooks/postGroupHooks/useGetPostGroups";
 import { useAppTheme } from "../../hooks/useAppTheme";
 
@@ -19,77 +18,11 @@ export default function LogScreen() {
   const theme = useAppTheme();
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<"me" | "partner">("me");
-  const { data: postGroups } = useGetPostGroups({ who: "me" });
+  const { data: postGroups } = useGetPostGroups({ who: activeTab });
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        alignItems: "center",
-        backgroundColor: theme.colors.background,
-      }}
-      edges={{
-        top: "additive",
-        bottom: "off",
-      }}
-    >
-      <View style={{ height: 12 }} />
-
-      <View>
-        <Text
-          style={{
-            fontSize: theme.fontStyle.lg[1].size,
-            fontWeight: theme.fontStyle.lg[1].weight,
-            letterSpacing: 2,
-          }}
-        >
-          Omoi
-        </Text>
-      </View>
-
-      <View style={{ height: 12 }} />
-
-      <View
-        style={{
-          display: "flex",
-          flexDirection: "row",
-        }}
-      >
-        <Pressable
-          style={{
-            paddingVertical: 10,
-            paddingHorizontal: 16,
-            backgroundColor:
-              activeTab === "me" ? "white" : theme.colors.background,
-            borderRadius: 50,
-          }}
-          onPress={() => setActiveTab("me")}
-        >
-          <Text>あなた</Text>
-        </Pressable>
-
-        <Pressable
-          style={{
-            paddingVertical: 10,
-            paddingHorizontal: 16,
-            backgroundColor:
-              activeTab === "partner" ? "white" : theme.colors.background,
-            borderRadius: 50,
-          }}
-          onPress={() => setActiveTab("partner")}
-        >
-          <Text>パートナー</Text>
-        </Pressable>
-      </View>
-
-      <View
-        style={{
-          height: 1,
-          width: "100%",
-          backgroundColor: theme.colors.textLight,
-          marginTop: 8,
-        }}
-      />
+    <Container activeTab={activeTab}>
+      <Header activeTab={activeTab} setActiveTab={setActiveTab} />
 
       <ScrollView style={{ width: "100%" }}>
         <View style={{ height: 40 }} />
@@ -138,8 +71,6 @@ export default function LogScreen() {
           router.push("/(app)/posts/new");
         }}
       />
-
-      <StatusBar />
-    </SafeAreaView>
+    </Container>
   );
 }
