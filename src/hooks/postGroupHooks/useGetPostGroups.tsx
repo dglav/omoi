@@ -1,20 +1,20 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { useSession } from "../../providers/AuthProvider";
 import { getPostGroups } from "../../services/supabase/database/post_groups/getPostGroups";
+import { useGetUser } from "../userHooks/useGetUser";
 
 type Props = {
-  user: "me" | "partner";
+  who: "me" | "partner";
   options?: {
     limit?: number;
     laterThan?: Date;
   };
 };
 
-export const useGetPostGroups = ({ user, options }: Props) => {
-  const { session } = useSession();
+export const useGetPostGroups = ({ who, options }: Props) => {
+  const { user } = useGetUser();
 
-  const userId = user === "me" ? session?.user.id : "session?.user.partnerId";
+  const userId = who === "me" ? user?.id : user?.partner_user_id;
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["postGroups", userId, options?.limit, options?.laterThan],

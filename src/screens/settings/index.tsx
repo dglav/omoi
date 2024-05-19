@@ -41,13 +41,13 @@ const SettingsScreen = () => {
               router.push("/settings/nickname");
             }}
           />
-          <SettingsCardButton
+          {/* <SettingsCardButton
             icon={<HeartHandshake color={theme.colors.text} size={20} />}
             text="ペアリング設定"
             onPress={() => {
-              console.log("route to pairing screen");
+              router.push("/settings/pair-settings");
             }}
-          />
+          /> */}
         </SettingsCard>
 
         <SettingsCard title="その他">
@@ -58,7 +58,9 @@ const SettingsScreen = () => {
               signOut();
             }}
           />
+        </SettingsCard>
 
+        <SettingsCard title="開発者設定">
           <SettingsCardButton
             icon={<RotateCcw color={theme.colors.text} size={20} />}
             text="Reset Async Storage"

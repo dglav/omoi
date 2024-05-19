@@ -14,7 +14,7 @@ export const MyHome = () => {
   const theme = useAppTheme();
   const router = useRouter();
   const { data: postGroups } = useGetPostGroups({
-    user: "me",
+    who: "me",
     options: {
       laterThan: dayStart(addDay(new Date(), -2)),
     },

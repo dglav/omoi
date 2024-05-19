@@ -210,16 +210,19 @@ export type Database = {
           birthday: string | null;
           id: string;
           nickname: string | null;
+          partner_user_id: string | null;
         };
         Insert: {
           birthday?: string | null;
           id?: string;
           nickname?: string | null;
+          partner_user_id?: string | null;
         };
         Update: {
           birthday?: string | null;
           id?: string;
           nickname?: string | null;
+          partner_user_id?: string | null;
         };
         Relationships: [
           {

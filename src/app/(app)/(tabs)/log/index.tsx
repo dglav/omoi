@@ -19,7 +19,7 @@ export default function LogScreen() {
   const theme = useAppTheme();
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<"me" | "partner">("me");
-  const { data: postGroups } = useGetPostGroups({ user: "me" });
+  const { data: postGroups } = useGetPostGroups({ who: "me" });
 
   return (
     <SafeAreaView

@@ -17,11 +17,20 @@ export default function Layout() {
       <Stack.Screen
         name="nickname"
         options={{
-          headerTitle: "マイページ",
+          headerTitle: "ニックネーム",
           headerTransparent: true,
           headerLeft: () => <BackButton />,
         }}
       />
+
+      {/* <Stack.Screen
+        name="pair-settings"
+        options={{
+          headerTitle: "ペアリング設定",
+          headerTransparent: true,
+          headerLeft: () => <BackButton />,
+        }}
+      /> */}
     </Stack>
   );
 }
