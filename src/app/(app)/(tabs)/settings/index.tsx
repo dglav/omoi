@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
-import { LogOut, RotateCcw, User } from "lucide-react-native";
+import { HeartHandshake, LogOut, RotateCcw, User } from "lucide-react-native";
 import React from "react";
 import { Alert, View, Text } from "react-native";
 
@@ -39,6 +39,13 @@ const SettingsRoute = () => {
             text="ニックネーム変更"
             onPress={() => {
               router.push("/settings/nickname");
+            }}
+          />
+          <SettingsCardButton
+            icon={<HeartHandshake color={theme.colors.text} size={20} />}
+            text="ペアリング設定"
+            onPress={() => {
+              console.log("route to pairing screen");
             }}
           />
         </SettingsCard>
