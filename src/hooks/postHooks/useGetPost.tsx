@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { useSession } from "../../providers/SessionProvider";
+import { useSession } from "../../providers/AuthProvider";
 import { getPost } from "../../services/supabase/posts/getPost";
 
 export const useGetPost = (id?: string) => {

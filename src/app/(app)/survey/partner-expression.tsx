@@ -3,7 +3,7 @@ import { useRouter } from "expo-router";
 import { View, Text, SafeAreaView, Alert } from "react-native";
 
 import { useAppTheme } from "../../../hooks/useAppTheme";
-import { useSession } from "../../../providers/SessionProvider";
+import { useSession } from "../../../providers/AuthProvider";
 import { LeftAlignedButton } from "../../../screens/relationship/leftAlignedButton";
 import { useStore } from "../../../screens/survey/useStore";
 import { createSurveyEntry } from "../../../services/supabase/survey_1/create";

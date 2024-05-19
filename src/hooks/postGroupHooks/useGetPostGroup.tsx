@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { useSession } from "../../providers/SessionProvider";
+import { useSession } from "../../providers/AuthProvider";
 import { getPostGroup } from "../../services/supabase/post_groups/getPostGroup";
 
 export const useGetPostGroup = (date: string) => {

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { useSession } from "../../providers/SessionProvider";
+import { useSession } from "../../providers/AuthProvider";
 import { deletePost } from "../../services/supabase/posts/deletePost";
 
 type mutationParams = {

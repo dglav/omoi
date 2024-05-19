@@ -2,7 +2,7 @@ import { Redirect, Stack } from "expo-router";
 import React from "react";
 import { Text } from "react-native";
 
-import { useSession } from "../../providers/SessionProvider";
+import { useSession } from "../../providers/AuthProvider";
 
 export default function AppLayout() {
   const { session, isLoading } = useSession();

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { useSession } from "../../providers/SessionProvider";
+import { useSession } from "../../providers/AuthProvider";
 import { getPostGroups } from "../../services/supabase/post_groups/getPostGroups";
 
 type Props = {

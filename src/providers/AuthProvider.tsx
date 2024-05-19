@@ -34,14 +34,14 @@ const useSession = () => {
 
   if (process.env.NODE_ENV !== "production") {
     if (!ctx) {
-      throw new Error("useSession must be wrapped in a <SessionProvider />");
+      throw new Error("useSession must be wrapped in a <AuthProvider />");
     }
   }
 
   return ctx;
 };
 
-const SessionProvider = (props: React.PropsWithChildren) => {
+const AuthProvider = (props: React.PropsWithChildren) => {
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -71,4 +71,4 @@ const SessionProvider = (props: React.PropsWithChildren) => {
   );
 };
 
-export { SessionProvider, useSession };
+export { AuthProvider, useSession };

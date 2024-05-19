@@ -7,7 +7,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { HAS_VIEWED_INTRODUCTION } from "../asyncStorageConstants";
 import { BackButton } from "../components/back-button";
-import { SessionProvider } from "../providers/SessionProvider";
+import { AuthProvider } from "../providers/AuthProvider";
 import { theme } from "../theme";
 
 const queryClient = new QueryClient({
@@ -40,7 +40,7 @@ export default function Root() {
     <StrictMode>
       <SafeAreaProvider>
         <PaperProvider theme={theme}>
-          <SessionProvider>
+          <AuthProvider>
             <QueryClientProvider client={queryClient}>
               <Stack>
                 <Stack.Screen
@@ -78,7 +78,7 @@ export default function Root() {
                 />
               </Stack>
             </QueryClientProvider>
-          </SessionProvider>
+          </AuthProvider>
         </PaperProvider>
       </SafeAreaProvider>
     </StrictMode>

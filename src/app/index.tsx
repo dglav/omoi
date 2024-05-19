@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, Image } from "react-native";
 
 import { Button } from "../components/button";
 import { useAppTheme } from "../hooks/useAppTheme";
-import { useSession } from "../providers/SessionProvider";
+import { useSession } from "../providers/AuthProvider";
 
 export default function IndexScreen() {
   const theme = useAppTheme();

@@ -6,7 +6,7 @@ import { Alert, View, Text } from "react-native";
 
 import { ScreenContainer } from "../../../../components/screen-container";
 import { useAppTheme } from "../../../../hooks/useAppTheme";
-import { useSession } from "../../../../providers/SessionProvider";
+import { useSession } from "../../../../providers/AuthProvider";
 import { SettingsCard } from "../../../../screens/settings/settings-card";
 import { SettingsCardButton } from "../../../../screens/settings/settings-card-button";
 
