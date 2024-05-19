@@ -33,8 +33,8 @@ export const PartnerMessage = ({ messageText, messageDate }: Props) => {
         <Text
           style={{
             color: theme.colors.text,
-            fontSize: theme.fontStyle.sm[1].size,
-            fontWeight: theme.fontStyle.sm[1].weight,
+            fontSize: theme.fontStyle.sm[3].size,
+            fontWeight: theme.fontStyle.sm[3].weight,
           }}
         >
           {messageText}

@@ -34,8 +34,8 @@ export const MyMessage = ({ messageText, messageDate }: Props) => {
         <Text
           style={{
             color: "#ffffff",
-            fontSize: theme.fontStyle.sm[1].size,
-            fontWeight: theme.fontStyle.sm[1].weight,
+            fontSize: theme.fontStyle.sm[3].size,
+            fontWeight: theme.fontStyle.sm[3].weight,
           }}
         >
           {messageText}
