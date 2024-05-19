@@ -4,6 +4,7 @@ import { Pressable, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { MyHome } from "./MyHome";
+import { PartnerHome } from "./PartnerHome";
 import { Text } from "../../components/text";
 import { useAppTheme } from "../../hooks/useAppTheme";
 
@@ -81,7 +82,8 @@ export default function HomeScreen() {
         }}
       />
 
-      <MyHome />
+      {activeTab === "me" && <MyHome />}
+      {activeTab === "partner" && <PartnerHome />}
 
       <StatusBar />
     </SafeAreaView>
