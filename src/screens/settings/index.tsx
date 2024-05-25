@@ -4,12 +4,13 @@ import { AlarmClock, Bell, LogOut, RotateCcw, User } from "lucide-react-native";
 import React from "react";
 import { Alert, View, Text, ScrollView } from "react-native";
 
+import { Push } from "./components/Push";
 import { SettingsCard } from "./components/settings-card";
 import { SettingsCardButton } from "./components/settings-card-button";
 import { ScreenContainer } from "../../components/screen-container";
 import { useSignOut } from "../../hooks/authHooks/useSignOut";
 import { useAppTheme } from "../../hooks/useAppTheme";
-import { isDevelopmentMode } from "../../utils/isDevelopmentMode";
+// import { isDevelopmentMode } from "../../utils/isDevelopmentMode";
 
 const SettingsScreen = () => {
   const theme = useAppTheme();
@@ -96,18 +97,20 @@ const SettingsScreen = () => {
             />
           </SettingsCard>
 
-          {isDevelopmentMode && (
-            <SettingsCard title="開発者設定">
-              <SettingsCardButton
-                icon={<RotateCcw color={theme.colors.text} size={20} />}
-                text="Reset Async Storage"
-                onPress={() => {
-                  AsyncStorage.clear();
-                  Alert.alert("async storage has been reset!");
-                }}
-              />
-            </SettingsCard>
-          )}
+          {/* {isDevelopmentMode && ( */}
+          <SettingsCard title="開発者設定">
+            <SettingsCardButton
+              icon={<RotateCcw color={theme.colors.text} size={20} />}
+              text="Reset Async Storage"
+              onPress={() => {
+                AsyncStorage.clear();
+                Alert.alert("async storage has been reset!");
+              }}
+            />
+
+            <Push />
+          </SettingsCard>
+          {/* )} */}
         </View>
       </ScrollView>
     </ScreenContainer>

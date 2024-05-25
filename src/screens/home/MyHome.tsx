@@ -7,7 +7,6 @@ import { FAB } from "react-native-paper";
 import { CreateNewJournalEntryCard } from "./CreateNewJournalEntryCard";
 import { MyJournalEntriesCardPast } from "../../components/JournalEntriesCard/MyJournalEntriesCardPast";
 import { MyJournalEntriesCardToday } from "../../components/JournalEntriesCard/MyJournalEntriesCardToday";
-import { Push } from "../../components/Push";
 import { useGetPostGroups } from "../../hooks/postGroupHooks/useGetPostGroups";
 import { useAppTheme } from "../../hooks/useAppTheme";
 
@@ -67,8 +66,6 @@ export const MyHome = () => {
           }}
         >
           {!hasWrittenJournalEntryToday && <CreateNewJournalEntryCard />}
-
-          <Push />
 
           {postGroups.map((postGroup) => {
             const postGroupDate = parse(postGroup.postGroupDate, "YYYY-MM-DD");

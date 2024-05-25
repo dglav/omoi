@@ -1,4 +1,5 @@
 // import "react-native-gesture-handler";
+import "expo-dev-client";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack, useRouter } from "expo-router";

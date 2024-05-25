@@ -9,7 +9,9 @@
     "web": "expo start --web",
     "lint": "eslint .",
     "generate:types": "supabase gen types typescript --project-id osfzwvhubwmiwimpgrpj --schema public > types/supabase.ts",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "serve:functions": "supabase start && supabase functions serve --no-verify-jwt",
+    "deploy:functions": "supabase functions deploy --no-verify-jwt"
   },
   "dependencies": {
     "@formkit/tempo": "^0.0.19",
