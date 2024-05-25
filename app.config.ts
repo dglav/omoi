@@ -24,6 +24,7 @@ export default {
         foregroundImage: "./assets/adaptive-icon.png",
         backgroundColor: "#ffffff",
       },
+      package: "com.dglav.omoi",
     },
     web: {
       favicon: "./assets/favicon.png",
