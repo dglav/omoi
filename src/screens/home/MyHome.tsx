@@ -89,6 +89,8 @@ export const MyHome = () => {
         </View>
 
         <View style={{ height: 40 }} />
+
+        {/* <Push /> */}
       </ScrollView>
 
       <FAB

@@ -2,6 +2,7 @@ import "dotenv/config";
 
 export default {
   expo: {
+    owner: "dglav",
     name: "omoi",
     slug: "omoi",
     version: "1.0.0",
@@ -35,6 +36,17 @@ export default {
           root: "./src/app",
         },
       ],
+      [
+        "expo-build-properties",
+        {
+          ios: {
+            newArchEnabled: true,
+          },
+          android: {
+            newArchEnabled: true,
+          },
+        },
+      ],
     ],
     scheme: "myapp",
     extra: {
@@ -43,7 +55,7 @@ export default {
         root: "./src/app",
       },
       eas: {
-        projectId: "092fe555-09bf-4925-b540-1cdb42fe807a",
+        projectId: "043ec743-5ab0-46eb-b6dc-b0c987e61bcd",
       },
       supabaseUrl: process.env.SUPABASE_URL,
       supabaseAnonKey: process.env.SUPABASE_ANON_KEY,

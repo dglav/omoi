@@ -3,11 +3,21 @@
     "version": ">= 7.3.0"
   },
   "build": {
+    "production": {
+      "developmentClient": false,
+      "node": "20.11.0",
+      "env": {
+        "SUPABASE_URL": "https://osfzwvhubwmiwimpgrpj.supabase.co",
+        "SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9zZnp3dmh1YndtaXdpbXBncnBqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA5MjQ2MDgsImV4cCI6MjAyNjUwMDYwOH0.XDSsknfDRqeSbZO26ynvE6Ea3RiUQaN5yqsVWdFF9aI"
+      }
+    },
     "development": {
+      "extends": "production",
       "developmentClient": true,
       "distribution": "internal"
     },
     "development-simulator": {
+      "extends": "production",
       "developmentClient": true,
       "distribution": "internal",
       "ios": {
@@ -15,14 +25,11 @@
       }
     },
     "preview": {
+      "extends": "production",
       "distribution": "internal",
       "ios": {
         "cocoapods": "1.15.2"
       }
-    },
-    "production": {}
-  },
-  "submit": {
-    "production": {}
+    }
   }
 }
