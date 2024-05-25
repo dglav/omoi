@@ -1,5 +1,12 @@
 import { useLocalSearchParams } from "expo-router";
-import { SafeAreaView, View } from "react-native";
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  SafeAreaView,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { Footer } from "./components/Footer";
@@ -12,27 +19,33 @@ export const PostGroupChat = () => {
   const theme = useAppTheme();
 
   return (
-    <View style={{ backgroundColor: "white" }}>
-      <SafeAreaView
-        style={{
-          marginBottom: insets.bottom,
-          backgroundColor: theme.colors.background,
-        }}
-      >
-        <View
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            height: "100%",
-          }}
-        >
-          {typeof postGroupId === "string" && (
-            <MessageWindow postGroupId={postGroupId} />
-          )}
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={{ backgroundColor: "white" }}>
+          <SafeAreaView
+            style={{
+              marginBottom: insets.bottom,
+              backgroundColor: theme.colors.background,
+            }}
+          >
+            <View
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                height: "100%",
+              }}
+            >
+              {typeof postGroupId === "string" && (
+                <MessageWindow postGroupId={postGroupId} />
+              )}
 
-          <Footer />
+              <Footer />
+            </View>
+          </SafeAreaView>
         </View>
-      </SafeAreaView>
-    </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };

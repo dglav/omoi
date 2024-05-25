@@ -19,6 +19,7 @@ export const Footer = () => {
       style={{
         backgroundColor: "white",
         padding: 17,
+        paddingBottom: 0,
         flexDirection: "row",
         alignItems: "center",
       }}
@@ -39,9 +40,6 @@ export const Footer = () => {
           borderRadius: 22,
           flex: 1,
         }}
-        keyboardType="default"
-        returnKeyType="send"
-        onSubmitEditing={() => setMessage("")}
         multiline
       />
 
@@ -60,10 +58,12 @@ export const Footer = () => {
       >
         <TouchableOpacity
           onPress={() => {
-            if (typeof postGroupId !== "string") {
-              throw Error("A valid post group id was not found");
+            if (message.length > 0) {
+              if (typeof postGroupId !== "string") {
+                throw Error("A valid post group id was not found");
+              }
+              return mutate({ postGroupId, message });
             }
-            return mutate({ postGroupId, message });
           }}
         >
           <SendHorizonal color="#667085" />

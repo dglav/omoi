@@ -2,15 +2,18 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useGlobalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
 import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
   SafeAreaView,
+  ScrollView,
   TextInput,
+  TouchableWithoutFeedback,
   View,
-  useWindowDimensions,
 } from "react-native";
 
+import { Header } from "./Header";
 import { Button } from "../../../components/button";
-import { MiniFeeling } from "../../../components/mini-feeling";
-import { TagPill } from "../../../components/tag-pill";
 import { useCreatePost } from "../../../hooks/postHooks/useCreatePost";
 import { useEditPost } from "../../../hooks/postHooks/useEditPost";
 import { useAppTheme } from "../../../hooks/useAppTheme";
@@ -19,7 +22,6 @@ import { useStore } from "../store/useStore";
 
 const JournalNote = () => {
   const theme = useAppTheme();
-  const { width } = useWindowDimensions();
   const router = useRouter();
   const params = useGlobalSearchParams<{ postId: string }>();
   const [note, updateNote] = useStore((state) => [
@@ -73,93 +75,66 @@ const JournalNote = () => {
         backgroundColor: theme.colors.background,
       }}
     >
-      <SafeAreaView>
-        <View
-          style={{
-            display: "flex",
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "space-between",
-            backgroundColor: theme.colors.background,
-          }}
-        >
-          <View
-            style={{
-              flex: 1,
-              flexDirection: "column",
-              justifyContent: "flex-start",
-            }}
-          >
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <SafeAreaView>
             <View
               style={{
-                width,
                 display: "flex",
-                justifyContent: "flex-start",
+                flex: 1,
+                alignItems: "center",
+                justifyContent: "space-between",
+                backgroundColor: theme.colors.background,
               }}
             >
-              <View style={{ gap: 8, padding: 16 }}>
-                <View
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    gap: 8,
-                  }}
-                >
-                  {feelings.map((feeling) => (
-                    <MiniFeeling key={feeling} feeling={feeling} />
-                  ))}
-                </View>
+              <Header feelings={feelings} tags={tags} />
 
-                <View
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    gap: 8,
-                  }}
-                >
-                  {tags.map((tag) => (
-                    <TagPill key={tag} tag={tag} />
-                  ))}
-                </View>
-              </View>
-
-              <View style={{ padding: 16 }}>
+              <ScrollView
+                style={{
+                  paddingHorizontal: 16,
+                  width: "100%",
+                }}
+                keyboardDismissMode="none"
+              >
                 <TextInput
-                  editable
                   multiline
                   value={note}
                   onChangeText={(text) => updateNote(text)}
                   placeholder="詳しく書いてみてください"
                   maxLength={2000}
+                  autoFocus
                 />
+              </ScrollView>
+
+              <View
+                style={{
+                  width: "100%",
+                  padding: 16,
+                }}
+              >
+                <Button
+                  onPress={() => {
+                    handlePost();
+                  }}
+                >
+                  投稿する
+                </Button>
               </View>
             </View>
-          </View>
-          <View
-            style={{
-              width: "100%",
-              paddingHorizontal: 16,
-            }}
-          >
-            <Button
-              onPress={() => {
-                handlePost();
-              }}
-            >
-              投稿する
-            </Button>
-          </View>
-        </View>
 
-        <PostSuccessModal
-          visible={isPostSuccessModalOpen}
-          onConfirm={() => {
-            setIsPostSuccessModalOpen(false);
-            resetAll();
-            router.navigate("/(app)/(tabs)/home");
-          }}
-        />
-      </SafeAreaView>
+            <PostSuccessModal
+              visible={isPostSuccessModalOpen}
+              onConfirm={() => {
+                setIsPostSuccessModalOpen(false);
+                resetAll();
+                router.navigate("/(app)/(tabs)/home");
+              }}
+            />
+          </SafeAreaView>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     </View>
   );
 };
