@@ -10,7 +10,13 @@ type Props = React.PropsWithChildren & {
 
 export const MiniFeeling = ({ feeling }: Props) => {
   const theme = useAppTheme();
-  const { fillColor, text } = feelingMap[feeling];
+  const feelingValue = feelingMap[feeling];
+
+  if (!feelingValue) {
+    return undefined;
+  }
+
+  const { fillColor, text } = feelingValue;
 
   return (
     <View
