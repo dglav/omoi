@@ -31,5 +31,14 @@
         "cocoapods": "1.15.2"
       }
     }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "appleId": "glavichdrew@gmail.com",
+        "ascAppId": "6503181177",
+        "appleTeamId": "P2CSP3563W"
+      }
+    }
   }
 }
