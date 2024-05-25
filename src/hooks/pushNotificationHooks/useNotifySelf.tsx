@@ -1,4 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
+import { Alert } from "react-native";
 
 import { push as supabasePush } from "../../services/supabase/functions/api/push";
 
@@ -22,7 +23,8 @@ export const useNotifySelf = () => {
       console.log("success!", { data });
     },
     onError: (error): void => {
-      console.error("error", error);
+      console.error(error);
+      Alert.alert(error.message);
     },
   });
 

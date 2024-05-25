@@ -3,7 +3,7 @@ import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import { RotateCcw } from "lucide-react-native";
 import { useState, useEffect, useRef } from "react";
-import { Platform } from "react-native";
+import { Alert, Platform } from "react-native";
 
 import { SettingsCardButton } from "./settings-card-button";
 import { useNotifySelf } from "../../../hooks/pushNotificationHooks/useNotifySelf";
@@ -79,7 +79,8 @@ export const Push = () => {
 
   useEffect(() => {
     registerForPushNotificationsAsync()
-      .then((token) => {
+      .then(async (token) => {
+        Alert.alert(token ?? "no token found...");
         if (token) {
           updateUser({ updatedUser: { expoPushToken } });
         }
@@ -116,7 +117,6 @@ export const Push = () => {
       text="Press to Send Notification"
       icon={<RotateCcw color={theme.colors.text} size={20} />}
       onPress={async () => {
-        console.log("send push notification");
         notifySelf({
           title: "Testing from settings tab...",
           body: "Hooray! It's working!",

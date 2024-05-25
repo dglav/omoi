@@ -21,26 +21,22 @@ export const useUpdateUser = ({ onSuccess }: UseUpdateUserParams) => {
   const userId = user?.id;
 
   const mutation = useMutation({
-    mutationFn: ({ updatedUser }: { updatedUser: UpdateUserParams }) => {
+    mutationFn: ({
+      updatedUser: { birthday, nickname, expoPushToken },
+    }: {
+      updatedUser: UpdateUserParams;
+    }) => {
       if (!userId) {
         throw new Error("User is not authenticated");
       }
 
-      const payload: Parameters<typeof updateUser>[1] = {};
+      const payload: Parameters<typeof updateUser>[1] = {
+        birthday,
+        nickname,
+        expo_push_token: expoPushToken,
+      };
 
-      if (updatedUser.birthday) {
-        payload["birthday"] = updatedUser.birthday;
-      }
-
-      if (updatedUser.nickname) {
-        payload["nickname"] = updatedUser.nickname;
-      }
-
-      if (updatedUser.expoPushToken) {
-        payload["partner_user_id"] = updatedUser.expoPushToken;
-      }
-
-      return updateUser(userId, updatedUser);
+      return updateUser(userId, payload);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
