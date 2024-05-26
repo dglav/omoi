@@ -128,7 +128,7 @@ export const DateSelector = ({ date, setDate }: Props) => {
                       }}
                     >
                       <RNDateTimePicker
-                        value={date}
+                        value={newDate}
                         mode="date"
                         onChange={(_: DateTimePickerEvent, date?: Date) => {
                           if (date) {
@@ -168,7 +168,7 @@ export const DateSelector = ({ date, setDate }: Props) => {
                       }}
                     >
                       <RNDateTimePicker
-                        value={date}
+                        value={newDate}
                         mode="time"
                         onChange={(_: DateTimePickerEvent, date?: Date) => {
                           if (date) {
