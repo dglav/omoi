@@ -2,7 +2,7 @@ import { View, Text } from "react-native";
 
 import { FeelingIcon_16 } from "./feeling-icon-16";
 import { useAppTheme } from "../hooks/useAppTheme";
-import { feelingMap } from "../utils/feelingMap";
+import { feelingMap } from "../screens/posts/FeelingsScreen/feelingMap";
 
 type Props = React.PropsWithChildren & {
   feeling: string;

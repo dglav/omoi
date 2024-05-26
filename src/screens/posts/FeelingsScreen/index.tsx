@@ -12,7 +12,7 @@ import {
 import { Button } from "../../../components/button";
 import { FeelingIcon } from "../../../components/feeling-icon";
 import { useAppTheme } from "../../../hooks/useAppTheme";
-import { feelingMap } from "../../../utils/feelingMap";
+import { feelingMap } from "./feelingMap";
 import { useStore } from "../store/useStore";
 
 const JournalFeeling = () => {

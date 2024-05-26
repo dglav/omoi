@@ -1,7 +1,7 @@
 import { Text } from "react-native";
 
 import { useAppTheme } from "../hooks/useAppTheme";
-import { tagMap } from "../utils/tagMap";
+import { tagMap } from "../screens/posts/TagsScreen/tagMap";
 
 type Props = {
   tag: string;
@@ -17,7 +17,7 @@ export const TagPill = ({ tag }: Props) => {
         borderColor: theme.colors.textLight,
         borderRadius: 4,
         borderStyle: "solid",
-        borderWidth: 2,
+        borderWidth: 1,
         paddingHorizontal: 4,
         paddingVertical: 2,
         fontSize: theme.fontStyle.xs[1].size,

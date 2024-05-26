@@ -1,24 +1,24 @@
-// import { Circle } from "@shopify/react-native-skia";
+import { Circle } from "@shopify/react-native-skia";
 import React from "react";
 import { Text, StyleSheet, View } from "react-native";
-// import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useTheme } from "react-native-paper";
-// import { SharedValue } from "react-native-reanimated";
+import { SharedValue } from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
-// import { Area, CartesianChart, Line, useChartPressState } from "victory-native";
+import { Area, CartesianChart, useChartPressState } from "victory-native";
 
-// const DATA = Array.from({ length: 31 }, (_, i) => ({
-//   day: i,
-//   lowTmp: 20 + 10 * Math.random(),
-//   highTmp: 40 + 30 * Math.random(),
-// }));
+const DATA = Array.from({ length: 31 }, (_, i) => ({
+  day: i,
+  lowTmp: 20 + 10 * Math.random(),
+  highTmp: 40 + 30 * Math.random(),
+}));
 
-// const INIT_STATE = { x: 0, y: { highTmp: 0, lowTmp: 0 } } as const;
+const INIT_STATE = { x: 0, y: { highTmp: 0, lowTmp: 0 } } as const;
 
 const AnalysisRoute = () => {
   const theme = useTheme();
 
-  // const { state, isActive } = useChartPressState(INIT_STATE);
+  const { state, isActive } = useChartPressState(INIT_STATE);
 
   return (
     <SafeAreaView
@@ -29,7 +29,7 @@ const AnalysisRoute = () => {
     >
       <Text>Analysis</Text>
 
-      {/* <GestureHandlerRootView style={{ width: "100%" }}>
+      <GestureHandlerRootView style={{ width: "100%" }}>
         <View style={{ height: 500 }}>
           <CartesianChart
             data={DATA} // 👈 specify your data
@@ -66,7 +66,7 @@ const AnalysisRoute = () => {
             }}
           </CartesianChart>
         </View>
-      </GestureHandlerRootView> */}
+      </GestureHandlerRootView>
     </SafeAreaView>
   );
 };
@@ -79,8 +79,8 @@ const styles = StyleSheet.create({
   },
 });
 
-// function ToolTip({ x, y }: { x: SharedValue<number>; y: SharedValue<number> }) {
-//   return <Circle cx={x} cy={y} r={8} color="black" />;
-// }
+function ToolTip({ x, y }: { x: SharedValue<number>; y: SharedValue<number> }) {
+  return <Circle cx={x} cy={y} r={8} color="black" />;
+}
 
 export default AnalysisRoute;
