@@ -70,23 +70,18 @@ async function registerForPushNotificationsAsync() {
 }
 
 export const Push = () => {
-  const [expoPushToken, setExpoPushToken] = useState("");
-
   const notificationListener = useRef<Notifications.Subscription>();
   const responseListener = useRef<Notifications.Subscription>();
 
   const { mutate: updateUser } = useUpdateUser({});
 
   useEffect(() => {
-    registerForPushNotificationsAsync()
-      .then(async (token) => {
-        Alert.alert(token ?? "no token found...");
-        if (token) {
-          updateUser({ updatedUser: { expoPushToken } });
-        }
-        setExpoPushToken(token ?? "");
-      })
-      .catch((error: any) => setExpoPushToken(`${error}`));
+    registerForPushNotificationsAsync().then(async (token) => {
+      Alert.alert(token ?? "no token found...");
+      if (token) {
+        updateUser({ updatedUser: { expoPushToken: token } });
+      }
+    });
 
     notificationListener.current =
       Notifications.addNotificationReceivedListener((notification) => {
