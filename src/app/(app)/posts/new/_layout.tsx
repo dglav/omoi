@@ -2,6 +2,7 @@ import { Stack } from "expo-router";
 import React from "react";
 
 import { BackButton } from "../../../../components/back-button";
+import { useAppTheme } from "../../../../hooks/useAppTheme";
 import { DateSelector } from "../../../../screens/posts/components/date-selector";
 import { useStore } from "../../../../screens/posts/store/useStore";
 
@@ -11,40 +12,28 @@ export default function Layout() {
     setDate,
   }));
 
+  const theme = useAppTheme();
+
   return (
-    <Stack>
-      <Stack.Screen
-        name="condition"
-        options={{
-          headerTitle: () => <DateSelector date={date} setDate={setDate} />,
-          headerTransparent: true,
-          headerLeft: () => <BackButton />,
-        }}
-      />
+    <Stack
+      screenOptions={{
+        headerTitle: () => <DateSelector date={date} setDate={setDate} />,
+        headerTransparent: true,
+        headerLeft: () => <BackButton />,
+      }}
+    >
+      <Stack.Screen name="condition" />
       <Stack.Screen
         name="feelings"
         options={{
-          headerTitle: () => <DateSelector date={date} setDate={setDate} />,
-          headerTransparent: true,
-          headerLeft: () => <BackButton />,
+          headerShadowVisible: false,
+          headerStyle: {
+            backgroundColor: theme.colors.background,
+          },
         }}
       />
-      <Stack.Screen
-        name="tags"
-        options={{
-          headerTitle: () => <DateSelector date={date} setDate={setDate} />,
-          headerTransparent: true,
-          headerLeft: () => <BackButton />,
-        }}
-      />
-      <Stack.Screen
-        name="note"
-        options={{
-          headerTitle: () => <DateSelector date={date} setDate={setDate} />,
-          headerTransparent: true,
-          headerLeft: () => <BackButton />,
-        }}
-      />
+      <Stack.Screen name="tags" />
+      <Stack.Screen name="note" />
     </Stack>
   );
 }

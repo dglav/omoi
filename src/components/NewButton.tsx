@@ -1,8 +1,10 @@
+import React from "react";
 import {
   TextStyle,
   TouchableOpacity,
   TouchableOpacityProps,
   View,
+  ViewStyle,
 } from "react-native";
 
 import { Text } from "./text";
@@ -14,6 +16,9 @@ type Props = React.PropsWithChildren & {
   isSelected?: boolean;
   textStyleOverrides?: TextStyle;
   onPress?: () => void;
+  icon?: React.ReactNode;
+  iconStyleOverrides?: ViewStyle;
+  contentStyleOverrides?: ViewStyle;
 };
 
 export const Button = ({
@@ -21,11 +26,20 @@ export const Button = ({
   variant = "primary",
   isSelected = false,
   textStyleOverrides = {},
+  icon = null,
+  iconStyleOverrides = {},
+  contentStyleOverrides = {},
   ...props
 }: Props) => {
   const theme = useAppTheme();
 
   let textStyle: TextStyle = {};
+  let iconStyle: ViewStyle = {};
+  let contentStyle: ViewStyle = {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  };
   let style: TouchableOpacityProps["style"] = {
     borderRadius: 48,
   };
@@ -56,9 +70,18 @@ export const Button = ({
     textStyle = { ...textStyle, ...textStyleOverrides };
   }
 
+  if (iconStyleOverrides || iconStyleOverrides !== false) {
+    iconStyle = { ...iconStyle, ...iconStyleOverrides };
+  }
+
+  if (contentStyleOverrides || contentStyleOverrides !== false) {
+    contentStyle = { ...contentStyle, ...contentStyleOverrides };
+  }
+
   return (
     <TouchableOpacity style={style} activeOpacity={0.5} {...props}>
-      <View>
+      <View style={contentStyle}>
+        <View style={iconStyle}>{icon}</View>
         <Text style={textStyle}>{props.children}</Text>
       </View>
     </TouchableOpacity>

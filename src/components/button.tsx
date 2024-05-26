@@ -5,13 +5,14 @@ import { useAppTheme } from "../hooks/useAppTheme";
 type RNButtonPropType = React.ComponentProps<typeof RNButton>;
 
 type ButtonProps = RNButtonPropType & {
-  size?: "lg";
+  size?: "lg" | "sm";
   variant?: "primary" | "secondary";
 };
 
 export const Button = ({
   size = "lg",
   variant = "primary",
+  disabled,
   ...props
 }: ButtonProps) => {
   const theme = useAppTheme();
@@ -28,8 +29,19 @@ export const Button = ({
     };
   }
 
-  if (variant === "primary") {
+  if (size === "sm") {
+    labelStyle = {
+      marginVertical: 11.5,
+      fontSize: theme.fontStyle.sm[1].size,
+      fontWeight: theme.fontStyle.sm[1].weight,
+    };
+  }
+
+  if (variant === "primary" && !disabled) {
     mode = "contained";
+  } else if (variant === "primary" && disabled) {
+    labelStyle = { ...labelStyle, color: theme.colors.white };
+    style = { ...style, backgroundColor: theme.colors.primaryLight };
   } else if (variant === "secondary") {
     mode = "text";
     labelStyle = { ...labelStyle, color: theme.colors.text };

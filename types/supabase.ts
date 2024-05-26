@@ -9,6 +9,38 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      custom_feelings: {
+        Row: {
+          created_at: string;
+          emotion_level: string;
+          id: number;
+          name: string;
+          user_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          emotion_level: string;
+          id?: number;
+          name: string;
+          user_id: string;
+        };
+        Update: {
+          created_at?: string;
+          emotion_level?: string;
+          id?: number;
+          name?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "custom_feelings_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       post_group_emojis: {
         Row: {
           created_at: string;
