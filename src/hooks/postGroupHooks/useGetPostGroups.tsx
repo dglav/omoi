@@ -35,6 +35,7 @@ export const useGetPostGroups = ({ who, options }: Props) => {
 
       return getPostGroups(input);
     },
+    staleTime: 10 * 1000, // 10 seconds
   });
 
   return { data: data ?? [], isLoading, isError };

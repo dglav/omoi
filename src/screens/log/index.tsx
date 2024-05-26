@@ -2,7 +2,7 @@ import { parse, dayStart, dayEnd } from "@formkit/tempo";
 import { useRouter } from "expo-router";
 import { SquarePen } from "lucide-react-native";
 import { useState } from "react";
-import { ScrollView, View } from "react-native";
+import { FlatList, View } from "react-native";
 import { FAB } from "react-native-paper";
 
 import { Container } from "../../components/Feed/Container";
@@ -15,6 +15,8 @@ import { useGetPostGroups } from "../../hooks/postGroupHooks/useGetPostGroups";
 import { useAppTheme } from "../../hooks/useAppTheme";
 
 const now = new Date();
+const startOfToday = dayStart(now);
+const endOfToday = dayEnd(now);
 
 export default function LogScreen() {
   const theme = useAppTheme();
@@ -26,47 +28,44 @@ export default function LogScreen() {
     <Container activeTab={activeTab}>
       <Header activeTab={activeTab} setActiveTab={setActiveTab} />
 
-      <ScrollView style={{ width: "100%" }}>
-        <View style={{ height: 40 }} />
+      <FlatList
+        style={{
+          paddingVertical: 40,
+          paddingHorizontal: 16,
+          width: "100%",
+          gap: 60,
+        }}
+        data={postGroups}
+        keyExtractor={(item) => item.id}
+        ItemSeparatorComponent={() => <View style={{ height: 40 }} />}
+        renderItem={({ item, index }) => {
+          const postGroupDate = parse(item.postGroupDate, "YYYY-MM-DD");
 
-        <View
-          style={{
-            paddingHorizontal: 16,
-            width: "100%",
-            gap: 60,
-          }}
-        >
-          {postGroups.map((postGroup) => {
-            const postGroupDate = parse(postGroup.postGroupDate, "YYYY-MM-DD");
+          const isToday =
+            postGroupDate >= startOfToday && postGroupDate < endOfToday;
 
-            const startOfToday = dayStart(now);
-            const endOfToday = dayEnd(now);
+          return (
+            <>
+              {isToday && activeTab === "me" && (
+                <MyJournalEntriesCardToday postGroup={item} />
+              )}
+              {isToday && activeTab === "partner" && (
+                <PartnerJournalEntriesCardToday postGroup={item} />
+              )}
+              {!isToday && activeTab === "me" && (
+                <MyJournalEntriesCardPast postGroup={item} />
+              )}
+              {!isToday && activeTab === "partner" && (
+                <PartnerJournalEntriesCardPast postGroup={item} />
+              )}
 
-            const isToday =
-              postGroupDate >= startOfToday && postGroupDate < endOfToday;
-
-            return (
-              <View key={postGroup.id}>
-                {isToday && activeTab === "me" && (
-                  <MyJournalEntriesCardToday postGroup={postGroup} />
-                )}
-                {isToday && activeTab === "partner" && (
-                  <PartnerJournalEntriesCardToday postGroup={postGroup} />
-                )}
-                {!isToday && activeTab === "me" && (
-                  <MyJournalEntriesCardPast postGroup={postGroup} />
-                )}
-                {!isToday && activeTab === "partner" && (
-                  <PartnerJournalEntriesCardPast postGroup={postGroup} />
-                )}
-              </View>
-            );
-          })}
-        </View>
-
-        <View style={{ height: 40 }} />
-      </ScrollView>
-
+              {index === postGroups.length - 1 && (
+                <View style={{ height: 80 }} />
+              )}
+            </>
+          );
+        }}
+      />
       <FAB
         icon={() => <SquarePen color={theme.colors.white} />}
         style={{
