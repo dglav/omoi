@@ -10,6 +10,8 @@ import { FeelingIcon_20 } from "../../../../components/feeling-icon-20";
 import { Text } from "../../../../components/text";
 import { useCreateCustomFeeling } from "../../../../hooks/customFeelingHooks/useCreateCustomFeeling";
 import { useAppTheme } from "../../../../hooks/useAppTheme";
+import { EmotionLevel } from "../../../../services/supabase/database/custom_feelings/converter";
+import { emotionLevelColorMap } from "../feelingMap";
 
 const maxFeelingLength = 4;
 
@@ -17,33 +19,33 @@ const emotionLevels = [
   {
     text: "とてもポジティブ",
     value: "very positive",
-    icon: <FeelingIcon_20 fill="#F86D6D" />,
+    icon: <FeelingIcon_20 fill={emotionLevelColorMap["very positive"]} />,
   },
   {
     text: "ポジティブ",
     value: "positive",
-    icon: <FeelingIcon_20 fill="#F89F6D" />,
+    icon: <FeelingIcon_20 fill={emotionLevelColorMap["positive"]} />,
   },
   {
     text: "ふつう",
     value: "average",
-    icon: <FeelingIcon_20 fill="#7CD185" />,
+    icon: <FeelingIcon_20 fill={emotionLevelColorMap["average"]} />,
   },
   {
     text: "ネガティブ",
     value: "negative",
-    icon: <FeelingIcon_20 fill="#6D9CF8" />,
+    icon: <FeelingIcon_20 fill={emotionLevelColorMap["negative"]} />,
   },
   {
     text: "とてもネガティブ",
     value: "very negative",
-    icon: <FeelingIcon_20 fill="#A26DF8" />,
+    icon: <FeelingIcon_20 fill={emotionLevelColorMap["very negative"]} />,
   },
 ];
 
 export const AddFeeling = () => {
   const [name, setName] = useState("");
-  const [emotionLevel, setEmotionLevel] = useState("");
+  const [emotionLevel, setEmotionLevel] = useState<EmotionLevel | "">("");
   const [isEmotionLevelModalShown, setIsEmotionLevelModalShown] =
     useState(false);
   const theme = useAppTheme();
@@ -51,7 +53,7 @@ export const AddFeeling = () => {
   const mutation = useCreateCustomFeeling();
 
   const handleRegister = () => {
-    if (!name.length || !emotionLevel.length) {
+    if (!name.length || emotionLevel === "") {
       Alert.alert("入力エラー");
       setIsEmotionLevelModalShown(false);
       return;
@@ -97,7 +99,11 @@ export const AddFeeling = () => {
 
       <FullScreenModal
         visible={isEmotionLevelModalShown}
-        onDismiss={() => setIsEmotionLevelModalShown(false)}
+        onDismiss={() => {
+          setName("");
+          setEmotionLevel("");
+          setIsEmotionLevelModalShown(false);
+        }}
       >
         <View
           style={{
@@ -120,7 +126,9 @@ export const AddFeeling = () => {
 
             <OptionsList
               options={emotionLevels}
-              handleSelectOption={(value) => setEmotionLevel(value)}
+              handleSelectOption={(value) =>
+                setEmotionLevel(value as EmotionLevel)
+              }
               selectedOption={emotionLevels.find(
                 (_emotionLevel) => _emotionLevel.value === emotionLevel,
               )}

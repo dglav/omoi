@@ -42,3 +42,11 @@ export const feelingMap: FeelingMap = rawValues.reduce(
   },
   {} as FeelingMap,
 );
+
+export const emotionLevelColorMap = {
+  "very positive": "#F86D6D",
+  positive: "#F89F6D",
+  average: "#7CD185",
+  negative: "#6D9CF8",
+  "very negative": "#A26DF8",
+};

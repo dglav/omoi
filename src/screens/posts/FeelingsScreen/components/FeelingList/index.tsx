@@ -6,11 +6,11 @@ import {
   Alert,
 } from "react-native";
 
-import { FeelingIcon } from "../../../../components/feeling-icon";
-import { Text } from "../../../../components/text";
-import { theme } from "../../../../theme";
-import { useStore } from "../../store/useStore";
-import { feelingMap } from "../feelingMap";
+import { useGetFeelingList } from "./hooks/useGetFeelings";
+import { FeelingIcon } from "../../../../../components/feeling-icon";
+import { Text } from "../../../../../components/text";
+import { theme } from "../../../../../theme";
+import { useStore } from "../../../store/useStore";
 
 const paddingHorizontal = 22;
 
@@ -21,6 +21,8 @@ export const FeelingList = () => {
     state.addFeeling,
     state.removeFeeling,
   ]);
+
+  const feelingList = useGetFeelingList();
 
   const onPressFeeling = (feeling: string) => {
     if (selectedFeelings.includes(feeling)) {
@@ -41,7 +43,7 @@ export const FeelingList = () => {
     <View style={{ paddingHorizontal }}>
       <FlatList
         scrollEnabled={false}
-        data={Object.entries(feelingMap)}
+        data={feelingList}
         renderItem={({ item: [key, value] }) => {
           const isSelected = selectedFeelings.includes(key);
 

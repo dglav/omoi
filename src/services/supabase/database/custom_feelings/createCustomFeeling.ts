@@ -1,10 +1,10 @@
-import { toSupabase } from "./converter";
+import { EmotionLevel, toSupabase } from "./converter";
 import { supabase } from "../..";
 import { SupabaseDatabaseError } from "../../error";
 
 type Params = {
   name: string;
-  emotionLevel: string;
+  emotionLevel: EmotionLevel;
 };
 
 export const createCustomFeeling = async (

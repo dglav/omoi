@@ -4,12 +4,19 @@ type DatabaseRowType = Database["public"]["Tables"]["custom_feelings"]["Row"];
 type DatabaseInsertType =
   Database["public"]["Tables"]["custom_feelings"]["Insert"];
 
+export type EmotionLevel =
+  | "very positive"
+  | "positive"
+  | "average"
+  | "negative"
+  | "very negative";
+
 export const fromSupabase = (
   feeling: DatabaseRowType,
 ): {
   id: string;
   name: string;
-  emotionLevel: string;
+  emotionLevel: EmotionLevel;
 } => ({
   id: feeling.id,
   name: feeling.name,
@@ -18,7 +25,7 @@ export const fromSupabase = (
 
 export const toSupabase = (feeling: {
   name: string;
-  emotionLevel: string;
+  emotionLevel: EmotionLevel;
 }): DatabaseInsertType => ({
   name: feeling.name,
   emotion_level: feeling.emotionLevel,

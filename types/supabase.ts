@@ -12,21 +12,21 @@ export type Database = {
       custom_feelings: {
         Row: {
           created_at: string;
-          emotion_level: string;
+          emotion_level: Database["public"]["Enums"]["feeling_emotion_level"];
           id: string;
           name: string;
           user_id: string;
         };
         Insert: {
           created_at?: string;
-          emotion_level: string;
+          emotion_level: Database["public"]["Enums"]["feeling_emotion_level"];
           id?: string;
           name: string;
           user_id?: string;
         };
         Update: {
           created_at?: string;
-          emotion_level?: string;
+          emotion_level?: Database["public"]["Enums"]["feeling_emotion_level"];
           id?: string;
           name?: string;
           user_id?: string;
@@ -320,6 +320,12 @@ export type Database = {
     };
     Enums: {
       condition: "reallyBad" | "bad" | "average" | "good" | "reallyGood";
+      feeling_emotion_level:
+        | "very positive"
+        | "positive"
+        | "average"
+        | "negative"
+        | "very negative";
     };
     CompositeTypes: {
       [_ in never]: never;
