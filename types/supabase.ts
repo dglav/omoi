@@ -13,21 +13,21 @@ export type Database = {
         Row: {
           created_at: string;
           emotion_level: string;
-          id: number;
+          id: string;
           name: string;
           user_id: string;
         };
         Insert: {
           created_at?: string;
           emotion_level: string;
-          id?: number;
+          id?: string;
           name: string;
-          user_id: string;
+          user_id?: string;
         };
         Update: {
           created_at?: string;
           emotion_level?: string;
-          id?: number;
+          id?: string;
           name?: string;
           user_id?: string;
         };

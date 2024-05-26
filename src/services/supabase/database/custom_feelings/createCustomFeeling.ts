@@ -1,19 +1,21 @@
+import { toSupabase } from "./converter";
 import { supabase } from "../..";
 import { SupabaseDatabaseError } from "../../error";
 
 type Params = {
-  userId: string;
   name: string;
   emotionLevel: string;
 };
 
 export const createCustomFeeling = async (
   // eslint-disable-next-line prettier/prettier
-  { userId, name, emotionLevel }: Params,
+  feeling: Params,
 ) => {
+  const payload = toSupabase(feeling);
+
   const { data, error } = await supabase
     .from("custom_feelings")
-    .insert({ user_id: userId, name, emotion_level: emotionLevel })
+    .insert(payload)
     .select();
 
   if (error) {
