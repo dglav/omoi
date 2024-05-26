@@ -4,7 +4,7 @@ import { SafeAreaView, Text, View, useWindowDimensions } from "react-native";
 import { TagSection } from "./components/TagSection";
 import { Button } from "../../../components/button";
 import { useAppTheme } from "../../../hooks/useAppTheme";
-import { tagMap } from "../../../utils/tagMap";
+import { tagMap } from "./tagMap";
 import { useStore } from "../store/useStore";
 
 const tags = Object.entries(tagMap).reduce(

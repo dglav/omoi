@@ -28,7 +28,7 @@ const TagSection = ({
     >
       <Text
         style={{
-          color: theme.colors.textLight,
+          color: "#666666",
         }}
       >
         {title}

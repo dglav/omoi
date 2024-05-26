@@ -41,7 +41,7 @@ export default {
         "expo-build-properties",
         {
           ios: {
-            newArchEnabled: false,
+            newArchEnabled: true,
           },
           android: {
             newArchEnabled: false,
