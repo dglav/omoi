@@ -11,14 +11,15 @@ import { Text } from "./text";
 import { useAppTheme } from "../hooks/useAppTheme";
 
 type Props = React.PropsWithChildren & {
-  size?: "lg";
-  variant?: "primary" | "secondary";
+  size?: "lg" | "sm";
+  variant?: "primary" | "secondary" | "text";
   isSelected?: boolean;
   textStyleOverrides?: TextStyle;
   onPress?: () => void;
   icon?: React.ReactNode;
   iconStyleOverrides?: ViewStyle;
   contentStyleOverrides?: ViewStyle;
+  isDisabled?: boolean;
 };
 
 export const Button = ({
@@ -29,6 +30,7 @@ export const Button = ({
   icon = null,
   iconStyleOverrides = {},
   contentStyleOverrides = {},
+  isDisabled = false,
   ...props
 }: Props) => {
   const theme = useAppTheme();
@@ -50,12 +52,17 @@ export const Button = ({
       fontSize: theme.fontStyle.lg[1].size,
       fontWeight: theme.fontStyle.lg[1].weight,
     };
+  } else if (size === "sm") {
+    textStyle = {
+      marginVertical: 12,
+      marginHorizontal: 24,
+      fontSize: theme.fontStyle.sm[1].size,
+      fontWeight: theme.fontStyle.sm[1].weight,
+    };
   }
 
   if (variant === "primary") {
-    // mode = "contained";
   } else if (variant === "secondary") {
-    // mode = "text";
     textStyle = {
       ...textStyle,
       color: theme.colors.text,
@@ -64,6 +71,10 @@ export const Button = ({
       ...style,
       backgroundColor: isSelected ? theme.colors.textLight : theme.colors.white,
     };
+  } else if (variant === "text" && isDisabled) {
+    textStyle = { ...textStyle, color: theme.colors.textLight };
+  } else if (variant === "text") {
+    textStyle = { ...textStyle, color: theme.colors.text };
   }
 
   if (textStyleOverrides || textStyleOverrides !== false) {

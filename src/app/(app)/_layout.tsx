@@ -55,6 +55,8 @@ export default function AppLayout() {
         options={{ headerShown: false, headerBackTitle: "Back" }}
       />
 
+      <Stack.Screen name="feelings" options={{ headerShown: false }} />
+
       <Stack.Screen name="post-group" options={{ headerShown: false }} />
     </Stack>
   );
