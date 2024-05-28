@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { Text } from "../../../../components/text";
 import { useAppTheme } from "../../../../hooks/useAppTheme";
 
-export const Title = () => {
+export const TitleSection = () => {
   const theme = useAppTheme();
 
   return (

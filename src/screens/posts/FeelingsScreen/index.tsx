@@ -11,7 +11,7 @@ import {
 
 import { AddFeeling } from "./components/AddFeeling";
 import { FeelingList } from "./components/FeelingList";
-import { Title } from "./components/Title";
+import { TitleSection } from "./components/TitleSection";
 import { Button } from "../../../components/button";
 import { useAppTheme } from "../../../hooks/useAppTheme";
 
@@ -41,7 +41,7 @@ const JournalFeeling = () => {
             }}
           >
             <View style={{ flex: 1 }}>
-              <Title />
+              <TitleSection />
 
               <ScrollView>
                 <FeelingList />
