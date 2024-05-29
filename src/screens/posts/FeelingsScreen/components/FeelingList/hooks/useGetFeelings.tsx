@@ -1,18 +1,35 @@
+import { useEffect, useState } from "react";
+
 import { useGetCustomFeelings } from "../../../../../../hooks/customFeelingHooks/useGetCustomFeelings";
 import {
   emotionLevelColorMap,
   feelingMap,
 } from "../../../../../../utils/feelingMap";
 
+const feelingList = Object.entries(feelingMap);
+
 export const useGetFeelingList = () => {
-  const { data: customFeelings, isLoading } = useGetCustomFeelings();
+  const [convertedCustomFeelings, setConvertedCustomFeelings] = useState<
+    [string, { text: string; fillColor: string }][]
+  >([]);
+  const { data: customFeelings } = useGetCustomFeelings();
 
-  if (!isLoading) {
-    customFeelings?.forEach((customFeeling) => {
-      const fillColor = emotionLevelColorMap[customFeeling.emotionLevel];
-      feelingMap[customFeeling.name] = { text: customFeeling.name, fillColor };
-    });
-  }
+  useEffect(() => {
+    if (customFeelings?.length) {
+      const _convertedFeelings: [
+        string,
+        { text: string; fillColor: string },
+      ][] = customFeelings?.map((customFeeling) => [
+        customFeeling.id,
+        {
+          text: customFeeling.name,
+          fillColor: emotionLevelColorMap[customFeeling.emotionLevel],
+        },
+      ]);
 
-  return Object.entries(feelingMap);
+      setConvertedCustomFeelings(_convertedFeelings);
+    }
+  }, [customFeelings]);
+
+  return [...feelingList, ...convertedCustomFeelings];
 };

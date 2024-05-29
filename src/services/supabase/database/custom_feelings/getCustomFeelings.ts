@@ -10,6 +10,7 @@ export const getCustomFeelings = async ({ userId }: Params) => {
   const { data: customFeelings, error } = await supabase
     .from("custom_feelings")
     .select("*")
+    .order("created_at")
     .eq("user_id", userId);
 
   if (error) {
