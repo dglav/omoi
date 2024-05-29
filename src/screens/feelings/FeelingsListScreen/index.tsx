@@ -41,7 +41,12 @@ export const FeelingsListScreen = () => {
             <ScrollView>
               <View style={{ gap: 32 }}>
                 {customFeelings.map((feeling) => (
-                  <Row key={feeling.id} id={feeling.id} name={feeling.name} />
+                  <Row
+                    key={feeling.id}
+                    id={feeling.id}
+                    name={feeling.name}
+                    emotionLevel={feeling.emotionLevel}
+                  />
                 ))}
               </View>
             </ScrollView>

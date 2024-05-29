@@ -1,5 +1,8 @@
 import { useGetCustomFeelings } from "../../../../../../hooks/customFeelingHooks/useGetCustomFeelings";
-import { emotionLevelColorMap, feelingMap } from "../../../feelingMap";
+import {
+  emotionLevelColorMap,
+  feelingMap,
+} from "../../../../../../utils/feelingMap";
 
 export const useGetFeelingList = () => {
   const { data: customFeelings, isLoading } = useGetCustomFeelings();

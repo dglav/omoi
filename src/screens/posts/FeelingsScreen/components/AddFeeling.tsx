@@ -6,42 +6,13 @@ import { Input } from "./Input";
 import { FullScreenModal } from "../../../../components/FullScreenModal";
 import { OptionsList } from "../../../../components/OptionsList";
 import { Button } from "../../../../components/button";
-import { FeelingIcon_20 } from "../../../../components/feeling-icon-20";
 import { Text } from "../../../../components/text";
 import { useCreateCustomFeeling } from "../../../../hooks/customFeelingHooks/useCreateCustomFeeling";
 import { useAppTheme } from "../../../../hooks/useAppTheme";
 import { EmotionLevel } from "../../../../services/supabase/database/custom_feelings/converter";
-import { emotionLevelColorMap } from "../feelingMap";
+import { emotionLevelOptions } from "../../../../utils/emotionLevelOptions";
 
 const maxFeelingLength = 4;
-
-const emotionLevels = [
-  {
-    text: "とてもポジティブ",
-    value: "very positive",
-    icon: <FeelingIcon_20 fill={emotionLevelColorMap["very positive"]} />,
-  },
-  {
-    text: "ポジティブ",
-    value: "positive",
-    icon: <FeelingIcon_20 fill={emotionLevelColorMap["positive"]} />,
-  },
-  {
-    text: "ふつう",
-    value: "average",
-    icon: <FeelingIcon_20 fill={emotionLevelColorMap["average"]} />,
-  },
-  {
-    text: "ネガティブ",
-    value: "negative",
-    icon: <FeelingIcon_20 fill={emotionLevelColorMap["negative"]} />,
-  },
-  {
-    text: "とてもネガティブ",
-    value: "very negative",
-    icon: <FeelingIcon_20 fill={emotionLevelColorMap["very negative"]} />,
-  },
-];
 
 export const AddFeeling = () => {
   const [name, setName] = useState("");
@@ -125,12 +96,13 @@ export const AddFeeling = () => {
             <View style={{ height: 24 }} />
 
             <OptionsList
-              options={emotionLevels}
+              options={emotionLevelOptions}
               handleSelectOption={(value) =>
                 setEmotionLevel(value as EmotionLevel)
               }
-              selectedOption={emotionLevels.find(
-                (_emotionLevel) => _emotionLevel.value === emotionLevel,
+              selectedOption={emotionLevelOptions.find(
+                (_emotionLevelOption) =>
+                  _emotionLevelOption.value === emotionLevel,
               )}
             />
           </View>

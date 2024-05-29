@@ -1,8 +1,7 @@
-import { Database } from "../../../../../types/supabase";
+import { Tables, TablesUpdate } from "../../../../../types/supabase";
 
-type DatabaseRowType = Database["public"]["Tables"]["custom_feelings"]["Row"];
-type DatabaseInsertType =
-  Database["public"]["Tables"]["custom_feelings"]["Insert"];
+type CustomFeelingEntity = Tables<"custom_feelings">;
+type DatabaseUpdateDTO = TablesUpdate<"custom_feelings">;
 
 export type EmotionLevel =
   | "very positive"
@@ -12,7 +11,7 @@ export type EmotionLevel =
   | "very negative";
 
 export const fromSupabase = (
-  feeling: DatabaseRowType,
+  feeling: CustomFeelingEntity,
 ): {
   id: string;
   name: string;
@@ -26,7 +25,7 @@ export const fromSupabase = (
 export const toSupabase = (feeling: {
   name: string;
   emotionLevel: EmotionLevel;
-}): DatabaseInsertType => ({
+}): DatabaseUpdateDTO => ({
   name: feeling.name,
   emotion_level: feeling.emotionLevel,
 });

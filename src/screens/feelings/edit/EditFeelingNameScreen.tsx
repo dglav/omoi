@@ -1,4 +1,4 @@
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useGlobalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
 import {
   Keyboard,
@@ -13,11 +13,18 @@ import {
 import { Button } from "../../../components/button";
 import { Text } from "../../../components/text";
 import { useAppTheme } from "../../../hooks/useAppTheme";
+import { useStore } from "../store/FeelingStore";
 
 export const EditFeelingScreenNameScreen = () => {
   const theme = useAppTheme();
   const router = useRouter();
-  const params = useLocalSearchParams();
+  const params = useGlobalSearchParams();
+
+  const { name, setName } = useStore(({ name, setName }) => ({
+    name,
+    setName,
+  }));
+
   const [isKeyboardVisible, setIsKeyboardVisible] = useState(
     Keyboard.isVisible(),
   );
@@ -50,7 +57,6 @@ export const EditFeelingScreenNameScreen = () => {
               style={{
                 justifyContent: "space-between",
                 gap: 16,
-                // marginBottom: 16,
               }}
             >
               <Text
@@ -74,8 +80,8 @@ export const EditFeelingScreenNameScreen = () => {
               <View style={{ height: 56 }} />
 
               <TextInput
-                value={"だいすき"}
-                // onChangeText={(text) => setUserId(text)}
+                value={name}
+                onChangeText={(newName) => setName(newName)}
                 autoCapitalize="none"
                 autoCorrect={false}
                 autoFocus
