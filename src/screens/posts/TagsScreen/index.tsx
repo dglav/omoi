@@ -1,10 +1,17 @@
 import { usePathname, useRouter } from "expo-router";
-import { SafeAreaView, Text, View, useWindowDimensions } from "react-native";
+import {
+  SafeAreaView,
+  ScrollView,
+  Text,
+  View,
+  useWindowDimensions,
+} from "react-native";
 
+import { AddTag } from "./components/AddTag";
 import { TagSection } from "./components/TagSection";
+import { tagMap } from "./tagMap";
 import { Button } from "../../../components/button";
 import { useAppTheme } from "../../../hooks/useAppTheme";
-import { tagMap } from "./tagMap";
 import { useStore } from "../store/useStore";
 
 const tags = Object.entries(tagMap).reduce(
@@ -86,6 +93,32 @@ const JournalTags = () => {
         >
           <View
             style={{
+              width,
+              gap: 8,
+              paddingHorizontal: 28,
+              paddingVertical: 16,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: theme.fontStyle.xl[1].size,
+                fontWeight: theme.fontStyle.xl[1].weight,
+              }}
+            >
+              関係していることは？
+            </Text>
+            <Text
+              style={{
+                fontSize: theme.fontStyle.md[3].size,
+                fontWeight: theme.fontStyle.md[3].weight,
+              }}
+            >
+              関連タグを設定することで、分析に役立ちます。
+            </Text>
+          </View>
+
+          <ScrollView
+            contentContainerStyle={{
               flex: 1,
               flexDirection: "column",
               justifyContent: "flex-start",
@@ -93,32 +126,10 @@ const JournalTags = () => {
           >
             <View
               style={{
-                width,
                 display: "flex",
                 justifyContent: "flex-start",
               }}
             >
-              <View
-                style={{ gap: 8, paddingHorizontal: 28, paddingVertical: 16 }}
-              >
-                <Text
-                  style={{
-                    fontSize: theme.fontStyle.xl[1].size,
-                    fontWeight: theme.fontStyle.xl[1].weight,
-                  }}
-                >
-                  関係していることは？
-                </Text>
-                <Text
-                  style={{
-                    fontSize: theme.fontStyle.md[3].size,
-                    fontWeight: theme.fontStyle.md[3].weight,
-                  }}
-                >
-                  関連タグを設定することで、分析に役立ちます。
-                </Text>
-              </View>
-
               <TagSection
                 title="自分自身"
                 tags={tags.personal}
@@ -147,7 +158,11 @@ const JournalTags = () => {
                 onPressTag={onPressTag}
               />
             </View>
-          </View>
+
+            <View style={{ height: 24 }} />
+
+            <AddTag />
+          </ScrollView>
           <View
             style={{
               width: "100%",

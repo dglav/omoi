@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Alert, View } from "react-native";
 import { HelperText } from "react-native-paper";
 
-import { Input } from "./Input";
 import { FullScreenModal } from "../../../../components/FullScreenModal";
 import { OptionsList } from "../../../../components/OptionsList";
+import { TextInput } from "../../../../components/TextInput";
 import { Button } from "../../../../components/button";
 import { Text } from "../../../../components/text";
 import { useCreateCustomFeeling } from "../../../../hooks/customFeelingHooks/useCreateCustomFeeling";
@@ -50,7 +50,11 @@ export const AddFeeling = () => {
           }}
         >
           <View style={{ width: 200 }}>
-            <Input value={name} updateValue={setName} />
+            <TextInput
+              placeholder="感情を追加（４文字"
+              value={name}
+              updateValue={setName}
+            />
           </View>
           <Button
             size="sm"

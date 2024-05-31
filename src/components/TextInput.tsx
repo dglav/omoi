@@ -1,20 +1,21 @@
-import { TextInput } from "react-native";
+import { TextInput as RNTextInput } from "react-native";
 
-import { useAppTheme } from "../../../../hooks/useAppTheme";
+import { useAppTheme } from "../hooks/useAppTheme";
 
 type Props = {
   value: string;
+  placeholder?: string;
   updateValue: (newValue: string) => void;
 };
 
-export const Input = ({ value, updateValue }: Props) => {
+export const TextInput = ({ value, placeholder, updateValue }: Props) => {
   const theme = useAppTheme();
 
   return (
-    <TextInput
+    <RNTextInput
       value={value}
       onChangeText={updateValue}
-      placeholder="感情を追加（４文字"
+      placeholder={placeholder}
       style={{
         paddingVertical: 10.5,
         paddingHorizontal: 16,
