@@ -44,6 +44,7 @@ const JournalNote = () => {
         },
         {
           onSuccess: () => {
+            Keyboard.dismiss();
             queryClient.invalidateQueries({ queryKey: ["postGroups"] });
             setIsPostSuccessModalOpen(true);
           },
