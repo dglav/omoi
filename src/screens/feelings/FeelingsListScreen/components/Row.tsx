@@ -3,6 +3,7 @@ import { Pencil, Trash2 } from "lucide-react-native";
 import { Alert, TouchableOpacity, View } from "react-native";
 
 import { Text } from "../../../../components/text";
+import { useDeleteCustomFeeling } from "../../../../hooks/customFeelingHooks/useDeleteCustomFeeling";
 import { useAppTheme } from "../../../../hooks/useAppTheme";
 import { EmotionLevel } from "../../../../services/supabase/database/custom_feelings/converter";
 import { useStore } from "../../store/FeelingStore";
@@ -21,6 +22,8 @@ export const Row = ({ name, emotionLevel, id }: Props) => {
     setName: state.setName,
     setEmotionLevel: state.setEmotionLevel,
   }));
+
+  const mutation = useDeleteCustomFeeling();
 
   return (
     <View
@@ -45,7 +48,18 @@ export const Row = ({ name, emotionLevel, id }: Props) => {
 
         <TouchableOpacity
           onPress={() => {
-            Alert.alert("delete");
+            Alert.alert(
+              "感情の削除",
+              "選択した感情を削除します。よろしいですか？",
+              [
+                { text: "キャンセル", style: "cancel" },
+                {
+                  text: "削除",
+                  onPress: () => mutation.mutate({ id }),
+                  style: "destructive",
+                },
+              ],
+            );
           }}
         >
           <Trash2 color={theme.colors.text} height={20} width={20} />
