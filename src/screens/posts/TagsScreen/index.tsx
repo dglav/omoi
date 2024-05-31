@@ -1,8 +1,12 @@
 import { usePathname, useRouter } from "expo-router";
 import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
   SafeAreaView,
   ScrollView,
   Text,
+  TouchableWithoutFeedback,
   View,
   useWindowDimensions,
 } from "react-native";
@@ -74,110 +78,116 @@ const JournalTags = () => {
   };
 
   return (
-    <View
+    <SafeAreaView
       style={{
         flex: 1,
-        alignItems: "flex-start",
         backgroundColor: theme.colors.background,
       }}
     >
-      <SafeAreaView>
-        <View
-          style={{
-            display: "flex",
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "space-between",
-            backgroundColor: theme.colors.background,
-          }}
-        >
+      <KeyboardAvoidingView
+        contentContainerStyle={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "position" : "height"}
+        style={{ flex: 1 }}
+      >
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View
             style={{
-              width,
-              gap: 8,
-              paddingHorizontal: 28,
-              paddingVertical: 16,
-            }}
-          >
-            <Text
-              style={{
-                fontSize: theme.fontStyle.xl[1].size,
-                fontWeight: theme.fontStyle.xl[1].weight,
-              }}
-            >
-              関係していることは？
-            </Text>
-            <Text
-              style={{
-                fontSize: theme.fontStyle.md[3].size,
-                fontWeight: theme.fontStyle.md[3].weight,
-              }}
-            >
-              関連タグを設定することで、分析に役立ちます。
-            </Text>
-          </View>
-
-          <ScrollView
-            contentContainerStyle={{
+              display: "flex",
               flex: 1,
-              flexDirection: "column",
-              justifyContent: "flex-start",
+              alignItems: "center",
+              justifyContent: "space-between",
+              backgroundColor: theme.colors.background,
+              paddingVertical: 16,
             }}
           >
             <View
               style={{
-                display: "flex",
+                width,
+                gap: 8,
+                paddingHorizontal: 28,
+                paddingVertical: 16,
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: theme.fontStyle.xl[1].size,
+                  fontWeight: theme.fontStyle.xl[1].weight,
+                }}
+              >
+                関係していることは？
+              </Text>
+              <Text
+                style={{
+                  fontSize: theme.fontStyle.md[3].size,
+                  fontWeight: theme.fontStyle.md[3].weight,
+                }}
+              >
+                関連タグを設定することで、分析に役立ちます。
+              </Text>
+            </View>
+
+            <ScrollView
+              contentContainerStyle={{
+                flex: 1,
+                flexDirection: "column",
                 justifyContent: "flex-start",
               }}
             >
-              <TagSection
-                title="自分自身"
-                tags={tags.personal}
-                selectedTags={selectedTags}
-                onPressTag={onPressTag}
-              />
+              <View
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                }}
+              >
+                <TagSection
+                  title="自分自身"
+                  tags={tags.personal}
+                  selectedTags={selectedTags}
+                  onPressTag={onPressTag}
+                />
 
-              <TagSection
-                title="関係性"
-                tags={tags.relationship}
-                selectedTags={selectedTags}
-                onPressTag={onPressTag}
-              />
+                <TagSection
+                  title="関係性"
+                  tags={tags.relationship}
+                  selectedTags={selectedTags}
+                  onPressTag={onPressTag}
+                />
 
-              <TagSection
-                title="出来事"
-                tags={tags.happenings}
-                selectedTags={selectedTags}
-                onPressTag={onPressTag}
-              />
+                <TagSection
+                  title="出来事"
+                  tags={tags.happenings}
+                  selectedTags={selectedTags}
+                  onPressTag={onPressTag}
+                />
 
-              <TagSection
-                title="その他"
-                tags={tags.other}
-                selectedTags={selectedTags}
-                onPressTag={onPressTag}
-              />
-            </View>
+                <TagSection
+                  title="その他"
+                  tags={tags.other}
+                  selectedTags={selectedTags}
+                  onPressTag={onPressTag}
+                />
+              </View>
 
-            <View style={{ height: 24 }} />
+              <View style={{ height: 24 }} />
 
-            <AddTag />
-          </ScrollView>
-          <View
-            style={{
-              width: "100%",
-              paddingHorizontal: 16,
-            }}
-          >
-            <Button
-              onPress={() => router.push(pathname.replace("/tags", "/note"))}
+              <AddTag />
+            </ScrollView>
+            <View
+              style={{
+                width: "100%",
+                paddingHorizontal: 16,
+              }}
             >
-              次へ
-            </Button>
+              <Button
+                onPress={() => router.push(pathname.replace("/tags", "/note"))}
+              >
+                次へ
+              </Button>
+            </View>
           </View>
-        </View>
-      </SafeAreaView>
-    </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
