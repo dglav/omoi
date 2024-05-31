@@ -9,11 +9,14 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import { HelperText } from "react-native-paper";
 
 import { Button } from "../../../components/button";
 import { Text } from "../../../components/text";
 import { useAppTheme } from "../../../hooks/useAppTheme";
 import { useStore } from "../store/FeelingStore";
+
+const maxFeelingLength = 4;
 
 export const EditFeelingScreenNameScreen = () => {
   const theme = useAppTheme();
@@ -53,51 +56,67 @@ export const EditFeelingScreenNameScreen = () => {
               justifyContent: "space-between",
             }}
           >
-            <View
-              style={{
-                justifyContent: "space-between",
-                gap: 16,
-              }}
-            >
-              <Text
+            <View>
+              <View
                 style={{
-                  fontSize: theme.fontStyle.xxl[1].size,
-                  fontWeight: theme.fontStyle.xxl[1].weight,
+                  justifyContent: "space-between",
+                  gap: 16,
                 }}
               >
-                感情の名前
-              </Text>
+                <Text
+                  style={{
+                    fontSize: theme.fontStyle.xxl[1].size,
+                    fontWeight: theme.fontStyle.xxl[1].weight,
+                  }}
+                >
+                  感情の名前
+                </Text>
 
-              <Text
-                style={{
-                  fontSize: theme.fontStyle.md[1].size,
-                  fontWeight: theme.fontStyle.md[1].weight,
-                }}
-              >
-                感情の名前を編集できます
-              </Text>
+                <Text
+                  style={{
+                    fontSize: theme.fontStyle.md[1].size,
+                    fontWeight: theme.fontStyle.md[1].weight,
+                  }}
+                >
+                  感情の名前を編集できます
+                </Text>
+              </View>
 
               <View style={{ height: 56 }} />
 
-              <TextInput
-                value={name}
-                onChangeText={(newName) => setName(newName)}
-                autoCapitalize="none"
-                autoCorrect={false}
-                autoFocus
-                style={{
-                  backgroundColor: theme.colors.white,
-                  fontSize: theme.fontStyle.md[3].size,
-                  fontWeight: theme.fontStyle.md[3].weight,
-                  paddingHorizontal: 16,
-                  paddingVertical: 17.5,
-                  borderRadius: 8,
-                }}
-              />
+              <View
+                style={{ display: "flex", flexDirection: "column", gap: 8 }}
+              >
+                <TextInput
+                  value={name}
+                  placeholder="感情を追加（４文字"
+                  onChangeText={(newName) => setName(newName)}
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  autoFocus
+                  style={{
+                    backgroundColor: theme.colors.white,
+                    fontSize: theme.fontStyle.md[3].size,
+                    fontWeight: theme.fontStyle.md[3].weight,
+                    paddingHorizontal: 16,
+                    paddingVertical: 17.5,
+                    borderRadius: 8,
+                  }}
+                />
+
+                {name && name.length > 0 && name.length > maxFeelingLength && (
+                  <HelperText type="error">
+                    最大４文字の感情を入力してください
+                  </HelperText>
+                )}
+              </View>
             </View>
 
             <View>
               <Button
+                disabled={
+                  !name || name.length === 0 || name.length > maxFeelingLength
+                }
                 onPress={() =>
                   router.push(`feelings/${params.id}/feeling-level`)
                 }
