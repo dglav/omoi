@@ -51,6 +51,7 @@ export const Button = ({
   return (
     <RNButton
       {...props}
+      disabled={disabled}
       mode={mode}
       labelStyle={[labelStyle, props.labelStyle]}
       style={style}
