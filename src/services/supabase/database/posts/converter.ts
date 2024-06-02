@@ -16,7 +16,7 @@ export type Post = {
 type TableName = "posts";
 type Entity = Tables<TableName>;
 type CreateDTO = Database["public"]["Functions"]["create_new_post_v2"]["Args"];
-type UpdateDTO = Database["public"]["Functions"]["edit_post"]["Args"];
+type UpdateDTO = Database["public"]["Functions"]["edit_post_v2"]["Args"];
 
 export const fromSupabase = ({
   author_id,
@@ -76,6 +76,7 @@ export const toUpdateDTO = ({
   tags,
   note,
   date,
+  isPrivate,
 }: {
   id: string;
   authorId: string;
@@ -84,6 +85,7 @@ export const toUpdateDTO = ({
   tags: string[];
   note: string;
   date: Date;
+  isPrivate: boolean;
 }): UpdateDTO => ({
   id,
   author_id: authorId,
@@ -92,4 +94,5 @@ export const toUpdateDTO = ({
   tags,
   note,
   date: date.toISOString(),
+  is_private: isPrivate,
 });

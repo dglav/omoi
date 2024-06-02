@@ -10,12 +10,13 @@ type Props = {
   tags: string[];
   note: string;
   date: Date;
+  isPrivate: boolean;
 };
 
 export const editPost = async (postEdit: Props) => {
   const DTO = toUpdateDTO(postEdit);
 
-  const { error } = await supabase.rpc("edit_post", DTO);
+  const { error } = await supabase.rpc("edit_post_v2", DTO);
 
   if (error) {
     console.error(error);

@@ -11,6 +11,7 @@ type mutationParams = {
     tags: string[];
     note: string;
     date: Date;
+    isPrivate: boolean;
   };
 };
 

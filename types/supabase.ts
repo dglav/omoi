@@ -331,54 +331,29 @@ export type Database = {
           tags: string[];
         }[];
       };
-      create_new_post_v2:
-        | {
-          Args: {
-            author_id: string;
-            note: string;
-            condition: Database["public"]["Enums"]["condition"];
-            feelings: string[];
-            tags: string[];
-            is_private: boolean;
-            date: string;
-          };
-          Returns: {
-            author_id: string;
-            condition: Database["public"]["Enums"]["condition"];
-            created_at: string;
-            date: string;
-            feelings: string[];
-            id: string;
-            is_private: boolean;
-            note: string;
-            post_group_id: string;
-            tags: string[];
-          }[];
-        }
-        | {
-          Args: {
-            id: string;
-            author_id: string;
-            note: string;
-            condition: Database["public"]["Enums"]["condition"];
-            feelings: string[];
-            tags: string[];
-            is_private: boolean;
-            date: string;
-          };
-          Returns: {
-            author_id: string;
-            condition: Database["public"]["Enums"]["condition"];
-            created_at: string;
-            date: string;
-            feelings: string[];
-            id: string;
-            is_private: boolean;
-            note: string;
-            post_group_id: string;
-            tags: string[];
-          }[];
+      create_new_post_v2: {
+        Args: {
+          author_id: string;
+          note: string;
+          condition: Database["public"]["Enums"]["condition"];
+          feelings: string[];
+          tags: string[];
+          is_private: boolean;
+          date: string;
         };
+        Returns: {
+          author_id: string;
+          condition: Database["public"]["Enums"]["condition"];
+          created_at: string;
+          date: string;
+          feelings: string[];
+          id: string;
+          is_private: boolean;
+          note: string;
+          post_group_id: string;
+          tags: string[];
+        }[];
+      };
       edit_post: {
         Args: {
           id: string;
@@ -387,6 +362,30 @@ export type Database = {
           condition: Database["public"]["Enums"]["condition"];
           feelings: string[];
           tags: string[];
+          date: string;
+        };
+        Returns: {
+          author_id: string;
+          condition: Database["public"]["Enums"]["condition"];
+          created_at: string;
+          date: string;
+          feelings: string[];
+          id: string;
+          is_private: boolean;
+          note: string;
+          post_group_id: string;
+          tags: string[];
+        }[];
+      };
+      edit_post_v2: {
+        Args: {
+          id: string;
+          author_id: string;
+          note: string;
+          condition: Database["public"]["Enums"]["condition"];
+          feelings: string[];
+          tags: string[];
+          is_private: boolean;
           date: string;
         };
         Returns: {
