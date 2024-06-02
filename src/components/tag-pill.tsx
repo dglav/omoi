@@ -1,7 +1,7 @@
 import { Text } from "react-native";
 
 import { useAppTheme } from "../hooks/useAppTheme";
-import { tagMap } from "../screens/posts/TagsScreen/tagMap";
+import { tagMap } from "../screens/posts/TagsScreen/components/TagList/tagMap";
 
 type Props = {
   tag: string;

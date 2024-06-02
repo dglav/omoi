@@ -1,8 +1,7 @@
 import { View } from "react-native";
 
-import { Chip } from "../../../../components/chip";
-import { Text } from "../../../../components/text";
-import { theme } from "../../../../theme";
+import { Chip } from "../../../../../../components/chip";
+import { Text } from "../../../../../../components/text";
 
 type TagSectionProps = {
   title: string;
