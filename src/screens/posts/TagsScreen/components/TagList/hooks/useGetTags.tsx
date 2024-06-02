@@ -42,6 +42,7 @@ const defaultTags = Object.entries(tagMap).reduce(
 
 export const useGetTags = () => {
   const [tags, setTags] = useState(defaultTags);
+
   const { data: customTags } = useGetCustomTags();
 
   useEffect(() => {
@@ -51,9 +52,9 @@ export const useGetTags = () => {
         text: customTag.name,
       }));
 
-      tags.other.push(...formattedCustomTags);
+      const otherTags = [...defaultTags.other, ...formattedCustomTags];
 
-      setTags(tags);
+      setTags({ ...tags, other: otherTags });
     }
   }, [customTags]);
 
