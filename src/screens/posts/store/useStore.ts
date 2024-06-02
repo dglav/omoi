@@ -1,19 +1,21 @@
 import { create } from "zustand";
 
-const defaultState: Post = {
-  condition: "average",
-  feelings: [],
-  tags: [],
-  note: "",
-  date: new Date(),
-};
-
 export type Post = {
   condition: "reallyBad" | "bad" | "average" | "good" | "reallyGood";
   feelings: string[];
   tags: string[];
   note: string;
   date: Date;
+  isPrivate: boolean;
+};
+
+const defaultState: Post = {
+  condition: "average",
+  feelings: [],
+  tags: [],
+  note: "",
+  date: new Date(),
+  isPrivate: false,
 };
 
 type Actions = {
@@ -26,6 +28,7 @@ type Actions = {
   setDate: (updatedDate: Date) => void;
   resetAll: () => void;
   resetTo: (newState: Post) => void;
+  setIsPrivate: (isPrivate: boolean) => void;
 };
 
 export const useStore = create<Post & Actions>((set) => ({
@@ -57,4 +60,7 @@ export const useStore = create<Post & Actions>((set) => ({
   resetAll: () => set(defaultState),
 
   resetTo: (newState: Post) => set(newState),
+
+  isPrivate: false,
+  setIsPrivate: (isPrivate) => set({ isPrivate }),
 }));
