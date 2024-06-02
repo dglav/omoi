@@ -3,7 +3,7 @@ import RNDateTimePicker, {
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
 import { CalendarDays } from "lucide-react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, Pressable, View } from "react-native";
 
 import { FullScreenModal } from "../../../components/FullScreenModal";
@@ -20,6 +20,10 @@ export const DateSelector = ({ date, setDate }: Props) => {
   const [showTimePicker, setShowTimePicker] = useState(false);
   const theme = useAppTheme();
   const formattedDate = format(date, "YYYY/MM/DD");
+
+  useEffect(() => {
+    setNewDate(date);
+  }, [date]);
 
   return (
     <>

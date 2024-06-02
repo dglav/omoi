@@ -57,7 +57,7 @@ export const useStore = create<Post & Actions>((set) => ({
   date: new Date(),
   setDate: (updatedDate) => set({ date: updatedDate }),
 
-  resetAll: () => set(defaultState),
+  resetAll: () => set({ ...defaultState, date: new Date() }),
 
   resetTo: (newState: Post) => set(newState),
 

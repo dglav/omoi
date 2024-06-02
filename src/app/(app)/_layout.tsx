@@ -3,6 +3,7 @@ import React from "react";
 import { Text } from "react-native";
 
 import { useSession } from "../../providers/AuthProvider";
+import { useStore as usePostStore } from "../../screens/posts/store/useStore";
 
 export default function AppLayout() {
   const { session, isLoading } = useSession();
@@ -24,6 +25,10 @@ export default function AppLayout() {
   //   }
   // }, [session]);
 
+  const { resetPostState } = usePostStore((state) => ({
+    resetPostState: state.resetAll,
+  }));
+
   if (isLoading) {
     return <Text>Loading...</Text>;
   }
@@ -43,7 +48,13 @@ export default function AppLayout() {
 
       <Stack.Screen name="tutorial" options={{ headerShown: false }} />
 
-      <Stack.Screen name="posts/new" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="posts/new"
+        options={{ headerShown: false }}
+        listeners={() => {
+          return { focus: () => resetPostState() };
+        }}
+      />
 
       <Stack.Screen
         name="posts/[postId]/edit"
