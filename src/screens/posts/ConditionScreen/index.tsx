@@ -29,6 +29,9 @@ const JournalCondition = () => {
     state.setCondition,
   ]);
   const [strokeColor, setStrokeColor] = useState(conditionMap.average.stroke);
+  const [backgroundColor, setBackgroundColor] = useState(
+    conditionMap.average.background,
+  );
 
   const { data: post, isLoading } = useGetPost(params.postId);
 
@@ -37,22 +40,27 @@ const JournalCondition = () => {
       if (post.condition === "reallyBad") {
         setValue(MIN_SLIDER_VALUE);
         setStrokeColor(conditionMap.reallyBad.stroke);
+        setBackgroundColor(conditionMap.reallyBad.background);
       }
       if (post.condition === "bad") {
         setValue(25);
         setStrokeColor(conditionMap.bad.stroke);
+        setBackgroundColor(conditionMap.bad.background);
       }
       if (post.condition === "average") {
         setValue(50);
         setStrokeColor(conditionMap.average.stroke);
+        setBackgroundColor(conditionMap.average.background);
       }
       if (post.condition === "good") {
         setValue(75);
         setStrokeColor(conditionMap.good.stroke);
+        setBackgroundColor(conditionMap.good.background);
       }
       if (post.condition === "reallyGood") {
         setValue(MAX_SLIDER_VALUE);
         setStrokeColor(conditionMap.reallyGood.stroke);
+        setBackgroundColor(conditionMap.reallyGood.background);
       }
     }
   }, [isLoading]);
@@ -66,18 +74,23 @@ const JournalCondition = () => {
     if (value < 20) {
       setCondition("reallyBad");
       setStrokeColor(conditionMap.reallyBad.stroke);
+      setBackgroundColor(conditionMap.reallyBad.background);
     } else if (value < 40) {
       setCondition("bad");
       setStrokeColor(conditionMap.bad.stroke);
+      setBackgroundColor(conditionMap.bad.background);
     } else if (value < 60) {
       setCondition("average");
       setStrokeColor(conditionMap.average.stroke);
+      setBackgroundColor(conditionMap.average.background);
     } else if (value < 80) {
       setCondition("good");
       setStrokeColor(conditionMap.good.stroke);
+      setBackgroundColor(conditionMap.good.background);
     } else {
       setCondition("reallyGood");
       setStrokeColor(conditionMap.reallyGood.stroke);
+      setBackgroundColor(conditionMap.reallyGood.background);
     }
   }, [value]);
 
@@ -86,7 +99,7 @@ const JournalCondition = () => {
       style={{
         flex: 1,
         alignItems: "flex-start",
-        backgroundColor: theme.colors.background,
+        backgroundColor,
       }}
     >
       <SafeAreaView>
@@ -96,7 +109,7 @@ const JournalCondition = () => {
             flex: 1,
             alignItems: "center",
             justifyContent: "space-between",
-            backgroundColor: theme.colors.background,
+            backgroundColor,
           }}
         >
           <View

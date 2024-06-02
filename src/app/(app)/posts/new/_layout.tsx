@@ -23,6 +23,7 @@ export default function Layout() {
       }}
     >
       <Stack.Screen name="condition" />
+
       <Stack.Screen
         name="feelings"
         options={{
@@ -32,6 +33,7 @@ export default function Layout() {
           },
         }}
       />
+
       <Stack.Screen
         name="tags"
         options={{
@@ -41,6 +43,7 @@ export default function Layout() {
           },
         }}
       />
+
       <Stack.Screen name="note" />
     </Stack>
   );
