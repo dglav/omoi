@@ -28,15 +28,15 @@ const JournalNote = () => {
     state.note,
     state.updateNote,
   ]);
-  const { condition, feelings, tags, date, isPrivate, resetAll } = useStore();
+  const { condition, feelings, tags, date, isPrivate } = useStore();
   const [isPostSuccessModalOpen, setIsPostSuccessModalOpen] = useState(false);
   const createPostMutation = useCreatePost();
   const editPostMutation = useEditPost();
   const queryClient = useQueryClient();
 
-  const isEdit = !!params.postId;
-
   const handlePost = () => {
+    const isEdit = !!params.postId;
+
     if (!isEdit) {
       createPostMutation.mutate(
         {
@@ -55,13 +55,21 @@ const JournalNote = () => {
     if (!!isEdit && params.postId) {
       editPostMutation.mutate(
         {
-          post: { id: params.postId, condition, feelings, tags, note, date },
+          post: {
+            id: params.postId,
+            condition,
+            feelings,
+            tags,
+            note,
+            isPrivate,
+            date,
+          },
         },
         {
           onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["postGroups"] });
-            resetAll();
-            router.push("/(app)/(tabs)/home");
+
+            router.navigate("/(app)/(tabs)/home");
           },
         },
       );
@@ -129,7 +137,6 @@ const JournalNote = () => {
               visible={isPostSuccessModalOpen}
               onConfirm={() => {
                 setIsPostSuccessModalOpen(false);
-                resetAll();
                 router.navigate("/(app)/(tabs)/home");
               }}
             />

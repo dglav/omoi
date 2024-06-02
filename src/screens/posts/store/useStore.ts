@@ -57,10 +57,16 @@ export const useStore = create<Post & Actions>((set) => ({
   date: new Date(),
   setDate: (updatedDate) => set({ date: updatedDate }),
 
-  resetAll: () => set({ ...defaultState, date: new Date() }),
+  resetAll: () => {
+    return set({ ...defaultState, date: new Date() });
+  },
 
-  resetTo: (newState: Post) => set(newState),
+  resetTo: (newState: Post) => {
+    return set(newState);
+  },
 
   isPrivate: false,
-  setIsPrivate: (isPrivate) => set({ isPrivate }),
+  setIsPrivate: (isPrivate) => {
+    return set({ isPrivate });
+  },
 }));

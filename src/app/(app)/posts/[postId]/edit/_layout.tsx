@@ -1,16 +1,13 @@
-import { Stack, useLocalSearchParams } from "expo-router";
-import React, { useEffect } from "react";
+import { Stack } from "expo-router";
+import React from "react";
 
 import { BackButton } from "../../../../../components/back-button";
-import { useGetPost } from "../../../../../hooks/postHooks/useGetPost";
 import { PrivacyButton } from "../../../../../screens/posts/components/PrivacyButton";
 import { DateSelector } from "../../../../../screens/posts/components/date-selector";
 import { useStore } from "../../../../../screens/posts/store/useStore";
 
 export default function Layout() {
-  const params = useLocalSearchParams<{ postId: string }>();
-  const { data: post, isLoading } = useGetPost(params.postId!);
-  const { date, setDate, isPrivate, setIsPrivate, resetTo } = useStore(
+  const { date, setDate, isPrivate, setIsPrivate } = useStore(
     ({ date, setDate, isPrivate, setIsPrivate, resetTo }) => ({
       date,
       setDate,
@@ -19,12 +16,6 @@ export default function Layout() {
       resetTo,
     }),
   );
-
-  useEffect(() => {
-    if (!isLoading && post) {
-      resetTo(post);
-    }
-  }, [isLoading]);
 
   return (
     <Stack

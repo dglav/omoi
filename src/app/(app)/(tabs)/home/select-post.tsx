@@ -40,7 +40,7 @@ function SelectPost() {
             <Button
               key={post.id}
               variant="secondary"
-              onPress={() => router.navigate(`/posts/${post.id}/edit`)}
+              onPress={() => router.push(`/posts/${post.id}/edit`)}
               labelStyle={{
                 width: "100%",
                 paddingHorizontal: 40,

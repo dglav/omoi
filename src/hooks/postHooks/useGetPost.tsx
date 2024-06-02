@@ -8,7 +8,7 @@ export const useGetPost = (id?: string) => {
 
   const userId = session?.user.id;
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, status } = useQuery({
     queryKey: ["post", id],
     queryFn: () => {
       if (!userId) {
@@ -22,7 +22,8 @@ export const useGetPost = (id?: string) => {
       return getPost({ id });
     },
     enabled: !!id,
+    staleTime: Infinity,
   });
 
-  return { data, isLoading, isError };
+  return { data, isLoading, isError, status };
 };

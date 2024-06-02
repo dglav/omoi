@@ -2,13 +2,11 @@ import { Stack } from "expo-router";
 import React from "react";
 
 import { BackButton } from "../../../../components/back-button";
-import { useAppTheme } from "../../../../hooks/useAppTheme";
 import { PrivacyButton } from "../../../../screens/posts/components/PrivacyButton";
 import { DateSelector } from "../../../../screens/posts/components/date-selector";
 import { useStore } from "../../../../screens/posts/store/useStore";
 
 export default function Layout() {
-  const theme = useAppTheme();
   const { date, setDate, isPrivate, setIsPrivate } = useStore(
     ({ date, setDate, isPrivate, setIsPrivate }) => ({
       date,
