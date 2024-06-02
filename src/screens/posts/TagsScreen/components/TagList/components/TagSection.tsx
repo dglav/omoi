@@ -19,7 +19,6 @@ const TagSection = ({
   return (
     <View
       style={{
-        paddingHorizontal: 28,
         paddingVertical: 16,
         display: "flex",
         gap: 12,

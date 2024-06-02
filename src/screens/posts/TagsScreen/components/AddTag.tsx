@@ -4,33 +4,27 @@ import { HelperText } from "react-native-paper";
 
 import { TextInput } from "../../../../components/TextInput";
 import { Button } from "../../../../components/button";
-import { useCreateCustomFeeling } from "../../../../hooks/customFeelingHooks/useCreateCustomFeeling";
-import { useAppTheme } from "../../../../hooks/useAppTheme";
+import { useCreateCustomTag } from "../../../../hooks/customTagHooks/useCreateCustomTag";
 
 const maxTagLength = 8;
 
 export const AddTag = () => {
   const [tagName, setTagName] = useState("");
-  const theme = useAppTheme();
 
-  const mutation = useCreateCustomFeeling();
+  const mutation = useCreateCustomTag();
 
   const handleRegister = () => {
-    if (!tagName.length) {
+    if (!tagName.length || tagName.length > maxTagLength) {
       Alert.alert("入力エラー");
       return;
     }
 
-    // mutation.mutate({ name: tagName });
+    mutation.mutate({ name: tagName });
     setTagName("");
   };
 
   return (
-    <View
-      style={{
-        paddingLeft: 28,
-      }}
-    >
+    <View>
       <View
         style={{
           flexDirection: "row",

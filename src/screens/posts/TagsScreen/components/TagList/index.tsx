@@ -1,48 +1,8 @@
 import { View } from "react-native";
 
 import { TagSection } from "./components/TagSection";
-import { tagMap } from "./tagMap";
+import { useGetTags } from "./hooks/useGetTags";
 import { useStore } from "../../../store/useStore";
-
-const tags = Object.entries(tagMap).reduce(
-  (
-    tagLists: {
-      personal: { value: string; text: string }[];
-      relationship: { value: string; text: string }[];
-      happenings: { value: string; text: string }[];
-      other: { value: string; text: string }[];
-    },
-    [key, value],
-  ) => {
-    if (value.category === "personal") {
-      tagLists.personal = tagLists.personal.concat([
-        { value: key, text: value.text },
-      ]);
-    }
-    if (value.category === "relationship") {
-      tagLists.relationship = tagLists.relationship.concat([
-        { value: key, text: value.text },
-      ]);
-    }
-    if (value.category === "happenings") {
-      tagLists.happenings = tagLists.happenings.concat([
-        { value: key, text: value.text },
-      ]);
-    }
-    if (value.category === "other") {
-      tagLists.other = tagLists.other.concat([
-        { value: key, text: value.text },
-      ]);
-    }
-    return tagLists;
-  },
-  {
-    personal: [],
-    relationship: [],
-    happenings: [],
-    other: [],
-  },
-);
 
 export const TagList = () => {
   const [selectedTags, addTag, removeTag] = useStore((state) => [
@@ -50,6 +10,8 @@ export const TagList = () => {
     state.addTag,
     state.removeTag,
   ]);
+
+  const tags = useGetTags();
 
   const onPressTag = (tag: string) => {
     if (selectedTags.includes(tag)) {
@@ -60,12 +22,7 @@ export const TagList = () => {
   };
 
   return (
-    <View
-      style={{
-        display: "flex",
-        justifyContent: "flex-start",
-      }}
-    >
+    <View>
       <TagSection
         title="自分自身"
         tags={tags.personal}
