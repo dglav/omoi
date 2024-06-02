@@ -1,4 +1,4 @@
-import { EmotionLevel, toSupabase } from "./converter";
+import { EmotionLevel, toCreateDTO } from "./converter";
 import { supabase } from "../..";
 import { SupabaseDatabaseError } from "../../error";
 
@@ -11,7 +11,7 @@ export const createCustomFeeling = async (
   // eslint-disable-next-line prettier/prettier
   feeling: Params,
 ) => {
-  const payload = toSupabase(feeling);
+  const payload = toCreateDTO(feeling);
 
   const { data, error } = await supabase
     .from("custom_feelings")

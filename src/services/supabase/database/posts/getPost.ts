@@ -1,3 +1,4 @@
+import { fromSupabase, Post } from "./converter";
 import { SupabaseDatabaseError } from "../../error";
 import { supabase } from "../../index";
 
@@ -5,7 +6,7 @@ type Params = {
   id: string;
 };
 
-export const getPost = async ({ id }: Params) => {
+export const getPost = async ({ id }: Params): Promise<Post> => {
   const { data: posts, error } = await supabase
     .from("posts")
     .select("*")
@@ -17,5 +18,5 @@ export const getPost = async ({ id }: Params) => {
 
   const post = posts[0];
 
-  return { ...post, date: new Date(post.date) };
+  return fromSupabase(post);
 };

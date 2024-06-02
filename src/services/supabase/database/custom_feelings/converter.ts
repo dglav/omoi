@@ -1,6 +1,11 @@
-import { Tables, TablesUpdate } from "../../../../../types/supabase";
+import {
+  Tables,
+  TablesInsert,
+  TablesUpdate,
+} from "../../../../../types/supabase";
 
 type CustomFeelingEntity = Tables<"custom_feelings">;
+type CreateDTO = TablesInsert<"custom_feelings">;
 type DatabaseUpdateDTO = TablesUpdate<"custom_feelings">;
 
 export type EmotionLevel =
@@ -22,7 +27,15 @@ export const fromSupabase = (
   emotionLevel: feeling.emotion_level,
 });
 
-export const toSupabase = (feeling: {
+export const toCreateDTO = (feeling: {
+  name: string;
+  emotionLevel: EmotionLevel;
+}): CreateDTO => ({
+  name: feeling.name,
+  emotion_level: feeling.emotionLevel,
+});
+
+export const toUpdateDTO = (feeling: {
   name: string;
   emotionLevel: EmotionLevel;
 }): DatabaseUpdateDTO => ({

@@ -1,4 +1,4 @@
-import { EmotionLevel, toSupabase } from "./converter";
+import { EmotionLevel, toUpdateDTO } from "./converter";
 import { SupabaseDatabaseError } from "../../error";
 import { supabase } from "../../index";
 
@@ -9,7 +9,7 @@ export const updateCustomFeeling = async (feeling: {
 }) => {
   const { data: customFeelings, error } = await supabase
     .from("custom_feelings")
-    .update(toSupabase(feeling))
+    .update(toUpdateDTO(feeling))
     .eq("id", feeling.id)
     .select();
 

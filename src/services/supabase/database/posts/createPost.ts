@@ -1,3 +1,4 @@
+import { toCreateSupabaseDTO } from "./converter";
 import { SupabaseDatabaseError } from "../../error";
 import { supabase } from "../../index";
 
@@ -11,28 +12,12 @@ type Props = {
   date: Date;
 };
 
-export const createPost = async ({
-  authorId,
-  condition,
-  feelings,
-  tags,
-  note,
-  isPrivate,
-  date,
-}: Props) => {
-  const { data, error } = await supabase.rpc("create_new_post_v2", {
-    author_id: authorId,
-    condition,
-    feelings,
-    tags,
-    note,
-    is_private: isPrivate,
-    date: date.toISOString(),
-  });
+export const createPost = async (post: Props) => {
+  const DTO = toCreateSupabaseDTO(post);
+
+  const { error } = await supabase.rpc("create_new_post_v2", DTO);
 
   if (error) {
     throw new SupabaseDatabaseError(error);
   }
-
-  return data;
 };
