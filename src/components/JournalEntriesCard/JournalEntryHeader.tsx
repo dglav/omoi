@@ -1,4 +1,5 @@
 import { format } from "@formkit/tempo";
+import { LockKeyhole } from "lucide-react-native";
 import { View, Text } from "react-native";
 
 import { useGetPostGroups } from "../../hooks/postGroupHooks/useGetPostGroups";
@@ -48,9 +49,16 @@ export const JournalEntryHeader = ({ post }: Props) => {
           }}
         >
           <ConditionIcon_80 stroke={conditionMap[post.condition].stroke} />
-          <View style={{ gap: 4 }}>
+          <View style={{ flex: 1, gap: 4 }}>
             <View
-              style={{ height: 38, display: "flex", justifyContent: "center" }}
+              style={{
+                width: "100%",
+                height: 38,
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
             >
               <Text
                 style={{
@@ -60,6 +68,18 @@ export const JournalEntryHeader = ({ post }: Props) => {
               >
                 {conditionMap[post.condition].text}
               </Text>
+
+              {post.is_private && (
+                <View
+                  style={{
+                    backgroundColor: theme.colors.primaryHeavy,
+                    padding: 5,
+                    borderRadius: 20,
+                  }}
+                >
+                  <LockKeyhole size={20} color={theme.colors.white} />
+                </View>
+              )}
             </View>
 
             <View

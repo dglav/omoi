@@ -1,4 +1,5 @@
 import { format } from "@formkit/tempo";
+import { LockKeyhole } from "lucide-react-native";
 import { View, Text } from "react-native";
 
 import { useGetPostGroups } from "../../hooks/postGroupHooks/useGetPostGroups";
@@ -52,14 +53,34 @@ export const JournalEntryRow = ({ post }: Props) => {
           </View>
         </View>
 
-        <Text
+        <View
           style={{
-            fontSize: theme.fontStyle.xs[3].size,
-            fontWeight: theme.fontStyle.xs[3].weight,
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 4,
           }}
         >
-          {format(new Date(post.date), "HH:mm")}
-        </Text>
+          <Text
+            style={{
+              fontSize: theme.fontStyle.xs[3].size,
+              fontWeight: theme.fontStyle.xs[3].weight,
+            }}
+          >
+            {format(new Date(post.date), "HH:mm")}
+          </Text>
+
+          {post.is_private && (
+            <View
+              style={{
+                backgroundColor: theme.colors.primaryHeavy,
+                padding: 4,
+                borderRadius: 16,
+              }}
+            >
+              <LockKeyhole size={16} color={theme.colors.white} />
+            </View>
+          )}
+        </View>
       </View>
 
       <Text
