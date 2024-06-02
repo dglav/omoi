@@ -53,9 +53,7 @@ export default function NicknameScreen() {
 
       <Button
         onPress={
-          user
-            ? () => mutate({ userId: user.id, updatedUser: { nickname } })
-            : () => null
+          user ? () => mutate({ updatedUser: { nickname } }) : () => null
         }
       >
         保存
