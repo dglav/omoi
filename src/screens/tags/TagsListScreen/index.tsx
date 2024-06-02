@@ -36,7 +36,7 @@ export const TagsListScreen = () => {
           追加したタグ
         </Text>
 
-        {!isLoading && customTags?.length && (
+        {!isLoading && customTags && customTags.length > 0 && (
           <Card>
             <ScrollView>
               <View style={{ gap: 32 }}>
@@ -45,6 +45,12 @@ export const TagsListScreen = () => {
                 ))}
               </View>
             </ScrollView>
+          </Card>
+        )}
+
+        {!isLoading && customTags && customTags.length === 0 && (
+          <Card>
+            <Text>追加されたタグはありません</Text>
           </Card>
         )}
       </View>

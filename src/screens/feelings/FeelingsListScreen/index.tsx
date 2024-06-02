@@ -36,7 +36,7 @@ export const FeelingsListScreen = () => {
           追加した感情
         </Text>
 
-        {!isLoading && customFeelings?.length && (
+        {!isLoading && customFeelings && customFeelings.length > 0 && (
           <Card>
             <ScrollView>
               <View style={{ gap: 32 }}>
@@ -50,6 +50,12 @@ export const FeelingsListScreen = () => {
                 ))}
               </View>
             </ScrollView>
+          </Card>
+        )}
+
+        {!isLoading && customFeelings && customFeelings.length === 0 && (
+          <Card>
+            <Text>追加された感情はありません</Text>
           </Card>
         )}
       </View>
