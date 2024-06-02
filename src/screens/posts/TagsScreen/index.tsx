@@ -4,19 +4,17 @@ import {
   Platform,
   SafeAreaView,
   ScrollView,
-  Text,
   View,
-  useWindowDimensions,
 } from "react-native";
 
 import { AddTag } from "./components/AddTag";
 import { TagList } from "./components/TagList";
+import { TitleSection } from "./components/TitleSection";
 import { Button } from "../../../components/button";
 import { useAppTheme } from "../../../hooks/useAppTheme";
 
 const JournalTags = () => {
   const theme = useAppTheme();
-  const { width } = useWindowDimensions();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -38,31 +36,7 @@ const JournalTags = () => {
             paddingVertical: 16,
           }}
         >
-          <View
-            style={{
-              width,
-              gap: 8,
-              paddingHorizontal: 16,
-              paddingVertical: 16,
-            }}
-          >
-            <Text
-              style={{
-                fontSize: theme.fontStyle.xl[1].size,
-                fontWeight: theme.fontStyle.xl[1].weight,
-              }}
-            >
-              関係していることは？
-            </Text>
-            <Text
-              style={{
-                fontSize: theme.fontStyle.md[3].size,
-                fontWeight: theme.fontStyle.md[3].weight,
-              }}
-            >
-              関連タグを設定することで、分析に役立ちます。
-            </Text>
-          </View>
+          <TitleSection />
 
           <ScrollView
             contentContainerStyle={{
