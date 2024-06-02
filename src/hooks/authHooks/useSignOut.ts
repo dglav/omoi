@@ -1,5 +1,14 @@
+import { useQueryClient } from "@tanstack/react-query";
+
 import { signOut } from "../../services/supabase/auth/signOut";
 
 export const useSignOut = () => {
-  return { signOut };
+  const queryClient = useQueryClient();
+
+  const handleSignOut = () => {
+    signOut();
+    queryClient.clear();
+  };
+
+  return { signOut: handleSignOut };
 };

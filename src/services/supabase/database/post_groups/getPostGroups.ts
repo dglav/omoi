@@ -5,9 +5,15 @@ type Params = {
   userId: string;
   limit?: number;
   laterThan?: Date;
+  filterPrivate?: boolean;
 };
 
-export const getPostGroups = async ({ userId, limit, laterThan }: Params) => {
+export const getPostGroups = async ({
+  userId,
+  limit,
+  laterThan,
+  filterPrivate,
+}: Params) => {
   const query = supabase
     .from("post_groups")
     .select("id,postGroupDate:date")
@@ -28,11 +34,19 @@ export const getPostGroups = async ({ userId, limit, laterThan }: Params) => {
   }
 
   const mergedPostGroupPromises = postGroups.map(async (postGroup) => {
-    const { data: posts, error } = await supabase
+    const query = supabase
       .from("posts")
       .select("*")
-      .match({ post_group_id: postGroup.id })
+      .match({
+        post_group_id: postGroup.id,
+      })
       .order("date", { ascending: false });
+
+    if (filterPrivate) {
+      query.is("is_private", false);
+    }
+
+    const { data: posts, error } = await query;
 
     if (error) {
       throw new SupabaseDatabaseError(error);

@@ -33,6 +33,10 @@ export const useGetPostGroups = ({ who, options }: Props) => {
         input["laterThan"] = options.laterThan;
       }
 
+      if (who === "partner") {
+        input["filterPrivate"] = true;
+      }
+
       return getPostGroups(input);
     },
     staleTime: 10 * 1000, // 10 seconds
