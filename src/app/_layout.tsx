@@ -59,7 +59,10 @@ export default function Root() {
                   name="signIn"
                   options={{
                     headerTitle: "ログイン",
-                    headerTransparent: true,
+                    headerStyle: {
+                      backgroundColor: "#EAF3D3",
+                    },
+                    headerShadowVisible: false,
                     headerLeft: () => <BackButton />,
                   }}
                 />
@@ -68,7 +71,10 @@ export default function Root() {
                   name="signUp"
                   options={{
                     headerTitle: "アカウント作成",
-                    headerTransparent: true,
+                    headerStyle: {
+                      backgroundColor: "#EAF3D3",
+                    },
+                    headerShadowVisible: false,
                     headerLeft: () => <BackButton />,
                   }}
                 />
