@@ -9,6 +9,7 @@ type mutationParams = {
     feelings: string[];
     tags: string[];
     note: string;
+    isPrivate: boolean;
     date: Date;
   };
 };
@@ -27,6 +28,9 @@ export const useCreatePost = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["postGroups"] });
+    },
+    onError: (error): void => {
+      console.error(error);
     },
   });
 

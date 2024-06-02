@@ -7,6 +7,7 @@ type Props = {
   feelings: string[];
   tags: string[];
   note: string;
+  isPrivate: boolean;
   date: Date;
 };
 
@@ -16,14 +17,16 @@ export const createPost = async ({
   feelings,
   tags,
   note,
+  isPrivate,
   date,
 }: Props) => {
-  const { data, error } = await supabase.rpc("create_new_post", {
+  const { data, error } = await supabase.rpc("create_new_post_v2", {
     author_id: authorId,
     condition,
     feelings,
     tags,
     note,
+    is_private: isPrivate,
     date: date.toISOString(),
   });
 

@@ -28,7 +28,7 @@ const JournalNote = () => {
     state.note,
     state.updateNote,
   ]);
-  const { condition, feelings, tags, date, resetAll } = useStore();
+  const { condition, feelings, tags, date, isPrivate, resetAll } = useStore();
   const [isPostSuccessModalOpen, setIsPostSuccessModalOpen] = useState(false);
   const createPostMutation = useCreatePost();
   const editPostMutation = useEditPost();
@@ -40,7 +40,7 @@ const JournalNote = () => {
     if (!isEdit) {
       createPostMutation.mutate(
         {
-          post: { condition, feelings, tags, note, date },
+          post: { condition, feelings, tags, note, date, isPrivate },
         },
         {
           onSuccess: () => {
