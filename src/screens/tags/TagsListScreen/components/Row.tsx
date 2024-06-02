@@ -45,8 +45,8 @@ export const Row = ({ name, id }: Props) => {
         <TouchableOpacity
           onPress={() => {
             Alert.alert(
-              "感情の削除",
-              "選択した感情を削除します。よろしいですか？",
+              "タグの削除",
+              "選択したタグを削除します。よろしいですか？",
               [
                 { text: "キャンセル", style: "cancel" },
                 {
