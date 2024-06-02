@@ -3,17 +3,22 @@ import React, { useEffect } from "react";
 
 import { BackButton } from "../../../../../components/back-button";
 import { useGetPost } from "../../../../../hooks/postHooks/useGetPost";
+import { PrivacyButton } from "../../../../../screens/posts/components/PrivacyButton";
 import { DateSelector } from "../../../../../screens/posts/components/date-selector";
 import { useStore } from "../../../../../screens/posts/store/useStore";
 
 export default function Layout() {
   const params = useLocalSearchParams<{ postId: string }>();
   const { data: post, isLoading } = useGetPost(params.postId!);
-  const { date, setDate, resetTo } = useStore(({ date, setDate, resetTo }) => ({
-    date,
-    setDate,
-    resetTo,
-  }));
+  const { date, setDate, isPrivate, setIsPrivate, resetTo } = useStore(
+    ({ date, setDate, isPrivate, setIsPrivate, resetTo }) => ({
+      date,
+      setDate,
+      isPrivate,
+      setIsPrivate,
+      resetTo,
+    }),
+  );
 
   useEffect(() => {
     if (!isLoading && post) {
@@ -22,7 +27,16 @@ export default function Layout() {
   }, [isLoading]);
 
   return (
-    <Stack>
+    <Stack
+      screenOptions={{
+        headerRight: () => (
+          <PrivacyButton
+            isPrivate={isPrivate}
+            onPress={() => setIsPrivate(!isPrivate)}
+          />
+        ),
+      }}
+    >
       <Stack.Screen
         name="condition"
         options={{
