@@ -34,25 +34,9 @@ export default function Layout() {
     >
       <Stack.Screen name="condition" />
 
-      <Stack.Screen
-        name="feelings"
-        options={{
-          headerShadowVisible: false,
-          headerStyle: {
-            backgroundColor: theme.colors.background,
-          },
-        }}
-      />
+      <Stack.Screen name="feelings" />
 
-      <Stack.Screen
-        name="tags"
-        options={{
-          headerShadowVisible: false,
-          headerStyle: {
-            backgroundColor: theme.colors.background,
-          },
-        }}
-      />
+      <Stack.Screen name="tags" />
 
       <Stack.Screen name="note" />
     </Stack>
