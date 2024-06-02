@@ -4,8 +4,6 @@ import {
   SafeAreaView,
   KeyboardAvoidingView,
   Platform,
-  Keyboard,
-  TouchableWithoutFeedback,
   ScrollView,
 } from "react-native";
 
@@ -32,44 +30,42 @@ const JournalFeeling = () => {
         behavior={Platform.OS === "ios" ? "position" : "height"}
         style={{ flex: 1 }}
       >
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "space-between",
+            paddingVertical: 16,
+          }}
+        >
+          <View style={{ flex: 1 }}>
+            <TitleSection />
+
+            <ScrollView>
+              <FeelingList />
+
+              <View style={{ height: 12 }} />
+
+              <AddFeeling />
+            </ScrollView>
+
+            <View style={{ height: 16 }} />
+          </View>
+
           <View
             style={{
-              flex: 1,
-              justifyContent: "space-between",
-              paddingVertical: 16,
+              width: "100%",
+              paddingHorizontal: 16,
             }}
           >
-            <View style={{ flex: 1 }}>
-              <TitleSection />
-
-              <ScrollView>
-                <FeelingList />
-
-                <View style={{ height: 12 }} />
-
-                <AddFeeling />
-              </ScrollView>
-
-              <View style={{ height: 16 }} />
-            </View>
-
-            <View
-              style={{
-                width: "100%",
-                paddingHorizontal: 16,
-              }}
+            <Button
+              onPress={() =>
+                router.push(pathname.replace("/feelings", "/tags"))
+              }
             >
-              <Button
-                onPress={() =>
-                  router.push(pathname.replace("/feelings", "/tags"))
-                }
-              >
-                次へ
-              </Button>
-            </View>
+              次へ
+            </Button>
           </View>
-        </TouchableWithoutFeedback>
+        </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
