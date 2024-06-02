@@ -29,6 +29,9 @@ export default function Layout() {
   return (
     <Stack
       screenOptions={{
+        headerTransparent: true,
+        headerLeft: () => <BackButton />,
+        headerTitle: () => <DateSelector date={date} setDate={setDate} />,
         headerRight: () => (
           <PrivacyButton
             isPrivate={isPrivate}
@@ -37,38 +40,13 @@ export default function Layout() {
         ),
       }}
     >
-      <Stack.Screen
-        name="condition"
-        options={{
-          headerTitle: () => <DateSelector date={date} setDate={setDate} />,
-          headerTransparent: true,
-          headerLeft: () => <BackButton />,
-        }}
-      />
-      <Stack.Screen
-        name="feelings"
-        options={{
-          headerTitle: () => <DateSelector date={date} setDate={setDate} />,
-          headerTransparent: true,
-          headerLeft: () => <BackButton />,
-        }}
-      />
-      <Stack.Screen
-        name="tags"
-        options={{
-          headerTitle: () => <DateSelector date={date} setDate={setDate} />,
-          headerTransparent: true,
-          headerLeft: () => <BackButton />,
-        }}
-      />
-      <Stack.Screen
-        name="note"
-        options={{
-          headerTitle: () => <DateSelector date={date} setDate={setDate} />,
-          headerTransparent: true,
-          headerLeft: () => <BackButton />,
-        }}
-      />
+      <Stack.Screen name="condition" />
+
+      <Stack.Screen name="feelings" />
+
+      <Stack.Screen name="tags" />
+
+      <Stack.Screen name="note" />
     </Stack>
   );
 }
