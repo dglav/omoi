@@ -65,7 +65,7 @@ const SettingsScreen = () => {
               icon={<Bell color={theme.colors.text} size={20} />}
               text="通知設定"
               onPress={() => {
-                Alert.alert("未実装");
+                router.push("/settings/notifications");
               }}
             />
             <SettingsCardButton

@@ -39,7 +39,18 @@ export default function Layout() {
         name="color"
         options={{
           headerTitle: "カラーテーマ",
-          // headerTransparent: true,
+          headerStyle: {
+            backgroundColor: theme.colors.background,
+          },
+          headerShadowVisible: false,
+          headerLeft: () => <BackButton />,
+        }}
+      />
+
+      <Stack.Screen
+        name="notifications"
+        options={{
+          headerTitle: "リマインダー設定",
           headerStyle: {
             backgroundColor: theme.colors.background,
           },

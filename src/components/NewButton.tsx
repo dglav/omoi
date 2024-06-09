@@ -35,7 +35,9 @@ export const Button = ({
 }: Props) => {
   const theme = useAppTheme();
 
-  let textStyle: TextStyle = {};
+  let textStyle: TextStyle = {
+    width: "100%",
+  };
   let iconStyle: ViewStyle = {};
   let contentStyle: ViewStyle = {
     flexDirection: "row",
@@ -48,12 +50,15 @@ export const Button = ({
 
   if (size === "lg") {
     textStyle = {
+      ...textStyle,
       marginVertical: 16,
+      marginHorizontal: 24,
       fontSize: theme.fontStyle.lg[1].size,
       fontWeight: theme.fontStyle.lg[1].weight,
     };
   } else if (size === "sm") {
     textStyle = {
+      ...textStyle,
       marginVertical: 12,
       marginHorizontal: 24,
       fontSize: theme.fontStyle.sm[1].size,
@@ -70,6 +75,8 @@ export const Button = ({
     style = {
       ...style,
       backgroundColor: isSelected ? theme.colors.textLight : theme.colors.white,
+      borderColor: theme.colors.textLight,
+      borderWidth: 1,
     };
   } else if (variant === "text" && isDisabled) {
     textStyle = { ...textStyle, color: theme.colors.textLight };

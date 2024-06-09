@@ -231,6 +231,30 @@ export type Database = {
           },
         ];
       };
+      reminders: {
+        Row: {
+          created_at: string;
+          hour: number;
+          id: string;
+          minute: number;
+          user_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          hour: number;
+          id?: string;
+          minute: number;
+          user_id?: string;
+        };
+        Update: {
+          created_at?: string;
+          hour?: number;
+          id?: string;
+          minute?: number;
+          user_id?: string;
+        };
+        Relationships: [];
+      };
       survey_1: {
         Row: {
           conversation_amount: string;
