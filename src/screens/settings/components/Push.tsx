@@ -3,7 +3,7 @@ import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
 import { RotateCcw } from "lucide-react-native";
 import { useEffect, useRef } from "react";
-import { Platform } from "react-native";
+import { Alert, Platform } from "react-native";
 
 import { SettingsCardButton } from "./settings-card-button";
 import { useNotifySelf } from "../../../hooks/pushNotificationHooks/useNotifySelf";
@@ -70,16 +70,11 @@ async function registerForPushNotificationsAsync() {
 export const Push = () => {
   const notificationListener = useRef<Notifications.Subscription>();
   const responseListener = useRef<Notifications.Subscription>();
+  const pushTokenListener = useRef<Notifications.Subscription>();
 
   const { mutate: updateUser } = useUpdateUser({});
 
   useEffect(() => {
-    registerForPushNotificationsAsync().then(async (token) => {
-      if (token) {
-        updateUser({ updatedUser: { expoPushToken: token } });
-      }
-    });
-
     notificationListener.current =
       Notifications.addNotificationReceivedListener((notification) => {
         console.log(notification);
@@ -90,6 +85,17 @@ export const Push = () => {
         console.log(response);
       });
 
+    pushTokenListener.current = Notifications.addPushTokenListener((token) => {
+      Alert.alert("addPushTokenListener", JSON.stringify(token));
+    });
+
+    registerForPushNotificationsAsync().then(async (token) => {
+      Alert.alert("registerForPushNotificationsAsync", token);
+      if (token) {
+        updateUser({ updatedUser: { expoPushToken: token } });
+      }
+    });
+
     return () => {
       notificationListener.current &&
         Notifications.removeNotificationSubscription(
@@ -97,6 +103,8 @@ export const Push = () => {
         );
       responseListener.current &&
         Notifications.removeNotificationSubscription(responseListener.current);
+      pushTokenListener.current &&
+        Notifications.removePushTokenSubscription(pushTokenListener.current);
     };
   }, []);
 
