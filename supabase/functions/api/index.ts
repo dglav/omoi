@@ -1,4 +1,4 @@
-import { PushController } from "./_shared/Controllers/push/index.ts";
+import { PushController } from "../_shared/Controllers/push/index.ts";
 
 Deno.serve(async (req) => {
   const match = req.url.match("(?<=api).*");
