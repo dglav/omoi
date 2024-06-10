@@ -5,7 +5,7 @@ type CreatePushNotificationInput = {
 };
 
 export class PushNotification {
-  create({ expoPushToken, title, body }: CreatePushNotificationInput) {
+  push({ expoPushToken, title, body }: CreatePushNotificationInput) {
     return fetch("https://exp.host/--/api/v2/push/send", {
       method: "POST",
       headers: {

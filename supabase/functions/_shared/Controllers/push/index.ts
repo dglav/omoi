@@ -18,7 +18,7 @@ export class PushController {
     try {
       const pushNotification = new PushNotification();
 
-      const res = await pushNotification.create({
+      const res = await pushNotification.push({
         expoPushToken,
         title,
         body,

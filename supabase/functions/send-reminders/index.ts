@@ -6,7 +6,7 @@ Deno.serve(async (req) => {
 
   try {
     const body = await req.json();
-    const time = body.time;
+    const time = new Date(body.time);
 
     if (!time) {
       return new Response("エラー", {
@@ -28,12 +28,13 @@ Deno.serve(async (req) => {
       status: 200,
     });
   } catch (error) {
+    console.log(error);
     return new Response("エラー", {
       headers: {
         "content-type": "text/html",
       },
-      status: 400,
-      statusText: error,
+      status: 500,
+      statusText: error.message,
     });
   }
 });

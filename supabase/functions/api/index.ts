@@ -15,7 +15,8 @@ Deno.serve(async (req) => {
   if (req.method === "POST" && resource === "/push") {
     const controller = new PushController();
 
-    return controller.push(req);
+    await controller.push(req);
+    return new Response();
   }
 
   return new Response("no matching route", {

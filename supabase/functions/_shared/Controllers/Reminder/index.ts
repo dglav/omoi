@@ -10,40 +10,29 @@ export class ReminderController {
   async pushIfScheduled(time: Date) {
     const reminderRepository = new ReminderRepository(this.supabase);
     // get all reminders that are set for the appropriate time frame
-    const hour = time.getHours();
+    const hour = time.getHours() + 9 > 23
+      ? time.getHours() + 9 - 24
+      : time.getHours() + 9;
     const minute = time.getMinutes();
     const reminders = await reminderRepository.getAllAtTime(hour, minute);
 
-    if (reminders.error) {
-      throw reminders.error;
-    }
-
-    if (!reminders.count) {
+    if (!reminders.length) {
       return;
     }
 
     // get the user data for each reminder
-    const userIds = reminders.data.map((reminder) => reminder.userId);
-
-    if (!userIds.length) {
-      return;
-    }
+    const userIds = reminders.map((reminder) => reminder.user_id);
 
     const userRepository = new UserRepository(this.supabase);
     const users = await userRepository.getUsersFromIdList(userIds);
 
-    if (users.error) {
-      throw users.error;
-    }
-
-    if (!users.count) {
+    if (users.length === 0) {
       return;
     }
 
-    const pushTokens = users.data.map((user) => user.expo_push_token);
+    const pushTokens = users.map((user) => user.expo_push_token);
 
     if (!pushTokens.length) {
-      console.log("Scheduled a notification but there are no push tokens set");
       return;
     }
 
@@ -51,7 +40,8 @@ export class ReminderController {
     const pusher = new PushNotification();
 
     const pushPromises = pushTokens.map((pushToken) => {
-      pusher.create({
+      console.log("push to: ", pushToken);
+      pusher.push({
         expoPushToken: pushToken,
         title: "感情を記録しよう！",
         body: "omoiの時間です！感情を記録しましょう！",
