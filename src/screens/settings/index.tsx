@@ -61,18 +61,18 @@ const SettingsScreen = () => {
           </SettingsCard>
 
           <SettingsCard title="通知設定">
-            <SettingsCardButton
+            {/* <SettingsCardButton
               icon={<Bell color={theme.colors.text} size={20} />}
               text="通知設定"
               onPress={() => {
-                router.push("/settings/notifications");
+                router.push("/settings/reminders");
               }}
-            />
+            /> */}
             <SettingsCardButton
               icon={<AlarmClock color={theme.colors.text} size={20} />}
               text="リマインダー設定"
               onPress={() => {
-                Alert.alert("未実装");
+                router.push("/settings/reminders");
               }}
             />
           </SettingsCard>

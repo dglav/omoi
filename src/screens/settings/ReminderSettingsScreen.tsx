@@ -15,7 +15,7 @@ import { Reminder } from "../../services/supabase/database/reminders/converter";
 const defaultHour = 20;
 const defaultMinute = 0;
 
-export default function NotificationSettingsScreen() {
+export default function ReminderSettingsScreen() {
   const theme = useAppTheme();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isActionSheetVisible, setIsActionSheeetVisible] = useState(false);

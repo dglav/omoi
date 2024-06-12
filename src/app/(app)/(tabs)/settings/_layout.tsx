@@ -48,7 +48,7 @@ export default function Layout() {
       />
 
       <Stack.Screen
-        name="notifications"
+        name="reminders"
         options={{
           headerTitle: "リマインダー設定",
           headerStyle: {
