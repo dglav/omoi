@@ -10,6 +10,7 @@ import { SettingsCardButton } from "./components/settings-card-button";
 import { ScreenContainer } from "../../components/screen-container";
 import { useSignOut } from "../../hooks/authHooks/useSignOut";
 import { useAppTheme } from "../../hooks/useAppTheme";
+import { PushToPartner } from "./components/PushToPartner";
 // import { isDevelopmentMode } from "../../utils/isDevelopmentMode";
 
 const SettingsScreen = () => {
@@ -109,6 +110,8 @@ const SettingsScreen = () => {
             />
 
             <Push />
+
+            <PushToPartner />
           </SettingsCard>
           {/* )} */}
         </View>

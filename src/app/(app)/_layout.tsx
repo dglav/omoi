@@ -2,12 +2,14 @@ import { Redirect, Stack } from "expo-router";
 import React from "react";
 import { Text } from "react-native";
 
+import { useNotifications } from "../../hooks/useNotifications";
 import { useSession } from "../../providers/AuthProvider";
 import { useInitializePostStore } from "../../screens/posts/hooks/useInitializePostStore";
 import { useStore as usePostStore } from "../../screens/posts/store/useStore";
 
 export default function AppLayout() {
   const { session, isLoading } = useSession();
+  useNotifications();
 
   // useEffect(() => {
   //   const rerouteIfFirstSignIn = async () => {
