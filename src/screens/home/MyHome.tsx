@@ -24,7 +24,9 @@ export const MyHome = () => {
 
   const now = new Date();
   const hour = new Date().getHours();
-  const isMorning = hour > 6 && hour < 12;
+  const isMorning = hour >= 4 && hour < 12;
+  const isAfternoon = hour >= 12 && hour < 19;
+  const isEvening = !isMorning && !isAfternoon;
 
   return (
     <>
@@ -47,12 +49,15 @@ export const MyHome = () => {
               fontWeight: theme.fontStyle.xl[1].weight,
             }}
           >
-            {isMorning ? "おはようございます" : "おつかれさま"}
+            {isMorning && "おはようございます"}
+            {isAfternoon && "こんにちは"}
+            {isEvening && "こんばんは"}
           </Text>
           <Text>
-            {isMorning
-              ? "今日の気分を記録して2人の連続投稿を継続しよう🤝"
-              : "休憩がてら感情を記入しませんか？"}
+            {isMorning && "今日の予定や今の気分を記録しましょう"}
+            {isAfternoon && "少し時間をとって今の気分を記録しましょう"}
+            {isEvening &&
+              "今日はどんな1日でしたか？出来事や感情を記録しましょう"}
           </Text>
         </View>
 
