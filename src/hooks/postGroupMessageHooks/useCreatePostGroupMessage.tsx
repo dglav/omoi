@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { useSession } from "../../providers/AuthProvider";
 import { insertPostGroupMessage } from "../../services/supabase/database/post_group_messages/insertPostGroupMessages";
+import { useNotifyPartner } from "../pushNotificationHooks/useNotifyPartner";
 
 type mutationParams = {
   postGroupId: string;
@@ -17,6 +18,8 @@ export const useCreatePostGroupMessage = ({ onSuccess }: Props) => {
   const { session } = useSession();
   const userId = session?.user.id;
 
+  const { mutate: notifyPartner } = useNotifyPartner();
+
   const mutation = useMutation({
     mutationFn: ({ postGroupId, message }: mutationParams) => {
       if (!userId) {
@@ -28,6 +31,12 @@ export const useCreatePostGroupMessage = ({ onSuccess }: Props) => {
       queryClient.invalidateQueries({
         queryKey: ["postGroupMessages", variables.postGroupId],
       });
+
+      notifyPartner({
+        title: "パートナーがコメントしました",
+        body: "コメントの内容を確認してみよう",
+      });
+
       if (onSuccess) {
         onSuccess();
       }

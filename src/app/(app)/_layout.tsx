@@ -8,8 +8,8 @@ import { useInitializePostStore } from "../../screens/posts/hooks/useInitializeP
 import { useStore as usePostStore } from "../../screens/posts/store/useStore";
 
 export default function AppLayout() {
-  const { session, isLoading } = useSession();
   useNotifications();
+  const { session, isLoading } = useSession();
 
   // useEffect(() => {
   //   const rerouteIfFirstSignIn = async () => {
