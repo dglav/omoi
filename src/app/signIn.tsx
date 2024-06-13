@@ -16,11 +16,10 @@ import {
 import { IS_FIRST_SIGN_IN } from "../asyncStorageConstants";
 import { Button } from "../components/button";
 import { useSignInWithPassword } from "../hooks/authHooks/useSignInWithPassword";
-import { useAppTheme } from "../hooks/useAppTheme";
+import { theme } from "../theme";
 
 export default function LoginScreen() {
   const { width } = useWindowDimensions();
-  const theme = useAppTheme();
   const router = useRouter();
   const [userId, setUserId] = useState<string>();
   const [password, setPassword] = useState<string>();

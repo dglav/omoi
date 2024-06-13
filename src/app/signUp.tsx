@@ -14,11 +14,10 @@ import {
 
 import { Button } from "../components/button";
 import { useSignUp } from "../hooks/authHooks/useSignUp";
-import { useAppTheme } from "../hooks/useAppTheme";
+import { theme } from "../theme";
 import { AuthError } from "../utils/errors";
 
 export default function SignUpScreen() {
-  const theme = useAppTheme();
   const router = useRouter();
   const [userId, setUserId] = useState<string>("");
   const [password, setPassword] = useState<string>("");

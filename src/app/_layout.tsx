@@ -10,6 +10,7 @@ import { HAS_VIEWED_INTRODUCTION } from "../asyncStorageConstants";
 import { BackButton } from "../components/back-button";
 import { AuthProvider } from "../providers/AuthProvider";
 import { ThemeProvider } from "../providers/ThemeProvider";
+import { theme } from "../theme";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -60,7 +61,7 @@ export default function Root() {
                   options={{
                     headerTitle: "ログイン",
                     headerStyle: {
-                      backgroundColor: "#EAF3D3",
+                      backgroundColor: theme.colors.background,
                     },
                     headerShadowVisible: false,
                     headerLeft: () => <BackButton />,
@@ -72,7 +73,7 @@ export default function Root() {
                   options={{
                     headerTitle: "アカウント作成",
                     headerStyle: {
-                      backgroundColor: "#EAF3D3",
+                      backgroundColor: theme.colors.background,
                     },
                     headerShadowVisible: false,
                     headerLeft: () => <BackButton />,
