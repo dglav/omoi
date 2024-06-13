@@ -2,6 +2,8 @@ import { Pressable, View } from "react-native";
 
 import { Text } from "../../components/text";
 import { useAppTheme } from "../../hooks/useAppTheme";
+import { useGetPartner } from "../../hooks/userHooks/useGetPartner";
+import { useGetUser } from "../../hooks/userHooks/useGetUser";
 
 type Props = {
   activeTab: "me" | "partner";
@@ -10,6 +12,11 @@ type Props = {
 
 export const Header = ({ activeTab, setActiveTab }: Props) => {
   const theme = useAppTheme();
+  const { user: me } = useGetUser();
+  const { user: partner } = useGetPartner();
+
+  const myNickname = me?.nickname;
+  const partnerNickname = partner?.nickname;
 
   return (
     <>
@@ -44,7 +51,7 @@ export const Header = ({ activeTab, setActiveTab }: Props) => {
           }}
           onPress={() => setActiveTab("me")}
         >
-          <Text>あなた</Text>
+          <Text>{myNickname ? myNickname : "あなた"}</Text>
         </Pressable>
 
         <Pressable
@@ -57,7 +64,7 @@ export const Header = ({ activeTab, setActiveTab }: Props) => {
           }}
           onPress={() => setActiveTab("partner")}
         >
-          <Text>パートナー</Text>
+          <Text>{partnerNickname ? partnerNickname : "あなた"}</Text>
         </Pressable>
       </View>
 
