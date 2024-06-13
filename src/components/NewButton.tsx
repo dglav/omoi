@@ -97,7 +97,12 @@ export const Button = ({
   }
 
   return (
-    <TouchableOpacity style={style} activeOpacity={0.5} {...props}>
+    <TouchableOpacity
+      style={style}
+      activeOpacity={0.5}
+      disabled={isDisabled}
+      {...props}
+    >
       <View style={contentStyle}>
         <View style={iconStyle}>{icon}</View>
         <Text style={textStyle}>{props.children}</Text>
