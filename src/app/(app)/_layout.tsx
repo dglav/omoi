@@ -2,30 +2,15 @@ import { Redirect, Stack } from "expo-router";
 import React from "react";
 import { Text } from "react-native";
 
+import { useAppTheme } from "../../hooks/useAppTheme";
 import { useNotifications } from "../../hooks/useNotifications";
 import { useSession } from "../../providers/AuthProvider";
 import { useStore as usePostStore } from "../../screens/posts/store/useStore";
 
 export default function AppLayout() {
   useNotifications();
+  const theme = useAppTheme();
   const { session, isLoading } = useSession();
-
-  // useEffect(() => {
-  //   const rerouteIfFirstSignIn = async () => {
-  //     try {
-  //       const value = await AsyncStorage.getItem(IS_FIRST_SIGN_IN);
-  //       if (value !== "false") {
-  //         router.navigate("/survey");
-  //       }
-  //     } catch (e) {
-  //       console.error("getting from async store failed", e);
-  //     }
-  //   };
-
-  //   if (session) {
-  //     rerouteIfFirstSignIn();
-  //   }
-  // }, [session]);
 
   const { resetPostState } = usePostStore((state) => ({
     resetPostState: state.resetAll,
@@ -49,6 +34,18 @@ export default function AppLayout() {
       />
 
       <Stack.Screen name="tutorial" options={{ headerShown: false }} />
+
+      <Stack.Screen
+        name="setup"
+        options={{
+          headerTitle: "カラーテーマ",
+          headerStyle: {
+            backgroundColor: theme.colors.background,
+          },
+          headerShadowVisible: false,
+          headerBackVisible: false,
+        }}
+      />
 
       <Stack.Screen
         name="posts/new"

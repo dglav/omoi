@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
@@ -12,6 +13,7 @@ import {
   ScrollView,
 } from "react-native";
 
+import { IS_FIRST_SIGN_IN } from "../asyncStorageConstants";
 import { Button } from "../components/button";
 import { useSignInWithPassword } from "../hooks/authHooks/useSignInWithPassword";
 import { useAppTheme } from "../hooks/useAppTheme";
@@ -40,6 +42,13 @@ export default function LoginScreen() {
     }
 
     if (data.session) {
+      const value = await AsyncStorage.getItem(IS_FIRST_SIGN_IN);
+
+      if (value !== "false") {
+        router.navigate("/setup");
+        return;
+      }
+
       router.push("/(app)/(tabs)/home");
     }
   }

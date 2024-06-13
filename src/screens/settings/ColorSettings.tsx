@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 
 import { OptionsList } from "../../components/OptionsList";
+import { Button } from "../../components/button";
 import { TitleSubtitleLayout } from "../../components/title-subtitle-layout";
 import { useAppTheme } from "../../hooks/useAppTheme";
 import { ThemeContext } from "../../providers/ThemeProvider";
@@ -16,7 +17,11 @@ const colorOptions = [
   { text: "グレー", value: "grey", hexCode: "#DDDDDD" } as const,
 ];
 
-export const ColorSettingsScreen = () => {
+type Props = {
+  onPress?: () => void;
+};
+
+export const ColorSettingsScreen = ({ onPress }: Props) => {
   const theme = useAppTheme();
   const currentColorOption = colorOptions.find(
     (option) => option.hexCode === theme.colors.background,
@@ -32,21 +37,27 @@ export const ColorSettingsScreen = () => {
       title="カラーテーマ"
       subtitle="好みのカラーテーマを選んでください"
     >
-      <OptionsList
-        options={colorOptions}
-        selectedOption={selectedColor}
-        handleSelectOption={async (value: string) => {
-          const option = colorOptions.find((option) => option.value === value);
-          if (option) {
-            if (updateTheme) {
-              await updateTheme(option.value);
+      <ScrollView style={{ flex: 1 }}>
+        <OptionsList
+          options={colorOptions}
+          selectedOption={selectedColor}
+          handleSelectOption={async (value: string) => {
+            const option = colorOptions.find(
+              (option) => option.value === value,
+            );
+            if (option) {
+              if (updateTheme) {
+                await updateTheme(option.value);
+              }
+              setSelectedColor(option);
             }
-            setSelectedColor(option);
-          }
-        }}
-      />
+          }}
+        />
 
-      <View style={{ height: 12 }} />
+        <View style={{ height: 12 }} />
+
+        {onPress && <Button onPress={onPress}>次へ　→</Button>}
+      </ScrollView>
     </TitleSubtitleLayout>
   );
 };

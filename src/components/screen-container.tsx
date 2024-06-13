@@ -16,8 +16,8 @@ export const ScreenContainer = ({ children }: Props) => {
         backgroundColor: theme.colors.background,
       }}
     >
-      <SafeAreaView>
-        <View style={{ width }}>{children}</View>
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={{ width, flex: 1 }}>{children}</View>
       </SafeAreaView>
     </View>
   );

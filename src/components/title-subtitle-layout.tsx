@@ -14,7 +14,7 @@ export const TitleSubtitleLayout = ({ title, subtitle, children }: Props) => {
 
   return (
     <ScreenContainer>
-      <View style={{ paddingHorizontal: 16, paddingTop: 48 }}>
+      <View style={{ paddingHorizontal: 16, paddingTop: 40, flex: 1 }}>
         <View
           style={{
             width,
