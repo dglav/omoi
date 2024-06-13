@@ -123,7 +123,7 @@ export const EditTagScreenNameScreen = () => {
                 onPress={() => {
                   if (typeof id === "string" && name) {
                     mutation.mutate({ id, name });
-                    router.navigate("/posts/new");
+                    router.navigate("/tags");
                   }
                 }}
               >

@@ -67,7 +67,7 @@ export const EditFeelingsScreenLevelScreen = () => {
           onPress={() => {
             if (typeof id === "string" && name && emotionLevel) {
               mutation.mutate({ id, name, emotionLevel });
-              router.navigate("/posts/new");
+              router.navigate("/feelings");
             }
           }}
         >
