@@ -4,9 +4,12 @@ import React from "react";
 import { BackButton } from "../../../../../components/back-button";
 import { PrivacyButton } from "../../../../../screens/posts/components/PrivacyButton";
 import { DateSelector } from "../../../../../screens/posts/components/date-selector";
+import { useInitializePostStore } from "../../../../../screens/posts/hooks/useInitializePostStore";
 import { useStore } from "../../../../../screens/posts/store/useStore";
 
 export default function Layout() {
+  useInitializePostStore();
+
   const { date, setDate, isPrivate, setIsPrivate } = useStore(
     ({ date, setDate, isPrivate, setIsPrivate, resetTo }) => ({
       date,

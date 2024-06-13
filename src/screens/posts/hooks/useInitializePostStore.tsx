@@ -1,4 +1,5 @@
 import { useGlobalSearchParams } from "expo-router";
+import { useEffect } from "react";
 
 import { useGetPost } from "../../../hooks/postHooks/useGetPost";
 import { useStore } from "../store/useStore";
@@ -12,11 +13,9 @@ export const useInitializePostStore = () => {
     resetTo,
   }));
 
-  const handleInitializePostStore = () => {
+  useEffect(() => {
     if (!isLoading && post) {
       resetTo(post);
     }
-  };
-
-  return { initializePostStore: handleInitializePostStore };
+  }, [isLoading, post]);
 };
