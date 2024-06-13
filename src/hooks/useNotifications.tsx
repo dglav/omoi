@@ -76,13 +76,6 @@ export const useNotifications = () => {
 
   const { mutate: updateUser } = useUpdateUser({});
 
-  // registerForPushNotificationsAsync().then(async (token) => {
-  //   Alert.alert("registerForPushNotificationsAsync", token);
-  //   if (token) {
-  //     updateUser({ updatedUser: { expoPushToken: token } });
-  //   }
-  // });
-
   useEffect(() => {
     notificationListener.current =
       Notifications.addNotificationReceivedListener((notification) => {

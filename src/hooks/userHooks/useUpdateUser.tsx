@@ -36,8 +36,6 @@ export const useUpdateUser = ({ onSuccess }: UseUpdateUserParams) => {
         expo_push_token: expoPushToken,
       };
 
-      Alert.alert(`updateUserPayload`, JSON.stringify(payload));
-
       return updateUser(userId, payload);
     },
     onSuccess: () => {
@@ -50,7 +48,7 @@ export const useUpdateUser = ({ onSuccess }: UseUpdateUserParams) => {
       }
     },
     onError: () => {
-      Alert.alert("post failed");
+      Alert.alert("ユーザー更新に失敗した");
     },
   });
 

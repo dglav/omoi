@@ -38,7 +38,7 @@ const SelfExpression = () => {
       router.push("/tutorial");
     },
     onError: () => {
-      Alert.alert("post failed");
+      Alert.alert("投稿に失敗した");
     },
   });
 

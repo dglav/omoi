@@ -1,17 +1,17 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
-import { AlarmClock, Bell, LogOut, RotateCcw, User } from "lucide-react-native";
+import { AlarmClock, LogOut, RotateCcw, User } from "lucide-react-native";
 import React from "react";
 import { Alert, View, Text, ScrollView } from "react-native";
 
 import { Push } from "./components/Push";
+import { PushToPartner } from "./components/PushToPartner";
 import { SettingsCard } from "./components/settings-card";
 import { SettingsCardButton } from "./components/settings-card-button";
 import { ScreenContainer } from "../../components/screen-container";
 import { useSignOut } from "../../hooks/authHooks/useSignOut";
 import { useAppTheme } from "../../hooks/useAppTheme";
-import { PushToPartner } from "./components/PushToPartner";
-// import { isDevelopmentMode } from "../../utils/isDevelopmentMode";
+import { isDevelopmentMode } from "../../utils/isDevelopmentMode";
 
 const SettingsScreen = () => {
   const theme = useAppTheme();
@@ -45,13 +45,6 @@ const SettingsScreen = () => {
                 router.push("/settings/nickname");
               }}
             />
-            {/* <SettingsCardButton
-            icon={<HeartHandshake color={theme.colors.text} size={20} />}
-            text="ペアリング設定"
-            onPress={() => {
-              router.push("/settings/pair-settings");
-            }}
-          /> */}
             <SettingsCardButton
               icon={<User color={theme.colors.text} size={20} />}
               text="カラーテーマ"
@@ -62,13 +55,6 @@ const SettingsScreen = () => {
           </SettingsCard>
 
           <SettingsCard title="通知設定">
-            {/* <SettingsCardButton
-              icon={<Bell color={theme.colors.text} size={20} />}
-              text="通知設定"
-              onPress={() => {
-                router.push("/settings/reminders");
-              }}
-            /> */}
             <SettingsCardButton
               icon={<AlarmClock color={theme.colors.text} size={20} />}
               text="リマインダー設定"
@@ -77,16 +63,6 @@ const SettingsScreen = () => {
               }}
             />
           </SettingsCard>
-
-          {/* <SettingsCard title="ヘルプ">
-          <SettingsCardButton
-            icon={<HelpCircle color={theme.colors.text} size={20} />}
-            text="お問い合わせ"
-            onPress={() => {
-              Alert.alert("未実装");
-            }}
-          />
-        </SettingsCard> */}
 
           <SettingsCard title="その他">
             <SettingsCardButton
@@ -98,22 +74,22 @@ const SettingsScreen = () => {
             />
           </SettingsCard>
 
-          {/* {isDevelopmentMode && ( */}
-          <SettingsCard title="開発者設定">
-            <SettingsCardButton
-              icon={<RotateCcw color={theme.colors.text} size={20} />}
-              text="Reset Async Storage"
-              onPress={() => {
-                AsyncStorage.clear();
-                Alert.alert("async storage has been reset!");
-              }}
-            />
+          {isDevelopmentMode && (
+            <SettingsCard title="開発者設定">
+              <SettingsCardButton
+                icon={<RotateCcw color={theme.colors.text} size={20} />}
+                text="Reset Async Storage"
+                onPress={() => {
+                  AsyncStorage.clear();
+                  Alert.alert("async storage has been reset!");
+                }}
+              />
 
-            <Push />
+              <Push />
 
-            <PushToPartner />
-          </SettingsCard>
-          {/* )} */}
+              <PushToPartner />
+            </SettingsCard>
+          )}
         </View>
       </ScrollView>
     </ScreenContainer>

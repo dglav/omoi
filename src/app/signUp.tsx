@@ -45,10 +45,6 @@ export default function SignUpScreen() {
     try {
       const { data } = await signUp({ email: userId, password });
 
-      if (!data.session) {
-        Alert.alert("Please check your inbox for email verification!");
-      }
-
       if (data.session) {
         router.push("/home");
       }
