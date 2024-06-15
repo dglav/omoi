@@ -5,16 +5,11 @@ import { Text } from "react-native";
 import { useAppTheme } from "../../hooks/useAppTheme";
 import { useNotifications } from "../../hooks/useNotifications";
 import { useSession } from "../../providers/AuthProvider";
-import { useStore as usePostStore } from "../../screens/posts/store/useStore";
 
 export default function AppLayout() {
   useNotifications();
   const theme = useAppTheme();
   const { session, isLoading } = useSession();
-
-  const { resetPostState } = usePostStore((state) => ({
-    resetPostState: state.resetAll,
-  }));
 
   if (isLoading) {
     return <Text>Loading...</Text>;
@@ -47,13 +42,7 @@ export default function AppLayout() {
         }}
       />
 
-      <Stack.Screen
-        name="posts/new"
-        options={{ headerShown: false }}
-        listeners={() => {
-          return { focus: () => resetPostState() };
-        }}
-      />
+      <Stack.Screen name="posts/new" options={{ headerShown: false }} />
 
       <Stack.Screen
         name="posts/[postId]/edit"

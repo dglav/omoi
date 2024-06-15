@@ -28,6 +28,7 @@ export default function Layout() {
             onPress={() => setIsPrivate(!isPrivate)}
           />
         ),
+        animation: "simple_push",
       }}
     >
       <Stack.Screen name="condition" />

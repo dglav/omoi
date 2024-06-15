@@ -5,7 +5,7 @@ import { BackButton } from "../../../../components/back-button";
 
 export default function Layout() {
   return (
-    <Stack>
+    <Stack screenOptions={{ animation: "simple_push" }}>
       <Stack.Screen
         name="name"
         options={{
