@@ -5,8 +5,8 @@ import { useState } from "react";
 import { FlatList, View } from "react-native";
 import { FAB } from "react-native-paper";
 
-import { Container } from "../../components/Feed/Container";
-import { Header } from "../../components/Feed/Header";
+import { Container } from "../../components/FeedAndAnalysisHeader/Container";
+import { Header } from "../../components/FeedAndAnalysisHeader/Header";
 import { MyJournalEntriesCardPast } from "../../components/JournalEntriesCard/MyJournalEntriesCardPast";
 import { MyJournalEntriesCardToday } from "../../components/JournalEntriesCard/MyJournalEntriesCardToday";
 import { PartnerJournalEntriesCardPast } from "../../components/JournalEntriesCard/PartnerJournalEntriesCardPast";
@@ -26,7 +26,7 @@ export default function LogScreen() {
 
   return (
     <Container activeTab={activeTab}>
-      <Header activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Header title="Omoi" activeTab={activeTab} setActiveTab={setActiveTab} />
 
       <FlatList
         style={{

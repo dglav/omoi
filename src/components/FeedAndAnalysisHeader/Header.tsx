@@ -1,16 +1,17 @@
 import { Pressable, View } from "react-native";
 
-import { Text } from "../../components/text";
+import { Text } from "../text";
 import { useAppTheme } from "../../hooks/useAppTheme";
 import { useGetPartner } from "../../hooks/userHooks/useGetPartner";
 import { useGetUser } from "../../hooks/userHooks/useGetUser";
 
 type Props = {
+  title: string;
   activeTab: "me" | "partner";
   setActiveTab: (tab: "me" | "partner") => void;
 };
 
-export const Header = ({ activeTab, setActiveTab }: Props) => {
+export const Header = ({ title, activeTab, setActiveTab }: Props) => {
   const theme = useAppTheme();
   const { user: me } = useGetUser();
   const { user: partner } = useGetPartner();
@@ -30,7 +31,7 @@ export const Header = ({ activeTab, setActiveTab }: Props) => {
             letterSpacing: 2,
           }}
         >
-          Omoi
+          {title}
         </Text>
       </View>
 

@@ -22,6 +22,7 @@ const TabsLayout = () => {
           tabBarIcon: ({ color }) => <Home size={24} color={color} />,
         }}
       />
+
       <Tabs.Screen
         name="analysis"
         options={{
@@ -29,6 +30,7 @@ const TabsLayout = () => {
           tabBarIcon: ({ color }) => <PieChart size={24} color={color} />,
         }}
       />
+
       <Tabs.Screen
         name="log"
         options={{
@@ -36,6 +38,7 @@ const TabsLayout = () => {
           tabBarIcon: ({ color }) => <NotebookText size={24} color={color} />,
         }}
       />
+
       <Tabs.Screen
         name="settings"
         options={{
