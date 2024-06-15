@@ -37,6 +37,7 @@
     "react-art": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-native": "0.73.6",
+    "react-native-context-menu-view": "^1.15.0",
     "react-native-gesture-handler": "~2.14.0",
     "react-native-ios-utilities": "^4.4.5",
     "react-native-paper": "^5.12.3",
