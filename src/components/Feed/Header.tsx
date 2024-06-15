@@ -64,7 +64,7 @@ export const Header = ({ activeTab, setActiveTab }: Props) => {
           }}
           onPress={() => setActiveTab("partner")}
         >
-          <Text>{partnerNickname ? partnerNickname : "あなた"}</Text>
+          <Text>{partnerNickname ? partnerNickname : "パートナー"}</Text>
         </Pressable>
       </View>
 
