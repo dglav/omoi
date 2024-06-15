@@ -30,13 +30,15 @@ export const useCreatePost = () => {
       }
       return createPost({ authorId: userId, ...post });
     },
-    onSuccess: () => {
+    onSuccess: (_, variables): any => {
       queryClient.invalidateQueries({ queryKey: ["postGroups"] });
 
-      notifyPartner({
-        title: "パートナーがジャーナルを投稿しました",
-        body: "共有された記録を確認してリアクションしましょう！",
-      });
+      if (!variables.post.isPrivate) {
+        notifyPartner({
+          title: "パートナーがジャーナルを投稿しました",
+          body: "共有された記録を確認してリアクションしましょう！",
+        });
+      }
     },
     onError: (error): void => {
       console.error(error);
