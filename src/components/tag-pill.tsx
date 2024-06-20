@@ -5,9 +5,11 @@ import { tagMap } from "../screens/posts/TagsScreen/components/TagList/hooks/tag
 
 type Props = {
   tag: string;
+  paddingVertical?: number;
+  paddingHorizontal?: number;
 };
 
-export const TagPill = ({ tag }: Props) => {
+export const TagPill = ({ tag, paddingVertical, paddingHorizontal }: Props) => {
   const theme = useAppTheme();
   const { text } = tagMap[tag];
 
@@ -18,8 +20,8 @@ export const TagPill = ({ tag }: Props) => {
         borderRadius: 4,
         borderStyle: "solid",
         borderWidth: 1,
-        paddingHorizontal: 4,
-        paddingVertical: 2,
+        paddingHorizontal: paddingHorizontal ?? 4,
+        paddingVertical: paddingVertical ?? 2,
         fontSize: theme.fontStyle.xs[1].size,
         fontWeight: theme.fontStyle.xs[1].weight,
         backgroundColor: theme.colors.white,

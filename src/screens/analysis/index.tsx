@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 
 import { Card } from "./components/Card";
 import { Container } from "../../components/FeedAndAnalysisHeader/Container";
@@ -12,9 +12,13 @@ export const AnalysisScreen = () => {
     <Container activeTab={activeTab}>
       <Header title="分析" activeTab={activeTab} setActiveTab={setActiveTab} />
 
-      <View style={{ height: 32 }} />
+      <ScrollView style={{ width: "100%" }}>
+        <View style={{ height: 32 }} />
 
-      <Card />
+        <Card />
+
+        <View style={{ height: 32 }} />
+      </ScrollView>
     </Container>
   );
 };

@@ -27,8 +27,20 @@ export const Card = () => {
       >
         <Header />
         <ConditionSection />
+        <View style={{ height: 60 }} />
         <FeelingSection />
+        <View style={{ height: 60 }} />
         <TagSection />
+        <View style={{ height: 24 }} />
+
+        <View
+          style={{
+            height: 1,
+            width: '100%',
+            backgroundColor: theme.colors.textLight,
+          }}
+        />
+
         <Footer />
       </View>
     </View>
