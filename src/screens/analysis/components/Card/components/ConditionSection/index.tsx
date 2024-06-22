@@ -81,7 +81,7 @@ export const ConditionSection = ({ startDate, endDate }: Props) => {
           {[0, 1, 2, 3, 4, 5, 6].map((dayDiff) => {
             const currentDate = addDay(startDate, dayDiff);
             const month = currentDate.getMonth() + 1;
-            const day = currentDate.getDay();
+            const day = currentDate.getDate();
             const weekday = currentDate.toLocaleString("ja-JP", {
               weekday: "short",
             });
