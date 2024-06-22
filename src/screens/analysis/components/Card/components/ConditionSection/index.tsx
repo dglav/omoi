@@ -44,7 +44,7 @@ export const ConditionSection = ({ startDate, endDate }: Props) => {
             data={timeBoundConditions} // 👈 specify your data
             xKey="dayDiff" // 👈 specify data key for x-axis
             yKeys={["conditionLevel"]} // 👈 specify data keys used for y-axis
-            domain={{ x: [0, 6], y: [-0.1, 4.1] }}
+            domain={{ x: [0, 6], y: [0, 4] }}
             axisOptions={{
               tickCount: {
                 x: 7,
