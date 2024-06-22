@@ -11,7 +11,7 @@ type Props = {
 
 export const TagPill = ({ tag, paddingVertical, paddingHorizontal }: Props) => {
   const theme = useAppTheme();
-  const { text } = tagMap[tag];
+  const text = tagMap[tag]?.text ?? tag;
 
   return (
     <Text
