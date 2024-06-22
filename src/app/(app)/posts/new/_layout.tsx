@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { BackButton } from "../../../../components/back-button";
 import { PrivacyButton } from "../../../../screens/posts/components/PrivacyButton";
@@ -15,6 +15,14 @@ export default function Layout() {
       setIsPrivate,
     }),
   );
+
+  /**
+    * Without this, the post date is always going to show to date from the last time the user 
+    * attempted to add a new journal entry.
+    */
+  useEffect(() => {
+    setDate(new Date());
+  }, []);
 
   return (
     <Stack
