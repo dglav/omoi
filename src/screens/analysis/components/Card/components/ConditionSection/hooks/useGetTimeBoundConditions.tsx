@@ -1,19 +1,18 @@
 import { diffDays } from "@formkit/tempo";
-import { useGetPosts } from "../../../../../../../hooks/postHooks/useGetPosts"
-import { Post } from "../../../../../../../services/supabase/database/posts/converter";
+import { useGetPosts } from "../../../../../../../hooks/postHooks/useGetPosts";
 
 const conditionLevelMap = {
-  'reallyBad': 1,
-  'bad': 2,
-  'average': 3,
-  'good': 4,
-  'reallyGood': 5
+  "reallyBad": 0,
+  "bad": 1,
+  "average": 2,
+  "good": 3,
+  "reallyGood": 4,
 } as const;
 
 type Props = {
-  startDate: Date,
-  endDate: Date,
-}
+  startDate: Date;
+  endDate: Date;
+};
 
 type TimeBoundConditions = {
   dayDiff: number;
@@ -21,25 +20,29 @@ type TimeBoundConditions = {
 }[];
 
 export const useGetTimeBoundConditions = ({ startDate, endDate }: Props): {
-  timeBoundConditions: TimeBoundConditions; isLoading: boolean;
+  timeBoundConditions: TimeBoundConditions;
+  isLoading: boolean;
 } => {
-  const { data, isLoading } = useGetPosts({ where: { startDate, endDate } })
+  const { data, isLoading } = useGetPosts({
+    who: "me",
+    where: { startDate, endDate },
+  });
 
   if (isLoading || !data) {
     const timeBoundConditions: TimeBoundConditions = [];
     return {
       timeBoundConditions,
-      isLoading
-    }
+      isLoading,
+    };
   }
 
   const timeBoundConditions = data.reduce((postGroups, post) => {
-    const postDayDiff = diffDays(post.date, startDate, 'floor');
+    const postDayDiff = diffDays(post.date, startDate, "floor");
 
     if (!postGroups[postDayDiff]) {
       postGroups[postDayDiff] = [conditionLevelMap[post.condition]];
     } else {
-      postGroups[postDayDiff].push(conditionLevelMap[post.condition])
+      postGroups[postDayDiff].push(conditionLevelMap[post.condition]);
     }
 
     return postGroups;
@@ -48,7 +51,7 @@ export const useGetTimeBoundConditions = ({ startDate, endDate }: Props): {
       return sum + level;
     }, 0) / levelsGroup.length;
     return { dayDiff: index, conditionLevel: averageLevel };
-  }).filter(dataPoint => !Number.isNaN(dataPoint.conditionLevel));
+  }).filter((dataPoint) => !Number.isNaN(dataPoint.conditionLevel));
 
-  return { timeBoundConditions, isLoading }
-}
+  return { timeBoundConditions, isLoading };
+};

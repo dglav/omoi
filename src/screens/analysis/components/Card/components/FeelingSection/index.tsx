@@ -4,9 +4,36 @@ import { Text } from "../../../../../../components/text";
 import { useAppTheme } from "../../../../../../hooks/useAppTheme";
 import { CategoryStats } from "./components/CategoryStats";
 import { FeelingDot } from "./components/FeelingDot";
+import { useGetTimeBoundFeelings } from "./hooks/useGetTimeBoundFeelings";
 
-export const FeelingSection = () => {
+type Props = {
+  startDate: Date;
+  endDate: Date;
+};
+
+export const FeelingSection = ({ startDate, endDate }: Props) => {
   const theme = useAppTheme();
+  const {
+    topEmotions,
+    goodEmotionCount,
+    averageEmotionCount,
+    badEmotionCount,
+    totalEmotionCount,
+  } = useGetTimeBoundFeelings({ startDate, endDate });
+
+  const shouldDisplayFeelingStatusBar = typeof goodEmotionCount === "number" &&
+    typeof averageEmotionCount === "number" &&
+    typeof badEmotionCount === "number" &&
+    typeof totalEmotionCount === "number";
+
+  if (!shouldDisplayFeelingStatusBar) {
+    return <View style={{ width: "100%" }} />;
+  }
+
+  const goodFeelingPercentage = 100 * goodEmotionCount / totalEmotionCount;
+  const averageFeelingPercentage = 100 * averageEmotionCount /
+    totalEmotionCount;
+  const badFeelingPercentage = 100 * badEmotionCount / totalEmotionCount;
 
   return (
     <View style={{ width: "100%" }}>
@@ -42,19 +69,23 @@ export const FeelingSection = () => {
         <View
           style={{
             height: "100%",
-            width: "36%",
+            width: `${badFeelingPercentage}%`,
             backgroundColor: "#6D9CF8",
             borderTopLeftRadius: 16,
             borderBottomLeftRadius: 16,
           }}
         />
         <View
-          style={{ height: "100%", width: "24%", backgroundColor: "#7CD185" }}
+          style={{
+            height: "100%",
+            width: `${averageFeelingPercentage}%`,
+            backgroundColor: "#7CD185",
+          }}
         />
         <View
           style={{
             height: "100%",
-            width: "40%",
+            width: `${goodFeelingPercentage}%`,
             backgroundColor: "#F89F6D",
             borderTopRightRadius: 16,
             borderBottomRightRadius: 16,
@@ -73,18 +104,18 @@ export const FeelingSection = () => {
       >
         <CategoryStats
           title="不快感情"
-          currentWeekPercentage={36}
-          lastWeekPercentage={48}
+          currentWeekPercentage={Math.round(badFeelingPercentage)}
+        // lastWeekPercentage={48}
         />
         <CategoryStats
           title="ニュートラル"
-          currentWeekPercentage={24}
-          lastWeekPercentage={12}
+          currentWeekPercentage={Math.round(averageFeelingPercentage)}
+        // lastWeekPercentage={12}
         />
         <CategoryStats
           title="快感情"
-          currentWeekPercentage={40}
-          lastWeekPercentage={40}
+          currentWeekPercentage={Math.round(goodFeelingPercentage)}
+        // lastWeekPercentage={40}
         />
       </View>
 

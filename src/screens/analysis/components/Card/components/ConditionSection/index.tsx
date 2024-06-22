@@ -44,7 +44,7 @@ export const ConditionSection = ({ startDate, endDate }: Props) => {
             data={timeBoundConditions} // 👈 specify your data
             xKey="dayDiff" // 👈 specify data key for x-axis
             yKeys={["conditionLevel"]} // 👈 specify data keys used for y-axis
-            domain={{ x: [0, 6], y: [0, 5] }}
+            domain={{ x: [0, 6], y: [-0.1, 4.1] }}
             axisOptions={{
               tickCount: {
                 x: 7,
@@ -88,6 +88,7 @@ export const ConditionSection = ({ startDate, endDate }: Props) => {
 
             return (
               <View
+                key={`${month}/${day}`}
                 style={{
                   alignItems: "center",
                 }}

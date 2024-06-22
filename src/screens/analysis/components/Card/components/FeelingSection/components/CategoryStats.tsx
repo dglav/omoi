@@ -6,14 +6,16 @@ import { useAppTheme } from "../../../../../../../hooks/useAppTheme";
 type Props = {
   title: string;
   currentWeekPercentage: number;
-  lastWeekPercentage: number;
+  lastWeekPercentage?: number;
 };
 
 export const CategoryStats = (
   { title, currentWeekPercentage, lastWeekPercentage }: Props,
 ) => {
   const theme = useAppTheme();
-  const percentChange = currentWeekPercentage - lastWeekPercentage;
+  const percentChange = lastWeekPercentage
+    ? currentWeekPercentage - lastWeekPercentage
+    : null;
 
   return (
     <View style={{ flex: 1, alignItems: "center" }}>
@@ -46,17 +48,20 @@ export const CategoryStats = (
           %
         </Text>
       </View>
-      <Text
-        style={{
-          color: percentChange >= 0
-            ? theme.colors.primary
-            : theme.colors.danger,
-          fontSize: theme.fontStyle.xs[1].size,
-          fontWeight: theme.fontStyle.xs[1].weight,
-        }}
-      >
-        {percentChange}%
-      </Text>
+
+      {percentChange && (
+        <Text
+          style={{
+            color: percentChange >= 0
+              ? theme.colors.primary
+              : theme.colors.danger,
+            fontSize: theme.fontStyle.xs[1].size,
+            fontWeight: theme.fontStyle.xs[1].weight,
+          }}
+        >
+          {`${percentChange > 0 ? "+" : ""}${percentChange}%`}
+        </Text>
+      )}
     </View>
   );
 };

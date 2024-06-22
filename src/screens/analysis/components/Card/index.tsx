@@ -12,7 +12,7 @@ import { weekEnd, weekStart } from "@formkit/tempo";
 export const Card = () => {
   const theme = useAppTheme();
 
-  const [date, setDate] = useState(new Date())
+  const [date, setDate] = useState(new Date());
 
   const startDate = weekStart(date, 1);
   const endDate = weekEnd(date, 1);
@@ -34,7 +34,7 @@ export const Card = () => {
         <Header timePeriod={{ start: startDate, end: endDate }} />
         <ConditionSection startDate={startDate} endDate={endDate} />
         <View style={{ height: 60 }} />
-        <FeelingSection />
+        <FeelingSection startDate={startDate} endDate={endDate} />
         <View style={{ height: 60 }} />
         <TagSection />
         <View style={{ height: 24 }} />
@@ -42,7 +42,7 @@ export const Card = () => {
         <View
           style={{
             height: 1,
-            width: '100%',
+            width: "100%",
             backgroundColor: theme.colors.textLight,
           }}
         />
