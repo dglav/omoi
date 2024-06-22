@@ -20,7 +20,7 @@ export const useGetPostGroups = ({ who, options }: Props) => {
     queryKey: ["postGroups", userId, options?.limit, options?.laterThan],
     queryFn: () => {
       if (!userId) {
-        throw new Error("user is not authenticated");
+        return null;
       }
 
       const input: Parameters<typeof getPostGroups>[0] = { userId };
