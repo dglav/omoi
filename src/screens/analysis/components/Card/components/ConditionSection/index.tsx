@@ -9,7 +9,9 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SharedValue } from "react-native-reanimated";
 import { Area, CartesianChart, useChartPressState } from "victory-native";
 
-import { useAppTheme } from "../../../../../hooks/useAppTheme";
+import { useAppTheme } from "../../../../../../hooks/useAppTheme";
+import { useGetTimeBoundConditions } from "./hooks/useGetTimeBoundConditions";
+import { addDay } from "@formkit/tempo";
 
 const DATA = Array.from({ length: 7 }, (_, i) => ({
   day: i,
@@ -22,8 +24,17 @@ const INIT_STATE = { x: 0, y: { highTmp: 0, lowTmp: 0 } } as const;
 const h = 400;
 const w = 0;
 
-export const ConditionSection = () => {
+type Props = {
+  startDate: Date,
+  endDate: Date,
+}
+
+export const ConditionSection = ({ startDate, endDate }: Props) => {
   const theme = useAppTheme();
+  const {
+    timeBoundConditions,
+    isLoading
+  } = useGetTimeBoundConditions({ startDate, endDate })
 
   const { state, isActive } = useChartPressState(INIT_STATE);
 
@@ -43,12 +54,11 @@ export const ConditionSection = () => {
       <GestureHandlerRootView
         style={{ height: 300, width: "100%", paddingHorizontal: 32 }}
       >
-        <CartesianChart
-          data={DATA} // 👈 specify your data
-          xKey="day" // 👈 specify data key for x-axis
-
-          yKeys={["highTmp"]} // 👈 specify data keys used for y-axis
-          domain={{ y: [0, 100] }}
+        {!isLoading && <CartesianChart
+          data={timeBoundConditions} // 👈 specify your data
+          xKey="dayDiff" // 👈 specify data key for x-axis
+          yKeys={["conditionLevel"]} // 👈 specify data keys used for y-axis
+          domain={{ x: [0, 6], y: [0, 5] }}
           axisOptions={{
             tickCount: {
               x: 7,
@@ -60,7 +70,7 @@ export const ConditionSection = () => {
             return (
               <>
                 <Area
-                  points={points.highTmp}
+                  points={points.conditionLevel}
                   y0={chartBounds.bottom}
                   animate={{ type: "timing", duration: 300 }}
                   curveType="natural"
@@ -78,20 +88,25 @@ export const ConditionSection = () => {
             );
           }}
         </CartesianChart>
+        }
 
         <View style={{
           flexDirection: 'row',
           width: "100%",
           justifyContent: 'space-between'
         }}>
-          {DATA.map((value) => {
-            const date = new Date();
+          {[0, 1, 2, 3, 4, 5, 6].map((dayDiff) => {
+            const currentDate = addDay(startDate, dayDiff);
+            const month = currentDate.getMonth() + 1;
+            const day = currentDate.getDay();
+            const weekday = currentDate.toLocaleString('ja-JP', { weekday: 'short' });
+
             return (
               <View style={{
                 alignItems: 'center'
               }}>
-                <Text>{`${date.getMonth() + 1}/${date.getDay()}`}</Text>
-                <Text>{date.toLocaleString('ja-JP', { weekday: 'short' })}</Text>
+                <Text>{`${month}/${day}`}</Text>
+                <Text>{weekday}</Text>
               </View>)
           })}
         </View>

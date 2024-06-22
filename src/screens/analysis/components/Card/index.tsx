@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View } from "react-native";
 
 import { ConditionSection } from "./components/ConditionSection";
@@ -7,9 +7,15 @@ import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { TagSection } from "./components/TagSection";
 import { useAppTheme } from "../../../../hooks/useAppTheme";
+import { weekEnd, weekStart } from "@formkit/tempo";
 
 export const Card = () => {
   const theme = useAppTheme();
+
+  const [date, setDate] = useState(new Date())
+
+  const startDate = weekStart(date, 1);
+  const endDate = weekEnd(date, 1);
 
   return (
     <View
@@ -25,8 +31,8 @@ export const Card = () => {
           alignItems: "center",
         }}
       >
-        <Header />
-        <ConditionSection />
+        <Header timePeriod={{ start: startDate, end: endDate }} />
+        <ConditionSection startDate={startDate} endDate={endDate} />
         <View style={{ height: 60 }} />
         <FeelingSection />
         <View style={{ height: 60 }} />

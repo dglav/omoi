@@ -2,8 +2,15 @@ import React from "react";
 import { Text, View } from "react-native";
 
 import { useAppTheme } from "../../../../../hooks/useAppTheme";
+import { format } from "@formkit/tempo";
 
-export const Header = () => {
+type Props = {
+  timePeriod: {
+    start: Date;
+    end: Date;
+  }
+}
+export const Header = ({ timePeriod }: Props) => {
   const theme = useAppTheme();
 
   return (
@@ -16,7 +23,7 @@ export const Header = () => {
           textAlign: "center",
         }}
       >
-        2/20~2/27
+        {`${format(timePeriod.start, 'M/D')} ~ ${format(timePeriod.end, 'M/D')}`}
       </Text>
 
       <View
