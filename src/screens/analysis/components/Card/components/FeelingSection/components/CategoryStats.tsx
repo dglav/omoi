@@ -1,21 +1,22 @@
-
 import { View } from "react-native";
 
-import { Text } from "../../../../../../components/text";
-import { useAppTheme } from "../../../../../../hooks/useAppTheme";
+import { Text } from "../../../../../../../components/text";
+import { useAppTheme } from "../../../../../../../hooks/useAppTheme";
 
 type Props = {
   title: string;
   currentWeekPercentage: number;
   lastWeekPercentage: number;
-}
+};
 
-export const CategoryStats = ({ title, currentWeekPercentage, lastWeekPercentage }: Props) => {
+export const CategoryStats = (
+  { title, currentWeekPercentage, lastWeekPercentage }: Props,
+) => {
   const theme = useAppTheme();
   const percentChange = currentWeekPercentage - lastWeekPercentage;
 
   return (
-    <View style={{ flex: 1, alignItems: 'center' }}>
+    <View style={{ flex: 1, alignItems: "center" }}>
       <Text
         style={{
           fontSize: theme.fontStyle.xs[3].size,
@@ -27,7 +28,7 @@ export const CategoryStats = ({ title, currentWeekPercentage, lastWeekPercentage
 
       <View style={{ height: 5 }} />
 
-      <View style={{ flexDirection: 'row', alignItems: 'baseline', gap: 2 }}>
+      <View style={{ flexDirection: "row", alignItems: "baseline", gap: 2 }}>
         <Text
           style={{
             fontSize: theme.fontStyle.lg[1].size,
@@ -47,7 +48,9 @@ export const CategoryStats = ({ title, currentWeekPercentage, lastWeekPercentage
       </View>
       <Text
         style={{
-          color: percentChange >= 0 ? theme.colors.primary : theme.colors.danger,
+          color: percentChange >= 0
+            ? theme.colors.primary
+            : theme.colors.danger,
           fontSize: theme.fontStyle.xs[1].size,
           fontWeight: theme.fontStyle.xs[1].weight,
         }}

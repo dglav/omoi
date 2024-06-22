@@ -2,8 +2,8 @@ import { View } from "react-native";
 
 import { Text } from "../../../../../../components/text";
 import { useAppTheme } from "../../../../../../hooks/useAppTheme";
-import { CategoryStats } from "./CategoryStats";
-import { FeelingDot } from "./FeelingDot";
+import { CategoryStats } from "./components/CategoryStats";
+import { FeelingDot } from "./components/FeelingDot";
 
 export const FeelingSection = () => {
   const theme = useAppTheme();
@@ -64,25 +64,41 @@ export const FeelingSection = () => {
 
       <View style={{ height: 28 }} />
 
-      <View style={{
-        paddingHorizontal: 20,
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-      }}>
-        <CategoryStats title="不快感情" currentWeekPercentage={36} lastWeekPercentage={48} />
-        <CategoryStats title="ニュートラル" currentWeekPercentage={24} lastWeekPercentage={12} />
-        <CategoryStats title="快感情" currentWeekPercentage={40} lastWeekPercentage={40} />
+      <View
+        style={{
+          paddingHorizontal: 20,
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <CategoryStats
+          title="不快感情"
+          currentWeekPercentage={36}
+          lastWeekPercentage={48}
+        />
+        <CategoryStats
+          title="ニュートラル"
+          currentWeekPercentage={24}
+          lastWeekPercentage={12}
+        />
+        <CategoryStats
+          title="快感情"
+          currentWeekPercentage={40}
+          lastWeekPercentage={40}
+        />
       </View>
 
-      <View style={{
-        paddingHorizontal: 60,
-        paddingTop: 16,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-        columnGap: 50,
-        rowGap: 12
-      }}>
+      <View
+        style={{
+          paddingHorizontal: 60,
+          paddingTop: 16,
+          flexDirection: "row",
+          justifyContent: "space-between",
+          flexWrap: "wrap",
+          columnGap: 50,
+          rowGap: 12,
+        }}
+      >
         <FeelingDot />
         <FeelingDot />
         <FeelingDot />
