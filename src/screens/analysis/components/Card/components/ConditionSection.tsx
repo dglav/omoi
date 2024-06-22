@@ -1,13 +1,10 @@
 import {
   Circle,
   LinearGradient,
-  listFontFamilies,
-  matchFont,
-  useFont,
   vec,
 } from "@shopify/react-native-skia";
 import React from "react";
-import { Platform, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SharedValue } from "react-native-reanimated";
 import { Area, CartesianChart, useChartPressState } from "victory-native";
@@ -24,20 +21,6 @@ const INIT_STATE = { x: 0, y: { highTmp: 0, lowTmp: 0 } } as const;
 
 const h = 400;
 const w = 0;
-
-const fontFamlies = listFontFamilies();
-console.log({ fontFamlies });
-const fontFamily = Platform.select({
-  ios: "Hiragino Maru Gothic ProN",
-  default: "serif",
-});
-const fontStyle = {
-  fontFamily,
-  fontSize: 14,
-  fontStyle: "italic" as const,
-  fontWeight: "bold" as const,
-};
-const font = matchFont(fontStyle);
 
 export const ConditionSection = () => {
   const theme = useAppTheme();
@@ -66,20 +49,11 @@ export const ConditionSection = () => {
 
           yKeys={["highTmp"]} // 👈 specify data keys used for y-axis
           domain={{ y: [0, 100] }}
-          // padding={{ left: 4, right: 10 }}
-          // domainPadding={{
-          //   left: 10, right: 20
-          // }}
           axisOptions={{
             tickCount: {
               x: 7,
               y: 0,
             },
-            // font,
-            // tickValues: {
-            //   x: [0, 1, 2, 3, 4, 5, 6],
-            //   y: [],
-            // },
           }}
         >
           {({ points, chartBounds }) => {
