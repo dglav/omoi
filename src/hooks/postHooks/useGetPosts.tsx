@@ -1,30 +1,45 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { useSession } from "../../providers/AuthProvider";
 import { getPosts } from "../../services/supabase/database/posts/getPosts";
+import { useGetUser } from "../userHooks/useGetUser";
 
 type Props = {
+  who: "me" | "partner";
   where?: {
     startDate?: Date;
     endDate?: Date;
-  }
-}
+  };
+};
 
-export const useGetPosts = ({ where }: Props) => {
-  const { session } = useSession();
-
-  const userId = session?.user.id;
+export const useGetPosts = ({ who, where }: Props) => {
+  const { user } = useGetUser();
+  const userId = who === "me" ? user?.id : user?.partner_user_id;
 
   const { data, isLoading, isError, status } = useQuery({
     queryKey: ["posts"],
     queryFn: () => {
       if (!userId) {
-        throw new Error("user is not authenticated");
+        return null;
       }
 
-      return getPosts({ where });
+      const input: Parameters<typeof getPosts>[0] = { userId };
+
+      if (where?.startDate) {
+        input["startDate"] = where.startDate;
+      }
+
+      if (where?.endDate) {
+        input["endDate"] = where.endDate;
+      }
+
+      if (who === "partner") {
+        input["filterPrivate"] = true;
+      }
+
+      return getPosts(input);
     },
-    staleTime: Infinity,
+    enabled: !!user && !!userId,
+    staleTime: 10 * 1000, // 10 seconds
   });
 
   return { data, isLoading, isError, status };

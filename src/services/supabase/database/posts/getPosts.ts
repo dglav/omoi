@@ -3,26 +3,30 @@ import { SupabaseDatabaseError } from "../../error";
 import { supabase } from "../../index";
 
 type Params = {
-  where?: {
-    startDate?: Date;
-    endDate?: Date;
-  }
+  userId: string;
+  startDate?: Date;
+  endDate?: Date;
+  filterPrivate?: boolean;
 };
 
-export const getPosts = async ({ where }: Params): Promise<Post[]> => {
+export const getPosts = async (
+  { userId, startDate, endDate, filterPrivate }: Params,
+): Promise<Post[]> => {
   let query = supabase
     .from("posts")
-    .select("*")
+    .select("*").eq("author_id", userId);
 
-  if (where?.startDate) {
-    query = query.gte('date', where.startDate.toISOString())
-
+  if (startDate) {
+    query = query.gte("date", startDate.toISOString());
   }
 
-  if (where?.endDate) {
-    query = query.lt('date', where.endDate.toISOString())
+  if (endDate) {
+    query = query.lt("date", endDate.toISOString());
   }
 
+  if (filterPrivate) {
+    query.is("is_private", false);
+  }
 
   const { data: posts, error } = await query;
 
@@ -30,5 +34,7 @@ export const getPosts = async ({ where }: Params): Promise<Post[]> => {
     throw new SupabaseDatabaseError(error);
   }
 
-  return posts.map(post => fromSupabase(post));
+  console.log({ posts });
+
+  return posts.map((post) => fromSupabase(post));
 };
