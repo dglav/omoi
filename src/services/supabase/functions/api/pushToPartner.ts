@@ -12,7 +12,7 @@ export const pushToPartner = async (payload: {
     throw new Error("Not authorized");
   }
 
-  const res = await fetch(`${baseUrl}/push`, {
+  const res = await fetch(`${baseUrl}/pushToPartner`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
