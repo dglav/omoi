@@ -5,7 +5,7 @@ export default {
     owner: "dglav",
     name: "omoi",
     slug: "omoi",
-    version: "0.1.0",
+    version: "0.1.1",
     orientation: "portrait",
     icon: "./assets/images/icon.png",
     userInterfaceStyle: "light",
@@ -18,7 +18,7 @@ export default {
     ios: {
       supportsTablet: true,
       bundleIdentifier: "com.dglav.omoi",
-      buildNumber: "0.1.0",
+      buildNumber: "0.1.1",
     },
     android: {
       adaptiveIcon: {
