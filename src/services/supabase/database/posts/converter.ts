@@ -1,15 +1,17 @@
 import { Database, Tables } from "../../../../../types/supabase";
+import { feelingMap } from "../../../../utils/feelingMap";
+import { Feeling } from "../custom_feelings/converter";
 
 export type Post = {
   id: string;
   postGroupId: string;
   authorId: string;
   condition: "reallyBad" | "bad" | "average" | "good" | "reallyGood";
-  feelings: string[];
+  feelings: Feeling[];
   tags: string[];
   note: string;
   date: Date;
-  createdAt: string;
+  createdAt: Date;
   isPrivate: boolean;
 };
 
@@ -29,18 +31,30 @@ export const fromSupabase = ({
   note,
   post_group_id,
   tags,
-}: Entity): Post => ({
-  authorId: author_id,
-  condition,
-  createdAt: created_at,
-  date: new Date(date),
-  feelings,
-  id,
-  isPrivate: is_private,
-  note,
-  postGroupId: post_group_id,
-  tags,
-});
+}: Entity, allCustomFeelingsMap: Map<string, Feeling>): Post => {
+  const convertedFeelings = feelings.map((feeling) => {
+    const standardFeeling = feelingMap[feeling];
+
+    if (!standardFeeling) {
+      return allCustomFeelingsMap.get(feeling);
+    }
+
+    return standardFeeling;
+  }).filter((feeling) => !!feeling) as Feeling[];
+
+  return ({
+    authorId: author_id,
+    condition,
+    createdAt: new Date(created_at),
+    date: new Date(date),
+    feelings: convertedFeelings,
+    id,
+    isPrivate: is_private,
+    note,
+    postGroupId: post_group_id,
+    tags,
+  });
+};
 
 export const toCreateSupabaseDTO = ({
   authorId,

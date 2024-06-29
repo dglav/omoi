@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import { getPost } from "../../../services/supabase/database/posts/getPost";
 import { useStore } from "../store/useStore";
+import { useGetUser } from "../../../hooks/userHooks/useGetUser";
 
 export const useInitializePostStore = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -11,10 +12,17 @@ export const useInitializePostStore = () => {
   const { resetTo } = useStore(({ resetTo }) => ({
     resetTo,
   }));
+  const { user } = useGetUser();
 
   useEffect(() => {
     const fetchPost = async (postId: string) => {
-      const post = await getPost({ id: postId });
+      if (!user) {
+        console.error("ユーザーがないため投稿を取得できません。");
+        return;
+      }
+
+      const post = await getPost({ id: postId, userId: user.id });
+
       resetTo(post);
       setIsLoading(false);
     };

@@ -19,7 +19,7 @@ export const useGetPost = (id?: string) => {
         throw new Error("post id is not specified");
       }
 
-      return getPost({ id });
+      return getPost({ id, userId });
     },
     enabled: !!id,
     staleTime: Infinity,

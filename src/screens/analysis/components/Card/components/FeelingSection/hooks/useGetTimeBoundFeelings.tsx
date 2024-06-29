@@ -1,8 +1,4 @@
 import { useGetCustomFeelings } from "../../../../../../../hooks/customFeelingHooks/useGetCustomFeelings";
-import {
-  emotionLevelColorMap,
-  feelingMap,
-} from "../../../../../../../utils/feelingMap";
 import { useGetPostsForAnalysis } from "../../hooks/useGetPostsForAnalysis";
 
 const approximateFeelingLevelMap = new Map<string, "bad" | "average" | "good">([
@@ -32,28 +28,6 @@ export const useGetTimeBoundFeelings = (): {
   }
 
   const feelings = posts.map((post) => post.feelings).flat();
-  const customFeelingsMap = customFeelings.reduce(
-    (map, customFeeling) => {
-      map[customFeeling.id] = {
-        name: customFeeling.name,
-        emotionLevel: customFeeling.emotionLevel,
-        color: emotionLevelColorMap[customFeeling.emotionLevel],
-      };
-      return map;
-    },
-    {} as {
-      [id: string]: {
-        name: string;
-        emotionLevel:
-        | "very positive"
-        | "positive"
-        | "average"
-        | "negative"
-        | "very negative";
-        color: string;
-      };
-    },
-  );
 
   const totalEmotionCount = feelings.length;
   const {
@@ -67,50 +41,24 @@ export const useGetTimeBoundFeelings = (): {
     averageEmotionCount: number;
     badEmotionCount: number;
   }, currentFeeling) => {
-    let result = feelingMap[currentFeeling];
-
-    if (!result) {
-      const customFeeling = customFeelingsMap[currentFeeling];
-
-      if (!customFeeling) {
-        console.error("Feeling not found: ", currentFeeling);
-
-        return accumulator;
-      }
-
-      const fillColor = emotionLevelColorMap[customFeeling.emotionLevel];
-
-      if (!fillColor) {
-        console.error("Feel color not found: ", currentFeeling);
-
-        return accumulator;
-      }
-
-      result = {
-        text: customFeeling.name,
-        emotionLevel: customFeeling.emotionLevel,
-        fillColor,
-      };
-    }
-
     const currentEmotionCountValue = accumulator.emotionCountMap.get(
-      result.text,
+      currentFeeling.name,
     )?.count;
 
     if (!currentEmotionCountValue) {
-      accumulator.emotionCountMap.set(result.text, {
+      accumulator.emotionCountMap.set(currentFeeling.name, {
         count: 1,
-        color: result.fillColor,
+        color: currentFeeling.color,
       });
     } else {
       accumulator.emotionCountMap.set(
-        result.text,
-        { count: currentEmotionCountValue + 1, color: result.fillColor },
+        currentFeeling.name,
+        { count: currentEmotionCountValue + 1, color: currentFeeling.color },
       );
     }
 
     const approximateFeelingLevel = approximateFeelingLevelMap.get(
-      result.emotionLevel,
+      currentFeeling.emotionLevel,
     );
 
     if (approximateFeelingLevel === "good") {

@@ -1,5 +1,6 @@
 import { SupabaseDatabaseError } from "../../error";
 import { supabase } from "../../index";
+import { getPostsByGroupId } from "../posts/getPostsByGroupId";
 
 type Params = {
   userId: string;
@@ -34,29 +35,13 @@ export const getPostGroups = async ({
   }
 
   const mergedPostGroupPromises = postGroups.map(async (postGroup) => {
-    const query = supabase
-      .from("posts")
-      .select("*")
-      .match({
-        post_group_id: postGroup.id,
-      })
-      .order("date", { ascending: false });
-
-    if (filterPrivate) {
-      query.is("is_private", false);
-    }
-
-    const { data: posts, error } = await query;
-
-    if (error) {
-      throw new SupabaseDatabaseError(error);
-    }
-
-    const convertedPosts = posts.map((post) => {
-      return { ...post, date: new Date(post.date) };
+    const posts = await getPostsByGroupId({
+      userId,
+      postGroupId: postGroup.id,
+      filterPrivate: filterPrivate,
     });
 
-    return { ...postGroup, posts: convertedPosts };
+    return { ...postGroup, posts };
   });
 
   const mergedPostGroups = (await Promise.all(mergedPostGroupPromises)).filter(

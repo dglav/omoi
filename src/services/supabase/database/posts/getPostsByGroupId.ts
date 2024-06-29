@@ -4,21 +4,31 @@ import { supabase } from "../../index";
 import { getCustomFeelings } from "../custom_feelings/getCustomFeelings";
 
 type Params = {
-  id: string;
   userId: string;
+  postGroupId: string;
+  filterPrivate?: boolean;
 };
 
-export const getPost = async ({ id, userId }: Params): Promise<Post> => {
-  const { data: posts, error: postsError } = await supabase
+export const getPostsByGroupId = async (
+  { userId, postGroupId, filterPrivate }: Params,
+): Promise<Post[]> => {
+  const query = supabase
     .from("posts")
     .select("*")
-    .match({ id });
+    .match({
+      post_group_id: postGroupId,
+    })
+    .order("date", { ascending: false });
 
-  if (postsError) {
-    throw new SupabaseDatabaseError(postsError);
+  if (filterPrivate) {
+    query.is("is_private", false);
   }
 
-  const post = posts[0];
+  const { data: posts, error } = await query;
+
+  if (error) {
+    throw new SupabaseDatabaseError(error);
+  }
 
   const allCustomFeelings = await getCustomFeelings({ userId });
   const allCustomFeelingsMap = allCustomFeelings.reduce<Map<string, any>>(
@@ -28,5 +38,5 @@ export const getPost = async ({ id, userId }: Params): Promise<Post> => {
     new Map(),
   );
 
-  return fromSupabase(post, allCustomFeelingsMap);
+  return posts.map((post) => fromSupabase(post, allCustomFeelingsMap));
 };

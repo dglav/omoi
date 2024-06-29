@@ -1,8 +1,9 @@
 import { create } from "zustand";
+import { Feeling } from "../../../services/supabase/database/custom_feelings/converter";
 
 export type Post = {
   condition: "reallyBad" | "bad" | "average" | "good" | "reallyGood";
-  feelings: string[];
+  feelings: Feeling[];
   tags: string[];
   note: string;
   date: Date;
@@ -20,8 +21,8 @@ const defaultState: Post = {
 
 type Actions = {
   setCondition: (newCondition: Post["condition"]) => void;
-  addFeeling: (newFeeling: string) => void;
-  removeFeeling: (feeling: string) => void;
+  addFeeling: (newFeeling: Feeling) => void;
+  removeFeeling: (feelingId: string) => void;
   addTag: (newTag: string) => void;
   removeTag: (tag: string) => void;
   updateNote: (updatedNote: string) => void;
@@ -36,11 +37,11 @@ export const useStore = create<Post & Actions>((set) => ({
   setCondition: (newCondition) => set({ condition: newCondition }),
 
   feelings: [],
-  addFeeling: (newfeeling: string) =>
+  addFeeling: (newfeeling) =>
     set((state) => ({ feelings: state.feelings.concat([newfeeling]) })),
-  removeFeeling: (feeling: string) =>
+  removeFeeling: (feelingId) =>
     set((state) => ({
-      feelings: state.feelings.filter((_feeling) => _feeling !== feeling),
+      feelings: state.feelings.filter((_feeling) => _feeling.id !== feelingId),
     })),
 
   tags: [],

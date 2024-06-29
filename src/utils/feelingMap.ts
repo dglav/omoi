@@ -1,8 +1,13 @@
+import {
+  EmotionLevel,
+  Feeling,
+} from "../services/supabase/database/custom_feelings/converter";
+
 const POSITIVE = "positive" as const;
 const AVERAGE = "average" as const;
 const NEGATIVE = "negative" as const;
 
-const rawValues = [
+const rawValues: [string, string, string, EmotionLevel][] = [
   ["excited", "興奮", "#F55634", POSITIVE],
   ["interested", "面白い", "#F88D5F", POSITIVE],
   ["happy", "嬉しい", "#FFBA69", POSITIVE],
@@ -29,23 +34,15 @@ const rawValues = [
   ["angry", "怒り", "#A84545", NEGATIVE],
 ];
 
-type Values = {
-  text: string;
-  fillColor: string;
-  emotionLevel: string;
-};
-
-type FeelingMap = {
-  [key: string]: Values;
-};
-
-export const feelingMap: FeelingMap = rawValues.reduce(
-  (accumulator, [key, text, fillColor, emotionLevel]) => {
-    accumulator[key] = { text, fillColor, emotionLevel };
+export const feelingMap: { [id: string]: Feeling } = rawValues.reduce<
+  { [id: string]: Feeling }
+>(
+  (accumulator, [id, name, color, emotionLevel]) => {
+    accumulator[id] = { id, name, color, emotionLevel };
 
     return accumulator;
   },
-  {} as FeelingMap,
+  {},
 );
 
 export const emotionLevelColorMap = {

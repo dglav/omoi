@@ -40,7 +40,14 @@ const JournalNote = () => {
     if (!isEdit) {
       createPostMutation.mutate(
         {
-          post: { condition, feelings, tags, note, date, isPrivate },
+          post: {
+            condition,
+            feelings: feelings.map((feeling) => feeling.id),
+            tags,
+            note,
+            date,
+            isPrivate,
+          },
         },
         {
           onSuccess: () => {
@@ -58,7 +65,7 @@ const JournalNote = () => {
           post: {
             id: params.postId,
             condition,
-            feelings,
+            feelings: feelings.map((feeling) => feeling.id),
             tags,
             note,
             isPrivate,

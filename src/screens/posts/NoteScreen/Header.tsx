@@ -1,10 +1,11 @@
-import { View, useWindowDimensions } from "react-native";
+import { useWindowDimensions, View } from "react-native";
 
 import { MiniFeeling } from "../../../components/mini-feeling";
 import { TagPill } from "../../../components/tag-pill";
+import { Feeling } from "../../../services/supabase/database/custom_feelings/converter";
 
 type Props = {
-  feelings: string[];
+  feelings: Feeling[];
   tags: string[];
 };
 
@@ -28,7 +29,7 @@ export const Header = ({ feelings, tags }: Props) => {
           }}
         >
           {feelings.map((feeling) => (
-            <MiniFeeling key={feeling} feeling={feeling} />
+            <MiniFeeling key={feeling.id} feeling={feeling} />
           ))}
         </View>
 
@@ -39,9 +40,7 @@ export const Header = ({ feelings, tags }: Props) => {
             gap: 8,
           }}
         >
-          {tags.map((tag) => (
-            <TagPill key={tag} tag={tag} />
-          ))}
+          {tags.map((tag) => <TagPill key={tag} tag={tag} />)}
         </View>
       </View>
     </View>

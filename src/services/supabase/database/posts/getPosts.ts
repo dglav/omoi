@@ -1,6 +1,7 @@
 import { fromSupabase, Post } from "./converter";
 import { SupabaseDatabaseError } from "../../error";
 import { supabase } from "../../index";
+import { getCustomFeelings } from "../custom_feelings/getCustomFeelings";
 
 type Params = {
   userId: string;
@@ -34,5 +35,13 @@ export const getPosts = async (
     throw new SupabaseDatabaseError(error);
   }
 
-  return posts.map((post) => fromSupabase(post));
+  const allCustomFeelings = await getCustomFeelings({ userId });
+  const allCustomFeelingsMap = allCustomFeelings.reduce<Map<string, any>>(
+    (map, currentFeeling) => {
+      return map.set(currentFeeling.id, currentFeeling);
+    },
+    new Map(),
+  );
+
+  return posts.map((post) => fromSupabase(post, allCustomFeelingsMap));
 };

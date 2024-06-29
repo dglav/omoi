@@ -1,16 +1,16 @@
 import { format } from "@formkit/tempo";
 import { LockKeyhole } from "lucide-react-native";
-import { View, Text } from "react-native";
+import { Text, View } from "react-native";
 
-import { useGetPostGroups } from "../../hooks/postGroupHooks/useGetPostGroups";
 import { useAppTheme } from "../../hooks/useAppTheme";
 import { conditionMap } from "../../utils/conditionMap";
 import { ConditionIcon_36 } from "../condition-icon-36";
 import { MiniFeeling } from "../mini-feeling";
 import { TagPill } from "../tag-pill";
+import { Post } from "../../services/supabase/database/posts/converter";
 
 type Props = {
-  post: ReturnType<typeof useGetPostGroups>["data"][0]["posts"][0];
+  post: Post;
 };
 
 export const JournalEntryRow = ({ post }: Props) => {
@@ -36,7 +36,7 @@ export const JournalEntryRow = ({ post }: Props) => {
               }}
             >
               {post.feelings.map((feeling) => {
-                return <MiniFeeling key={feeling} feeling={feeling} />;
+                return <MiniFeeling key={feeling.id} feeling={feeling} />;
               })}
             </View>
             <View
@@ -69,7 +69,7 @@ export const JournalEntryRow = ({ post }: Props) => {
             {format(new Date(post.date), "HH:mm")}
           </Text>
 
-          {post.is_private && (
+          {post.isPrivate && (
             <View
               style={{
                 backgroundColor: theme.colors.primaryHeavy,

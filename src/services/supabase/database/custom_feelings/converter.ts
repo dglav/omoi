@@ -3,6 +3,7 @@ import {
   TablesInsert,
   TablesUpdate,
 } from "../../../../../types/supabase";
+import { emotionLevelColorMap } from "../../../../utils/feelingMap";
 
 type CustomFeelingEntity = Tables<"custom_feelings">;
 type CreateDTO = TablesInsert<"custom_feelings">;
@@ -15,16 +16,25 @@ export type EmotionLevel =
   | "negative"
   | "very negative";
 
+export type Feeling = {
+  id: string;
+  name: string;
+  emotionLevel: EmotionLevel;
+  color: string;
+};
+
 export const fromSupabase = (
   feeling: CustomFeelingEntity,
 ): {
   id: string;
   name: string;
   emotionLevel: EmotionLevel;
+  color: string;
 } => ({
   id: feeling.id,
   name: feeling.name,
   emotionLevel: feeling.emotion_level,
+  color: emotionLevelColorMap[feeling.emotion_level],
 });
 
 export const toCreateDTO = (feeling: {

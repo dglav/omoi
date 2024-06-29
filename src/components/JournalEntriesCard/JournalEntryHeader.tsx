@@ -1,6 +1,6 @@
 import { format } from "@formkit/tempo";
 import { LockKeyhole } from "lucide-react-native";
-import { View, Text } from "react-native";
+import { Text, View } from "react-native";
 
 import { useGetPostGroups } from "../../hooks/postGroupHooks/useGetPostGroups";
 import { useAppTheme } from "../../hooks/useAppTheme";
@@ -69,7 +69,7 @@ export const JournalEntryHeader = ({ post }: Props) => {
                 {conditionMap[post.condition].text}
               </Text>
 
-              {post.is_private && (
+              {post.isPrivate && (
                 <View
                   style={{
                     backgroundColor: theme.colors.primaryHeavy,
@@ -90,7 +90,7 @@ export const JournalEntryHeader = ({ post }: Props) => {
               }}
             >
               {post.feelings.map((feeling) => {
-                return <MiniFeeling key={feeling} feeling={feeling} />;
+                return <MiniFeeling key={feeling.id} feeling={feeling} />;
               })}
             </View>
             <View

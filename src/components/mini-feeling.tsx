@@ -1,22 +1,17 @@
-import { View, Text } from "react-native";
+import { Text, View } from "react-native";
 
 import { FeelingIcon_16 } from "./feeling-icon-16";
 import { useAppTheme } from "../hooks/useAppTheme";
-import { feelingMap } from "../utils/feelingMap";
+import { Feeling } from "../services/supabase/database/custom_feelings/converter";
 
 type Props = React.PropsWithChildren & {
-  feeling: string;
+  feeling: Feeling;
 };
 
 export const MiniFeeling = ({ feeling }: Props) => {
   const theme = useAppTheme();
-  const feelingValue = feelingMap[feeling];
 
-  if (!feelingValue) {
-    return undefined;
-  }
-
-  const { fillColor, text } = feelingValue;
+  const { name, color } = feeling;
 
   return (
     <View
@@ -26,14 +21,14 @@ export const MiniFeeling = ({ feeling }: Props) => {
         gap: 4,
       }}
     >
-      <FeelingIcon_16 fill={fillColor} />
+      <FeelingIcon_16 fill={color} />
       <Text
         style={{
           fontSize: theme.fontStyle.sm[3].size,
           fontWeight: theme.fontStyle.sm[3].weight,
         }}
       >
-        {text}
+        {name}
       </Text>
     </View>
   );

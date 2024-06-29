@@ -1,35 +1,14 @@
-import { useEffect, useState } from "react";
-
 import { useGetCustomFeelings } from "../../../../../../hooks/customFeelingHooks/useGetCustomFeelings";
-import {
-  emotionLevelColorMap,
-  feelingMap,
-} from "../../../../../../utils/feelingMap";
+import { feelingMap } from "../../../../../../utils/feelingMap";
+import { Feeling } from "../../../../../../services/supabase/database/custom_feelings/converter";
 
-const feelingList = Object.entries(feelingMap);
+const feelingList: Feeling[] = Object.values(feelingMap);
 
-export const useGetFeelingList = () => {
-  const [convertedCustomFeelings, setConvertedCustomFeelings] = useState<
-    [string, { text: string; fillColor: string }][]
-  >([]);
+export const useGetFeelingList = (): Feeling[] => {
   const { data: customFeelings } = useGetCustomFeelings();
 
-  useEffect(() => {
-    if (customFeelings?.length) {
-      const _convertedFeelings: [
-        string,
-        { text: string; fillColor: string },
-      ][] = customFeelings?.map((customFeeling) => [
-        customFeeling.id,
-        {
-          text: customFeeling.name,
-          fillColor: emotionLevelColorMap[customFeeling.emotionLevel],
-        },
-      ]);
-
-      setConvertedCustomFeelings(_convertedFeelings);
-    }
-  }, [customFeelings]);
-
-  return [...feelingList, ...convertedCustomFeelings];
+  if (!customFeelings) {
+    return feelingList;
+  }
+  return feelingList.concat(customFeelings);
 };
