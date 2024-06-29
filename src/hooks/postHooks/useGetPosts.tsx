@@ -15,7 +15,7 @@ export const useGetPosts = ({ who, where }: Props) => {
   const { user } = useGetUser();
   const userId = who === "me" ? user?.id : user?.partner_user_id;
 
-  const { data, isLoading, isError, status } = useQuery({
+  const { data, isLoading, isError, status, isFetching } = useQuery({
     queryKey: ["posts", userId, where?.startDate, where?.endDate],
     queryFn: () => {
       if (!userId) {
@@ -42,5 +42,5 @@ export const useGetPosts = ({ who, where }: Props) => {
     staleTime: 10 * 1000, // 10 seconds
   });
 
-  return { data, isLoading, isError, status };
+  return { data, isLoading, isError, status, isFetching };
 };

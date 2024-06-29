@@ -7,9 +7,16 @@ import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { TagSection } from "./components/TagSection";
 import { useAppTheme } from "../../../../hooks/useAppTheme";
+import { useGetPostsForAnalysis } from "./components/hooks/useGetPostsForAnalysis";
+import { Text } from "../../../../components/text";
 
 export const Card = () => {
   const theme = useAppTheme();
+  const { data: posts, isLoading, isFetching } = useGetPostsForAnalysis();
+
+  if (isFetching || isLoading) {
+    return <View />;
+  }
 
   return (
     <View
@@ -27,17 +34,32 @@ export const Card = () => {
       >
         <Header />
 
-        <ConditionSection />
+        {!posts?.length
+          ? (
+            <View
+              style={{
+                height: 100,
+                justifyContent: "center",
+              }}
+            >
+              <Text>データがない！</Text>
+            </View>
+          )
+          : (
+            <>
+              <ConditionSection />
 
-        <View style={{ height: 60 }} />
+              <View style={{ height: 60 }} />
 
-        <FeelingSection />
+              <FeelingSection />
 
-        <View style={{ height: 60 }} />
+              <View style={{ height: 60 }} />
 
-        <TagSection />
+              <TagSection />
 
-        <View style={{ height: 24 }} />
+              <View style={{ height: 24 }} />
+            </>
+          )}
 
         <View
           style={{
