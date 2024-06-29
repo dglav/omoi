@@ -26,7 +26,7 @@ export const useGetPostGroupMessages = ({
       return getPostGroupMessages({ postGroupId });
     },
     enabled: !!postGroupId,
-    refetchInterval: 15000,
+    refetchInterval: 10000,
   });
 
   return { data, isLoading, isError };

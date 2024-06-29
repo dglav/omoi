@@ -16,6 +16,7 @@ export const useGetPostGroup = (date: string) => {
       }
       return getPostGroup({ userId, date });
     },
+    refetchInterval: 1000 * 10,
   });
 
   return { data, isLoading, isError };

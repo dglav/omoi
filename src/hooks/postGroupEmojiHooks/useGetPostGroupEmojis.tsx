@@ -34,6 +34,7 @@ export const useGetPostGroupEmojis = (
 
       return getPostGroupEmojis({ postGroupId });
     },
+    refetchInterval: 1000 * 10,
   });
 
   return { data, isLoading, isError };
