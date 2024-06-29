@@ -8,7 +8,8 @@ import { ChevronLeft, ChevronRight } from "lucide-react-native";
 
 export const Header = () => {
   const theme = useAppTheme();
-  const { startDate, endDate } = useAnalysisScreenStore();
+  const { startDate, endDate, goBackOneWeek, goForwardOneWeek } =
+    useAnalysisScreenStore();
 
   return (
     <>
@@ -20,6 +21,7 @@ export const Header = () => {
         }}
       >
         <TouchableOpacity
+          onPress={() => goBackOneWeek()}
           style={{
             alignItems: "center",
             justifyContent: "center",
@@ -39,6 +41,7 @@ export const Header = () => {
           {`${format(startDate, "M/D")} ~ ${format(endDate, "M/D")}`}
         </Text>
         <TouchableOpacity
+          onPress={() => goForwardOneWeek()}
           style={{
             alignItems: "center",
             justifyContent: "center",
