@@ -36,7 +36,7 @@ export const Card = () => {
         <View style={{ height: 60 }} />
         <FeelingSection startDate={startDate} endDate={endDate} />
         <View style={{ height: 60 }} />
-        <TagSection />
+        <TagSection startDate={startDate} endDate={endDate} />
         <View style={{ height: 24 }} />
 
         <View
