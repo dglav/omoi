@@ -18,7 +18,7 @@ export const CategoryStats = (
     : null;
 
   return (
-    <View style={{ flex: 1, alignItems: "center" }}>
+    <View style={{ flex: 1, alignItems: "center", width: 104 }}>
       <Text
         style={{
           fontSize: theme.fontStyle.xs[3].size,

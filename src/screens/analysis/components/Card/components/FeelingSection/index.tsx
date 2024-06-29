@@ -132,7 +132,6 @@ export const FeelingSection = () => {
         style={{
           paddingHorizontal: 20,
           flexDirection: "row",
-          justifyContent: "space-between",
         }}
       >
         <CategoryStats
@@ -154,12 +153,10 @@ export const FeelingSection = () => {
 
       <View
         style={{
-          paddingHorizontal: 60,
+          paddingHorizontal: 20,
           paddingTop: 16,
           flexDirection: "row",
-          justifyContent: "space-between",
           flexWrap: "wrap",
-          columnGap: 50,
           rowGap: 12,
         }}
       >

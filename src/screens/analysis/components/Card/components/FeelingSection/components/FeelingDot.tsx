@@ -14,6 +14,7 @@ export const FeelingDot = ({ text, color }: Props) => {
   return (
     <View
       style={{
+        width: 104,
         gap: 6,
         alignItems: "center",
       }}
