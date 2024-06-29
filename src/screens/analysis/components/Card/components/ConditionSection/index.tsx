@@ -7,21 +7,18 @@ import { Area, CartesianChart } from "victory-native";
 import { useAppTheme } from "../../../../../../hooks/useAppTheme";
 import { useGetTimeBoundConditions } from "./hooks/useGetTimeBoundConditions";
 import { addDay } from "@formkit/tempo";
+import { useAnalysisScreenStore } from "../../../useAnalysisScreenStore";
 
 const h = 400;
 const w = 0;
 
-type Props = {
-  startDate: Date;
-  endDate: Date;
-};
-
-export const ConditionSection = ({ startDate, endDate }: Props) => {
+export const ConditionSection = () => {
   const theme = useAppTheme();
+  const { startDate } = useAnalysisScreenStore();
   const {
     timeBoundConditions,
     isLoading,
-  } = useGetTimeBoundConditions({ startDate, endDate });
+  } = useGetTimeBoundConditions();
 
   return (
     <View style={{ width: "100%" }}>

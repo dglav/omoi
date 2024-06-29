@@ -1,22 +1,12 @@
-import { useGetPosts } from "../../../../../../../hooks/postHooks/useGetPosts";
-
-type Props = {
-  startDate: Date;
-  endDate: Date;
-};
+import { useGetPostsForAnalysis } from "../../hooks/useGetPostsForAnalysis";
 
 type ReturnType = {
   isLoading: boolean;
   topTags: string[];
 };
 
-export const useGetTimeBoundTags = (
-  { startDate, endDate }: Props,
-): ReturnType => {
-  const { data: posts, isLoading } = useGetPosts({
-    who: "me",
-    where: { startDate, endDate },
-  });
+export const useGetTimeBoundTags = (): ReturnType => {
+  const { data: posts, isLoading } = useGetPostsForAnalysis();
 
   if (isLoading || !posts) {
     return {

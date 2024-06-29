@@ -7,15 +7,11 @@ import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { TagSection } from "./components/TagSection";
 import { useAppTheme } from "../../../../hooks/useAppTheme";
-import { weekEnd, weekStart } from "@formkit/tempo";
+import { useAnalysisScreenStore } from "../useAnalysisScreenStore";
 
 export const Card = () => {
   const theme = useAppTheme();
-
-  const [date, setDate] = useState(new Date());
-
-  const startDate = weekStart(date, 1);
-  const endDate = weekEnd(date, 1);
+  const { startDate, endDate } = useAnalysisScreenStore();
 
   return (
     <View
@@ -32,11 +28,17 @@ export const Card = () => {
         }}
       >
         <Header timePeriod={{ start: startDate, end: endDate }} />
-        <ConditionSection startDate={startDate} endDate={endDate} />
+
+        <ConditionSection />
+
         <View style={{ height: 60 }} />
-        <FeelingSection startDate={startDate} endDate={endDate} />
+
+        <FeelingSection />
+
         <View style={{ height: 60 }} />
-        <TagSection startDate={startDate} endDate={endDate} />
+
+        <TagSection />
+
         <View style={{ height: 24 }} />
 
         <View

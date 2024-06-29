@@ -4,14 +4,9 @@ import { useAppTheme } from "../../../../../../hooks/useAppTheme";
 import { TagPill } from "../../../../../../components/tag-pill";
 import { useGetTimeBoundTags } from "./hooks/useGetTimeBoundTags";
 
-type Props = {
-  startDate: Date;
-  endDate: Date;
-};
-
-export const TagSection = ({ startDate, endDate }: Props) => {
+export const TagSection = () => {
   const theme = useAppTheme();
-  const { topTags } = useGetTimeBoundTags({ startDate, endDate });
+  const { topTags } = useGetTimeBoundTags();
 
   return (
     <View style={{ width: "100%" }}>

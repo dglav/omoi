@@ -1,9 +1,9 @@
 import { useGetCustomFeelings } from "../../../../../../../hooks/customFeelingHooks/useGetCustomFeelings";
-import { useGetPosts } from "../../../../../../../hooks/postHooks/useGetPosts";
 import {
   emotionLevelColorMap,
   feelingMap,
 } from "../../../../../../../utils/feelingMap";
+import { useGetPostsForAnalysis } from "../../hooks/useGetPostsForAnalysis";
 
 const approximateFeelingLevelMap = new Map<string, "bad" | "average" | "good">([
   ["very negative", "bad"],
@@ -13,22 +13,15 @@ const approximateFeelingLevelMap = new Map<string, "bad" | "average" | "good">([
   ["very positive", "good"],
 ]);
 
-type Props = {
-  startDate: Date;
-  endDate: Date;
-};
-
-export const useGetTimeBoundFeelings = ({ startDate, endDate }: Props): {
+export const useGetTimeBoundFeelings = (): {
   topEmotions: [string, { count: number; color: string }][];
   goodEmotionCount?: number;
   averageEmotionCount?: number;
   badEmotionCount?: number;
   totalEmotionCount?: number;
 } => {
-  const { data: posts, isLoading: isLoadingPosts } = useGetPosts({
-    who: "me",
-    where: { startDate, endDate },
-  });
+  const { data: posts, isLoading: isLoadingPosts } = useGetPostsForAnalysis();
+
   const { data: customFeelings, isLoading: isLoadingFeelings } =
     useGetCustomFeelings();
 

@@ -6,12 +6,7 @@ import { CategoryStats } from "./components/CategoryStats";
 import { FeelingDot } from "./components/FeelingDot";
 import { useGetTimeBoundFeelings } from "./hooks/useGetTimeBoundFeelings";
 
-type Props = {
-  startDate: Date;
-  endDate: Date;
-};
-
-export const FeelingSection = ({ startDate, endDate }: Props) => {
+export const FeelingSection = () => {
   const theme = useAppTheme();
   const {
     topEmotions,
@@ -19,7 +14,7 @@ export const FeelingSection = ({ startDate, endDate }: Props) => {
     averageEmotionCount,
     badEmotionCount,
     totalEmotionCount,
-  } = useGetTimeBoundFeelings({ startDate, endDate });
+  } = useGetTimeBoundFeelings();
 
   const shouldDisplayFeelingStatusBar = typeof goodEmotionCount === "number" &&
     typeof averageEmotionCount === "number" &&

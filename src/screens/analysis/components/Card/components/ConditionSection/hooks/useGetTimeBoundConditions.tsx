@@ -1,5 +1,6 @@
 import { diffDays } from "@formkit/tempo";
-import { useGetPosts } from "../../../../../../../hooks/postHooks/useGetPosts";
+import { useGetPostsForAnalysis } from "../../hooks/useGetPostsForAnalysis";
+import { useAnalysisScreenStore } from "../../../../useAnalysisScreenStore";
 
 const conditionLevelMap = {
   "reallyBad": 0,
@@ -9,24 +10,17 @@ const conditionLevelMap = {
   "reallyGood": 4,
 } as const;
 
-type Props = {
-  startDate: Date;
-  endDate: Date;
-};
-
 type TimeBoundConditions = {
   dayDiff: number;
   conditionLevel: number;
 }[];
 
-export const useGetTimeBoundConditions = ({ startDate, endDate }: Props): {
+export const useGetTimeBoundConditions = (): {
   timeBoundConditions: TimeBoundConditions;
   isLoading: boolean;
 } => {
-  const { data, isLoading } = useGetPosts({
-    who: "me",
-    where: { startDate, endDate },
-  });
+  const { startDate } = useAnalysisScreenStore();
+  const { data, isLoading } = useGetPostsForAnalysis();
 
   if (isLoading || !data) {
     const timeBoundConditions: TimeBoundConditions = [];
