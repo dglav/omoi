@@ -16,7 +16,7 @@ export const useGetPosts = ({ who, where }: Props) => {
   const userId = who === "me" ? user?.id : user?.partner_user_id;
 
   const { data, isLoading, isError, status } = useQuery({
-    queryKey: ["posts", userId],
+    queryKey: ["posts", userId, where?.startDate, where?.endDate],
     queryFn: () => {
       if (!userId) {
         return null;
