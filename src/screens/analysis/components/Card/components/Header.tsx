@@ -1,26 +1,53 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 
 import { useAppTheme } from "../../../../../hooks/useAppTheme";
 import { format } from "@formkit/tempo";
 import { useAnalysisScreenStore } from "../../useAnalysisScreenStore";
+import { ChevronLeft, ChevronRight } from "lucide-react-native";
 
 export const Header = () => {
   const theme = useAppTheme();
   const { startDate, endDate } = useAnalysisScreenStore();
 
   return (
-    <View style={{ width: "100%" }}>
-      <Text
+    <>
+      <View
         style={{
-          fontSize: theme.fontStyle.md[1].size,
-          fontWeight: theme.fontStyle.md[1].weight,
-          marginVertical: 16,
-          textAlign: "center",
+          width: "100%",
+          flexDirection: "row",
+          justifyContent: "space-between",
         }}
       >
-        {`${format(startDate, "M/D")} ~ ${format(endDate, "M/D")}`}
-      </Text>
+        <TouchableOpacity
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+            width: 60,
+          }}
+        >
+          <ChevronLeft color={theme.colors.text} width={20} height={20} />
+        </TouchableOpacity>
+        <Text
+          style={{
+            fontSize: theme.fontStyle.md[1].size,
+            fontWeight: theme.fontStyle.md[1].weight,
+            marginVertical: 16,
+            textAlign: "center",
+          }}
+        >
+          {`${format(startDate, "M/D")} ~ ${format(endDate, "M/D")}`}
+        </Text>
+        <TouchableOpacity
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+            width: 60,
+          }}
+        >
+          <ChevronRight color={theme.colors.text} width={20} height={20} />
+        </TouchableOpacity>
+      </View>
 
       <View
         style={{
@@ -29,6 +56,6 @@ export const Header = () => {
           backgroundColor: theme.colors.textLight,
         }}
       />
-    </View>
+    </>
   );
 };
