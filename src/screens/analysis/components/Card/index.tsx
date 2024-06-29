@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { View } from "react-native";
 
 import { ConditionSection } from "./components/ConditionSection";
@@ -7,11 +7,9 @@ import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { TagSection } from "./components/TagSection";
 import { useAppTheme } from "../../../../hooks/useAppTheme";
-import { useAnalysisScreenStore } from "../useAnalysisScreenStore";
 
 export const Card = () => {
   const theme = useAppTheme();
-  const { startDate, endDate } = useAnalysisScreenStore();
 
   return (
     <View
@@ -27,7 +25,7 @@ export const Card = () => {
           alignItems: "center",
         }}
       >
-        <Header timePeriod={{ start: startDate, end: endDate }} />
+        <Header />
 
         <ConditionSection />
 

@@ -3,15 +3,11 @@ import { Text, View } from "react-native";
 
 import { useAppTheme } from "../../../../../hooks/useAppTheme";
 import { format } from "@formkit/tempo";
+import { useAnalysisScreenStore } from "../../useAnalysisScreenStore";
 
-type Props = {
-  timePeriod: {
-    start: Date;
-    end: Date;
-  }
-}
-export const Header = ({ timePeriod }: Props) => {
+export const Header = () => {
   const theme = useAppTheme();
+  const { startDate, endDate } = useAnalysisScreenStore();
 
   return (
     <View style={{ width: "100%" }}>
@@ -23,7 +19,7 @@ export const Header = ({ timePeriod }: Props) => {
           textAlign: "center",
         }}
       >
-        {`${format(timePeriod.start, 'M/D')} ~ ${format(timePeriod.end, 'M/D')}`}
+        {`${format(startDate, "M/D")} ~ ${format(endDate, "M/D")}`}
       </Text>
 
       <View
