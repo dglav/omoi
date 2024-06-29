@@ -34,7 +34,5 @@ export const getPosts = async (
     throw new SupabaseDatabaseError(error);
   }
 
-  console.log({ posts });
-
   return posts.map((post) => fromSupabase(post));
 };

@@ -66,31 +66,69 @@ export const FeelingSection = ({ startDate, endDate }: Props) => {
           paddingHorizontal: 20,
         }}
       >
-        <View
-          style={{
-            height: "100%",
-            width: `${badFeelingPercentage}%`,
-            backgroundColor: "#6D9CF8",
-            borderTopLeftRadius: 16,
-            borderBottomLeftRadius: 16,
-          }}
-        />
-        <View
-          style={{
-            height: "100%",
-            width: `${averageFeelingPercentage}%`,
-            backgroundColor: "#7CD185",
-          }}
-        />
-        <View
-          style={{
-            height: "100%",
-            width: `${goodFeelingPercentage}%`,
-            backgroundColor: "#F89F6D",
-            borderTopRightRadius: 16,
-            borderBottomRightRadius: 16,
-          }}
-        />
+        {goodFeelingPercentage === 0 && averageFeelingPercentage === 0 &&
+          badFeelingPercentage === 0
+          ? (
+            <Text
+              style={{
+                width: "100%",
+                fontSize: theme.fontStyle.xs[3].size,
+                fontWeight: theme.fontStyle.xs[3].weight,
+                textAlign: "center",
+              }}
+            >
+              感情データはありません！
+            </Text>
+          )
+          : (
+            <>
+              <View
+                style={{
+                  height: "100%",
+                  width: `${badFeelingPercentage}%`,
+                  backgroundColor: "#6D9CF8",
+                  borderTopLeftRadius: 16,
+                  borderBottomLeftRadius: 16,
+                  borderTopRightRadius: averageFeelingPercentage === 0 &&
+                    goodFeelingPercentage === 0
+                    ? 16
+                    : 0,
+                  borderBottomRightRadius: averageFeelingPercentage === 0 &&
+                    goodFeelingPercentage === 0
+                    ? 16
+                    : 0,
+                }}
+              />
+              <View
+                style={{
+                  height: "100%",
+                  width: `${averageFeelingPercentage}%`,
+                  backgroundColor: "#7CD185",
+                  borderTopLeftRadius: badFeelingPercentage === 0 ? 16 : 0,
+                  borderBottomLeftRadius: badFeelingPercentage === 0 ? 16 : 0,
+                  borderTopRightRadius: goodFeelingPercentage === 0 ? 16 : 0,
+                  borderBottomRightRadius: goodFeelingPercentage === 0 ? 16 : 0,
+                }}
+              />
+              <View
+                style={{
+                  height: "100%",
+                  width: `${goodFeelingPercentage}%`,
+                  backgroundColor: "#F89F6D",
+                  borderTopLeftRadius:
+                    badFeelingPercentage === 0 && averageFeelingPercentage === 0
+                      ? 16
+                      : 0,
+                  borderBottomLeftRadius:
+                    badFeelingPercentage === 0 && averageFeelingPercentage === 0
+                      ? 16
+                      : 0,
+                  borderTopRightRadius: 16,
+                  borderBottomRightRadius: 16,
+                }}
+              />
+            </>
+          )}
       </View>
 
       <View style={{ height: 28 }} />
