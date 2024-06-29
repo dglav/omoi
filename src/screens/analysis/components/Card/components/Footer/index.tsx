@@ -1,25 +1,21 @@
-import { useRouter } from "expo-router";
 import { MessageCircleMore, Smile } from "lucide-react-native";
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Alert } from "react-native";
+import { Alert, Text, TouchableOpacity, View } from "react-native";
 import EmojiPicker, { ja } from "rn-emoji-keyboard";
 
-// import { usePostGroupEmojis } from "../../";
 // import { useGetPostGroupMessageCount } from "../../hooks/postGroupMessageHooks/useGetPostGroupMessagesCount";
-import { useAppTheme } from "../../../../../hooks/useAppTheme";
-import { useGetUser } from "../../../../../hooks/userHooks/useGetUser";
+import { useAppTheme } from "../../../../../../hooks/useAppTheme";
+import { useGetUser } from "../../../../../../hooks/userHooks/useGetUser";
+import { useAnalysisScreenStore } from "../../../useAnalysisScreenStore";
+import { useAnalysisResultsEmojis } from "./hooks/useAnalysisResultsEmoji";
 
-type Props = {
-  postGroupId: string;
-};
-
-export const Footer = ({ postGroupId }: Props) => {
+export const Footer = () => {
   const theme = useAppTheme();
-  const router = useRouter();
+  const { startDate, endDate, user: tab } = useAnalysisScreenStore();
 
   const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
-  // const { postGroupEmojis, handlePostEmoji, handleDeleteEmoji } =
-  //   usePostGroupEmojis({ postGroupId });
+  const { emojis, isLoadingEmojis, handlePostEmoji, handleDeleteEmoji } =
+    useAnalysisResultsEmojis({ user: tab, startDate, endDate });
   const { user } = useGetUser();
   // const { data } = useGetPostGroupMessageCount({ postGroupId });
 
@@ -36,22 +32,22 @@ export const Footer = ({ postGroupId }: Props) => {
           justifyContent: "flex-end",
           alignItems: "center",
           gap: 8,
-          width: '100%'
+          width: "100%",
         }}
       >
-        {/* {postGroupEmojis && */}
-        {/*   postGroupEmojis.map((postGroupEmoji) => { */}
-        {/*     return ( */}
-        {/*       <Text */}
-        {/*         key={`${postGroupEmoji.post_group_id}_${postGroupEmoji.user_id}`} */}
-        {/*         style={{ */}
-        {/*           fontSize: 24, */}
-        {/*         }} */}
-        {/*       > */}
-        {/*         {postGroupEmoji.emoji} */}
-        {/*       </Text> */}
-        {/*     ); */}
-        {/*   })} */}
+        {emojis &&
+          emojis.map((emoji) => {
+            return (
+              <Text
+                key={`${emoji.id}_${emoji.authorId}`}
+                style={{
+                  fontSize: 24,
+                }}
+              >
+                {emoji.emoji}
+              </Text>
+            );
+          })}
 
         <TouchableOpacity
           style={{
@@ -79,7 +75,7 @@ export const Footer = ({ postGroupId }: Props) => {
             alignItems: "center",
           }}
           onPress={() => {
-            Alert.alert('open chat')
+            Alert.alert("open chat");
           }}
         >
           <Text
@@ -95,15 +91,27 @@ export const Footer = ({ postGroupId }: Props) => {
       </View>
 
       <EmojiPicker
-        onEmojiSelected={() => {
-          // const selectedEmoji = data.emoji;
-          // const myEmoji = postGroupEmojis?.find(
-          //   (emoji) => emoji.user_id === user?.id,
-          // )?.emoji;
-          //
-          // return selectedEmoji === myEmoji
-          //   ? handleDeleteEmoji(postGroupId)
-          //   : handlePostEmoji({ postGroupId, emoji: selectedEmoji });
+        onEmojiSelected={async (data) => {
+          const selectedEmoji = data.emoji;
+
+          if (isLoadingEmojis) {
+            return;
+          }
+
+          const mySavedEmoji = emojis?.find(
+            (emoji) => emoji.authorId === user?.id,
+          );
+
+          if (!mySavedEmoji) {
+            return handlePostEmoji({ emoji: selectedEmoji });
+          }
+
+          if (mySavedEmoji.emoji === selectedEmoji) {
+            return handleDeleteEmoji(mySavedEmoji.id);
+          }
+
+          handleDeleteEmoji(mySavedEmoji.id);
+          handlePostEmoji({ emoji: selectedEmoji });
         }}
         open={isEmojiPickerOpen}
         onClose={() => setIsEmojiPickerOpen(false)}

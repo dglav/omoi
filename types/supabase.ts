@@ -9,6 +9,48 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      analysis_results_emojis: {
+        Row: {
+          author_id: string;
+          created_at: string;
+          date_span: string;
+          emoji: string;
+          id: string;
+          user_id: string;
+        };
+        Insert: {
+          author_id?: string;
+          created_at?: string;
+          date_span: string;
+          emoji: string;
+          id?: string;
+          user_id: string;
+        };
+        Update: {
+          author_id?: string;
+          created_at?: string;
+          date_span?: string;
+          emoji?: string;
+          id?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "analysis_results_emojis_author_id_fkey";
+            columns: ["author_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "analysis_results_emojis_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       custom_feelings: {
         Row: {
           created_at: string;
