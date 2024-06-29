@@ -168,12 +168,11 @@ export const FeelingSection = ({ startDate, endDate }: Props) => {
           rowGap: 12,
         }}
       >
-        <FeelingDot />
-        <FeelingDot />
-        <FeelingDot />
-        <FeelingDot />
-        <FeelingDot />
-        <FeelingDot />
+        {topEmotions.map((emotion) => {
+          const text = emotion[0];
+          const color = emotion[1].color;
+          return <FeelingDot key={emotion[0]} text={text} color={color} />;
+        })}
       </View>
     </View>
   );

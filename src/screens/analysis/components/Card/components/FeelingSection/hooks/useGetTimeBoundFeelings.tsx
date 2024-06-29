@@ -19,7 +19,7 @@ type Props = {
 };
 
 export const useGetTimeBoundFeelings = ({ startDate, endDate }: Props): {
-  topEmotions: any;
+  topEmotions: [string, { count: number; color: string }][];
   goodEmotionCount?: number;
   averageEmotionCount?: number;
   badEmotionCount?: number;
@@ -44,6 +44,7 @@ export const useGetTimeBoundFeelings = ({ startDate, endDate }: Props): {
       map[customFeeling.id] = {
         name: customFeeling.name,
         emotionLevel: customFeeling.emotionLevel,
+        color: emotionLevelColorMap[customFeeling.emotionLevel],
       };
       return map;
     },
@@ -56,6 +57,7 @@ export const useGetTimeBoundFeelings = ({ startDate, endDate }: Props): {
         | "average"
         | "negative"
         | "very negative";
+        color: string;
       };
     },
   );
@@ -67,7 +69,7 @@ export const useGetTimeBoundFeelings = ({ startDate, endDate }: Props): {
     badEmotionCount,
     emotionCountMap,
   } = feelings.reduce((accumulator: {
-    emotionCountMap: Map<string, number>;
+    emotionCountMap: Map<string, { count: number; color: string }>;
     goodEmotionCount: number;
     averageEmotionCount: number;
     badEmotionCount: number;
@@ -100,14 +102,17 @@ export const useGetTimeBoundFeelings = ({ startDate, endDate }: Props): {
 
     const currentEmotionCountValue = accumulator.emotionCountMap.get(
       result.text,
-    );
+    )?.count;
 
     if (!currentEmotionCountValue) {
-      accumulator.emotionCountMap.set(result.text, 1);
+      accumulator.emotionCountMap.set(result.text, {
+        count: 1,
+        color: result.fillColor,
+      });
     } else {
       accumulator.emotionCountMap.set(
         result.text,
-        currentEmotionCountValue + 1,
+        { count: currentEmotionCountValue + 1, color: result.fillColor },
       );
     }
 
@@ -130,7 +135,7 @@ export const useGetTimeBoundFeelings = ({ startDate, endDate }: Props): {
     averageEmotionCount: 0,
     badEmotionCount: 0,
   } as {
-    emotionCountMap: Map<string, number>;
+    emotionCountMap: Map<string, { count: number; color: string }>;
     goodEmotionCount: number;
     averageEmotionCount: number;
     badEmotionCount: number;
@@ -138,7 +143,7 @@ export const useGetTimeBoundFeelings = ({ startDate, endDate }: Props): {
 
   const topEmotions = Array.from(emotionCountMap.entries()).sort(
     ([_, value1], [__, value2]) => {
-      return value2 - value1;
+      return value2.count - value1.count;
     },
   ).slice(0, 6);
 
