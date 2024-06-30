@@ -6,16 +6,16 @@ type ReturnType = {
 };
 
 export const useGetTimeBoundTags = (): ReturnType => {
-  const { data: posts, isLoading } = useGetPostsForAnalysis();
+  const { currentWeekPosts, isLoading } = useGetPostsForAnalysis();
 
-  if (isLoading || !posts) {
+  if (isLoading || !currentWeekPosts) {
     return {
       isLoading,
       topTags: [],
     };
   }
 
-  const allTags = posts.map((post) => post.tags).flat();
+  const allTags = currentWeekPosts.map((post) => post.tags).flat();
   const tagCountMap = allTags.reduce<Map<string, number>>(
     (accumulator, currentTag) => {
       const currentAccumulatorValue = accumulator.get(currentTag);

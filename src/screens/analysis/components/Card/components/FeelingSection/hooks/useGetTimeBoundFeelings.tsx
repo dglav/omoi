@@ -1,4 +1,6 @@
 import { useGetCustomFeelings } from "../../../../../../../hooks/customFeelingHooks/useGetCustomFeelings";
+import { Feeling } from "../../../../../../../services/supabase/database/custom_feelings/converter";
+import { Post } from "../../../../../../../services/supabase/database/posts/converter";
 import { useGetPostsForAnalysis } from "../../hooks/useGetPostsForAnalysis";
 
 const approximateFeelingLevelMap = new Map<string, "bad" | "average" | "good">([
@@ -18,12 +20,15 @@ export const useGetTimeBoundFeelings = (): {
     totalEmotionCount?: number;
   };
 } => {
-  const { data: posts, isLoading: isLoadingPosts } = useGetPostsForAnalysis();
+  const { currentWeekPosts, isLoading: isLoadingPosts } =
+    useGetPostsForAnalysis();
 
   const { data: customFeelings, isLoading: isLoadingFeelings } =
     useGetCustomFeelings();
 
-  if (isLoadingPosts || isLoadingFeelings || !posts || !customFeelings) {
+  if (
+    isLoadingPosts || isLoadingFeelings || !currentWeekPosts || !customFeelings
+  ) {
     return {
       currentWeek: {
         topEmotions: [],
@@ -31,8 +36,46 @@ export const useGetTimeBoundFeelings = (): {
     };
   }
 
+  const currentWeek = getCurrentWeekData({ posts: currentWeekPosts });
+
+  return {
+    currentWeek,
+  };
+};
+
+const getCurrentWeekData = ({ posts }: { posts: Post[] }) => {
   const feelings = posts.map((post) => post.feelings).flat();
 
+  const {
+    goodEmotionCount,
+    averageEmotionCount,
+    badEmotionCount,
+    totalEmotionCount,
+    emotionCountMap,
+  } = getEmotionCategoryCount(feelings);
+
+  const topEmotions = Array.from(emotionCountMap.entries()).sort(
+    ([_, value1], [__, value2]) => {
+      return value2.count - value1.count;
+    },
+  ).slice(0, 6);
+
+  return {
+    goodEmotionCount,
+    averageEmotionCount,
+    badEmotionCount,
+    totalEmotionCount,
+    topEmotions,
+  };
+};
+
+const getEmotionCategoryCount = (feelings: Feeling[]): {
+  goodEmotionCount: number;
+  averageEmotionCount: number;
+  badEmotionCount: number;
+  totalEmotionCount: number;
+  emotionCountMap: Map<string, { count: number; color: string }>;
+} => {
   const totalEmotionCount = feelings.length;
   const {
     goodEmotionCount,
@@ -86,19 +129,11 @@ export const useGetTimeBoundFeelings = (): {
     badEmotionCount: number;
   });
 
-  const topEmotions = Array.from(emotionCountMap.entries()).sort(
-    ([_, value1], [__, value2]) => {
-      return value2.count - value1.count;
-    },
-  ).slice(0, 6);
-
   return {
-    currentWeek: {
-      topEmotions,
-      goodEmotionCount,
-      averageEmotionCount,
-      badEmotionCount,
-      totalEmotionCount,
-    },
+    totalEmotionCount,
+    goodEmotionCount,
+    averageEmotionCount,
+    badEmotionCount,
+    emotionCountMap,
   };
 };

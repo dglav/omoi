@@ -20,9 +20,9 @@ export const useGetTimeBoundConditions = (): {
   isLoading: boolean;
 } => {
   const { startDate } = useAnalysisScreenStore();
-  const { data, isLoading } = useGetPostsForAnalysis();
+  const { currentWeekPosts, isLoading } = useGetPostsForAnalysis();
 
-  if (isLoading || !data) {
+  if (isLoading || !currentWeekPosts) {
     const timeBoundConditions: TimeBoundConditions = [];
     return {
       timeBoundConditions,
@@ -30,7 +30,7 @@ export const useGetTimeBoundConditions = (): {
     };
   }
 
-  const timeBoundConditions = data.reduce((postGroups, post) => {
+  const timeBoundConditions = currentWeekPosts.reduce((postGroups, post) => {
     const postDayDiff = diffDays(post.date, startDate, "floor");
 
     if (!postGroups[postDayDiff]) {

@@ -12,9 +12,9 @@ import { Text } from "../../../../components/text";
 
 export const Card = () => {
   const theme = useAppTheme();
-  const { data: posts, isLoading, isFetching } = useGetPostsForAnalysis();
+  const { currentWeekPosts, isLoading } = useGetPostsForAnalysis();
 
-  if (isFetching || isLoading) {
+  if (isLoading) {
     return <View />;
   }
 
@@ -34,7 +34,7 @@ export const Card = () => {
       >
         <Header />
 
-        {!posts?.length
+        {!currentWeekPosts?.length
           ? (
             <View
               style={{
