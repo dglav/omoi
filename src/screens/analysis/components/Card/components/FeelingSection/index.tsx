@@ -16,6 +16,7 @@ export const FeelingSection = () => {
       badEmotionCount: currentWeekBadEmotionCount,
       totalEmotionCount: currentWeekTotalEmotionCount,
     },
+    lastWeek,
   } = useGetTimeBoundFeelings();
 
   const shouldDisplayFeelingStatusBar =
@@ -142,17 +143,17 @@ export const FeelingSection = () => {
         <CategoryStats
           title="不快感情"
           currentWeekPercentage={Math.round(badFeelingPercentage)}
-        // lastWeekPercentage={48}
+          percentChange={lastWeek ? lastWeek.percentChangeBad : undefined}
         />
         <CategoryStats
           title="ニュートラル"
           currentWeekPercentage={Math.round(averageFeelingPercentage)}
-        // lastWeekPercentage={12}
+          percentChange={lastWeek ? lastWeek.percentChangeAverage : undefined}
         />
         <CategoryStats
           title="快感情"
           currentWeekPercentage={Math.round(goodFeelingPercentage)}
-        // lastWeekPercentage={40}
+          percentChange={lastWeek ? lastWeek.percentChangeGood : undefined}
         />
       </View>
 

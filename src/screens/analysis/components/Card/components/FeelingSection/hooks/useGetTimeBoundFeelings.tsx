@@ -19,15 +19,21 @@ export const useGetTimeBoundFeelings = (): {
     badEmotionCount?: number;
     totalEmotionCount?: number;
   };
+  lastWeek?: {
+    percentChangeGood: number;
+    percentChangeAverage: number;
+    percentChangeBad: number;
+  };
 } => {
-  const { currentWeekPosts, isLoading: isLoadingPosts } =
+  const { currentWeekPosts, lastWeekPosts, isLoading: isLoadingPosts } =
     useGetPostsForAnalysis();
 
   const { data: customFeelings, isLoading: isLoadingFeelings } =
     useGetCustomFeelings();
 
   if (
-    isLoadingPosts || isLoadingFeelings || !currentWeekPosts || !customFeelings
+    isLoadingPosts || isLoadingFeelings || !currentWeekPosts ||
+    !customFeelings
   ) {
     return {
       currentWeek: {
@@ -36,14 +42,44 @@ export const useGetTimeBoundFeelings = (): {
     };
   }
 
-  const currentWeek = getCurrentWeekData({ posts: currentWeekPosts });
+  const currentWeek = getWeekData({ posts: currentWeekPosts });
+
+  if (!lastWeekPosts?.length) {
+    return {
+      currentWeek,
+    };
+  }
+
+  const lastWeek = getWeekData({ posts: lastWeekPosts });
+
+  const currentWeekPercentGood = 100 * currentWeek.goodEmotionCount /
+    currentWeek.totalEmotionCount;
+  const currentWeekPercentAverage = 100 * currentWeek.averageEmotionCount /
+    currentWeek.totalEmotionCount;
+  const currentWeekPercentBad = 100 * currentWeek.badEmotionCount /
+    currentWeek.totalEmotionCount;
+  const lastWeekPercentGood = 100 * lastWeek.goodEmotionCount /
+    lastWeek.totalEmotionCount;
+  const lastWeekPercentAverage = 100 * lastWeek.averageEmotionCount /
+    lastWeek.totalEmotionCount;
+  const lastWeekPercentBad = 100 * lastWeek.badEmotionCount /
+    lastWeek.totalEmotionCount;
 
   return {
     currentWeek,
+    lastWeek: {
+      percentChangeGood: Math.round(
+        currentWeekPercentGood - lastWeekPercentGood,
+      ),
+      percentChangeAverage: Math.round(
+        currentWeekPercentAverage - lastWeekPercentAverage,
+      ),
+      percentChangeBad: Math.round(currentWeekPercentBad - lastWeekPercentBad),
+    },
   };
 };
 
-const getCurrentWeekData = ({ posts }: { posts: Post[] }) => {
+const getWeekData = ({ posts }: { posts: Post[] }) => {
   const feelings = posts.map((post) => post.feelings).flat();
 
   const {
