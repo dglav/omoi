@@ -9,26 +9,31 @@ import { useGetTimeBoundFeelings } from "./hooks/useGetTimeBoundFeelings";
 export const FeelingSection = () => {
   const theme = useAppTheme();
   const {
-    topEmotions,
-    goodEmotionCount,
-    averageEmotionCount,
-    badEmotionCount,
-    totalEmotionCount,
+    currentWeek: {
+      topEmotions: currentWeekTopEmotions,
+      goodEmotionCount: currentWeekGoodEmotionCount,
+      averageEmotionCount: currentWeekAverageEmotionCount,
+      badEmotionCount: currentWeekBadEmotionCount,
+      totalEmotionCount: currentWeekTotalEmotionCount,
+    },
   } = useGetTimeBoundFeelings();
 
-  const shouldDisplayFeelingStatusBar = typeof goodEmotionCount === "number" &&
-    typeof averageEmotionCount === "number" &&
-    typeof badEmotionCount === "number" &&
-    typeof totalEmotionCount === "number";
+  const shouldDisplayFeelingStatusBar =
+    typeof currentWeekGoodEmotionCount === "number" &&
+    typeof currentWeekAverageEmotionCount === "number" &&
+    typeof currentWeekBadEmotionCount === "number" &&
+    typeof currentWeekTotalEmotionCount === "number";
 
   if (!shouldDisplayFeelingStatusBar) {
     return <View style={{ width: "100%" }} />;
   }
 
-  const goodFeelingPercentage = 100 * goodEmotionCount / totalEmotionCount;
-  const averageFeelingPercentage = 100 * averageEmotionCount /
-    totalEmotionCount;
-  const badFeelingPercentage = 100 * badEmotionCount / totalEmotionCount;
+  const goodFeelingPercentage = 100 * currentWeekGoodEmotionCount /
+    currentWeekTotalEmotionCount;
+  const averageFeelingPercentage = 100 * currentWeekAverageEmotionCount /
+    currentWeekTotalEmotionCount;
+  const badFeelingPercentage = 100 * currentWeekBadEmotionCount /
+    currentWeekTotalEmotionCount;
 
   return (
     <View style={{ width: "100%" }}>
@@ -160,7 +165,7 @@ export const FeelingSection = () => {
           rowGap: 12,
         }}
       >
-        {topEmotions.map((emotion) => {
+        {currentWeekTopEmotions.map((emotion) => {
           const text = emotion[0];
           const color = emotion[1].color;
           return <FeelingDot key={emotion[0]} text={text} color={color} />;

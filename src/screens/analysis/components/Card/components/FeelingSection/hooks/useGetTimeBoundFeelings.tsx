@@ -10,11 +10,13 @@ const approximateFeelingLevelMap = new Map<string, "bad" | "average" | "good">([
 ]);
 
 export const useGetTimeBoundFeelings = (): {
-  topEmotions: [string, { count: number; color: string }][];
-  goodEmotionCount?: number;
-  averageEmotionCount?: number;
-  badEmotionCount?: number;
-  totalEmotionCount?: number;
+  currentWeek: {
+    topEmotions: [string, { count: number; color: string }][];
+    goodEmotionCount?: number;
+    averageEmotionCount?: number;
+    badEmotionCount?: number;
+    totalEmotionCount?: number;
+  };
 } => {
   const { data: posts, isLoading: isLoadingPosts } = useGetPostsForAnalysis();
 
@@ -23,7 +25,9 @@ export const useGetTimeBoundFeelings = (): {
 
   if (isLoadingPosts || isLoadingFeelings || !posts || !customFeelings) {
     return {
-      topEmotions: [],
+      currentWeek: {
+        topEmotions: [],
+      },
     };
   }
 
@@ -89,10 +93,12 @@ export const useGetTimeBoundFeelings = (): {
   ).slice(0, 6);
 
   return {
-    topEmotions,
-    goodEmotionCount,
-    averageEmotionCount,
-    badEmotionCount,
-    totalEmotionCount,
+    currentWeek: {
+      topEmotions,
+      goodEmotionCount,
+      averageEmotionCount,
+      badEmotionCount,
+      totalEmotionCount,
+    },
   };
 };
