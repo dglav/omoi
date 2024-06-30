@@ -32,7 +32,7 @@ export const useGetTimeBoundFeelings = (): {
     useGetCustomFeelings();
 
   if (
-    isLoadingPosts || isLoadingFeelings || !currentWeekPosts ||
+    isLoadingPosts || isLoadingFeelings || !currentWeekPosts?.length ||
     !customFeelings
   ) {
     return {
