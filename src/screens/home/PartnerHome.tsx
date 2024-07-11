@@ -1,4 +1,4 @@
-import { dayStart, dayEnd, parse, addDay } from "@formkit/tempo";
+import { addDay, dayEnd, dayStart, parse } from "@formkit/tempo";
 import { ScrollView, View } from "react-native";
 
 import { PartnerJournalEntriesCardPast } from "../../components/JournalEntriesCard/PartnerJournalEntriesCardPast";
@@ -32,16 +32,14 @@ export const PartnerHome = () => {
           const startOfToday = dayStart(now);
           const endOfToday = dayEnd(now);
 
-          const isToday =
-            postGroupDate >= startOfToday && postGroupDate < endOfToday;
+          const isToday = postGroupDate >= startOfToday &&
+            postGroupDate < endOfToday;
 
           return (
             <View key={postGroup.id}>
-              {isToday ? (
-                <PartnerJournalEntriesCardToday postGroup={postGroup} />
-              ) : (
-                <PartnerJournalEntriesCardPast postGroup={postGroup} />
-              )}
+              {isToday
+                ? <PartnerJournalEntriesCardToday postGroup={postGroup} />
+                : <PartnerJournalEntriesCardPast postGroup={postGroup} />}
             </View>
           );
         })}

@@ -50,7 +50,8 @@
     "rn-emoji-keyboard": "^1.7.0",
     "victory-native": "^40.2.0",
     "zeego": "^1.10.0",
-    "zustand": "^4.5.2"
+    "zustand": "^4.5.2",
+    "react-native-pager-view": "6.2.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

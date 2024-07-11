@@ -12,9 +12,9 @@ export const Container = ({ activeTab, children }: Props) => {
     <SafeAreaView
       style={{
         flex: 1,
-        alignItems: "center",
-        backgroundColor:
-          activeTab === "me" ? theme.colors.background : "#F3D9D3",
+        backgroundColor: activeTab === "me"
+          ? theme.colors.background
+          : "#F3D9D3",
       }}
       edges={{
         top: "additive",

@@ -20,7 +20,7 @@ export const Header = ({ title, activeTab, setActiveTab }: Props) => {
   const partnerNickname = partner?.nickname;
 
   return (
-    <>
+    <View style={{ alignItems: "center" }}>
       <View style={{ height: 12 }} />
 
       <View>
@@ -59,8 +59,9 @@ export const Header = ({ title, activeTab, setActiveTab }: Props) => {
           style={{
             paddingVertical: 10,
             paddingHorizontal: 16,
-            backgroundColor:
-              activeTab === "partner" ? "white" : theme.colors.background,
+            backgroundColor: activeTab === "partner"
+              ? "white"
+              : theme.colors.background,
             borderRadius: 50,
           }}
           onPress={() => setActiveTab("partner")}
@@ -77,6 +78,6 @@ export const Header = ({ title, activeTab, setActiveTab }: Props) => {
           marginTop: 8,
         }}
       />
-    </>
+    </View>
   );
 };
