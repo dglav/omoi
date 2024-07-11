@@ -5,8 +5,17 @@ import { useAppTheme } from "../../../../../../hooks/useAppTheme";
 import { CategoryStats } from "./components/CategoryStats";
 import { FeelingDot } from "./components/FeelingDot";
 import { useGetTimeBoundFeelings } from "./hooks/useGetTimeBoundFeelings";
+import type { Post } from "../../../../../../services/supabase/database/posts/converter";
 
-export const FeelingSection = () => {
+type Props = {
+  currentWeekPosts: Post[];
+  lastWeekPosts: Post[];
+  isLoading: boolean;
+};
+
+export const FeelingSection = (
+  { currentWeekPosts, lastWeekPosts, isLoading }: Props,
+) => {
   const theme = useAppTheme();
   const {
     currentWeek: {
@@ -17,7 +26,7 @@ export const FeelingSection = () => {
       totalEmotionCount: currentWeekTotalEmotionCount,
     },
     lastWeek,
-  } = useGetTimeBoundFeelings();
+  } = useGetTimeBoundFeelings({ currentWeekPosts, lastWeekPosts, isLoading });
 
   const shouldDisplayFeelingStatusBar =
     typeof currentWeekGoodEmotionCount === "number" &&

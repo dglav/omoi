@@ -7,18 +7,23 @@ import { Area, CartesianChart } from "victory-native";
 import { useAppTheme } from "../../../../../../hooks/useAppTheme";
 import { useGetTimeBoundConditions } from "./hooks/useGetTimeBoundConditions";
 import { addDay } from "@formkit/tempo";
-import { useAnalysisScreenStore } from "../../../useAnalysisScreenStore";
+import { useAnalysisScreenStore } from "../../../../hooks/useAnalysisScreenStore";
+import type { Post } from "../../../../../../services/supabase/database/posts/converter";
 
 const h = 400;
 const w = 0;
 
-export const ConditionSection = () => {
+type Props = {
+  currentWeekPosts: Post[];
+  isLoading: boolean;
+};
+
+export const ConditionSection = ({ currentWeekPosts, isLoading }: Props) => {
   const theme = useAppTheme();
   const { startDate } = useAnalysisScreenStore();
   const {
     timeBoundConditions,
-    isLoading,
-  } = useGetTimeBoundConditions();
+  } = useGetTimeBoundConditions({ currentWeekPosts, isLoading });
 
   return (
     <View style={{ width: "100%" }}>

@@ -11,7 +11,13 @@ const approximateFeelingLevelMap = new Map<string, "bad" | "average" | "good">([
   ["very positive", "good"],
 ]);
 
-export const useGetTimeBoundFeelings = (): {
+type Props = {
+  currentWeekPosts: Post[];
+  lastWeekPosts: Post[];
+  isLoading: boolean;
+};
+
+export const useGetTimeBoundFeelings = ({ currentWeekPosts, lastWeekPosts, isLoading: isLoadingPosts }: Props): {
   currentWeek: {
     topEmotions: [string, { count: number; color: string }][];
     goodEmotionCount?: number;
@@ -25,8 +31,6 @@ export const useGetTimeBoundFeelings = (): {
     percentChangeBad: number;
   };
 } => {
-  const { currentWeekPosts, lastWeekPosts, isLoading: isLoadingPosts } =
-    useGetPostsForAnalysis();
 
   const { data: customFeelings, isLoading: isLoadingFeelings } =
     useGetCustomFeelings();

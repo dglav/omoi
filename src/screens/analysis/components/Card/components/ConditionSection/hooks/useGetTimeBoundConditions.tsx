@@ -1,6 +1,6 @@
 import { diffDays } from "@formkit/tempo";
-import { useGetPostsForAnalysis } from "../../hooks/useGetPostsForAnalysis";
-import { useAnalysisScreenStore } from "../../../../useAnalysisScreenStore";
+import { useAnalysisScreenStore } from "../../../../../hooks/useAnalysisScreenStore";
+import type { Post } from "../../../../../../../services/supabase/database/posts/converter";
 
 const conditionLevelMap = {
   "reallyBad": 0,
@@ -15,12 +15,18 @@ type TimeBoundConditions = {
   conditionLevel: number;
 }[];
 
-export const useGetTimeBoundConditions = (): {
+type Props = {
+  currentWeekPosts: Post[];
+  isLoading: boolean;
+};
+
+export const useGetTimeBoundConditions = (
+  { currentWeekPosts, isLoading }: Props,
+): {
   timeBoundConditions: TimeBoundConditions;
   isLoading: boolean;
 } => {
   const { startDate } = useAnalysisScreenStore();
-  const { currentWeekPosts, isLoading } = useGetPostsForAnalysis();
 
   if (isLoading || !currentWeekPosts) {
     const timeBoundConditions: TimeBoundConditions = [];

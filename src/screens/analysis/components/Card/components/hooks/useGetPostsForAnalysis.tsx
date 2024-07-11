@@ -1,9 +1,13 @@
 import { addDay } from "@formkit/tempo";
 import { useGetPosts } from "../../../../../../hooks/postHooks/useGetPosts";
-import { useAnalysisScreenStore } from "../../../useAnalysisScreenStore";
+import { useAnalysisScreenStore } from "../../../../hooks/useAnalysisScreenStore";
 
-export const useGetPostsForAnalysis = () => {
-  const { user, startDate, endDate } = useAnalysisScreenStore();
+type Props = {
+  user: "me" | "partner";
+};
+
+export const useGetPostsForAnalysis = ({ user }: Props) => {
+  const { startDate, endDate } = useAnalysisScreenStore();
 
   const currentWeekPosts = useGetPosts({
     who: user,
@@ -16,8 +20,8 @@ export const useGetPostsForAnalysis = () => {
   });
 
   return {
-    currentWeekPosts: currentWeekPosts.data,
-    lastWeekPosts: lastWeekPosts.data,
+    currentWeekPosts: currentWeekPosts.data ?? [],
+    lastWeekPosts: lastWeekPosts.data ?? [],
     isLoading: currentWeekPosts.isLoading || lastWeekPosts.isLoading,
   };
 };

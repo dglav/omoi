@@ -10,9 +10,14 @@ import { useAppTheme } from "../../../../hooks/useAppTheme";
 import { useGetPostsForAnalysis } from "./components/hooks/useGetPostsForAnalysis";
 import { Text } from "../../../../components/text";
 
-export const Card = () => {
+type Props = {
+  user: "me" | "partner";
+};
+
+export const Card = ({ user }: Props) => {
   const theme = useAppTheme();
-  const { currentWeekPosts, isLoading } = useGetPostsForAnalysis();
+  const { currentWeekPosts, lastWeekPosts, isLoading } =
+    useGetPostsForAnalysis({ user });
 
   if (isLoading) {
     return <View />;
@@ -47,15 +52,25 @@ export const Card = () => {
           )
           : (
             <>
-              <ConditionSection />
+              <ConditionSection
+                currentWeekPosts={currentWeekPosts}
+                isLoading={isLoading}
+              />
 
               <View style={{ height: 60 }} />
 
-              <FeelingSection />
+              <FeelingSection
+                currentWeekPosts={currentWeekPosts}
+                lastWeekPosts={lastWeekPosts}
+                isLoading={isLoading}
+              />
 
               <View style={{ height: 60 }} />
 
-              <TagSection />
+              <TagSection
+                currentWeekPosts={currentWeekPosts}
+                isLoading={isLoading}
+              />
 
               <View style={{ height: 24 }} />
             </>
@@ -69,7 +84,7 @@ export const Card = () => {
           }}
         />
 
-        <Footer />
+        <Footer user={user} />
       </View>
     </View>
   );

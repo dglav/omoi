@@ -1,13 +1,18 @@
-import { useGetPostsForAnalysis } from "../../hooks/useGetPostsForAnalysis";
+import type { Post } from "../../../../../../../services/supabase/database/posts/converter";
 
 type ReturnType = {
   isLoading: boolean;
   topTags: string[];
 };
 
-export const useGetTimeBoundTags = (): ReturnType => {
-  const { currentWeekPosts, isLoading } = useGetPostsForAnalysis();
+type Props = {
+  currentWeekPosts: Post[];
+  isLoading: boolean;
+};
 
+export const useGetTimeBoundTags = (
+  { currentWeekPosts, isLoading }: Props,
+): ReturnType => {
   if (isLoading || !currentWeekPosts) {
     return {
       isLoading,

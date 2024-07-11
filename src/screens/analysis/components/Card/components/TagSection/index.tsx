@@ -3,10 +3,16 @@ import { Text } from "../../../../../../components/text";
 import { useAppTheme } from "../../../../../../hooks/useAppTheme";
 import { TagPill } from "../../../../../../components/tag-pill";
 import { useGetTimeBoundTags } from "./hooks/useGetTimeBoundTags";
+import type { Post } from "../../../../../../services/supabase/database/posts/converter";
 
-export const TagSection = () => {
+type Props = {
+  currentWeekPosts: Post[];
+  isLoading: boolean;
+};
+
+export const TagSection = ({ currentWeekPosts, isLoading }: Props) => {
   const theme = useAppTheme();
-  const { topTags } = useGetTimeBoundTags();
+  const { topTags } = useGetTimeBoundTags({ currentWeekPosts, isLoading });
 
   return (
     <View style={{ width: "100%" }}>

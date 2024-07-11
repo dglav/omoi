@@ -6,17 +6,21 @@ import EmojiPicker, { ja } from "rn-emoji-keyboard";
 // import { useGetPostGroupMessageCount } from "../../hooks/postGroupMessageHooks/useGetPostGroupMessagesCount";
 import { useAppTheme } from "../../../../../../hooks/useAppTheme";
 import { useGetUser } from "../../../../../../hooks/userHooks/useGetUser";
-import { useAnalysisScreenStore } from "../../../useAnalysisScreenStore";
+import { useAnalysisScreenStore } from "../../../../hooks/useAnalysisScreenStore";
 import { useAnalysisResultsEmojis } from "./hooks/useAnalysisResultsEmoji";
 
-export const Footer = () => {
+type Props = {
+  user: "me" | "partner";
+};
+
+export const Footer = ({ user }: Props) => {
   const theme = useAppTheme();
-  const { startDate, endDate, user: tab } = useAnalysisScreenStore();
+  const { startDate, endDate } = useAnalysisScreenStore();
 
   const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
   const { emojis, isLoadingEmojis, handlePostEmoji, handleDeleteEmoji } =
-    useAnalysisResultsEmojis({ user: tab, startDate, endDate });
-  const { user } = useGetUser();
+    useAnalysisResultsEmojis({ user, startDate, endDate });
+  const { user: userData } = useGetUser();
   // const { data } = useGetPostGroupMessageCount({ postGroupId });
 
   const count = 0;
@@ -99,7 +103,7 @@ export const Footer = () => {
           }
 
           const mySavedEmoji = emojis?.find(
-            (emoji) => emoji.authorId === user?.id,
+            (emoji) => emoji.authorId === userData?.id,
           );
 
           if (!mySavedEmoji) {
