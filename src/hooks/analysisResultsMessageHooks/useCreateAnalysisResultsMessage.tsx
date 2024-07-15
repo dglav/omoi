@@ -1,29 +1,29 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { useSession } from "../../providers/AuthProvider";
-import { insertPostGroupMessage } from "../../services/supabase/database/post_group_messages/insertPostGroupMessages";
 import { useNotifyPartner } from "../pushNotificationHooks/useNotifyPartner";
 import { insertAnalysisResultsMessage } from "../../services/supabase/database/analysis_weekly_messages/insertAnalysisResultsMessage";
 
 type mutationParams = {
-  analyzedUserId: string;
-  startDate: Date;
-  endDate: Date;
   message: string;
 };
 
 type Props = {
+  analyzedUserId: string;
+  startDate: Date;
+  endDate: Date;
   onSuccess?: () => void;
 };
 
-export const useCreateAnalysisResultsMessage = ({ onSuccess }: Props) => {
+export const useCreateAnalysisResultsMessage = (
+  { analyzedUserId, startDate, endDate, onSuccess }: Props,
+) => {
   const queryClient = useQueryClient();
 
   const { mutate: notifyPartner } = useNotifyPartner();
 
   const mutation = useMutation({
     mutationFn: (
-      { analyzedUserId, startDate, endDate, message }: mutationParams,
+      { message }: mutationParams,
     ) => {
       return insertAnalysisResultsMessage({
         analyzedUserId,
@@ -32,13 +32,13 @@ export const useCreateAnalysisResultsMessage = ({ onSuccess }: Props) => {
         message,
       });
     },
-    onSuccess: (_, variables) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [
           "analysisResultsMessages",
-          variables.analyzedUserId,
-          variables.startDate,
-          variables.endDate,
+          analyzedUserId,
+          startDate,
+          endDate,
         ],
       });
 

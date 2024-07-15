@@ -23,9 +23,12 @@ export const Footer = ({ user }: Props) => {
   const { emojis, isLoadingEmojis, handlePostEmoji, handleDeleteEmoji } =
     useAnalysisResultsEmojis({ user, startDate, endDate });
   const { user: userData } = useGetUser();
+
+  const userId = user === "me" ? userData?.id : userData?.partner_user_id ?? "";
+
   const { data: analysisResultsMessageCountData } =
     useGetAnalysisResultsMessageCount({
-      analyzedUserId: userData?.id,
+      analyzedUserId: userId,
       startDate,
       endDate,
     });
@@ -84,7 +87,9 @@ export const Footer = ({ user }: Props) => {
             alignItems: "center",
           }}
           onPress={() => {
-            router.push("analysis/chat");
+            router.push(
+              `analysis-chat?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}&analyzedUserId=${userId}`,
+            );
           }}
         >
           <Text

@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { getAnalysisResultsWeeklyMessages } from "../../services/supabase/database/analysis_weekly_messages/getAnalysisResultsWeeklyMessages";
+import { ChatMessage } from "../../domain/ChatMessage";
 
 type Props = {
   analyzedUserId: string;
@@ -12,7 +13,11 @@ export const useGetAnalysisResultsMessages = ({
   analyzedUserId,
   startDate,
   endDate,
-}: Props) => {
+}: Props): {
+  messages: ChatMessage[];
+  isLoading: boolean;
+  isError: boolean;
+} => {
   const { data, isLoading, isError } = useQuery({
     queryKey: [
       "analysisResultsMessages",
@@ -30,5 +35,5 @@ export const useGetAnalysisResultsMessages = ({
     refetchInterval: 10000,
   });
 
-  return { data, isLoading, isError };
+  return { messages: data?.messages ?? [], isLoading, isError };
 };

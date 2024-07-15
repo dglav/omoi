@@ -74,6 +74,8 @@ export default function AppLayout() {
       <Stack.Screen name="tags" options={{ headerShown: false }} />
 
       <Stack.Screen name="post-group" options={{ headerShown: false }} />
+
+      <Stack.Screen name="analysis-chat" options={{ headerShown: false }} />
     </Stack>
   );
 }

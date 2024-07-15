@@ -24,8 +24,8 @@ export const insertAnalysisResultsMessage = async ({
   };
 
   const { data, error } = await supabase
-    .from("analysis_weekly_messages")
-    .insert([createMessageDTO])
+    .from("analysis_results_weekly_messages")
+    .insert(createMessageDTO)
     .select();
 
   if (error) {

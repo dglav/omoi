@@ -2,13 +2,7 @@ import { format, parse } from "@formkit/tempo";
 
 import { supabase } from "../..";
 import { SupabaseDatabaseError } from "../../error";
-
-type Message = {
-  id: string;
-  authorId: string;
-  message: string;
-  createdAt: Date;
-};
+import { ChatMessage } from "../../../../domain/ChatMessage";
 
 type Props = {
   startDate: Date;
@@ -20,7 +14,7 @@ export const getAnalysisResultsWeeklyMessages = async ({
   startDate,
   endDate,
   analyzedUserId,
-}: Props): Promise<{ messages: Message[] }> => {
+}: Props): Promise<{ messages: ChatMessage[] }> => {
   const { data: messages, error } = await supabase
     .from("analysis_results_weekly_messages")
     .select("*")
@@ -34,7 +28,7 @@ export const getAnalysisResultsWeeklyMessages = async ({
     throw new SupabaseDatabaseError(error);
   }
 
-  const convertedMessages: Message[] = messages.map((message) => ({
+  const convertedMessages: ChatMessage[] = messages.map((message) => ({
     id: message.id,
     message: message.message,
     authorId: message.author_id,
