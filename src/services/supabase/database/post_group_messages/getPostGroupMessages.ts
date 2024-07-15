@@ -2,14 +2,7 @@ import { parse } from "@formkit/tempo";
 
 import { supabase } from "../..";
 import { SupabaseDatabaseError } from "../../error";
-
-export type Message = {
-  id: string;
-  message: string;
-  postGroupId: string;
-  userId: string;
-  createdAt: Date;
-};
+import { ChatMessage } from "../../../../domain/ChatMessage";
 
 type Props = {
   postGroupId: string;
@@ -17,7 +10,7 @@ type Props = {
 
 export const getPostGroupMessages = async ({
   postGroupId,
-}: Props): Promise<{ messages: Message[] }> => {
+}: Props): Promise<{ messages: ChatMessage[] }> => {
   const { data: messages, error } = await supabase
     .from("post_group_messages")
     .select("*")
@@ -27,11 +20,10 @@ export const getPostGroupMessages = async ({
     throw new SupabaseDatabaseError(error);
   }
 
-  const convertedMessages: Message[] = messages.map((message) => ({
+  const convertedMessages: ChatMessage[] = messages.map((message) => ({
     id: message.id,
     message: message.message,
-    postGroupId: message.post_group_id,
-    userId: message.user_id,
+    authorId: message.user_id,
     createdAt: parse(message.created_at),
   }));
 

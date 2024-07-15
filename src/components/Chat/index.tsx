@@ -11,10 +11,10 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Footer } from "./components/Footer";
 import { MessageWindow } from "./components/MessageWindow";
 import { useAppTheme } from "../../hooks/useAppTheme";
-import { Message } from "../../services/supabase/database/post_group_messages/getPostGroupMessages";
+import { ChatMessage } from "../../domain/ChatMessage";
 
 type Props = {
-  messages: Message[];
+  messages: ChatMessage[];
   sendNewMessage: ({ message }: { message: string }) => void;
 };
 
