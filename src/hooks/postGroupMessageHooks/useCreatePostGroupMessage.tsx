@@ -5,15 +5,17 @@ import { insertPostGroupMessage } from "../../services/supabase/database/post_gr
 import { useNotifyPartner } from "../pushNotificationHooks/useNotifyPartner";
 
 type mutationParams = {
-  postGroupId: string;
   message: string;
 };
 
 type Props = {
+  postGroupId: string;
   onSuccess?: () => void;
 };
 
-export const useCreatePostGroupMessage = ({ onSuccess }: Props) => {
+export const useCreatePostGroupMessage = (
+  { postGroupId, onSuccess }: Props,
+) => {
   const queryClient = useQueryClient();
   const { session } = useSession();
   const userId = session?.user.id;
@@ -21,15 +23,15 @@ export const useCreatePostGroupMessage = ({ onSuccess }: Props) => {
   const { mutate: notifyPartner } = useNotifyPartner();
 
   const mutation = useMutation({
-    mutationFn: ({ postGroupId, message }: mutationParams) => {
+    mutationFn: ({ message }: mutationParams) => {
       if (!userId) {
         throw new Error("User is not authenticated");
       }
       return insertPostGroupMessage({ userId, postGroupId, message });
     },
-    onSuccess: (_, variables) => {
+    onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["postGroupMessages", variables.postGroupId],
+        queryKey: ["postGroupMessages", postGroupId],
       });
 
       notifyPartner({

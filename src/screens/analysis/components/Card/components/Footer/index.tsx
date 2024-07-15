@@ -1,9 +1,8 @@
 import { MessageCircleMore, Smile } from "lucide-react-native";
 import React, { useState } from "react";
-import { Alert, Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import EmojiPicker, { ja } from "rn-emoji-keyboard";
 
-// import { useGetPostGroupMessageCount } from "../../hooks/postGroupMessageHooks/useGetPostGroupMessagesCount";
 import { useAppTheme } from "../../../../../../hooks/useAppTheme";
 import { useGetUser } from "../../../../../../hooks/userHooks/useGetUser";
 import { useAnalysisScreenStore } from "../../../../hooks/useAnalysisScreenStore";

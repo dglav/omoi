@@ -3,7 +3,7 @@ import { parse } from "@formkit/tempo";
 import { supabase } from "../..";
 import { SupabaseDatabaseError } from "../../error";
 
-type Message = {
+export type Message = {
   id: string;
   message: string;
   postGroupId: string;

@@ -1,18 +1,16 @@
-import { useLocalSearchParams } from "expo-router";
-import { SendHorizonal } from "lucide-react-native";
+import { SendHorizontal } from "lucide-react-native";
 import { useState } from "react";
 import { TextInput, TouchableOpacity, View } from "react-native";
 
-import { useCreatePostGroupMessage } from "../../../../hooks/postGroupMessageHooks/useCreatePostGroupMessage";
-import { useAppTheme } from "../../../../hooks/useAppTheme";
+import { useAppTheme } from "../../../hooks/useAppTheme";
 
-export const Footer = () => {
+type Props = {
+  sendNewMessage: ({ message }: { message: string }) => void;
+};
+
+export const Footer = ({ sendNewMessage }: Props) => {
   const theme = useAppTheme();
-  const { postGroupId } = useLocalSearchParams();
   const [message, setMessage] = useState<string>("");
-  const { mutate } = useCreatePostGroupMessage({
-    onSuccess: () => setMessage(""),
-  });
 
   return (
     <View
@@ -59,14 +57,12 @@ export const Footer = () => {
         <TouchableOpacity
           onPress={() => {
             if (message.length > 0) {
-              if (typeof postGroupId !== "string") {
-                throw Error("A valid post group id was not found");
-              }
-              return mutate({ postGroupId, message });
+              sendNewMessage({ message });
+              setMessage("");
             }
           }}
         >
-          <SendHorizonal color="#667085" />
+          <SendHorizontal color="#667085" />
         </TouchableOpacity>
       </View>
     </View>

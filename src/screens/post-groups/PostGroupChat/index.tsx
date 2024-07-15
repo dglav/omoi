@@ -1,51 +1,20 @@
 import { useLocalSearchParams } from "expo-router";
-import {
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  SafeAreaView,
-  TouchableWithoutFeedback,
-  View,
-} from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Chat } from "../../../components/Chat";
+import { useGetPostGroupMessages } from "../../../hooks/postGroupMessageHooks/useGetPostGroupMessages";
+import { useCreatePostGroupMessage } from "../../../hooks/postGroupMessageHooks/useCreatePostGroupMessage";
 
-import { Footer } from "./components/Footer";
-import { MessageWindow } from "./components/MessageWindow";
-import { useAppTheme } from "../../../hooks/useAppTheme";
+type Messages = Parameters<typeof Chat>[0]["messages"];
 
 export const PostGroupChat = () => {
-  const { postGroupId } = useLocalSearchParams();
-  const insets = useSafeAreaInsets();
-  const theme = useAppTheme();
+  const { postGroupId: rawPostGroupId } = useLocalSearchParams();
+  const postGroupId = typeof rawPostGroupId === "string" ? rawPostGroupId : "";
+
+  const { data } = useGetPostGroupMessages({
+    postGroupId,
+  });
+  const { mutate } = useCreatePostGroupMessage({ postGroupId });
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-    >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={{ backgroundColor: "white" }}>
-          <SafeAreaView
-            style={{
-              marginBottom: insets.bottom,
-              backgroundColor: theme.colors.background,
-            }}
-          >
-            <View
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                height: "100%",
-              }}
-            >
-              {typeof postGroupId === "string" && (
-                <MessageWindow postGroupId={postGroupId} />
-              )}
-
-              <Footer />
-            </View>
-          </SafeAreaView>
-        </View>
-      </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+    <Chat messages={data?.messages ?? [] as Messages} sendNewMessage={mutate} />
   );
 };
