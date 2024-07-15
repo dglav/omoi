@@ -1,6 +1,4 @@
-import { useQueryClient } from "@tanstack/react-query";
-import { useGlobalSearchParams, useRouter } from "expo-router";
-import { useState } from "react";
+import { usePathname, useRouter } from "expo-router";
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -14,74 +12,18 @@ import {
 
 import { Header } from "./Header";
 import { Button } from "../../../components/button";
-import { useCreatePost } from "../../../hooks/postHooks/useCreatePost";
-import { useEditPost } from "../../../hooks/postHooks/useEditPost";
 import { useAppTheme } from "../../../hooks/useAppTheme";
-import { PostSuccessModal } from "../components/post-success-modal";
 import { useStore } from "../store/useStore";
 
 const JournalNote = () => {
   const theme = useAppTheme();
   const router = useRouter();
-  const params = useGlobalSearchParams<{ postId: string }>();
   const [note, updateNote] = useStore((state) => [
     state.note,
     state.updateNote,
   ]);
-  const { condition, feelings, tags, date, isPrivate } = useStore();
-  const [isPostSuccessModalOpen, setIsPostSuccessModalOpen] = useState(false);
-  const createPostMutation = useCreatePost();
-  const editPostMutation = useEditPost();
-  const queryClient = useQueryClient();
-
-  const handlePost = () => {
-    const isEdit = !!params.postId;
-
-    if (!isEdit) {
-      createPostMutation.mutate(
-        {
-          post: {
-            condition,
-            feelings: feelings.map((feeling) => feeling.id),
-            tags,
-            note,
-            date,
-            isPrivate,
-          },
-        },
-        {
-          onSuccess: () => {
-            Keyboard.dismiss();
-            queryClient.invalidateQueries({ queryKey: ["postGroups"] });
-            setIsPostSuccessModalOpen(true);
-          },
-        },
-      );
-    }
-
-    if (!!isEdit && params.postId) {
-      editPostMutation.mutate(
-        {
-          post: {
-            id: params.postId,
-            condition,
-            feelings: feelings.map((feeling) => feeling.id),
-            tags,
-            note,
-            isPrivate,
-            date,
-          },
-        },
-        {
-          onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["postGroups"] });
-
-            router.navigate("/(app)/(tabs)/home");
-          },
-        },
-      );
-    }
-  };
+  const { feelings, tags } = useStore();
+  const pathname = usePathname();
 
   return (
     <View
@@ -131,22 +73,13 @@ const JournalNote = () => {
                 }}
               >
                 <Button
-                  onPress={() => {
-                    handlePost();
-                  }}
+                  onPress={() =>
+                    router.push(pathname.replace("/note", "/tags"))}
                 >
-                  投稿する
+                  次へ
                 </Button>
               </View>
             </View>
-
-            <PostSuccessModal
-              visible={isPostSuccessModalOpen}
-              onConfirm={() => {
-                setIsPostSuccessModalOpen(false);
-                router.navigate("/(app)/(tabs)/home");
-              }}
-            />
           </SafeAreaView>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>

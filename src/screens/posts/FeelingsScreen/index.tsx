@@ -1,10 +1,10 @@
 import { usePathname, useRouter } from "expo-router";
 import {
-  View,
-  SafeAreaView,
   KeyboardAvoidingView,
   Platform,
+  SafeAreaView,
   ScrollView,
+  View,
 } from "react-native";
 
 import { AddFeeling } from "./components/AddFeeling";
@@ -59,8 +59,7 @@ const JournalFeeling = () => {
           >
             <Button
               onPress={() =>
-                router.push(pathname.replace("/feelings", "/tags"))
-              }
+                router.push(pathname.replace("/feelings", "/note"))}
             >
               次へ
             </Button>
