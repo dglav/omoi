@@ -9,6 +9,7 @@ import { useGetUser } from "../../../../../../hooks/userHooks/useGetUser";
 import { useAnalysisScreenStore } from "../../../../hooks/useAnalysisScreenStore";
 import { useAnalysisResultsEmojis } from "./hooks/useAnalysisResultsEmoji";
 import { useGetAnalysisResultsMessageCount } from "../../../../../../hooks/analysisResultsMessageHooks/useGetAnalysisResultsMessagesCount";
+import { useRouter } from "expo-router";
 
 type Props = {
   user: "me" | "partner";
@@ -16,6 +17,7 @@ type Props = {
 
 export const Footer = ({ user }: Props) => {
   const theme = useAppTheme();
+  const router = useRouter();
   const { startDate, endDate } = useAnalysisScreenStore();
 
   const [isEmojiPickerOpen, setIsEmojiPickerOpen] = useState(false);
@@ -83,7 +85,7 @@ export const Footer = ({ user }: Props) => {
             alignItems: "center",
           }}
           onPress={() => {
-            Alert.alert("open chat");
+            router.push("analysis/chat");
           }}
         >
           <Text

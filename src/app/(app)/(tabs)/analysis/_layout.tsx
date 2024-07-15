@@ -13,14 +13,14 @@ export default function Layout() {
         }}
       />
 
-      {/* <Stack.Screen */}
-      {/*   name="select-post" */}
-      {/*   options={{ */}
-      {/*     headerTitle: "投稿の編集", */}
-      {/*     headerTransparent: true, */}
-      {/*     headerLeft: () => <BackButton />, */}
-      {/*   }} */}
-      {/* /> */}
+      <Stack.Screen
+        name="chat"
+        options={{
+          headerTitle: "分析コメント",
+          headerTransparent: true,
+          headerLeft: () => <BackButton />,
+        }}
+      />
     </Stack>
   );
 }
