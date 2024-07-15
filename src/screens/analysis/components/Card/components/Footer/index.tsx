@@ -8,6 +8,7 @@ import { useAppTheme } from "../../../../../../hooks/useAppTheme";
 import { useGetUser } from "../../../../../../hooks/userHooks/useGetUser";
 import { useAnalysisScreenStore } from "../../../../hooks/useAnalysisScreenStore";
 import { useAnalysisResultsEmojis } from "./hooks/useAnalysisResultsEmoji";
+import { useGetAnalysisResultsMessageCount } from "../../../../../../hooks/analysisResultsMessageHooks/useGetAnalysisResultsMessagesCount";
 
 type Props = {
   user: "me" | "partner";
@@ -21,9 +22,12 @@ export const Footer = ({ user }: Props) => {
   const { emojis, isLoadingEmojis, handlePostEmoji, handleDeleteEmoji } =
     useAnalysisResultsEmojis({ user, startDate, endDate });
   const { user: userData } = useGetUser();
-  // const { data } = useGetPostGroupMessageCount({ postGroupId });
-
-  const count = 0;
+  const { data: analysisResultsMessageCountData } =
+    useGetAnalysisResultsMessageCount({
+      analyzedUserId: userData?.id,
+      startDate,
+      endDate,
+    });
 
   return (
     <>
@@ -88,7 +92,7 @@ export const Footer = ({ user }: Props) => {
               fontWeight: theme.fontStyle.lg[1].weight,
             }}
           >
-            {count ?? 0}
+            {analysisResultsMessageCountData?.count ?? 0}
           </Text>
           <MessageCircleMore color="black" />
         </TouchableOpacity>
