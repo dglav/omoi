@@ -51,6 +51,39 @@ export type Database = {
           },
         ];
       };
+      analysis_results_weekly_messages: {
+        Row: {
+          analyzed_user_id: string;
+          author_id: string;
+          created_at: string;
+          end_date: string;
+          id: string;
+          message: string;
+          start_date: string;
+          updated_at: string;
+        };
+        Insert: {
+          analyzed_user_id: string;
+          author_id?: string;
+          created_at?: string;
+          end_date: string;
+          id?: string;
+          message: string;
+          start_date: string;
+          updated_at?: string;
+        };
+        Update: {
+          analyzed_user_id?: string;
+          author_id?: string;
+          created_at?: string;
+          end_date?: string;
+          id?: string;
+          message?: string;
+          start_date?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
       custom_feelings: {
         Row: {
           created_at: string;
