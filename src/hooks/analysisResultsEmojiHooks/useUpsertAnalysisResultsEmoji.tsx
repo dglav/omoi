@@ -41,10 +41,10 @@ export const useUpsertAnalysisResultsEmoji = ({ user }: Params) => {
         ],
       });
 
-      // notifyPartner({
-      //   title: "パートナーがリアクションしました",
-      //   body: "パートナーのリアクションをチェックしよう",
-      // });
+      notifyPartner({
+        title: "パートナーが分析にリアクションしました",
+        body: "パートナーのリアクションをチェックしよう",
+      });
     },
     onError: (error) => {
       console.error(error);
