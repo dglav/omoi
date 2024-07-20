@@ -11,6 +11,8 @@
     "generate:types": "supabase gen types typescript --project-id osfzwvhubwmiwimpgrpj --schema public > types/supabase.ts",
     "postinstall": "patch-package",
     "serve:functions": "supabase start && supabase functions serve --no-verify-jwt",
+    "build:ios:production": "eas build --profile production --platform ios",
+    "submit:ios:production": "eas submit -e production -p ios",
     "deploy:functions": "supabase functions deploy --no-verify-jwt"
   },
   "dependencies": {
