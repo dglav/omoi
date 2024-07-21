@@ -1,0 +1,7 @@
+{
+  "tasks": {
+    "dev:api": "deno run --allow-net --allow-env --watch ./functions/api/index.ts",
+    "dev:supabase": "supabase functions serve",
+    "test": "deno test"
+  }
+}
