@@ -3,5 +3,8 @@
     "dev:api": "deno run --allow-net --allow-env --watch ./functions/api/index.ts",
     "dev:supabase": "supabase functions serve",
     "test": "deno test"
+  },
+  "imports": {
+    "@supabase/supabase-js": "jsr:@supabase/supabase-js@^2.44.4"
   }
 }

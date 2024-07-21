@@ -1,4 +1,4 @@
-import type { SupabaseClient } from "https://esm.sh/v135/@supabase/supabase-js@2.43.4/dist/module/index.js";
+import type { SupabaseClient } from "@supabase/supabase-js";
 
 import { ReminderRepository } from "../../Infrastructure/database/repositories/reminder/index.ts";
 import { UserRepository } from "../../Infrastructure/database/repositories/user/index.ts";

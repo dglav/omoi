@@ -1,4 +1,4 @@
-import { SupabaseClient } from "https://esm.sh/@supabase/supabase-js@2.43.4";
+import { SupabaseClient } from "@supabase/supabase-js";
 
 import { PushController } from "../_shared/Controllers/push/index.ts";
 import { createSupabaseClient } from "../_shared/Infrastructure/database/index.ts";
