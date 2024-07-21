@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { Animated, View } from "react-native";
-
 import PagerView from "react-native-pager-view";
-import { Container } from "../../components/FeedAndAnalysisHeader/Container";
-import { Header } from "../../components/FeedAndAnalysisHeader/Header";
+
 import { MyHome } from "./MyHome";
 import { PartnerHome } from "./PartnerHome";
+import { Container } from "../../components/FeedAndAnalysisHeader/Container";
+import { Header } from "../../components/FeedAndAnalysisHeader/Header";
 import { useNavigationPanel } from "../../hooks/useNavigationPanel";
 
 const AnimatedPagerView = Animated.createAnimatedComponent(PagerView);
@@ -13,7 +13,7 @@ const AnimatedPagerView = Animated.createAnimatedComponent(PagerView);
 export default function HomeScreen() {
   const [activeTab, setActiveTab] = useState<"me" | "partner">("me");
   const { ref, ...navigationPanel } = useNavigationPanel((page) =>
-    setActiveTab(page === 0 ? "me" : "partner")
+    setActiveTab(page === 0 ? "me" : "partner"),
   );
 
   const handleSetActiveTab = (tab: "me" | "partner") => {
@@ -41,18 +41,10 @@ export default function HomeScreen() {
         onPageScrollStateChanged={navigationPanel.onPageScrollStateChanged}
         orientation="horizontal"
       >
-        <View
-          key="1"
-          style={{ flex: 1 }}
-          collapsable={false}
-        >
+        <View key="1" style={{ flex: 1 }} collapsable={false}>
           <MyHome />
         </View>
-        <View
-          key="2"
-          style={{ flex: 1 }}
-          collapsable={false}
-        >
+        <View key="2" style={{ flex: 1 }} collapsable={false}>
           <PartnerHome />
         </View>
       </AnimatedPagerView>

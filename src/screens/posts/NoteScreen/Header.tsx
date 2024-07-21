@@ -40,7 +40,9 @@ export const Header = ({ feelings, tags }: Props) => {
             gap: 8,
           }}
         >
-          {tags.map((tag) => <TagPill key={tag} tag={tag} />)}
+          {tags.map((tag) => (
+            <TagPill key={tag} tag={tag} />
+          ))}
         </View>
       </View>
     </View>

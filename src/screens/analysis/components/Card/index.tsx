@@ -6,9 +6,9 @@ import { FeelingSection } from "./components/FeelingSection";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import { TagSection } from "./components/TagSection";
-import { useAppTheme } from "../../../../hooks/useAppTheme";
 import { useGetPostsForAnalysis } from "./components/hooks/useGetPostsForAnalysis";
 import { Text } from "../../../../components/text";
+import { useAppTheme } from "../../../../hooks/useAppTheme";
 
 type Props = {
   user: "me" | "partner";
@@ -16,8 +16,9 @@ type Props = {
 
 export const Card = ({ user }: Props) => {
   const theme = useAppTheme();
-  const { currentWeekPosts, lastWeekPosts, isLoading } =
-    useGetPostsForAnalysis({ user });
+  const { currentWeekPosts, lastWeekPosts, isLoading } = useGetPostsForAnalysis(
+    { user },
+  );
 
   if (isLoading) {
     return <View />;
@@ -39,42 +40,40 @@ export const Card = ({ user }: Props) => {
       >
         <Header />
 
-        {!currentWeekPosts?.length
-          ? (
-            <View
-              style={{
-                height: 100,
-                justifyContent: "center",
-              }}
-            >
-              <Text>データがない！</Text>
-            </View>
-          )
-          : (
-            <>
-              <ConditionSection
-                currentWeekPosts={currentWeekPosts}
-                isLoading={isLoading}
-              />
+        {!currentWeekPosts?.length ? (
+          <View
+            style={{
+              height: 100,
+              justifyContent: "center",
+            }}
+          >
+            <Text>データがない！</Text>
+          </View>
+        ) : (
+          <>
+            <ConditionSection
+              currentWeekPosts={currentWeekPosts}
+              isLoading={isLoading}
+            />
 
-              <View style={{ height: 60 }} />
+            <View style={{ height: 60 }} />
 
-              <FeelingSection
-                currentWeekPosts={currentWeekPosts}
-                lastWeekPosts={lastWeekPosts}
-                isLoading={isLoading}
-              />
+            <FeelingSection
+              currentWeekPosts={currentWeekPosts}
+              lastWeekPosts={lastWeekPosts}
+              isLoading={isLoading}
+            />
 
-              <View style={{ height: 60 }} />
+            <View style={{ height: 60 }} />
 
-              <TagSection
-                currentWeekPosts={currentWeekPosts}
-                isLoading={isLoading}
-              />
+            <TagSection
+              currentWeekPosts={currentWeekPosts}
+              isLoading={isLoading}
+            />
 
-              <View style={{ height: 24 }} />
-            </>
-          )}
+            <View style={{ height: 24 }} />
+          </>
+        )}
 
         <View
           style={{

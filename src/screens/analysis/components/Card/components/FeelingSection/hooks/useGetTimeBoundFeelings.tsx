@@ -17,7 +17,11 @@ type Props = {
   isLoading: boolean;
 };
 
-export const useGetTimeBoundFeelings = ({ currentWeekPosts, lastWeekPosts, isLoading: isLoadingPosts }: Props): {
+export const useGetTimeBoundFeelings = ({
+  currentWeekPosts,
+  lastWeekPosts,
+  isLoading: isLoadingPosts,
+}: Props): {
   currentWeek: {
     topEmotions: [string, { count: number; color: string }][];
     goodEmotionCount?: number;
@@ -31,12 +35,13 @@ export const useGetTimeBoundFeelings = ({ currentWeekPosts, lastWeekPosts, isLoa
     percentChangeBad: number;
   };
 } => {
-
   const { data: customFeelings, isLoading: isLoadingFeelings } =
     useGetCustomFeelings();
 
   if (
-    isLoadingPosts || isLoadingFeelings || !currentWeekPosts?.length ||
+    isLoadingPosts ||
+    isLoadingFeelings ||
+    !currentWeekPosts?.length ||
     !customFeelings
   ) {
     return {
@@ -56,18 +61,18 @@ export const useGetTimeBoundFeelings = ({ currentWeekPosts, lastWeekPosts, isLoa
 
   const lastWeek = getWeekData({ posts: lastWeekPosts });
 
-  const currentWeekPercentGood = 100 * currentWeek.goodEmotionCount /
-    currentWeek.totalEmotionCount;
-  const currentWeekPercentAverage = 100 * currentWeek.averageEmotionCount /
-    currentWeek.totalEmotionCount;
-  const currentWeekPercentBad = 100 * currentWeek.badEmotionCount /
-    currentWeek.totalEmotionCount;
-  const lastWeekPercentGood = 100 * lastWeek.goodEmotionCount /
-    lastWeek.totalEmotionCount;
-  const lastWeekPercentAverage = 100 * lastWeek.averageEmotionCount /
-    lastWeek.totalEmotionCount;
-  const lastWeekPercentBad = 100 * lastWeek.badEmotionCount /
-    lastWeek.totalEmotionCount;
+  const currentWeekPercentGood =
+    (100 * currentWeek.goodEmotionCount) / currentWeek.totalEmotionCount;
+  const currentWeekPercentAverage =
+    (100 * currentWeek.averageEmotionCount) / currentWeek.totalEmotionCount;
+  const currentWeekPercentBad =
+    (100 * currentWeek.badEmotionCount) / currentWeek.totalEmotionCount;
+  const lastWeekPercentGood =
+    (100 * lastWeek.goodEmotionCount) / lastWeek.totalEmotionCount;
+  const lastWeekPercentAverage =
+    (100 * lastWeek.averageEmotionCount) / lastWeek.totalEmotionCount;
+  const lastWeekPercentBad =
+    (100 * lastWeek.badEmotionCount) / lastWeek.totalEmotionCount;
 
   return {
     currentWeek,
@@ -94,11 +99,11 @@ const getWeekData = ({ posts }: { posts: Post[] }) => {
     emotionCountMap,
   } = getEmotionCategoryCount(feelings);
 
-  const topEmotions = Array.from(emotionCountMap.entries()).sort(
-    ([_, value1], [__, value2]) => {
+  const topEmotions = Array.from(emotionCountMap.entries())
+    .sort(([_, value1], [__, value2]) => {
       return value2.count - value1.count;
-    },
-  ).slice(0, 6);
+    })
+    .slice(0, 6);
 
   return {
     goodEmotionCount,
@@ -109,7 +114,9 @@ const getWeekData = ({ posts }: { posts: Post[] }) => {
   };
 };
 
-const getEmotionCategoryCount = (feelings: Feeling[]): {
+const getEmotionCategoryCount = (
+  feelings: Feeling[],
+): {
   goodEmotionCount: number;
   averageEmotionCount: number;
   badEmotionCount: number;
@@ -122,52 +129,58 @@ const getEmotionCategoryCount = (feelings: Feeling[]): {
     averageEmotionCount,
     badEmotionCount,
     emotionCountMap,
-  } = feelings.reduce((accumulator: {
-    emotionCountMap: Map<string, { count: number; color: string }>;
-    goodEmotionCount: number;
-    averageEmotionCount: number;
-    badEmotionCount: number;
-  }, currentFeeling) => {
-    const currentEmotionCountValue = accumulator.emotionCountMap.get(
-      currentFeeling.name,
-    )?.count;
-
-    if (!currentEmotionCountValue) {
-      accumulator.emotionCountMap.set(currentFeeling.name, {
-        count: 1,
-        color: currentFeeling.color,
-      });
-    } else {
-      accumulator.emotionCountMap.set(
+  } = feelings.reduce(
+    (
+      accumulator: {
+        emotionCountMap: Map<string, { count: number; color: string }>;
+        goodEmotionCount: number;
+        averageEmotionCount: number;
+        badEmotionCount: number;
+      },
+      currentFeeling,
+    ) => {
+      const currentEmotionCountValue = accumulator.emotionCountMap.get(
         currentFeeling.name,
-        { count: currentEmotionCountValue + 1, color: currentFeeling.color },
+      )?.count;
+
+      if (!currentEmotionCountValue) {
+        accumulator.emotionCountMap.set(currentFeeling.name, {
+          count: 1,
+          color: currentFeeling.color,
+        });
+      } else {
+        accumulator.emotionCountMap.set(currentFeeling.name, {
+          count: currentEmotionCountValue + 1,
+          color: currentFeeling.color,
+        });
+      }
+
+      const approximateFeelingLevel = approximateFeelingLevelMap.get(
+        currentFeeling.emotionLevel,
       );
-    }
 
-    const approximateFeelingLevel = approximateFeelingLevelMap.get(
-      currentFeeling.emotionLevel,
-    );
+      if (approximateFeelingLevel === "good") {
+        accumulator.goodEmotionCount++;
+      } else if (approximateFeelingLevel === "average") {
+        accumulator.averageEmotionCount++;
+      } else if (approximateFeelingLevel === "bad") {
+        accumulator.badEmotionCount++;
+      }
 
-    if (approximateFeelingLevel === "good") {
-      accumulator.goodEmotionCount++;
-    } else if (approximateFeelingLevel === "average") {
-      accumulator.averageEmotionCount++;
-    } else if (approximateFeelingLevel === "bad") {
-      accumulator.badEmotionCount++;
-    }
-
-    return accumulator;
-  }, {
-    emotionCountMap: new Map(),
-    goodEmotionCount: 0,
-    averageEmotionCount: 0,
-    badEmotionCount: 0,
-  } as {
-    emotionCountMap: Map<string, { count: number; color: string }>;
-    goodEmotionCount: number;
-    averageEmotionCount: number;
-    badEmotionCount: number;
-  });
+      return accumulator;
+    },
+    {
+      emotionCountMap: new Map(),
+      goodEmotionCount: 0,
+      averageEmotionCount: 0,
+      badEmotionCount: 0,
+    } as {
+      emotionCountMap: Map<string, { count: number; color: string }>;
+      goodEmotionCount: number;
+      averageEmotionCount: number;
+      badEmotionCount: number;
+    },
+  );
 
   return {
     totalEmotionCount,

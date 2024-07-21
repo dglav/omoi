@@ -1,9 +1,9 @@
 import { useGlobalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 
+import { useGetUser } from "../../../hooks/userHooks/useGetUser";
 import { getPost } from "../../../services/supabase/database/posts/getPost";
 import { useStore } from "../store/useStore";
-import { useGetUser } from "../../../hooks/userHooks/useGetUser";
 
 export const useInitializePostStore = () => {
   const [isLoading, setIsLoading] = useState(true);

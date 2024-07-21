@@ -1,4 +1,6 @@
+import { useQueryClient } from "@tanstack/react-query";
 import { useGlobalSearchParams, useRouter } from "expo-router";
+import { useState } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -11,13 +13,11 @@ import { AddTag } from "./components/AddTag";
 import { TagList } from "./components/TagList";
 import { TitleSection } from "./components/TitleSection";
 import { Button } from "../../../components/button";
-import { useAppTheme } from "../../../hooks/useAppTheme";
 import { useCreatePost } from "../../../hooks/postHooks/useCreatePost";
 import { useEditPost } from "../../../hooks/postHooks/useEditPost";
+import { useAppTheme } from "../../../hooks/useAppTheme";
 import { PostSuccessModal } from "../components/post-success-modal";
 import { useStore } from "../store/useStore";
-import { useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
 
 const JournalTags = () => {
   const theme = useAppTheme();

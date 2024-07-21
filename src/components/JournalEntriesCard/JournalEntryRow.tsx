@@ -3,11 +3,11 @@ import { LockKeyhole } from "lucide-react-native";
 import { Text, View } from "react-native";
 
 import { useAppTheme } from "../../hooks/useAppTheme";
+import { Post } from "../../services/supabase/database/posts/converter";
 import { conditionMap } from "../../utils/conditionMap";
 import { ConditionIcon_36 } from "../condition-icon-36";
 import { MiniFeeling } from "../mini-feeling";
 import { TagPill } from "../tag-pill";
-import { Post } from "../../services/supabase/database/posts/converter";
 
 type Props = {
   post: Post;

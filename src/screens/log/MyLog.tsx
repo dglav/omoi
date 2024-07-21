@@ -33,8 +33,8 @@ export default function MyLogScreen() {
         renderItem={({ item, index }) => {
           const postGroupDate = parse(item.postGroupDate, "YYYY-MM-DD");
 
-          const isToday = postGroupDate >= startOfToday &&
-            postGroupDate < endOfToday;
+          const isToday =
+            postGroupDate >= startOfToday && postGroupDate < endOfToday;
 
           return (
             <>

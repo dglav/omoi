@@ -10,12 +10,13 @@ type Params = {
   filterPrivate?: boolean;
 };
 
-export const getPosts = async (
-  { userId, startDate, endDate, filterPrivate }: Params,
-): Promise<Post[]> => {
-  let query = supabase
-    .from("posts")
-    .select("*").eq("author_id", userId);
+export const getPosts = async ({
+  userId,
+  startDate,
+  endDate,
+  filterPrivate,
+}: Params): Promise<Post[]> => {
+  let query = supabase.from("posts").select("*").eq("author_id", userId);
 
   if (startDate) {
     query = query.gte("date", startDate.toISOString());

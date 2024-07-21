@@ -9,9 +9,11 @@ type Params = {
   filterPrivate?: boolean;
 };
 
-export const getPostsByGroupId = async (
-  { userId, postGroupId, filterPrivate }: Params,
-): Promise<Post[]> => {
+export const getPostsByGroupId = async ({
+  userId,
+  postGroupId,
+  filterPrivate,
+}: Params): Promise<Post[]> => {
   const query = supabase
     .from("posts")
     .select("*")

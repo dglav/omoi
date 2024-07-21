@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 
+import { ChatMessage } from "../../domain/ChatMessage";
 import { useSession } from "../../providers/AuthProvider";
 import { getPostGroupMessages } from "../../services/supabase/database/post_group_messages/getPostGroupMessages";
-import { ChatMessage } from "../../domain/ChatMessage";
 
 export const useGetPostGroupMessages = ({
   postGroupId,

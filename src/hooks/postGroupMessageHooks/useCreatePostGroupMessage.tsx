@@ -13,9 +13,10 @@ type Props = {
   onSuccess?: () => void;
 };
 
-export const useCreatePostGroupMessage = (
-  { postGroupId, onSuccess }: Props,
-) => {
+export const useCreatePostGroupMessage = ({
+  postGroupId,
+  onSuccess,
+}: Props) => {
   const queryClient = useQueryClient();
   const { session } = useSession();
   const userId = session?.user.id;

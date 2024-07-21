@@ -1,4 +1,5 @@
 import { format } from "@formkit/tempo";
+
 import { supabase } from "../..";
 import { SupabaseDatabaseError } from "../../error";
 
@@ -8,9 +9,11 @@ type Props = {
   analyzedUserId: string;
 };
 
-export const getAnalysisResultsWeeklyMessageCount = async (
-  { startDate, endDate, analyzedUserId }: Props,
-) => {
+export const getAnalysisResultsWeeklyMessageCount = async ({
+  startDate,
+  endDate,
+  analyzedUserId,
+}: Props) => {
   const { count, error } = await supabase
     .from("analysis_results_weekly_messages")
     .select("*", { count: "exact", head: true })

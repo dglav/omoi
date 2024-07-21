@@ -1,6 +1,6 @@
-import { useUpsertAnalysisResultsEmoji } from "../../../../../../../hooks/analysisResultsEmojiHooks/useUpsertAnalysisResultsEmoji";
-import { useGetAnalysisResultsEmojis } from "../../../../../../../hooks/analysisResultsEmojiHooks/useGetAnalysisResultsEmojis";
 import { useDeleteAnalysisResultsEmoji } from "../../../../../../../hooks/analysisResultsEmojiHooks/useDeleteAnalysisResultsEmoji";
+import { useGetAnalysisResultsEmojis } from "../../../../../../../hooks/analysisResultsEmojiHooks/useGetAnalysisResultsEmojis";
+import { useUpsertAnalysisResultsEmoji } from "../../../../../../../hooks/analysisResultsEmojiHooks/useUpsertAnalysisResultsEmoji";
 
 type Props = {
   user: "me" | "partner";
@@ -8,9 +8,11 @@ type Props = {
   endDate: Date;
 };
 
-export const useAnalysisResultsEmojis = (
-  { user, startDate, endDate }: Props,
-) => {
+export const useAnalysisResultsEmojis = ({
+  user,
+  startDate,
+  endDate,
+}: Props) => {
   const { analysisResultsEmojis: emojis, isLoading } =
     useGetAnalysisResultsEmojis({
       user,
@@ -22,11 +24,7 @@ export const useAnalysisResultsEmojis = (
     user,
   });
 
-  const handlePostEmoji = ({
-    emoji,
-  }: {
-    emoji: string;
-  }) => {
+  const handlePostEmoji = ({ emoji }: { emoji: string }) => {
     postAnalysisResultsEmoji({ startDate, endDate, emoji });
   };
 

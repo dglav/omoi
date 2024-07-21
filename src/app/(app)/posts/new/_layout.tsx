@@ -17,9 +17,9 @@ export default function Layout() {
   );
 
   /**
-    * Without this, the post date is always going to show to date from the last time the user 
-    * attempted to add a new journal entry.
-    */
+   * Without this, the post date is always going to show to date from the last time the user
+   * attempted to add a new journal entry.
+   */
   useEffect(() => {
     setDate(new Date());
   }, []);

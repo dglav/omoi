@@ -1,7 +1,8 @@
 import { format } from "@formkit/tempo";
+
 import { supabase } from "../..";
-import { SupabaseDatabaseError } from "../../error";
 import { TablesInsert } from "../../../../../types/supabase";
+import { SupabaseDatabaseError } from "../../error";
 
 type Props = {
   startDate: Date;

@@ -1,14 +1,14 @@
+import { addDay } from "@formkit/tempo";
 import { LinearGradient, vec } from "@shopify/react-native-skia";
 import React from "react";
 import { Text, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Area, CartesianChart } from "victory-native";
 
-import { useAppTheme } from "../../../../../../hooks/useAppTheme";
 import { useGetTimeBoundConditions } from "./hooks/useGetTimeBoundConditions";
-import { addDay } from "@formkit/tempo";
-import { useAnalysisScreenStore } from "../../../../hooks/useAnalysisScreenStore";
+import { useAppTheme } from "../../../../../../hooks/useAppTheme";
 import type { Post } from "../../../../../../services/supabase/database/posts/converter";
+import { useAnalysisScreenStore } from "../../../../hooks/useAnalysisScreenStore";
 
 const h = 400;
 const w = 0;
@@ -21,9 +21,10 @@ type Props = {
 export const ConditionSection = ({ currentWeekPosts, isLoading }: Props) => {
   const theme = useAppTheme();
   const { startDate } = useAnalysisScreenStore();
-  const {
-    timeBoundConditions,
-  } = useGetTimeBoundConditions({ currentWeekPosts, isLoading });
+  const { timeBoundConditions } = useGetTimeBoundConditions({
+    currentWeekPosts,
+    isLoading,
+  });
 
   return (
     <View style={{ width: "100%" }}>

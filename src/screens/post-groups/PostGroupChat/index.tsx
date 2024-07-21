@@ -1,7 +1,8 @@
 import { useLocalSearchParams } from "expo-router";
+
 import { Chat } from "../../../components/Chat";
-import { useGetPostGroupMessages } from "../../../hooks/postGroupMessageHooks/useGetPostGroupMessages";
 import { useCreatePostGroupMessage } from "../../../hooks/postGroupMessageHooks/useCreatePostGroupMessage";
+import { useGetPostGroupMessages } from "../../../hooks/postGroupMessageHooks/useGetPostGroupMessages";
 
 export const PostGroupChat = () => {
   const { postGroupId: rawPostGroupId } = useLocalSearchParams();

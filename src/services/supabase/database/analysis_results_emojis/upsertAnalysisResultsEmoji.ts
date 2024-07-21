@@ -1,6 +1,6 @@
+import { convertStartEndDateToDateSpan } from "./utils";
 import { SupabaseDatabaseError } from "../../error";
 import { supabase } from "../../index";
-import { convertStartEndDateToDateSpan } from "./utils";
 
 type Params = {
   emoji: string;

@@ -38,7 +38,7 @@ export const getPostGroups = async ({
     const posts = await getPostsByGroupId({
       userId,
       postGroupId: postGroup.id,
-      filterPrivate: filterPrivate,
+      filterPrivate,
     });
 
     return { ...postGroup, posts };
