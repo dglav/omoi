@@ -59,7 +59,8 @@ const JournalFeeling = () => {
           >
             <Button
               onPress={() =>
-                router.push(pathname.replace("/feelings", "/note"))}
+                router.push(pathname.replace("/feelings", "/note"))
+              }
             >
               次へ
             </Button>

@@ -10,8 +10,8 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { Footer } from "./components/Footer";
 import { MessageWindow } from "./components/MessageWindow";
-import { useAppTheme } from "../../hooks/useAppTheme";
 import { ChatMessage } from "../../domain/ChatMessage";
+import { useAppTheme } from "../../hooks/useAppTheme";
 
 type Props = {
   messages: ChatMessage[];

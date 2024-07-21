@@ -1,7 +1,7 @@
+import { format } from "@formkit/tempo";
 import { Text, View } from "react-native";
 
 import { useAppTheme } from "../../../../../hooks/useAppTheme";
-import { format } from "@formkit/tempo";
 
 type Props = {
   messageText: string;

@@ -10,9 +10,8 @@ export class ReminderController {
   async pushIfScheduled(time: Date) {
     const reminderRepository = new ReminderRepository(this.supabase);
     // get all reminders that are set for the appropriate time frame
-    const hour = time.getHours() + 9 > 23
-      ? time.getHours() + 9 - 24
-      : time.getHours() + 9;
+    const hour =
+      time.getHours() + 9 > 23 ? time.getHours() + 9 - 24 : time.getHours() + 9;
     const minute = time.getMinutes();
     const reminders = await reminderRepository.getAllAtTime(hour, minute);
 

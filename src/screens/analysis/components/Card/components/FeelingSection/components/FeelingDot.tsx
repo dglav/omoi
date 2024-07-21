@@ -1,4 +1,5 @@
 import { View } from "react-native";
+
 import { FeelingIcon_32 } from "../../../../../../../components/Icons/feeling-icon-32";
 import { Text } from "../../../../../../../components/text";
 import { useAppTheme } from "../../../../../../../hooks/useAppTheme";

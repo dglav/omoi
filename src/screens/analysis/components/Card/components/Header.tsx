@@ -1,10 +1,10 @@
+import { format } from "@formkit/tempo";
+import { ChevronLeft, ChevronRight } from "lucide-react-native";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 
 import { useAppTheme } from "../../../../../hooks/useAppTheme";
-import { format } from "@formkit/tempo";
 import { useAnalysisScreenStore } from "../../../hooks/useAnalysisScreenStore";
-import { ChevronLeft, ChevronRight } from "lucide-react-native";
 
 export const Header = () => {
   const theme = useAppTheme();

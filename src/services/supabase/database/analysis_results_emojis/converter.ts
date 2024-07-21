@@ -28,17 +28,21 @@ export const fromSupabase = (
   authorId: analysisResultsEmojis.author_id,
 });
 
-export const toCreateDTO = (
-  analysisResultEmoji: { dateSpan: string; userId: string; emoji: string },
-): CreateDTO => ({
+export const toCreateDTO = (analysisResultEmoji: {
+  dateSpan: string;
+  userId: string;
+  emoji: string;
+}): CreateDTO => ({
   date_span: analysisResultEmoji.dateSpan,
   user_id: analysisResultEmoji.userId,
   emoji: analysisResultEmoji.emoji,
 });
 
-export const toUpdateDTO = (
-  analysisResultEmoji: { dateSpan: string; userId: string; emoji: string },
-): DatabaseUpdateDTO => ({
+export const toUpdateDTO = (analysisResultEmoji: {
+  dateSpan: string;
+  userId: string;
+  emoji: string;
+}): DatabaseUpdateDTO => ({
   date_span: analysisResultEmoji.dateSpan,
   user_id: analysisResultEmoji.userId,
   emoji: analysisResultEmoji.emoji,

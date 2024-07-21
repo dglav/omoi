@@ -1,9 +1,9 @@
 import { Pressable, View } from "react-native";
 
-import { Text } from "../text";
 import { useAppTheme } from "../../hooks/useAppTheme";
 import { useGetPartner } from "../../hooks/userHooks/useGetPartner";
 import { useGetUser } from "../../hooks/userHooks/useGetUser";
+import { Text } from "../text";
 
 type Props = {
   title: string;
@@ -59,9 +59,8 @@ export const Header = ({ title, activeTab, setActiveTab }: Props) => {
           style={{
             paddingVertical: 10,
             paddingHorizontal: 16,
-            backgroundColor: activeTab === "partner"
-              ? "white"
-              : theme.colors.background,
+            backgroundColor:
+              activeTab === "partner" ? "white" : theme.colors.background,
             borderRadius: 50,
           }}
           onPress={() => setActiveTab("partner")}

@@ -1,14 +1,14 @@
+import { useRouter } from "expo-router";
 import { MessageCircleMore, Smile } from "lucide-react-native";
 import React, { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import EmojiPicker, { ja } from "rn-emoji-keyboard";
 
+import { useAnalysisResultsEmojis } from "./hooks/useAnalysisResultsEmoji";
+import { useGetAnalysisResultsMessageCount } from "../../../../../../hooks/analysisResultsMessageHooks/useGetAnalysisResultsMessagesCount";
 import { useAppTheme } from "../../../../../../hooks/useAppTheme";
 import { useGetUser } from "../../../../../../hooks/userHooks/useGetUser";
 import { useAnalysisScreenStore } from "../../../../hooks/useAnalysisScreenStore";
-import { useAnalysisResultsEmojis } from "./hooks/useAnalysisResultsEmoji";
-import { useGetAnalysisResultsMessageCount } from "../../../../../../hooks/analysisResultsMessageHooks/useGetAnalysisResultsMessagesCount";
-import { useRouter } from "expo-router";
 
 type Props = {
   user: "me" | "partner";

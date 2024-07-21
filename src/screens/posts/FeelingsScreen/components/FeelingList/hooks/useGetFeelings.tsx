@@ -1,6 +1,6 @@
 import { useGetCustomFeelings } from "../../../../../../hooks/customFeelingHooks/useGetCustomFeelings";
-import { feelingMap } from "../../../../../../utils/feelingMap";
 import { Feeling } from "../../../../../../services/supabase/database/custom_feelings/converter";
+import { feelingMap } from "../../../../../../utils/feelingMap";
 
 const feelingList: Feeling[] = Object.values(feelingMap);
 

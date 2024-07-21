@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { useNotifyPartner } from "../pushNotificationHooks/useNotifyPartner";
 import { upsertAnalysisResultsEmoji } from "../../services/supabase/database/analysis_results_emojis/upsertAnalysisResultsEmoji";
+import { useNotifyPartner } from "../pushNotificationHooks/useNotifyPartner";
 import { useGetUser } from "../userHooks/useGetUser";
 
 type Params = {

@@ -9,9 +9,9 @@ import {
 import { useGetFeelingList } from "./hooks/useGetFeelings";
 import { FeelingIcon } from "../../../../../components/feeling-icon";
 import { Text } from "../../../../../components/text";
+import { Feeling } from "../../../../../services/supabase/database/custom_feelings/converter";
 import { theme } from "../../../../../theme";
 import { useStore } from "../../../store/useStore";
-import { Feeling } from "../../../../../services/supabase/database/custom_feelings/converter";
 
 const paddingHorizontal = 22;
 
@@ -22,8 +22,8 @@ export const FeelingList = () => {
     state.addFeeling,
     state.removeFeeling,
   ]);
-  const selectedFeelingIds = selectedFeelings.map((selectedFeeling) =>
-    selectedFeeling.id
+  const selectedFeelingIds = selectedFeelings.map(
+    (selectedFeeling) => selectedFeeling.id,
   );
 
   const feelingList = useGetFeelingList();

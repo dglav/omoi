@@ -20,29 +20,34 @@ type Entity = Tables<TableName>;
 type CreateDTO = Database["public"]["Functions"]["create_new_post_v2"]["Args"];
 type UpdateDTO = Database["public"]["Functions"]["edit_post_v2"]["Args"];
 
-export const fromSupabase = ({
-  author_id,
-  condition,
-  created_at,
-  date,
-  feelings,
-  id,
-  is_private,
-  note,
-  post_group_id,
-  tags,
-}: Entity, allCustomFeelingsMap: Map<string, Feeling>): Post => {
-  const convertedFeelings = feelings.map((feeling) => {
-    const standardFeeling = feelingMap[feeling];
+export const fromSupabase = (
+  {
+    author_id,
+    condition,
+    created_at,
+    date,
+    feelings,
+    id,
+    is_private,
+    note,
+    post_group_id,
+    tags,
+  }: Entity,
+  allCustomFeelingsMap: Map<string, Feeling>,
+): Post => {
+  const convertedFeelings = feelings
+    .map((feeling) => {
+      const standardFeeling = feelingMap[feeling];
 
-    if (!standardFeeling) {
-      return allCustomFeelingsMap.get(feeling);
-    }
+      if (!standardFeeling) {
+        return allCustomFeelingsMap.get(feeling);
+      }
 
-    return standardFeeling;
-  }).filter((feeling) => !!feeling) as Feeling[];
+      return standardFeeling;
+    })
+    .filter((feeling) => !!feeling) as Feeling[];
 
-  return ({
+  return {
     authorId: author_id,
     condition,
     createdAt: new Date(created_at),
@@ -53,7 +58,7 @@ export const fromSupabase = ({
     note,
     postGroupId: post_group_id,
     tags,
-  });
+  };
 };
 
 export const toCreateSupabaseDTO = ({

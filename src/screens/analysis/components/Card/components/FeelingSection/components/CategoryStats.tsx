@@ -9,9 +9,11 @@ type Props = {
   percentChange?: number;
 };
 
-export const CategoryStats = (
-  { title, currentWeekPercentage, percentChange }: Props,
-) => {
+export const CategoryStats = ({
+  title,
+  currentWeekPercentage,
+  percentChange,
+}: Props) => {
   const theme = useAppTheme();
 
   return (
@@ -49,9 +51,8 @@ export const CategoryStats = (
       {typeof percentChange === "number" && (
         <Text
           style={{
-            color: percentChange >= 0
-              ? theme.colors.primary
-              : theme.colors.danger,
+            color:
+              percentChange >= 0 ? theme.colors.primary : theme.colors.danger,
             fontSize: theme.fontStyle.xs[1].size,
             fontWeight: theme.fontStyle.xs[1].weight,
           }}

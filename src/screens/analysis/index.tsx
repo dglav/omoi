@@ -12,7 +12,7 @@ const AnimatedPagerView = Animated.createAnimatedComponent(PagerView);
 export const AnalysisScreen = () => {
   const [user, setUser] = useState<"me" | "partner">("me");
   const { ref, ...navigationPanel } = useNavigationPanel((page) =>
-    setUser(page === 0 ? "me" : "partner")
+    setUser(page === 0 ? "me" : "partner"),
   );
 
   const handleSetActiveTab = (tab: "me" | "partner") => {
@@ -36,11 +36,7 @@ export const AnalysisScreen = () => {
         onPageScrollStateChanged={navigationPanel.onPageScrollStateChanged}
         orientation="horizontal"
       >
-        <View
-          key="1"
-          style={{ flex: 1 }}
-          collapsable={false}
-        >
+        <View key="1" style={{ flex: 1 }} collapsable={false}>
           <ScrollView style={{ width: "100%" }}>
             <View style={{ height: 32 }} />
 
@@ -49,11 +45,7 @@ export const AnalysisScreen = () => {
             <View style={{ height: 32 }} />
           </ScrollView>
         </View>
-        <View
-          key="2"
-          style={{ flex: 1 }}
-          collapsable={false}
-        >
+        <View key="2" style={{ flex: 1 }} collapsable={false}>
           <ScrollView style={{ width: "100%" }}>
             <View style={{ height: 32 }} />
 

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { getAnalysisResultsWeeklyMessages } from "../../services/supabase/database/analysis_weekly_messages/getAnalysisResultsWeeklyMessages";
 import { ChatMessage } from "../../domain/ChatMessage";
+import { getAnalysisResultsWeeklyMessages } from "../../services/supabase/database/analysis_weekly_messages/getAnalysisResultsWeeklyMessages";
 
 type Props = {
   analyzedUserId: string;
@@ -19,12 +19,7 @@ export const useGetAnalysisResultsMessages = ({
   isError: boolean;
 } => {
   const { data, isLoading, isError } = useQuery({
-    queryKey: [
-      "analysisResultsMessages",
-      analyzedUserId,
-      startDate,
-      endDate,
-    ],
+    queryKey: ["analysisResultsMessages", analyzedUserId, startDate, endDate],
     queryFn: () => {
       return getAnalysisResultsWeeklyMessages({
         analyzedUserId,

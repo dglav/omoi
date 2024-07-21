@@ -10,9 +10,10 @@ type Props = {
   isLoading: boolean;
 };
 
-export const useGetTimeBoundTags = (
-  { currentWeekPosts, isLoading }: Props,
-): ReturnType => {
+export const useGetTimeBoundTags = ({
+  currentWeekPosts,
+  isLoading,
+}: Props): ReturnType => {
   if (isLoading || !currentWeekPosts) {
     return {
       isLoading,
@@ -34,9 +35,9 @@ export const useGetTimeBoundTags = (
     new Map(),
   );
 
-  const topTags = Array.from(tagCountMap).sort((a, b) => b[1] - a[1]).map((
-    tag,
-  ) => tag[0]);
+  const topTags = Array.from(tagCountMap)
+    .sort((a, b) => b[1] - a[1])
+    .map((tag) => tag[0]);
 
   return { topTags, isLoading };
 };

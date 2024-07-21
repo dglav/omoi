@@ -1,8 +1,9 @@
 import { View } from "react-native";
+
+import { useGetTimeBoundTags } from "./hooks/useGetTimeBoundTags";
+import { TagPill } from "../../../../../../components/tag-pill";
 import { Text } from "../../../../../../components/text";
 import { useAppTheme } from "../../../../../../hooks/useAppTheme";
-import { TagPill } from "../../../../../../components/tag-pill";
-import { useGetTimeBoundTags } from "./hooks/useGetTimeBoundTags";
 import type { Post } from "../../../../../../services/supabase/database/posts/converter";
 
 type Props = {

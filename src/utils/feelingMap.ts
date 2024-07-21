@@ -34,16 +34,13 @@ const rawValues: [string, string, string, EmotionLevel][] = [
   ["angry", "怒り", "#A84545", NEGATIVE],
 ];
 
-export const feelingMap: { [id: string]: Feeling } = rawValues.reduce<
-  { [id: string]: Feeling }
->(
-  (accumulator, [id, name, color, emotionLevel]) => {
-    accumulator[id] = { id, name, color, emotionLevel };
+export const feelingMap: { [id: string]: Feeling } = rawValues.reduce<{
+  [id: string]: Feeling;
+}>((accumulator, [id, name, color, emotionLevel]) => {
+  accumulator[id] = { id, name, color, emotionLevel };
 
-    return accumulator;
-  },
-  {},
-);
+  return accumulator;
+}, {});
 
 export const emotionLevelColorMap = {
   "very positive": "#F86D6D",

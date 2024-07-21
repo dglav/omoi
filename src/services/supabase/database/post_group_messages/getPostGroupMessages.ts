@@ -1,8 +1,8 @@
 import { parse } from "@formkit/tempo";
 
 import { supabase } from "../..";
-import { SupabaseDatabaseError } from "../../error";
 import { ChatMessage } from "../../../../domain/ChatMessage";
+import { SupabaseDatabaseError } from "../../error";
 
 type Props = {
   postGroupId: string;

@@ -74,7 +74,8 @@ const JournalNote = () => {
               >
                 <Button
                   onPress={() =>
-                    router.push(pathname.replace("/note", "/tags"))}
+                    router.push(pathname.replace("/note", "/tags"))
+                  }
                 >
                   次へ
                 </Button>

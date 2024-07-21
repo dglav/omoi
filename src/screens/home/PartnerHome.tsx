@@ -32,14 +32,16 @@ export const PartnerHome = () => {
           const startOfToday = dayStart(now);
           const endOfToday = dayEnd(now);
 
-          const isToday = postGroupDate >= startOfToday &&
-            postGroupDate < endOfToday;
+          const isToday =
+            postGroupDate >= startOfToday && postGroupDate < endOfToday;
 
           return (
             <View key={postGroup.id}>
-              {isToday
-                ? <PartnerJournalEntriesCardToday postGroup={postGroup} />
-                : <PartnerJournalEntriesCardPast postGroup={postGroup} />}
+              {isToday ? (
+                <PartnerJournalEntriesCardToday postGroup={postGroup} />
+              ) : (
+                <PartnerJournalEntriesCardPast postGroup={postGroup} />
+              )}
             </View>
           );
         })}

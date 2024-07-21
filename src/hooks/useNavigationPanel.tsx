@@ -1,6 +1,5 @@
 import { useCallback, useMemo, useRef, useState } from "react";
 import { Animated } from "react-native";
-
 import type {
   PagerViewOnPageScrollEventData,
   PagerViewOnPageSelectedEventData,
@@ -17,7 +16,7 @@ export interface EventLog {
 }
 
 export function useNavigationPanel(
-  onPageSelectedCallback: (position: number) => void = () => { },
+  onPageSelectedCallback: (position: number) => void = () => {},
 ) {
   const ref = useRef<PagerView>(null);
   const [activePage, setActivePage] = useState(0);
