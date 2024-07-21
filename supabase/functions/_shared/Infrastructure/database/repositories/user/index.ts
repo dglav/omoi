@@ -1,4 +1,4 @@
-import type { SupabaseClient } from "https://esm.sh/v135/@supabase/supabase-js@2.43.4/dist/module/index.js";
+import type { SupabaseClient } from "@supabase/supabase-js";
 
 export class UserRepository {
   constructor(private supabase: SupabaseClient) {}
