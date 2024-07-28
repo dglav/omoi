@@ -18,6 +18,8 @@ export const PartnerMessage = ({ messageText, messageDate }: Props) => {
         justifyContent: "flex-start",
         alignItems: "flex-end",
         gap: 8,
+        marginBottom: 10,
+        marginHorizontal: 10,
       }}
     >
       <View

@@ -18,6 +18,8 @@ export const MyMessage = ({ messageText, messageDate }: Props) => {
         justifyContent: "flex-end",
         alignItems: "flex-end",
         gap: 8,
+        marginBottom: 10,
+        marginHorizontal: 10,
       }}
     >
       <Text style={{ color: "#858585" }}>{format(messageDate, "HH:mm")}</Text>
