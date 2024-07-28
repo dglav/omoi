@@ -1,9 +1,7 @@
 import {
-  Keyboard,
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
-  TouchableWithoutFeedback,
   View,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -26,28 +24,24 @@ export const Chat = ({ messages, sendNewMessage }: Props) => {
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={{ backgroundColor: "white" }}>
-          <SafeAreaView
+      <View style={{ backgroundColor: "white" }}>
+        <SafeAreaView
+          style={{
+            marginBottom: insets.bottom,
+            backgroundColor: theme.colors.background,
+          }}
+        >
+          <View
             style={{
-              marginBottom: insets.bottom,
-              backgroundColor: theme.colors.background,
+              height: "100%",
             }}
           >
-            <View
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                height: "100%",
-              }}
-            >
-              <MessageWindow messages={messages} />
+            <MessageWindow messages={messages} />
 
-              <Footer sendNewMessage={sendNewMessage} />
-            </View>
-          </SafeAreaView>
-        </View>
-      </TouchableWithoutFeedback>
+            <Footer sendNewMessage={sendNewMessage} />
+          </View>
+        </SafeAreaView>
+      </View>
     </KeyboardAvoidingView>
   );
 };
