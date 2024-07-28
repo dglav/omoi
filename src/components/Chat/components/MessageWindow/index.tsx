@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { FlatList, ListRenderItemInfo } from "react-native";
 
 import { MyMessage } from "./components/MyMessage";
 import { PartnerMessage } from "./components/PartnerMessage";
@@ -12,31 +12,28 @@ type Props = {
 export const MessageWindow = ({ messages }: Props) => {
   const { user } = useGetUser();
 
+  const renderItem = (info: ListRenderItemInfo<ChatMessage>) =>
+    info.item.authorId === user?.id ? (
+      <MyMessage
+        key={info.item.id}
+        messageText={info.item.message}
+        messageDate={info.item.createdAt}
+      />
+    ) : (
+      <PartnerMessage
+        key={info.item.id}
+        messageText={info.item.message}
+        messageDate={info.item.createdAt}
+      />
+    );
+
   return (
-    <View
-      style={{
-        paddingVertical: 28,
-        paddingHorizontal: 16,
-        gap: 28,
-      }}
-    >
-      {!!messages &&
-        user?.id &&
-        messages.map((message) =>
-          message.authorId === user?.id ? (
-            <MyMessage
-              key={message.id}
-              messageText={message.message}
-              messageDate={message.createdAt}
-            />
-          ) : (
-            <PartnerMessage
-              key={message.id}
-              messageText={message.message}
-              messageDate={message.createdAt}
-            />
-          ),
-        )}
-    </View>
+    <FlatList
+      data={messages}
+      renderItem={(info) => renderItem(info)}
+      keyExtractor={(item) => item.id}
+      inverted
+      extraData={user?.id}
+    />
   );
 };

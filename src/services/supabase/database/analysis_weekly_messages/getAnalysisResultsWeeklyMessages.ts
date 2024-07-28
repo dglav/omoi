@@ -22,7 +22,8 @@ export const getAnalysisResultsWeeklyMessages = async ({
       start_date: format(startDate, "YYYY/MM/DD"),
       end_date: format(endDate, "YYYY/MM/DD"),
       analyzed_user_id: analyzedUserId,
-    });
+    })
+    .order("created_at", { ascending: false });
 
   if (error) {
     throw new SupabaseDatabaseError(error);

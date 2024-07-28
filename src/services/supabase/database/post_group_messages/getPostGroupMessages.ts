@@ -14,7 +14,8 @@ export const getPostGroupMessages = async ({
   const { data: messages, error } = await supabase
     .from("post_group_messages")
     .select("*")
-    .match({ post_group_id: postGroupId });
+    .match({ post_group_id: postGroupId })
+    .order("created_at", { ascending: false });
 
   if (error) {
     throw new SupabaseDatabaseError(error);
