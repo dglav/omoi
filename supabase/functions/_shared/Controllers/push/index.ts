@@ -1,11 +1,12 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 
 import { PushNotification } from "../../Infrastructure/expo/PushNotification.ts";
+import { HonoRequest } from "hono";
 
 export class PushController {
   constructor(private supabase: SupabaseClient) {}
 
-  async push(req: Request, ctx: any) {
+  async push(req: HonoRequest, ctx: any) {
     const { title, body } = await req.json();
     const { user } = ctx;
 
@@ -44,7 +45,7 @@ export class PushController {
     }
   }
 
-  async pushToPartner(req: Request, ctx: any) {
+  async pushToPartner(req: HonoRequest, ctx: any) {
     const { title, body } = await req.json();
     const { user } = ctx;
 
