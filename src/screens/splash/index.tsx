@@ -1,23 +1,9 @@
-import { Redirect, useRouter } from "expo-router";
 import { View, StyleSheet, Text, Image } from "react-native";
 
-import { Button } from "../components/button";
-import { useAppTheme } from "../hooks/useAppTheme";
-import { useSession } from "../providers/AuthProvider";
-import SplashScreen from "../screens/splash";
+import { useAppTheme } from "../../hooks/useAppTheme";
 
-export default function IndexScreen() {
+export default function SplashScreen() {
   const theme = useAppTheme();
-  const router = useRouter();
-  const { session, isLoading } = useSession();
-
-  if (isLoading) {
-    return <SplashScreen />;
-  }
-
-  if (session) {
-    return <Redirect href="/(app)/(tabs)/home" />;
-  }
 
   return (
     <View
@@ -52,23 +38,7 @@ export default function IndexScreen() {
             β版
           </Text>
         </View>
-        <Image source={require("../../assets/Frame 184_white.png")} />
-      </View>
-      <View
-        style={{
-          width: "100%",
-          paddingVertical: 24,
-          paddingHorizontal: 16,
-          gap: 16,
-          height: 172,
-        }}
-      >
-        <Button variant="secondary" onPress={() => router.push("/signUp")}>
-          新規アカウントを作る
-        </Button>
-        <Button variant="secondary" onPress={() => router.push("/signIn")}>
-          ログインする
-        </Button>
+        <Image source={require("../../../assets/Frame 184_white.png")} />
       </View>
     </View>
   );
